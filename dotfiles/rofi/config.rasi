@@ -1,0 +1,31 @@
+configuration {
+  /* modi:                 "drun,run,window,ssh,calc,emoji,combi"; */
+  combi-modi:           "window,drun,run,emoji";
+  cycle: 		        true;
+  disable-history:      false;
+  display-drun:         "";
+  drun-display-format:  "{name}";
+  font:                 "Noto Sans 10";
+  icon-theme:           "Papirus";
+  /*modi:                 "drun,run,combi";*/
+  modi:                 "window,drun,run,combi";
+  show-icons:         	true;
+  sidebar-mode:         true;
+  sort: 		        true;
+  ssh-client:           "ssh";
+  terminal: 		    "kitty";
+}
+
+@theme "~/.config/rofi/theme/top_down.rasi"
+
+/** Window Locations Reference
+    '0 Center'
+    '1 Northwest'
+    '2 North'
+    '3 Northeast'
+    '4 East'
+    '5 Southeast'
+    '6 South'
+    '7 Southwest'
+    '8 West'
+**/

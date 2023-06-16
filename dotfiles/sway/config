@@ -1,0 +1,511 @@
+########################
+### i3 Window Management
+########################
+
+# Master Modifier (Win)
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# split toggle
+bindsym $mod+t split toggle
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+workspace_layout tabbed
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+bindsym $mod+c floating toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Number Pad Mapping
+set $KP_1 87
+set $KP_2 88
+set $KP_3 89
+set $KP_4 83
+set $KP_5 84
+set $KP_6 85
+set $KP_7 79
+set $KP_8 80
+set $KP_9 81
+set $KP_0 90
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Mod2+KP_1 workspace number $ws1
+bindsym $mod+Mod2+KP_2 workspace number $ws2
+bindsym $mod+Mod2+KP_3 workspace number $ws3
+bindsym $mod+Mod2+KP_4 workspace number $ws4
+bindsym $mod+Mod2+KP_5 workspace number $ws5
+bindsym $mod+Mod2+KP_6 workspace number $ws6
+bindsym $mod+Mod2+KP_7 workspace number $ws7
+bindsym $mod+Mod2+KP_8 workspace number $ws8
+bindsym $mod+Mod2+KP_9 workspace number $ws9
+bindsym $mod+Mod2+KP_0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindcode $mod+Shift+$KP_1 move container to workspace $ws1
+bindcode $mod+Shift+$KP_2 move container to workspace $ws2
+bindcode $mod+Shift+$KP_3 move container to workspace $ws3
+bindcode $mod+Shift+$KP_4 move container to workspace $ws4
+bindcode $mod+Shift+$KP_5 move container to workspace $ws5
+bindcode $mod+Shift+$KP_6 move container to workspace $ws6
+bindcode $mod+Shift+$KP_7 move container to workspace $ws7
+bindcode $mod+Shift+$KP_8 move container to workspace $ws8
+bindcode $mod+Shift+$KP_9 move container to workspace $ws9
+bindcode $mod+Shift+$KP_0 move container to workspace $ws10
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+
+# Different way of resizing
+bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 40 px or 40 ppt
+        bindsym k resize grow height 40 px or 40 ppt
+        bindsym l resize shrink height 40 px or 40 ppt
+        bindsym semicolon resize grow width 40 px or 40 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 40 px or 40 ppt
+        bindsym Down resize grow height 40 px or 40 ppt
+        bindsym Up resize shrink height 40 px or 40 ppt
+        bindsym Right resize grow width 40 px or 40 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Binding Modes
+set $mode_launcher Launch: [c]hromium [d]iffuse [f]irefox [t]hunderbird [v]scode [z]oom
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+    bindsym c exec chromium ; mode "default"
+    bindsym d exec diffuse ; mode "default"
+    bindsym f exec firefox ; mode "default"
+    bindsym t exec thunderbird ; mode "default"
+    bindsym v exec code ; mode "default"
+    bindsym z exec zoom ; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+
+####################
+### Hardware Mapping
+####################
+
+set $mon_left DP-3
+set $mon_center DP-2
+set $mon_right HDMI-1
+
+workspace 1 output $mon_left
+workspace 4 output $mon_left
+workspace 7 output $mon_left
+workspace 2 output $mon_center
+workspace 5 output $mon_center
+workspace 8 output $mon_center
+workspace 3 output $mon_right
+workspace 6 output $mon_right
+workspace 9 output $mon_right
+
+##################
+### USER INTERFACE
+##################
+
+## Window Bar Font
+font pango:Hack Nerd Font 10
+
+## Floating dialogs overrides
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Preferences$"] floating enable
+
+## Gaps between applications
+gaps inner 10
+gaps outer 5
+smart_gaps on
+
+## System Tray
+bar {
+        colors {
+                separator #666666
+                background #222222
+                statusline #dddddd
+                focused_workspace #0088CC #0088CC #ffffff
+                active_workspace #333333 #333333 #ffffff
+                inactive_workspace #333333 #333333 #888888
+                urgent_workspace #2f343a #900000 #ffffff
+        }
+        font pango:Noto Sans, FontAwesome 12
+        id bar-left
+        output $mon_left
+        position top
+        status_command i3status-rs ~/.config/i3/status/left.rs
+        tray_output none
+}
+
+bar {
+        colors {
+                separator #666666
+                background #222222
+                statusline #dddddd
+                focused_workspace #0088CC #0088CC #ffffff
+                active_workspace #333333 #333333 #ffffff
+                inactive_workspace #333333 #333333 #888888
+                urgent_workspace #2f343a #900000 #ffffff
+        }
+        font pango:Noto Sans, FontAwesome 12
+        id bar-center
+        status_command i3status-rs ~/.config/i3/status/center.rs
+        output $mon_center
+        position top
+        tray_output $mon_center
+}
+
+bar {
+        colors {
+                separator #666666
+                background #222222
+                statusline #dddddd
+                focused_workspace #0088CC #0088CC #ffffff
+                active_workspace #333333 #333333 #ffffff
+                inactive_workspace #333333 #333333 #888888
+                urgent_workspace #2f343a #900000 #ffffff
+        }
+        font pango:Noto Sans, FontAwesome 12
+        id bar-right
+        status_command i3status-rs ~/.config/i3/status/right.rs
+        position top
+        output $mon_right
+        tray_output none
+}
+
+###################################
+### I3 Modifications / Enhancements
+###################################
+
+## Alt Tab Support
+exec --no-startup-id alttab -fg "#d58681" -bg "#4a4a4a" -frame "#eb564d" -t 128x150 -i 127x64
+
+## Auto Tiling H/V
+exec_always --no-startup-id autotiling
+
+## Autokey Parser for firefox
+exec --no-startup-id autokey-gtk
+
+## Bluetooth
+#exec --no-startup-id blueberry
+
+## Desktop Background
+exec --no-startup-id nitrogen --restore
+
+## Clipboard Manager
+exec_always --no-startup-id greenclip daemon
+
+## Number Lock on Default
+exec --no-startup-id numlockx on
+
+## Power Manager
+#exec --no-startup-id xfce4-power-manager
+
+## Screen Saver / Auto Lock
+#exec --no-startup-id xautolock -locker ~/.config/scripts/lock.sh -time 10
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 600 "~/.config/i3/scripts/lock.sh" "" --timer 300 "xset dpms force off" "" --timer 2700 "systemctl suspend" ""
+
+## System Notifications
+exec --no-startup-id dunst
+
+## Volume Control
+exec --no-startup-id volctl
+
+## Hide Mouse Cursor when typing
+exec --no-startup-id xbanish
+
+## Decryption Script
+exec --no-startup-id ~/.config/scripts/decrypt.sh
+
+## Ferdi
+assign [class="^Ferdium"] 3
+## bindsym $mod+x floating enable, resize set 50 ppt 50 ppt, move position 0 px 0 px
+exec --no-startup-id i3-msg 'workspace 3; exec ferdium;'
+
+# flameshot ## TODO investigate "--release" for the gui commands without having to have this run in background
+exec --no-startup-id flameshot
+
+## Nextcloud Client
+exec --no-startup-id nextcloud --background
+## Polkit
+
+#exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+
+## Redshift Screen
+exec --no-startup-id redshift -P -O 3000
+
+## XRandr Display
+exec --no-startup-id ~/.config/i3/scripts/x_3screenlayout.sh
+
+# Window Decorations
+#exec --no-startup-id picom -b > /tmp/picom
+
+# OpenSnitch
+exec --no-startup-id opensnitch-ui
+
+#############################################################################################
+### Keybind Applications (xmodmap -pke for grabbing keycodes)
+### or xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+#############################################################################################
+
+## Natural Keyboard 4000 binds
+bindsym XF86HomePage exec thunar # spacefm # or pcmanfm
+#bindsym 0xffeb exec thunar
+bindsym XF86Search exec firefox
+bindsym $mod+XF86Search exec chromium
+bindsym XF86Mail exec thunderbird
+bindsym XF86Favorites exec ~/.config/scripts/timewarrior.sh
+
+# bindsym XF86Launch5 exec something # 1
+# bindsym XF86Launch6 exec # 2
+# bindsym XF86Launch7 exec # 3
+# bindsym XF86Launch8 exec # 4
+# bindsym XF86Launch9 exec # 5
+# bindsym Up exec # Up Slider
+# bindsym Down exec # Down Slider
+# bindsym XF86Forward exec # Forward Button
+# bindsym XF86Back exec # Back Button
+
+## Calculator
+bindsym XF86Calculator exec mate-calc
+
+## Find Cursor
+#bindsym Control_L exec find-cursor -g -s 70 -d 25 -g -l 15
+#bindcode 37 exec find-cursor -g -s 65 -d 25 -g -l 10 -t
+
+## Screen Lock
+#bindsym $mod+shift+x exec $HOME/.config/scripts/lock.sh
+bindsym $mod+shift+x exec "~/.config/i3/scripts/lock.sh"
+
+## Play / Pause
+bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+
+## Clipboard
+bindsym $mod+Shift+d exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+## Program Launcher
+bindsym $mod+d exec "rofi -combi-modi window,drun,ssh,run -show combi -show-icons"
+
+## Redshift
+#bindsym $mod+XF86Favorites mode "$mode_redshift"
+#bindsym $mod+shift+a mode "$mode_redshift"
+#set $mode_redshift Set colour temperature: (a)uto, (r)eset, (2)500K, (3)000K, (4)000K, (5)000K
+#set $kill_redshift pkill -1 redshift;
+#mode "$mode_redshift" {
+#    bindsym a exec --no-startup-id "$kill_redshift redshift -P -l 49.6585:-124.9835 -t 5000:4000", mode "default"
+#    bindsym r exec --no-startup-id "$kill_redshift redshift -x", mode "default"
+#    bindsym 2 exec --no-startup-id "$kill_redshift redshift -P -O 2500", mode "default"
+#    bindsym 3 exec --no-startup-id "$kill_redshift redshift -P -O 3000", mode "default"
+#    bindsym 4 exec --no-startup-id "$kill_redshift redshift -P -O 4000", mode "default"
+#    bindsym 5 exec --no-startup-id "$kill_redshift redshift -P -O 5000", mode "default"
+#
+#    # exit mode: "Enter" or "Escape"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+
+## Screenshot
+bindsym Print exec flameshot gui
+bindsym $mod+Shift+s exec flameshot gui
+
+## Terminal
+bindsym $mod+Return exec kitty
+
+## Timewarrior GUI
+bindsym $mod+Mod1+space exec ~/.config/scripts/timewarrior.sh start
+
+## Volume Keys
+set $refresh_i3status killall -SIGUSR1 i3status-rs
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1%  && $refresh_i3
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1%  && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle  && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle  && $refresh_i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 2958 +1%  && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 2958 -1%  && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 2958 toggle  && $refresh_i3status
+
+###################
+## Window Overrides (use xprop for WM_CLASS)
+###################
+
+## Floating
+for_window [class="Arandr"] floating enable # Display Management
+for_window [class="virt-manager"] floating enable # Virtualization Manager
+for_window [class="Pavucontrol"] floating enable # PA Volume Control
+
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+
+for_window [class=".*yzoom"] floating enable
+no_focus [class=".*zoom"]
+
+# Set Zoom notification window to floating with no focus
+for_window [title="^zoom\s?$"] floating enable
+no_focus [title="^zoom\s?$"]
+
+# For meetings that you have joined via a link
+for_window [title="^join\?action=join.*$"] floating enable
+no_focus [title="^join\?action=join.*$"]
+
+# Set Zoom notification window to floating with no focus
+#for_window [title="^zoom\s?$"] floating enable
+#no_focus [title="^zoom\s?$"]
+
+# For meetings that you have joined via a link
+#for_window [title="^join\?action=join.*$"] floating enable
+#no_focus [title="^join\?action=join.*$"]
+
+# Alternatively if the popups are annoying you...
+# for_window [title="^zoom\s?$"] kill
+# for_window [title="^join\?action=join.*$"] kill
+
+#for_window [class="zoom"] floating enable, sticky enable
+#for_window [class="zoom"] [title="Zoom Meeting"] resize set 1880 1040, move position 20 20
+#for_window [class="zoom"] [title="Chat"] move position mouse
+
+#for_window [class="Calendar"] floating enable # Thunderbird Detail Popup
+for_window [title="Timewarrior Tracking"] floating enable # Timewarrior
+for_window [class="kitty_floating"] floating enable # When Passing something to Kitty with WM_CLASS kitty_floating
+for_window [window_role="(pop-up|bubble|dialog)"] floating enable
+
+### Mouse Binds
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
+# The middle button and a modifer over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
+# The right button toggles floating
+bindsym button3 floating toggle
+bindsym $mod+button3 floating toggle
+
+# The side buttons move the window around
+bindsym button9 move left
+bindsym button8 move right
+
+## Move this later
+# Popups during fullscreen (smart/ignore/leave_fullscreen)
+popup_during_fullscreen smart
+
+## Bounce back and forth between workspaces using same workspace key
+workspace_auto_back_and_forth yes
+
+## Hide Bar
+bindsym $mod+shift+p bar mode toggle
+
+exec_always --no-startup-id kitti3
+bindsym $mod+n nop kitti3
