@@ -201,6 +201,7 @@
             { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
+       #          windowrulev2 = size 360 690,title:^Zoom - Licensed Account$
             { "class" = ".zoom" ; }                     # Zoom
             { "window_role" = "(pop-up|bubble|dialog)" ; }
             { "window_role" = "pop-up"; }
@@ -208,6 +209,7 @@
           ];
           modifier = "Mod4";
         };
+
         modifier = "Mod4";
         keybindings = let
           mod = config.xsession.windowManager.i3.config.modifier;
@@ -314,14 +316,14 @@
           { command = "alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
           { command = "autokey-gtk"; always = false; notification = false; }            # Autokey Parser for Firefox
           { command = "autotiling"; always = true; notification = false; }              # Auto Tile H/V
-          { command = "dunst"; always = false; notification = false; }                  # Notification Manager
+          #{ command = "dunst"; always = false; notification = false; }                  # Notification Manager
           { command = "ferdium"; always = false; notification = true; }                 # IM
           { command = "flameshot"; always = false; notification = true; }               # Screenshot
           { command = "greenclip daemon"; always = true; notification = false; }        # Clipboard Management
           { command = "nextcloud --background"; always = false; notification = true; }  # Nextcloud Client
           { command = "nitrogen --restore"; always = false; notification = false; }     # Desktop Background
           { command = "numlockx on"; always = false; notification = false; }            # Number Lock on by Default TODO - Seperate for small keyboards
-          { command = "opensnitch-ui"; always = false; notification = true; }           # Firewall
+          #{ command = "opensnitch-ui"; always = false; notification = true; }           # Firewall
           { command = "redshift -P -O 3000"; always = false; notification = false; }    # Gamma correction
           { command = "volctl"; always = false; notification = false; }                 # Volume Control
           { command = "xbanish"; always = false; notification = false; }                # Hide Mouse Cursor when typing
