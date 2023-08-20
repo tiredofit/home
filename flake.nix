@@ -85,6 +85,9 @@
 
           selecta = HomeConfiguration {
             extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              hostname = "selecta";
               displays = 1;
               networkInterface = "wlo1";
               windowmanager = "x-cinnamon";
