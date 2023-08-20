@@ -201,7 +201,6 @@
             { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
-       #          windowrulev2 = size 360 690,title:^Zoom - Licensed Account$
             { "class" = ".zoom" ; }                     # Zoom
             { "window_role" = "(pop-up|bubble|dialog)" ; }
             { "window_role" = "pop-up"; }
@@ -209,7 +208,6 @@
           ];
           modifier = "Mod4";
         };
-
         modifier = "Mod4";
         keybindings = let
           mod = config.xsession.windowManager.i3.config.modifier;
@@ -316,7 +314,6 @@
           { command = "alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
           { command = "autokey-gtk"; always = false; notification = false; }            # Autokey Parser for Firefox
           { command = "autotiling"; always = true; notification = false; }              # Auto Tile H/V
-          #{ command = "dunst"; always = false; notification = false; }                  # Notification Manager
           { command = "ferdium"; always = false; notification = true; }                 # IM
           { command = "flameshot"; always = false; notification = true; }               # Screenshot
           { command = "greenclip daemon"; always = true; notification = false; }        # Clipboard Management
@@ -360,6 +357,9 @@
 
         ## Popups during fullscreen (smart/ignore/leave_fullscreen)
         popup_during_fullscreen smart
+
+        for_window [title="Zoom - Licensed Account"] floating enable floating_minimum_size 360x690; floating_maximum_size 360x690;
+        for_window [title="Settings" ] floating enable;
 
         ## Keyboard app Launcher
         set $mode_launcher Launch: [c]hromium [d]iffuse [f]irefox [t]hunderbird [v]scode [z]oom

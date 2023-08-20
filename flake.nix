@@ -83,6 +83,15 @@
             };
           };
 
+          selecta = HomeConfiguration {
+            extraSpecialArgs = {
+              displays = 1;
+              networkInterface = "wlo1";
+              windowmanager = "x-cinnamon";
+              inherit inputs outputs;
+            };
+          };
+
           soy = HomeConfiguration {
             extraSpecialArgs = {
               displays = 1;
