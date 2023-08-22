@@ -77,6 +77,8 @@
 
           butcher = HomeConfiguration {
             extraSpecialArgs = {
+              org = "toi";
+              role = "server";
               displays = 1;
               networkInterface = "enp6s18";
               inherit inputs outputs;
@@ -97,6 +99,8 @@
 
           soy = HomeConfiguration {
             extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
               displays = 1;
               networkInterface = "wlo1";
               windowmanager = "x-cinnamon";
