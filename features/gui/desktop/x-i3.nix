@@ -201,6 +201,7 @@
             { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
+            { "title" = "Virtual Machine Manager" ; }   # Virt manager
             { "class" = ".zoom" ; }                     # Zoom
             { "window_role" = "(pop-up|bubble|dialog)" ; }
             { "window_role" = "pop-up"; }
@@ -360,6 +361,7 @@
 
         for_window [title="Zoom - Licensed Account"] floating enable floating_minimum_size 360x690; floating_maximum_size 360x690;
         for_window [title="Settings" ] floating enable;
+        for_window [class="virt-manager" ] floating enable;
 
         ## Keyboard app Launcher
         set $mode_launcher Launch: [c]hromium [d]iffuse [f]irefox [t]hunderbird [v]scode [z]oom
