@@ -196,12 +196,13 @@
             { "title" = "Volume Control"; }             # PulseAudio Volume Control
             { "class" = "kitty_floating" ; }            # When Passing something to Kitty with WM_CLASS kitty_floating
             { "class" = "virt-manager"; }               # QEMU Virtualization Manager
+            { "title" = "Settings"; }
             { "title" = "Preferences$"; }
             { "title" = "Timewarrior Tracking" ; }      # Timewarrior
             { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
-            { "title" = "Virtual Machine Manager" ; }   # Virt manager
+            { "title" = "Virtual Machine Manager" ; }   # QEMU Virtualization Manager
             { "class" = ".zoom" ; }                     # Zoom
             { "window_role" = "(pop-up|bubble|dialog)" ; }
             { "window_role" = "pop-up"; }
@@ -312,22 +313,23 @@
           };
         };
         startup = [
-          { command = "alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
-          { command = "autokey-gtk"; always = false; notification = false; }            # Autokey Parser for Firefox
-          { command = "autotiling"; always = true; notification = false; }              # Auto Tile H/V
-          { command = "ferdium"; always = false; notification = true; }                 # IM
-          { command = "flameshot"; always = false; notification = true; }               # Screenshot
-          { command = "greenclip daemon"; always = true; notification = false; }        # Clipboard Management
-          { command = "nextcloud --background"; always = false; notification = true; }  # Nextcloud Client
-          { command = "nitrogen --restore"; always = false; notification = false; }     # Desktop Background
-          { command = "numlockx on"; always = false; notification = false; }            # Number Lock on by Default TODO - Seperate for small keyboards
+          { command = "${pkgs.alttab}/bin/alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
+          #{ command = "${pkgs.autokey-gtk}/bin/autokey-gtk"; always = false; notification = false; }            # Autokey Parser for Firefox
+          { command = "${pkgs.autotiling}/bin/autotiling"; always = true; notification = false; }              # Auto Tile H/V
+          { command = "${pkgs.ferdium}/bin/ferdium"; always = false; notification = true; }                 # IM
+          { command = "${pkgs.flameshot}/bin/flameshot"; always = false; notification = true; }               # Screenshot
+          { command = "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = true; notification = false; }        # Clipboard Management
+          { command = "${pkgs.nextcloud-client}/bin/nextcloud --background"; always = false; notification = true; }  # Nextcloud Client
+          { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; always = false; notification = false; }     # Desktop Background
+          { command = "${pkgs.numlockx}/bin/numlockx on"; always = false; notification = false; }            # Number Lock on by Default TODO - Seperate for small keyboards
           #{ command = "opensnitch-ui"; always = false; notification = true; }           # Firewall
-          { command = "redshift -P -O 3000"; always = false; notification = false; }    # Gamma correction
-          { command = "volctl"; always = false; notification = false; }                 # Volume Control
-          { command = "xbanish"; always = false; notification = false; }                # Hide Mouse Cursor when typing
-          { command = "xidlehook --not-when-fullscreen --not-when-audio --timer 600 ~/.config/i3/scripts/lock.sh '' --timer 300 'xset dpms force off' '' --timer 2700 'systemctl suspend' ''"; always = false; notification = false; } # Power Management
-          { command = "~/.config/i3/scripts/x_3screenlayout.sh"; always = false; notification = false; }     # Display Setup # TODO - Seperate for different screens / systems
-          { command = "~/.config/scripts/decrypt.sh"; always = false; notification = false; }  # Decryption script # TODO - Secrets and SystemD service
+          { command = "${pkgs.redshift}/bin/redshift -P -O 3000"; always = false; notification = false; }    # Gamma correction
+          { command = "${pkgs.volctl}/bin/volctl"; always = false; notification = false; }                 # Volume Control
+          { command = "${pkgs.xbanish}/bin/xbanish"; always = false; notification = false; }                # Hide Mouse Cursor when typing
+          #{ command = "${pkgs.xidlehook}/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 600 ~/.config/i3/scripts/lock.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
+          { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 ~/.config/i3/scripts/lock.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
+          #{ command = "~/.config/i3/scripts/x_3screenlayout.sh"; always = false; notification = false; }     # Display Setup # TODO - Seperate for different screens / systems
+          #{ command = "~/.config/scripts/decrypt.sh"; always = false; notification = false; }  # Decryption script # TODO - Secrets and SystemD service
         ];
         terminal = "kitty";
         workspaceAutoBackAndForth = true;
@@ -360,8 +362,8 @@
         popup_during_fullscreen smart
 
         for_window [title="Zoom - Licensed Account"] floating enable floating_minimum_size 360x690; floating_maximum_size 360x690;
-        for_window [title="Settings" ] floating enable;
-        for_window [class="virt-manager" ] floating enable;
+        for_window [title="Settings" ] floating enable
+        for_window [class="virt-manager" ] floating enable
 
         ## Keyboard app Launcher
         set $mode_launcher Launch: [c]hromium [d]iffuse [f]irefox [t]hunderbird [v]scode [z]oom
