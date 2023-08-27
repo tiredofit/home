@@ -199,6 +199,7 @@
             { "title" = "Settings"; }
             { "title" = "Preferences$"; }
             { "title" = "Timewarrior Tracking" ; }      # Timewarrior
+            { "title" = "File Manager Preferences" ; }  # Thunar
             { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
             { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
