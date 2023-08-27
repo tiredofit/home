@@ -336,9 +336,9 @@
         workspaceAutoBackAndForth = true;
         workspaceLayout = "default"; # Bounce back and forth between workspaces using same workspace key
         workspaceOutputAssign = let  ## TODO This is used in multiple areas - move to top of configuration
-          mon_left = "DP-3";
-          mon_center = "DP-2";
-          mon_right = "HDMI-1";
+          mon_left = "DisplayPort-2";
+          mon_center = "DisplayPort-1";
+          mon_right = "HDMI-A-0";
         in [
            { workspace = "1"; output = "${mon_left}"; }
            { workspace = "4"; output = "${mon_left}"; }
