@@ -49,9 +49,9 @@
           "3" = [{ class = "^Ferdium"; }];
         };
         bars = let  ## TODO This is used in multiple areas - move to top of configuration
-          mon_left = "DP-3";
-          mon_center = "DP-2";
-          mon_right = "HDMI-1";
+          mon_left = "DisplayPort-2";
+          mon_center = "DisplayPort-1";
+          mon_right = "HDMI-A-0";
         in [
           {
             id = "bar-left"; # TODO - Adapt for various screens
