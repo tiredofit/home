@@ -20,7 +20,6 @@ with lib;
     ../../features/cli/file-compression.nix
     ../../features/cli/git.nix
     ../../features/cli/gnupg.nix
-    ../../features/cli/nano.nix
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
     ../../features/cli/wget.nix
@@ -62,6 +61,8 @@ with lib;
           libreoffice.enable = true;
           liquidprompt.enable = true;
           mate-calc.enable = true;
+          mp3gain.enable = true;
+          nano.enable = true;
           neofetch.enable = true;
           ncdu.enable = true;
           nmap.enable = true;
