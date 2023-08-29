@@ -22,6 +22,7 @@
     home = {
       applications = {
         diffuse.enable = true;
+        eog.enable = true;
         libreoffice.enable = true;
         pinta.enable = true;
         smartgit.enable = true;
