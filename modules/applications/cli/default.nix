@@ -33,6 +33,7 @@ with lib;
     ./tmux.nix
     ./wget.nix
     ./yt-dlp.nix
+    ./zathura.nix
     ./zoxide.nix
   ];
 }
