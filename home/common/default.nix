@@ -12,7 +12,6 @@ with lib;
     ./nix.nix
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
     ../../features/cli/bash.nix
-    ../../features/cli/docker-compose.nix
     ../../features/cli/file-compression.nix
     ../../features/cli/git.nix
     ../../features/cli/sops.nix
@@ -36,6 +35,7 @@ with lib;
           comma.enable = true;
           diceware.enable = true;
           diffuse.enable = true;
+          docker-compose = true;
           drawio.enable = true;
           duf.enable = true;
           dust.enable = true;
