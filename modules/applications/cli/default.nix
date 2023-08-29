@@ -45,6 +45,7 @@ with lib;
     ./timewarrior.nix
     ./tmux.nix
     ./wget.nix
+    ./xdg-ninja.nix
     ./xmlstarlet.nix
     ./yq.nix
     ./yt-dlp.nix
