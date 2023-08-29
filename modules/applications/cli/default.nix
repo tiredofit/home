@@ -37,8 +37,9 @@ with lib;
     ./nmap.nix
     ./rclone.nix
     ./ripgrep.nix
-    ./secrets.nix
     ./s3ql.nix
+    ./secrets.nix
+    ./shellcheck.nix
     ./tea.nix
     ./timewarrior.nix
     ./tmux.nix
