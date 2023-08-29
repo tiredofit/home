@@ -1,5 +1,26 @@
-{ config, ...}:
+{ config, lib, pkgs, ...}:
 {
+
+  host = {
+    home = {
+      applications = {
+        act.enable = true;
+        android-tools.enable = true;
+        calibre.enable = true;
+        encfs.enable = true;
+        gh.enable = true;
+        hugo.enable = true;
+        nextcloud-client.enable = true;
+      };
+      feature = {
+
+      };
+      service = {
+        decrypt_encfs_workspace = true;
+        vscode-server.enable = true;
+      }
+    };
+  };
 
   #  ------   -----   -------
   # | DP-3 | | DP-2| | HDMI-1|
@@ -8,7 +29,6 @@
   #  ---------------- ----------------- ------------
   # | DisplayPort-2 | | DisplayPort-1 | | HDMI-A-0 |
   #  ---------------- ----------------- ------------
-
   programs = {
     autorandr = {
       enable = true;
@@ -48,4 +68,12 @@
   };
 
   services.autorandr.enable = true;
+
+  sops.secrets = {
+    "bashrc.d/toi_remotehosts.sh" = {
+      format = "binary";
+      sopsFile = ./secrets/bash-toi_remotehosts.sh;
+      mode = "500";
+    };
+  };
 }
