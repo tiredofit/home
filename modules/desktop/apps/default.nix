@@ -7,5 +7,6 @@ with lib;
     ./xbindkeys.nix
     ./xdotool.nix
     ./xbacklight.nix
+    ./xdpyinfo.nix
   ];
 }
