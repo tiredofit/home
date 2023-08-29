@@ -74,6 +74,7 @@ with lib;
           tmux.enable = true;
           virt-manager.enable = true;
           vivaldi.enable = true; # Workstation
+          zoxide.enable = true;
         };
       };
     };

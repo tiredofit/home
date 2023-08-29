@@ -11,5 +11,6 @@ with lib;
     ./lsd.nix
     ./ncdu.nix
     ./tmux.nix
+    ./zoxide.nix
   ];
 }
