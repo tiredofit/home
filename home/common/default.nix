@@ -59,7 +59,6 @@ with lib;
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/kitty.nix
-      ../../features/gui/apps/libreoffice.nix
       ../../features/gui/apps/mate-calc.nix
       ../../features/gui/apps/smplayer.nix
       ../../features/gui/apps/thunar.nix
@@ -70,6 +69,7 @@ with lib;
       home = {
         applications = {
           file-roller.enable = true;
+          libreoffice.enable = true;
           pinta.enable = true;
         };
       };

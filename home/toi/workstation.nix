@@ -18,13 +18,12 @@
     ../../features/gui/apps/sqlitebrowser.nix
     ../../features/gui/apps/thunderbird.nix
     ../../features/gui/apps/virt-manager.nix
-    ../../features/gui/apps/wpsoffice.nix
-
   ];
 
   host = {
     home = {
       applications = {
+        libreoffice.enable = true;
         pinta.enable = true;
         thunderbird.enable = true;
         wps-office.enable = true;
