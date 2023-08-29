@@ -67,6 +67,7 @@ with lib;
           diffuse.enable = true;
           eog.enable = true;
           file-roller.enable = true;
+          geeqie.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
           pinta.enable = true;

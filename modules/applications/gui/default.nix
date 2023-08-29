@@ -6,6 +6,7 @@ with lib;
     ./diffuse.nix
     ./eog.nix
     ./file-roller.nix
+    ./geeqie.nix
     ./libreoffice.nix
     ./mate-calc.nix
     ./pinta.nix
