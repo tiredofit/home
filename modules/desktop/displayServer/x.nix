@@ -6,7 +6,22 @@ let
 in
 {
   config = mkIf (displayServer == "x" && config.host.home.feature.gui.enable ) {
-    ## TODO These should be seperated into modules at some point as they are all common to X
+    host = {
+      home = {
+        applications = {
+          arandr.enable = true;
+          autokey.enable = mkDefault true;
+          redshift.enable = true;
+          sysstat.enable = true;
+          xbindkeys.enable = true;
+          xdotool.enable = true;
+          xbacklight.enable = true;
+          xdpyinfo.enable = true;
+          xev.enable = true;
+          xprop.enable = true;
+        }
+      }
+    }
     home = {
       packages = with pkgs;
         [
