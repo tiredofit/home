@@ -5,6 +5,7 @@ with lib;
   imports = [
     ./autorandr.nix
     ./autokey.nix
+    ./cliphist.nix
     ./grim.nix
     ./hyprpaper.nix
     ./nwg-displays.nix
