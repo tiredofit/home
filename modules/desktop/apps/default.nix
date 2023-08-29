@@ -14,6 +14,7 @@ with lib;
     ./sysstat.nix
     ./wdisplays.nix
     ./wev.nix
+    ./wl-clipboard.nix
     ./wlr-randr.nix
     ./xbindkeys.nix
     ./xdotool.nix

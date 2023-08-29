@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          cliphist
+          #cliphist
           #grim
           #hyprpaper
           #nwg-displays
@@ -33,7 +33,7 @@ in
           wayprompt
           #wdisplays
           #wev
-          wl-clipboard
+          #wl-clipboard
           wlogout
           wl-gammarelay-rs
           #wlr-randr
