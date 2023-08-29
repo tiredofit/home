@@ -28,6 +28,7 @@ with lib;
     ./liquidprompt.nix
     ./lsd.nix
     ./mp3gain.nix
+    ./mtr.nix
     ./nano.nix
     ./neofetch.nix
     ./neovim.nix
