@@ -7,6 +7,7 @@ with lib;
     ./autokey.nix
     ./redshift.nix
     ./sysstat.nix
+    ./wdisplays.nix
     ./wev.nix
     ./wlr-randr.nix
     ./xbindkeys.nix
