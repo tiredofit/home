@@ -8,5 +8,6 @@ with lib;
     ./xdotool.nix
     ./xbacklight.nix
     ./xdpyinfo.nix
+    ./xev.nix
   ];
 }
