@@ -15,7 +15,6 @@ with lib;
     ../../features/cli/docker-compose.nix
     ../../features/cli/file-compression.nix
     ../../features/cli/git.nix
-    ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
     ]
     ++ optionals ( role == "workstation" ) [
@@ -74,6 +73,7 @@ with lib;
           ranger.enable = true;
           restic.enable = true;
           rclone.enable = true;
+          ripgrep.enable = true;
           seahorse.enable = true;
           smplayer.enable = true;
           thunar.enable = true;
