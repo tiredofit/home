@@ -16,7 +16,8 @@
   host = {
     home = {
       applications = {
-        calibre.nix = true;
+        blueman.enable = true;
+        calibre.enable = true;
         chromium.enable = true;
         diffuse.enable = true;
         drawio.enable = true;

@@ -44,7 +44,6 @@ with lib;
       ../../features/cli/direnv.nix
       ../../features/cli/nix-index.nix
       ../../features/cli/zathura.nix
-      ../../features/gui/apps/blueman.nix
       ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
@@ -58,7 +57,8 @@ with lib;
     host = {
       home = {
         applications = {
-          chrmoim.enable = true;
+          blueman.enable = true;
+          chromium.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
           eog.enable = true;
