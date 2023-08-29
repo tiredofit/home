@@ -50,6 +50,7 @@ with lib;
           fzf.enable = true;
           gnome-system-monitor.enable = true;
           geeqie.enable = true;
+          gnupg.enable = true;
           gparted.enable = true;
           greenclip.enable = true;
           htop.enable = true;

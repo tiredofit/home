@@ -7,6 +7,7 @@ with lib;
     ./bat.nix
     ./btop.nix
     ./fzf.nix
+    ./gnupg.nix
     ./htop.nix
     ./jq.nix
     ./lazygit.nix
