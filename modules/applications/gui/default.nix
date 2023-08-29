@@ -6,6 +6,7 @@ with lib;
     ./diffuse.nix
     ./drawio.nix
     ./eog.nix
+    ./ferdium.nix
     ./file-roller.nix
     ./geeqie.nix
     ./greenclip.nix

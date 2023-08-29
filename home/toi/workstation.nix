@@ -23,6 +23,7 @@
         diffuse.enable = true;
         drawio.enable = true;
         eog.enable = true;
+        ferdium.enable = true;
         greenclip.enable = true;
         libreoffice.enable = true;
         mate-calc.enable = true

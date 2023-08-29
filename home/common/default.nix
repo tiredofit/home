@@ -50,7 +50,6 @@ with lib;
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/chromium.nix
-      ../../features/gui/apps/ferdium.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
@@ -67,6 +66,7 @@ with lib;
           drawio.enable = true;
           eog.enable = true;
           file-roller.enable = true;
+          ferdium.enable = true;
           geeqie.enable = true;
           greenclip.enable = true;
           libreoffice.enable = true;
