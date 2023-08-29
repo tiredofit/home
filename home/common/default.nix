@@ -47,7 +47,6 @@ with lib;
       ../../features/gui/apps/blueman.nix
       ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/apps/gparted.nix
-      ../../features/gui/apps/vivaldi.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/chromium.nix
@@ -71,6 +70,7 @@ with lib;
           file-roller.enable = true;
           libreoffice.enable = true;
           pinta.enable = true;
+          vivaldi.enable = true; # Workstation
         };
       };
     };
