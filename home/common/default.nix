@@ -47,7 +47,6 @@ with lib;
       ../../features/gui/apps/blueman.nix
       ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/apps/gparted.nix
-      #../../features/gui/apps/pinta.nix
       ../../features/gui/apps/vivaldi.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
@@ -56,7 +55,6 @@ with lib;
       ../../features/gui/apps/drawio.nix
       ../../features/gui/apps/eog.nix
       ../../features/gui/apps/ferdium.nix
-      ../../features/gui/apps/file-roller.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
@@ -71,6 +69,7 @@ with lib;
     host = {
       home = {
         applications = {
+          file-roller.enable = true;
           pinta.enable = true;
         };
       };
