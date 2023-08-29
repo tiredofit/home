@@ -16,6 +16,7 @@ with lib;
     ./wev.nix
     ./wl-clipboard.nix
     ./wlr-randr.nix
+    ./wlogout.nix
     ./xbindkeys.nix
     ./xdotool.nix
     ./xbacklight.nix

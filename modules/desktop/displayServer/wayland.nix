@@ -34,7 +34,7 @@ in
           #wdisplays
           #wev
           #wl-clipboard
-          wlogout
+          #wlogout
           wl-gammarelay-rs
           #wlr-randr
         ];
