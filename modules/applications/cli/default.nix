@@ -20,6 +20,7 @@ with lib;
     ./gh.nix
     ./git.nix
     ./gnupg.nix
+    ./hadolint.nix
     ./hugo.nix
     ./htop.nix
     ./jq.nix
