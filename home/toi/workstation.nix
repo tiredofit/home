@@ -26,6 +26,7 @@
     home = {
       applications = {
         pinta.enable = true;
+        thunderbird.enable = true;
         zoom.enable = true;
       };
     };
