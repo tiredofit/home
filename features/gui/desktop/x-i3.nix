@@ -26,10 +26,8 @@
         autotiling                          # window management
         betterlockscreen                    # a... better lock screen
         dex                                 # autostart applications
-        dunst                               # notification daemon
         feh                                 # set wallpaper
         i3status-rust                       # provide information to i3bar
-        lxappearance                        # changew icons and themes
         nitrogen                            # set wallpaper
         numlockx                            # auto enable number lock
         picom                               # transparency and shadows, compositor

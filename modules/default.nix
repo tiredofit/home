@@ -6,8 +6,8 @@ with lib;
     ./applications/cli
     ./applications/gui
     ./desktop
-    ./features
+    ./feature
     ./roles
-    ./services
+    ./service
   ];
 }

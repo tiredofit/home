@@ -80,10 +80,10 @@ with lib;
           zathura.enable = true;
           zoxide.enable = true;
         };
-        features = {
+        feature = {
 
         };
-        services = {
+        service = {
 
         };
       };

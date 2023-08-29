@@ -1,7 +1,7 @@
 {config, inputs, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.features.themes;
+  cfg = config.host.home.feature.theming;
 in
   with lib;
 {
@@ -11,7 +11,7 @@ in
   ];
 
   options = {
-    host.home.features.themes = {
+    host.home.feature.theming = {
       enable = mkOption {
         default = false;
         type = with types; bool;

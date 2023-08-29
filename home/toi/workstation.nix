@@ -44,12 +44,12 @@
         yt-dlp.enable = true;
         zoom.enable = true;
       };
-      features = {
+      feature = {
         fonts.enable = true;
         mime-defaults.enable = true;
         theming.enable = true;
       };
-      services = {
+      service = {
         decrypt_encfs_workspace = true;
         vscode-server.enable = true;
       }

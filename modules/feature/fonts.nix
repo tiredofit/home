@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.features.fonts;
+  cfg = config.host.home.feature.fonts;
 in
   with lib;
 {
   options = {
-    host.home.features.fonts = {
+    host.home.feature.fonts = {
       enable = mkOption {
         default = false;
         type = with types; bool;
