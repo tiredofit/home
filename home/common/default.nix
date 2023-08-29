@@ -50,7 +50,6 @@ with lib;
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/chromium.nix
-      ../../features/gui/apps/drawio.nix
       ../../features/gui/apps/ferdium.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/flameshot.nix
@@ -65,6 +64,7 @@ with lib;
       home = {
         applications = {
           diffuse.enable = true;
+          drawio.enable = true;
           eog.enable = true;
           file-roller.enable = true;
           geeqie.enable = true;

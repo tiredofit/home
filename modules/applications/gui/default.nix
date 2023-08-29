@@ -4,6 +4,7 @@ with lib;
 {
   imports = [
     ./diffuse.nix
+    ./drawio.nix
     ./eog.nix
     ./file-roller.nix
     ./geeqie.nix
