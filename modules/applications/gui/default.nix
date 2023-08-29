@@ -11,15 +11,16 @@ with lib;
     ./eog.nix
     ./ferdium.nix
     ./file-roller.nix
+    ./flameshot.nix
     ./geeqie.nix
     ./gnomeencfsmanager.nix
-    ./gnomesystemonitor.nix
+    ./gnomesystemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
     ./libreoffice.nix
     ./masterpdfeditor.nix
     ./mate-calc.nix
-    ./nextcloud-client.nix
+    ./nextcloudclient.nix
     ./opensnitch-ui.nix
     ./pinta.nix
     ./seahorse.nix

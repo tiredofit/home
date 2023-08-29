@@ -8,7 +8,6 @@
     ../../features/cli/nmap.nix
     ../../features/cli/yt-dlp.nix
     ../../features/services/decrypt_encfs_workspace.nix
-    ../../features/gui/apps/gnome-encfs-manager.nix
     ../../features/gui/apps/virt-manager.nix
   ];
 
@@ -22,11 +21,13 @@
         drawio.enable = true;
         eog.enable = true;
         ferdium.enable = true;
+        flameshot.enable = true;
         gnome-system-monitor.enable = true;
+        gnome-encfs-manager.enable = true;
         greenclip.enable = true;
         gparted.enable = true;
         libreoffice.enable = true;
-        master-pdf-editor = true;
+        master-pdf-editor.enable = true;
         mate-calc.enable = true;
         nextcloud-client.enable = true;
         opensnitch-ui.enable = true;

@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.gparted;
+  cfg = config.host.home.applications.seahorse;
 in
   with lib;
 {
   options = {
-    host.home.applications.gparted = {
+    host.home.applications.seahorse = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Graphical Partition Manager";
+        description = "Key manager";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          gparted
+          gnome.seahorse
         ];
     };
   };

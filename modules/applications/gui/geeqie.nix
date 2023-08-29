@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.seahorse;
+  cfg = config.host.home.applications.geeqie;
 in
   with lib;
 {
   options = {
-    host.home.applications.seahorse = {
+    host.home.applications.geeqie = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Key manager";
+        description = "Image viewer";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          gnome.seahorse
+          geeqie
         ];
     };
   };

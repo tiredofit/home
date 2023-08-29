@@ -47,7 +47,6 @@ with lib;
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/firefox.nix
-      ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/kitty.nix
       ../../features/gui/apps/vscode.nix
@@ -63,7 +62,8 @@ with lib;
           eog.enable = true;
           file-roller.enable = true;
           ferdium.enable = true;
-          gnome-system-monitor = true;
+          flameshot.enable = true;
+          gnome-system-monitor.enable = true;
           geeqie.enable = true;
           gparted.enable = true;
           greenclip.enable = true;
