@@ -1,33 +1,38 @@
-{ pkgs, config, lib, ...}:
-
+{ config, lib, pkgs, ... }:
+let
+  displayServer = config.host.home.feature.gui.displayServer ;
+  windowManager = config.host.home.feature.gui.windowManager ;
+in
+with lib;
 {
-  imports = [
-    ./wayland-common.nix
-  ];
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager = "sway") {
+    imports = [
+      ./wayland-common.nix
+    ];
 
-  home = {
-    file = {
-      ".config/rofi".source = ../../../dotfiles/rofi;
+    home = {
+      file = {
+        ".config/rofi".source = ../../../dotfiles/rofi;
+      };
+
+      packages = with pkgs;
+        [
+          autotiling
+          i3status-rust                       # provide information to swaybar
+        ];
     };
 
-    packages = with pkgs;
-      [
-        autotiling
-        i3status-rust                       # provide information to swaybar
-      ];
-  };
-
-  host = {
-    home = {
-      applications = {
-        dunst.enable = true;
+    host = {
+      home = {
+        applications = {
+          dunst.enable = true;
+        };
       };
     };
-  };
 
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
+    wayland.windowManager.sway = {
+      enable = true;
+      config = {
       assigns = {
         "3" = [{ class = "^Ferdium"; }];
       };
@@ -400,12 +405,25 @@
         #bindcode Mod4+Shift+$KP_9 move container to workspace $ws9
         #bindcode Mod4+Shift+$KP_0 move container to workspace $ws10
       '';
-  };
-  xsession = {
-    enable = true;
-    scriptPath = ".hm-xsession";
-    windowManager.command = ''
-      $HOME/sway.sh
-    '';
+    };
+    xsession = {
+      enable = true;
+      scriptPath = ".hm-xsession";
+      windowManager.command = ''
+        export MOZ_ENABLE_WAYLAND=1
+        export NIXOS_OZONE_WL=1
+        export XDG_SESSION_TYPE=wayland
+        export XDG_SESSION_DESKTOP=sway
+        export XDG_CURRENT_DESKTOP=sway
+        export CLUTTER_BACKEND=wayland
+        export QT_QPA_PLATFORM=wayland-egl
+        export ECORE_EVAS_ENGINE=wayland-egl
+        export ELM_ENGINE=wayland_egl
+        export SDL_VIDEODRIVER=wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export NO_AT_BRIDGE=1
+        sway
+      '';
+    };
   };
 }
