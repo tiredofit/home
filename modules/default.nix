@@ -8,5 +8,6 @@ with lib;
     ./desktop
     ./features
     ./roles
+    ./services
   ];
 }
