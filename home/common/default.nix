@@ -26,6 +26,7 @@ with lib;
         applications = {
           act.enable = true;
           android-tools.enable = true;
+          bash.enable = true;
           bat.enable = true;
           blueman.enable = true;
           btop.enable = true;

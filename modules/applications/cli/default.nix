@@ -6,6 +6,7 @@ with lib;
     ./act.nix
     ./android-tools.nix
     ./bat.nix
+    ./bash.nix
     ./btop.nix
     ./comma.nix
     ./diceware.nix
