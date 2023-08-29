@@ -6,5 +6,7 @@ with lib;
     ./applications/cli
     ./applications/gui
     ./desktop
+    ./features
+    ./roles
   ];
 }
