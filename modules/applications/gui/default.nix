@@ -6,6 +6,7 @@ with lib;
     ./file-roller.nix
     ./pinta.nix
     ./thunderbird.nix
+    ./wpsoffice.nix
     ./zoom.nix
   ];
 }

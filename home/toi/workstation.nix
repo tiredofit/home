@@ -27,6 +27,7 @@
       applications = {
         pinta.enable = true;
         thunderbird.enable = true;
+        wps-office.enable = true;
         zoom.enable = true;
       };
     };
