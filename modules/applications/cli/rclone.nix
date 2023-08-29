@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.rclone;
+  cfg = config.host.home.applications.restic;
 in
   with lib;
 {
   options = {
-    host.home.applications.rclone = {
+    host.home.applications.restic = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Remote File System tools";
+        description = "System backups";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          rclone
+          restic
         ];
     };
   };
