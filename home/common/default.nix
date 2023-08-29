@@ -18,7 +18,6 @@ with lib;
     ../../features/cli/git.nix
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
-    ../../features/cli/wget.nix
     ]
     ++ optionals ( role == "workstation" ) [
       ../../features/cli/direnv.nix
@@ -36,6 +35,7 @@ with lib;
           blueman.enable = true;
           btop.enable = true;
           chromium.enable = true;
+          diceware.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
           duf.enable = true;
@@ -79,6 +79,7 @@ with lib;
           tmux.enable = true;
           virt-manager.enable = true;
           vivaldi.enable = true; # Workstation
+          wget.enable = true;
           yt-dlp.enable = true;
           zoxide.enable = true;
         };

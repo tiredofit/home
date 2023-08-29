@@ -27,6 +27,7 @@ with lib;
     ./nmap.nix
     ./rclone.nix
     ./tmux.nix
+    ./wget.nix
     ./yt-dlp.nix
     ./zoxide.nix
   ];
