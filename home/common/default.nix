@@ -16,7 +16,6 @@ with lib;
     ../../features/cli/sops.nix
     ]
     ++ optionals ( role == "workstation" ) [
-      ../../features/cli/direnv.nix
       ../../features/cli/nix-index.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
@@ -34,6 +33,7 @@ with lib;
           comma.enable = true;
           diceware.enable = true;
           diffuse.enable = true;
+          direnv.enable = true;
           docker-compose = true;
           drawio.enable = true;
           duf.enable = true;
