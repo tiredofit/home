@@ -26,6 +26,7 @@
         libreoffice.enable = true;
         mate-calc.enable = true
         pinta.enable = true;
+        seahorse.enable = true;
         smartgit.enable = true;
         thunderbird.enable = true;
         wps-office.enable = true;

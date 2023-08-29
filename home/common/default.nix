@@ -71,6 +71,7 @@ with lib;
           libreoffice.enable = true;
           mate-calc.enable = true;
           pinta.enable = true;
+          seahorse.enable = true;
           vivaldi.enable = true; # Workstation
         };
       };

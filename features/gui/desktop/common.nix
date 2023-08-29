@@ -7,7 +7,6 @@
   home = {
     packages = with pkgs;
       [
-        gnome.seahorse
         gnome.zenity
         lxappearance
         pavucontrol      # Pulse Audio Volume Control
