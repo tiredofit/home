@@ -1,21 +1,37 @@
-{ config, pkgs, ...}:
+{config, lib, pkgs, ...}:
+
+let
+  cfg = config.host.home.applications.neofetch;
+in
+  with lib;
 {
-  home = {
-    packages = with pkgs;
-      [
-        atool               # viewing inside archives
-        exiftool            # Viewing information about media files
-        ffmpegthumbnailer   # Video Thumbnails
-        file                # Determine file types
-        imagemagick_light   # Auto rotate images for previews
-        mupdf               # Textual PDF previews
-        poppler_utils       # PDF image previews
-        ranger              # The actual file manager
-        w3m                 # Web previews
-      ];
+  options = {
+    host.home.applications.ranger = {
+      enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "File Manager";
+      };
+    };
   };
 
-  xdg.configFile."ranger/rc.conf".text = ''
+  config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+          atool               # viewing inside archives
+          exiftool            # Viewing information about media files
+          ffmpegthumbnailer   # Video Thumbnails
+          file                # Determine file types
+          imagemagick_light   # Auto rotate images for previews
+          mupdf               # Textual PDF previews
+          poppler_utils       # PDF image previews
+          ranger              # The actual file manager
+          w3m                 # Web previews
+        ];
+    };
+
+    xdg.configFile."ranger/rc.conf".text = ''
       # ===================================================================
       # This file contains the default startup commands for ranger.
       # To change them, it is recommended to create either /etc/ranger/rc.conf
@@ -775,4 +791,5 @@
       tmap <ESC> taskview_close
       copytmap <ESC> q Q w <C-c>
     '';
+  };
 }

@@ -9,6 +9,7 @@ with lib;
     ./lazygit.nix
     ./less.nix
     ./lsd.nix
+    ./neofetch.nix
     ./ncdu.nix
     ./nmap.nix
     ./tmux.nix

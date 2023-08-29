@@ -25,8 +25,6 @@ with lib;
     ../../features/cli/htop.nix
     ../../features/cli/liquidprompt.nix
     ../../features/cli/nano.nix
-    ../../features/cli/neofetch.nix
-    ../../features/cli/ranger.nix
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
     ../../features/cli/wget.nix
@@ -64,10 +62,12 @@ with lib;
           lsd.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
+          neofetch.enable = true;
           ncdu.enable = true;
           nmap.enable = true;
           nextcloud-client.enable = true;
           pinta.enable = true;
+          ranger.enable = true;
           seahorse.enable = true;
           smplayer.enable = true;
           thunar.enable = true;
