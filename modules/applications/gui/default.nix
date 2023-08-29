@@ -4,6 +4,7 @@ with lib;
 {
   imports = [
     ./arandr.nix
+    ./autokey.nix
     ./blueman.nix
     ./calibre.nix
     ./chromium.nix

@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.arandr;
+  cfg = config.host.home.applications.autokey;
 in
   with lib;
 {
   options = {
-    host.home.applications.arandr = {
+    host.home.applications.autokey = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Graphical Screen layout manager";
+        description = "Perform automation and override keymaps";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          arandr
+          autokey
         ];
     };
   };
