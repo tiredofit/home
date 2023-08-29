@@ -1,14 +1,14 @@
-{config, pkgs, lib, ...}:
+{config, lib, pkgs, ...}:
 
 let
-  cfg = config.services.decrypt_encfs_workspace;
+  cfg = config.host.home.service.decrypt_encfs_workspace;
   name = "decrypt_encfs_workspace";
 in
 with lib;
 {
- options.services.decrypt_encfs_workspace = {
+ options.host.home.service.decrypt_encfs_workspace = {
    enable = mkOption {
-     default = true;
+     default = false;
      type = with types; bool;
      description = "Decrypt Encfs Workspace";
    };
