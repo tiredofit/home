@@ -11,7 +11,6 @@ with lib;
     ./locale.nix
     ./nix.nix
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
-    ../../features/cli/act.nix
     ../../features/cli/bash.nix
     ../../features/cli/bat.nix
     ../../features/cli/btop.nix
@@ -51,6 +50,7 @@ with lib;
     host = {
       home = {
         applications = {
+          act.enable = true;
           blueman.enable = true;
           chromium.enable = true;
           diffuse.enable = true;

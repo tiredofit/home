@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, lib, pkgs, ...}:
 {
   home = {
     packages = with pkgs;
@@ -9,8 +9,10 @@
 
   programs = {
     bash.initExtra = ''
-      alias act="act --secret-file $XDG_RUNTIME_DIR/secrets/act/docker"
-    '';
+      if [ -f "$XDG_RUNTIME_DIR"/secrets/act/docker ] ; then
+          alias act="act --secret-file $XDG_RUNTIME_DIR/secrets/act/docker"
+      fi
+      '';
   };
 
   sops.secrets = {
