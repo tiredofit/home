@@ -44,7 +44,6 @@ with lib;
       ../../features/cli/direnv.nix
       ../../features/cli/nix-index.nix
       ../../features/cli/zathura.nix
-      ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/firefox.nix
@@ -64,6 +63,7 @@ with lib;
           eog.enable = true;
           file-roller.enable = true;
           ferdium.enable = true;
+          gnome-system-monitor = true;
           geeqie.enable = true;
           gparted.enable = true;
           greenclip.enable = true;

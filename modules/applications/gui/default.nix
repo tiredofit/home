@@ -12,6 +12,7 @@ with lib;
     ./ferdium.nix
     ./file-roller.nix
     ./geeqie.nix
+    ./gnomesystemonitor.nix
     ./gparted.nix
     ./greenclip.nix
     ./libreoffice.nix

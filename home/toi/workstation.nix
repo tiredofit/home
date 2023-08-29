@@ -23,6 +23,7 @@
         drawio.enable = true;
         eog.enable = true;
         ferdium.enable = true;
+        gnome-system-monitor.enable = true;
         greenclip.enable = true;
         gparted.enable = true;
         libreoffice.enable = true;
