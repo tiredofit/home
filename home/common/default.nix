@@ -41,6 +41,7 @@ with lib;
           chromium.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
+          duf.enable = true;
           encfs.enable = true;
           eog.enable = true;
           file-roller.enable = true;

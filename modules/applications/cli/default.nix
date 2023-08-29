@@ -6,6 +6,8 @@ with lib;
     ./act.nix
     ./bat.nix
     ./btop.nix
+    ./duf.nix
+    ./dust.nix
     ./encfs.nix
     ./fzf.nix
     ./gnupg.nix
