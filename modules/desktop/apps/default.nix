@@ -9,5 +9,6 @@ with lib;
     ./xbacklight.nix
     ./xdpyinfo.nix
     ./xev.nix
+    ./xprop.nix
   ];
 }
