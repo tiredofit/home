@@ -8,6 +8,7 @@ with lib;
     ./jq.nix
     ./lazygit.nix
     ./less.nix
+    ./liquidprompt.nix
     ./lsd.nix
     ./neofetch.nix
     ./ncdu.nix
