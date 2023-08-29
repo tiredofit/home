@@ -30,7 +30,6 @@ with lib;
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
     ../../features/cli/wget.nix
-    ../../features/cli/zoxide.nix
     ]
     ++ optionals ( role == "workstation" ) [
       ../../features/cli/direnv.nix
@@ -74,6 +73,7 @@ with lib;
           tmux.enable = true;
           virt-manager.enable = true;
           vivaldi.enable = true; # Workstation
+          yt-dlp.enable = true;
           zoxide.enable = true;
         };
       };
