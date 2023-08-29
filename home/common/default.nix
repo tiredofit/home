@@ -19,7 +19,6 @@ with lib;
     ../../features/cli/dust.nix
     ../../features/cli/file-compression.nix
     ../../features/cli/git.nix
-    ../../features/cli/gnupg.nix
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
     ../../features/cli/wget.nix
@@ -42,6 +41,7 @@ with lib;
           chromium.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
+          encfs.enable = true;
           eog.enable = true;
           file-roller.enable = true;
           firefox.enable = true;
@@ -67,9 +67,11 @@ with lib;
           neofetch.enable = true;
           ncdu.enable = true;
           nmap.enable = true;
+          neovim.enable = true;
           nextcloud-client.enable = true;
           pinta.enable = true;
           ranger.enable = true;
+          rclone.enable = true;
           seahorse.enable = true;
           smplayer.enable = true;
           thunar.enable = true;

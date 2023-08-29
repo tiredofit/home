@@ -6,6 +6,7 @@ with lib;
     ./act.nix
     ./bat.nix
     ./btop.nix
+    ./encfs.nix
     ./fzf.nix
     ./gnupg.nix
     ./htop.nix
@@ -17,8 +18,10 @@ with lib;
     ./mp3gain.nix
     ./nano.nix
     ./neofetch.nix
+    ./neovim.nix
     ./ncdu.nix
     ./nmap.nix
+    ./rclone.nix
     ./tmux.nix
     ./yt-dlp.nix
     ./zoxide.nix
