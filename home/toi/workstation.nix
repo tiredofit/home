@@ -33,6 +33,7 @@
         nextcloud-client.enable = true;
         opensnitch-ui.enable = true;
         pinta.enable = true;
+        pulsemixer.enable = true;
         seahorse.enable = true;
         smartgit.enable = true;
         smplayer.enable = true;

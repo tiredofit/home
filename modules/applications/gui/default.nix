@@ -26,6 +26,7 @@ with lib;
     ./nextcloudclient.nix
     ./opensnitch-ui.nix
     ./pinta.nix
+    ./pulsemixer.nix
     ./seahorse.nix
     ./smartgit.nix
     ./smplayer.nix
