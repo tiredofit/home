@@ -14,6 +14,7 @@ with lib;
     ./dust.nix
     ./encfs.nix
     ./fzf.nix
+    ./gh.nix
     ./git.nix
     ./gnupg.nix
     ./hugo.nix

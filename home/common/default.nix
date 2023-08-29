@@ -13,7 +13,6 @@ with lib;
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
     ../../features/cli/bash.nix
     ../../features/cli/file-compression.nix
-    ../../features/cli/git.nix
     ../../features/cli/sops.nix
     ]
     ++ optionals ( role == "workstation" ) [
@@ -46,6 +45,7 @@ with lib;
           ferdium.enable = true;
           flameshot.enable = true;
           fzf.enable = true;
+          github-client.enable = true;
           gnome-system-monitor.enable = true;
           geeqie.enable = true;
           git.enable = true;
