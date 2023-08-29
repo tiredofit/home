@@ -30,7 +30,6 @@ with lib;
     ../../features/cli/ranger.nix
     ../../features/cli/ripgrep.nix
     ../../features/cli/sops.nix
-    ../../features/cli/tmux.nix
     ../../features/cli/wget.nix
     ../../features/cli/zoxide.nix
     ]
@@ -72,6 +71,7 @@ with lib;
           seahorse.enable = true;
           smplayer.enable = true;
           thunar.enable = true;
+          tmux.enable = true;
           virt-manager.enable = true;
           vivaldi.enable = true; # Workstation
         };

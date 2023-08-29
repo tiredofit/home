@@ -9,5 +9,6 @@ with lib;
     ./less.nix
     ./lsd.nix
     ./ncdu.nix
+    ./tmux.nix
   ];
 }
