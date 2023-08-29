@@ -37,6 +37,7 @@ with lib;
     ./ripgrep.nix
     ./secrets.nix
     ./s3ql.nix
+    ./tea.nix
     ./timewarrior.nix
     ./tmux.nix
     ./wget.nix
