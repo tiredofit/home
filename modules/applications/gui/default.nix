@@ -18,6 +18,7 @@ with lib;
     ./gnomesystemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
+    ./kitty.nix
     ./libreoffice.nix
     ./masterpdfeditor.nix
     ./mate-calc.nix

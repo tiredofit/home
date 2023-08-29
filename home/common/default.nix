@@ -46,7 +46,6 @@ with lib;
       ../../features/cli/zathura.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
-      ../../features/gui/apps/kitty.nix
       ../../features/gui/apps/vscode.nix
     ];
 
@@ -66,6 +65,7 @@ with lib;
           geeqie.enable = true;
           gparted.enable = true;
           greenclip.enable = true;
+          kitty.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
           nextcloud-client.enable = true;

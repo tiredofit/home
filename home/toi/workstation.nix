@@ -27,6 +27,7 @@
         gnome-encfs-manager.enable = true;
         greenclip.enable = true;
         gparted.enable = true;
+        kitty.enable = true;
         libreoffice.enable = true;
         master-pdf-editor.enable = true;
         mate-calc.enable = true;
