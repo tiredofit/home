@@ -11,9 +11,6 @@ with lib;
     ./locale.nix
     ./nix.nix
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
-    ../../features/cli/bash.nix
-    ../../features/cli/file-compression.nix
-    ../../features/cli/sops.nix
     ]
     ++ optionals ( role == "workstation" ) [
       ../../features/cli/nix-index.nix
@@ -76,6 +73,7 @@ with lib;
           rclone.enable = true;
           ripgrep.enable = true;
           seahorse.enable = true;
+          secrets.enable = true;
           smplayer.enable = true;
           thunar.enable = true;
           tmux.enable = true;

@@ -35,6 +35,7 @@ with lib;
     ./nmap.nix
     ./rclone.nix
     ./ripgrep.nix
+    ./secrets.nix
     ./s3ql.nix
     ./timewarrior.nix
     ./tmux.nix
