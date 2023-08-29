@@ -29,6 +29,7 @@ with lib;
     ./smartgit.nix
     ./smplayer.nix
     ./sqlitebrowser.nix
+    ./swaynotificationcenter.nix
     ./thunar.nix
     ./thunderbird.nix
     ./virtmanager.nix

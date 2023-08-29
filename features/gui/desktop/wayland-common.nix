@@ -2,12 +2,12 @@
 {
   imports = [
     ./common.nix
-    ../apps/swaync.nix
   ];
 
   host = {
     home = {
       applications = {
+        sway-notification-center.enable = true;
         waybar.enable = true;
       };
     };
