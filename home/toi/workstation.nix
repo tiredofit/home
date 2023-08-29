@@ -20,6 +20,7 @@
   host = {
     home = {
       applications = {
+        chromium.enable = true;
         diffuse.enable = true;
         drawio.enable = true;
         eog.enable = true;

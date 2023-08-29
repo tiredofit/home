@@ -3,6 +3,7 @@
 with lib;
 {
   imports = [
+    ./chromium.nix
     ./diffuse.nix
     ./drawio.nix
     ./eog.nix

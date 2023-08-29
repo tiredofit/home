@@ -48,7 +48,6 @@ with lib;
       ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
-      ../../features/gui/apps/chromium.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
@@ -61,6 +60,7 @@ with lib;
     host = {
       home = {
         applications = {
+          chrmoim.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
           eog.enable = true;
