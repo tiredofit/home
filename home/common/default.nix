@@ -73,6 +73,7 @@ with lib;
           mate-calc.enable = true;
           pinta.enable = true;
           seahorse.enable = true;
+          thunar.enable = true;
           vivaldi.enable = true; # Workstation
         };
       };
