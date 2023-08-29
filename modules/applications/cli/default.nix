@@ -15,6 +15,7 @@ with lib;
     ./duf.nix
     ./dust.nix
     ./encfs.nix
+    ./file-compression.nix
     ./fzf.nix
     ./gh.nix
     ./git.nix

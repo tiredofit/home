@@ -1,22 +1,38 @@
-{ config, pkgs, ...}:
+{config, lib, pkgs, ...}:
+
+let
+  cfg = config.host.home.applications.file-compression;
+in
+  with lib;
 {
-  home = {
-    packages = with pkgs;
-      [
-        p7zip
-        pbzip2
-        pigz
-        pixz
-        unrar
-        unzip
-        zip
-        zstd
-      ];
+  options = {
+    host.home.applications.file-compression = {
+      enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Tools to work with compressed archives";
+      };
+    };
   };
 
-  programs = {
-    bash = {
-      initExtra = ''
+  config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+          p7zip
+          pbzip2
+          pigz
+          pixz
+          unrar
+          unzip
+          zip
+          zstd
+        ];
+    };
+
+    programs = {
+      bash = {
+        initExtra = ''
 # Get checksum hash of files
 get_file_hash() {
     if [ -n "$2" ] ; then
@@ -100,7 +116,8 @@ extract () {
       echo "extract - '$1' is not a valid file!"
   fi
 }
-      '';
+        '';
+      };
     };
   };
 }
