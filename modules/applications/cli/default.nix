@@ -39,6 +39,7 @@ with lib;
     ./ripgrep.nix
     ./s3ql.nix
     ./secrets.nix
+    ./shfmt.nix
     ./shellcheck.nix
     ./tea.nix
     ./timewarrior.nix
