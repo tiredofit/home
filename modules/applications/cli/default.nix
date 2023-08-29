@@ -9,6 +9,7 @@ with lib;
     ./encfs.nix
     ./fzf.nix
     ./gnupg.nix
+    ./hugo.nix
     ./htop.nix
     ./jq.nix
     ./lazygit.nix
