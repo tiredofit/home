@@ -47,7 +47,7 @@ with lib;
       ../../features/gui/apps/blueman.nix
       ../../features/gui/apps/gnome-system-monitor.nix
       ../../features/gui/apps/gparted.nix
-      ../../features/gui/apps/pinta.nix
+      #../../features/gui/apps/pinta.nix
       ../../features/gui/apps/vivaldi.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
@@ -67,6 +67,14 @@ with lib;
       ../../features/gui/apps/thunar.nix
       ../../features/gui/apps/vscode.nix
     ];
+
+    host = {
+      home = {
+        applications = {
+          pinta.enable = true;
+        };
+      };
+    };
 
     home = {
       packages = with pkgs;

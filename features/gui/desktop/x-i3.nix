@@ -264,7 +264,6 @@
             # focus the parent container
             "${mod}+a" = "focus parent";
 
-
             ## Mode Launchers
             "${mod}+r" = "mode resize";
 

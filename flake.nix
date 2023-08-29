@@ -69,6 +69,7 @@
       HomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
         modules = [
           (import ./home)
+          (import ./modules)
         ];
         extraSpecialArgs = { };
         pkgs = pkgsForSystem (args.system or "x86_64-linux");
