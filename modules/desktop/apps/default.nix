@@ -6,8 +6,10 @@ with lib;
     ./autorandr.nix
     ./autokey.nix
     ./grim.nix
+    ./hyprpaper.nix
     ./nwg-displays.nix
     ./redshift.nix
+    ./slurp.nix
     ./sysstat.nix
     ./wdisplays.nix
     ./wev.nix

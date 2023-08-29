@@ -20,13 +20,13 @@ in
       packages = with pkgs;
         [
           cliphist
-          grim
-          hyprpaper
+          #grim
+          #hyprpaper
           #nwg-displays
           qt5.qtwayland
           qt6.qtwayland
           rofi-wayland
-          slurp
+          #slurp
           swayidle
           swaylock-effects
           swayosd
