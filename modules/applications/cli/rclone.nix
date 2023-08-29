@@ -6,11 +6,11 @@ in
   with lib;
 {
   options = {
-    host.home.applications.restic = {
+    host.home.applications.rclone = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "System backups";
+        description = "Remote filesystem tools";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          restic
+          rclone
         ];
     };
   };
