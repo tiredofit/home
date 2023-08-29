@@ -29,10 +29,6 @@
         rofi                                # application launcher
         xbanish                             # hide mouse when typing
         xbindkeys                           # bind keys to commands
-        xfce.thunar                         # xfce4's file manager
-        xfce.thunar-volman                  # xfce4's file manager
-        xfce.thunar-archive-plugin          # xfce4's file manager
-        xfce.thunar-media-tags-plugin       # xfce4's file manager
         xidlehook                           # do things when system goes idle
         volctl                              # volume control
       ];
