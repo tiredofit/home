@@ -24,6 +24,7 @@
         diffuse.enable = true;
         eog.enable = true;
         libreoffice.enable = true;
+        mate-calc.enable = true
         pinta.enable = true;
         smartgit.enable = true;
         thunderbird.enable = true;

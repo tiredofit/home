@@ -56,7 +56,6 @@ with lib;
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/kitty.nix
-      ../../features/gui/apps/mate-calc.nix
       ../../features/gui/apps/smplayer.nix
       ../../features/gui/apps/thunar.nix
       ../../features/gui/apps/vscode.nix
@@ -69,6 +68,7 @@ with lib;
           eog.enable = true;
           file-roller.enable = true;
           libreoffice.enable = true;
+          mate-calc.enable = true;
           pinta.enable = true;
           vivaldi.enable = true; # Workstation
         };
