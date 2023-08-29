@@ -32,6 +32,7 @@ with lib;
     ./neofetch.nix
     ./neovim.nix
     ./ncdu.nix
+    ./nixfmt.nix
     ./nmap.nix
     ./rclone.nix
     ./ripgrep.nix
