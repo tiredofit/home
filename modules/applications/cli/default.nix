@@ -4,6 +4,7 @@ with lib;
 {
   imports = [
     ./act.nix
+    ./bat.nix
     ./btop.nix
     ./fzf.nix
     ./htop.nix

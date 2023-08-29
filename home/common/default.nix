@@ -12,8 +12,6 @@ with lib;
     ./nix.nix
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
     ../../features/cli/bash.nix
-    ../../features/cli/bat.nix
-    ../../features/cli/btop.nix
     ../../features/cli/comma.nix
     ../../features/cli/diceware.nix
     ../../features/cli/docker-compose.nix
@@ -39,6 +37,7 @@ with lib;
       home = {
         applications = {
           act.enable = true;
+          bat.enable = true;
           blueman.enable = true;
           btop.enable = true;
           chromium.enable = true;
