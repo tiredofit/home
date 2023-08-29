@@ -13,6 +13,7 @@ with lib;
     ./less.nix
     ./liquidprompt.nix
     ./lsd.nix
+    ./nano.nix
     ./neofetch.nix
     ./ncdu.nix
     ./nmap.nix
