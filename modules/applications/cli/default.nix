@@ -42,6 +42,7 @@ with lib;
     ./timewarrior.nix
     ./tmux.nix
     ./wget.nix
+    ./xmlstarlet.nix
     ./yt-dlp.nix
     ./zathura.nix
     ./zoxide.nix
