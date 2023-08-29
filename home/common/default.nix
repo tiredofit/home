@@ -24,12 +24,8 @@ with lib;
     ../../features/cli/git.nix
     ../../features/cli/gnupg.nix
     ../../features/cli/htop.nix
-    ../../features/cli/jq.nix
-    ../../features/cli/lazygit.nix
     ../../features/cli/liquidprompt.nix
-    ../../features/cli/lsd.nix
     ../../features/cli/nano.nix
-    ../../features/cli/ncdu.nix
     ../../features/cli/neofetch.nix
     ../../features/cli/ranger.nix
     ../../features/cli/ripgrep.nix
@@ -63,10 +59,14 @@ with lib;
           geeqie.enable = true;
           gparted.enable = true;
           greenclip.enable = true;
+          jq.enable = true;
           kitty.enable = true;
+          lazygit.enable = true;
           less.enable = true;
+          lsd.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
+          ncdu.enable = true;
           nextcloud-client.enable = true;
           pinta.enable = true;
           seahorse.enable = true;
