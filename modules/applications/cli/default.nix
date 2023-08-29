@@ -43,6 +43,7 @@ with lib;
     ./tmux.nix
     ./wget.nix
     ./xmlstarlet.nix
+    ./yq.nix
     ./yt-dlp.nix
     ./zathura.nix
     ./zoxide.nix
