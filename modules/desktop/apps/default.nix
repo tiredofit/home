@@ -8,6 +8,7 @@ with lib;
     ./redshift.nix
     ./sysstat.nix
     ./wev.nix
+    ./wlr-randr.nix
     ./xbindkeys.nix
     ./xdotool.nix
     ./xbacklight.nix
