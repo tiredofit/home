@@ -5,6 +5,7 @@ with lib;
   imports = [
     ./autorandr.nix
     ./autokey.nix
+    ./nwg-displays.nix
     ./redshift.nix
     ./sysstat.nix
     ./wdisplays.nix

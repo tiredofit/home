@@ -31,12 +31,12 @@ in
           swaylock-effects
           swayosd
           wayprompt
-          wdisplays
-          wev
+          #wdisplays
+          #wev
           wl-clipboard
           wlogout
           wl-gammarelay-rs
-          wlr-randr
+          #wlr-randr
         ];
 
       sessionVariables = {
