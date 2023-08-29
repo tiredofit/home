@@ -14,9 +14,7 @@
     ../../features/gui/apps/nextcloud-desktop.nix
     ../../features/gui/apps/masterpdfeditor.nix
     ../../features/gui/apps/opensnitch-ui.nix
-    ../../features/gui/apps/smartgit.nix
     ../../features/gui/apps/sqlitebrowser.nix
-    ../../features/gui/apps/thunderbird.nix
     ../../features/gui/apps/virt-manager.nix
   ];
 
@@ -25,6 +23,7 @@
       applications = {
         libreoffice.enable = true;
         pinta.enable = true;
+        smartgit.enable = true;
         thunderbird.enable = true;
         wps-office.enable = true;
         zoom.enable = true;
