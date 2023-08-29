@@ -1,13 +1,13 @@
 { config, lib, pkgs, ...}:
 {
   imports = [
-    ../apps/dunst.nix
     ./x-common.nix
   ];
 
   host = {
     home = {
       applications = {
+        dunst.enable = true;
         greenclip.enable = true;
       };
     };
