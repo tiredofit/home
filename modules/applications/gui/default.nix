@@ -16,6 +16,7 @@ with lib;
     ./gparted.nix
     ./greenclip.nix
     ./libreoffice.nix
+    ./masterpdfeditor.nix
     ./mate-calc.nix
     ./nextcloud-client.nix
     ./opensnitch-ui.nix

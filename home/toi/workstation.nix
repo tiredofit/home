@@ -9,7 +9,6 @@
     ../../features/cli/yt-dlp.nix
     ../../features/services/decrypt_encfs_workspace.nix
     ../../features/gui/apps/gnome-encfs-manager.nix
-    ../../features/gui/apps/masterpdfeditor.nix
     ../../features/gui/apps/virt-manager.nix
   ];
 
@@ -27,6 +26,7 @@
         greenclip.enable = true;
         gparted.enable = true;
         libreoffice.enable = true;
+        master-pdf-editor = true;
         mate-calc.enable = true;
         nextcloud-client.enable = true;
         opensnitch-ui.enable = true;
