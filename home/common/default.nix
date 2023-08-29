@@ -46,8 +46,6 @@ with lib;
       ../../features/cli/zathura.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
-      ../../features/gui/apps/firefox.nix
-      ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/kitty.nix
       ../../features/gui/apps/vscode.nix
     ];
@@ -61,6 +59,7 @@ with lib;
           drawio.enable = true;
           eog.enable = true;
           file-roller.enable = true;
+          firefox.enable = true;
           ferdium.enable = true;
           flameshot.enable = true;
           gnome-system-monitor.enable = true;

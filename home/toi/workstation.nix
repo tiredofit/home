@@ -21,6 +21,7 @@
         drawio.enable = true;
         eog.enable = true;
         ferdium.enable = true;
+        firefox.enable = true;
         flameshot.enable = true;
         gnome-system-monitor.enable = true;
         gnome-encfs-manager.enable = true;

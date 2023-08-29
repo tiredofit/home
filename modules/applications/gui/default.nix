@@ -11,6 +11,7 @@ with lib;
     ./eog.nix
     ./ferdium.nix
     ./file-roller.nix
+    ./firefox.nix
     ./flameshot.nix
     ./geeqie.nix
     ./gnomeencfsmanager.nix
