@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.sqlite-browser;
+  cfg = config.host.home.applications.opensnitch-ui;
 in
   with lib;
 {
   options = {
-    host.home.applications.sqlite-browser = {
+    host.home.applications.opensnitch-ui = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Database Manager";
+        description = "Application Firewall";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          sqlitebrowser
+          opensnitch-ui
         ];
     };
   };

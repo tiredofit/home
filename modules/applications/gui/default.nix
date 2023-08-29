@@ -16,6 +16,7 @@ with lib;
     ./libreoffice.nix
     ./mate-calc.nix
     ./nextcloud-client.nix
+    ./opensnitch-ui.nix
     ./pinta.nix
     ./seahorse.nix
     ./smartgit.nix
