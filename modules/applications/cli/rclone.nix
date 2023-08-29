@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.restic;
+  cfg = config.host.home.applications.rclone;
 in
   with lib;
 {
