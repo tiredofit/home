@@ -6,5 +6,6 @@ with lib;
     ./redshift.nix
     ./xbindkeys.nix
     ./xdotool.nix
+    ./xbacklight.nix
   ];
 }
