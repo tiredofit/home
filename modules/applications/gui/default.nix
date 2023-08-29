@@ -15,6 +15,7 @@ with lib;
     ./greenclip.nix
     ./libreoffice.nix
     ./mate-calc.nix
+    ./nextcloud-client.nix
     ./pinta.nix
     ./seahorse.nix
     ./smartgit.nix

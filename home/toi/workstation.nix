@@ -9,7 +9,6 @@
     ../../features/cli/yt-dlp.nix
     ../../features/services/decrypt_encfs_workspace.nix
     ../../features/gui/apps/gnome-encfs-manager.nix
-    ../../features/gui/apps/nextcloud-desktop.nix
     ../../features/gui/apps/masterpdfeditor.nix
     ../../features/gui/apps/opensnitch-ui.nix
     ../../features/gui/apps/sqlitebrowser.nix
@@ -28,7 +27,8 @@
         greenclip.enable = true;
         gparted.enable = true;
         libreoffice.enable = true;
-        mate-calc.enable = true
+        mate-calc.enable = true;
+        nextcloud-client.enable= true;
         pinta.enable = true;
         seahorse.enable = true;
         smartgit.enable = true;

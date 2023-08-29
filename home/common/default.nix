@@ -69,6 +69,7 @@ with lib;
           greenclip.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
+          nextcloud-client.enable = true;
           pinta.enable = true;
           seahorse.enable = true;
           smplayer.enable = true;
