@@ -3,6 +3,7 @@
 with lib;
 {
   imports = [
+    ./arandr.nix
     ./blueman.nix
     ./calibre.nix
     ./chromium.nix
