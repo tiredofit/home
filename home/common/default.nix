@@ -20,7 +20,6 @@ with lib;
     ../../features/cli/duf.nix
     ../../features/cli/dust.nix
     ../../features/cli/file-compression.nix
-    ../../features/cli/fzf.nix
     ../../features/cli/git.nix
     ../../features/cli/gnupg.nix
     ../../features/cli/htop.nix
@@ -54,6 +53,7 @@ with lib;
           firefox.enable = true;
           ferdium.enable = true;
           flameshot.enable = true;
+          fzf.enable = true;
           gnome-system-monitor.enable = true;
           geeqie.enable = true;
           gparted.enable = true;

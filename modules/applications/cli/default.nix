@@ -4,6 +4,7 @@ with lib;
 {
   imports = [
     ./act.nix
+    ./fzf.nix
     ./jq.nix
     ./lazygit.nix
     ./less.nix
