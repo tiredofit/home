@@ -46,7 +46,6 @@ with lib;
       ../../features/cli/zathura.nix
       ../../features/gui/apps/blueman.nix
       ../../features/gui/apps/gnome-system-monitor.nix
-      ../../features/gui/apps/gparted.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/chromium.nix
@@ -68,6 +67,7 @@ with lib;
           file-roller.enable = true;
           ferdium.enable = true;
           geeqie.enable = true;
+          gparted.enable = true;
           greenclip.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;

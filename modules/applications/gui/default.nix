@@ -9,6 +9,7 @@ with lib;
     ./ferdium.nix
     ./file-roller.nix
     ./geeqie.nix
+    ./gparted.nix
     ./greenclip.nix
     ./libreoffice.nix
     ./mate-calc.nix

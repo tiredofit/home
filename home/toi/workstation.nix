@@ -25,6 +25,7 @@
         eog.enable = true;
         ferdium.enable = true;
         greenclip.enable = true;
+        gparted.enable = true;
         libreoffice.enable = true;
         mate-calc.enable = true
         pinta.enable = true;
