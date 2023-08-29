@@ -7,6 +7,7 @@ with lib;
     ./android-tools.nix
     ./bat.nix
     ./btop.nix
+    ./comma.nix
     ./diceware.nix
     ./duf.nix
     ./dust.nix
