@@ -65,6 +65,7 @@ with lib;
           libreoffice.enable = true;
           mate-calc.enable = true;
           ncdu.enable = true;
+          nmap.enable = true;
           nextcloud-client.enable = true;
           pinta.enable = true;
           seahorse.enable = true;
