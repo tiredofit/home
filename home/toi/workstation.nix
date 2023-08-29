@@ -11,7 +11,6 @@
     ../../features/gui/apps/gnome-encfs-manager.nix
     ../../features/gui/apps/masterpdfeditor.nix
     ../../features/gui/apps/opensnitch-ui.nix
-    ../../features/gui/apps/sqlitebrowser.nix
     ../../features/gui/apps/virt-manager.nix
   ];
 
@@ -33,6 +32,7 @@
         seahorse.enable = true;
         smartgit.enable = true;
         smplayer.enable = true;
+        sqlite-browser.enable = true;
         thunar.enable = true;
         thunderbird.enable = true;
         wps-office.enable = true;

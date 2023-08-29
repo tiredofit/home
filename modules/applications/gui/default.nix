@@ -20,6 +20,7 @@ with lib;
     ./seahorse.nix
     ./smartgit.nix
     ./smplayer.nix
+    ./sqlitebrowser.nix
     ./thunar.nix
     ./thunderbird.nix
     ./vivaldi.nix
