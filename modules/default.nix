@@ -3,6 +3,8 @@
 with lib;
 {
   imports = [
+    ./applications/cli
     ./applications/gui
+    ./desktop
   ];
 }
