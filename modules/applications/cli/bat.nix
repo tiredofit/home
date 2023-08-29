@@ -1,32 +1,29 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.btop;
+  cfg = config.host.home.applications.bat;
 in
   with lib;
 {
   options = {
-    host.home.applications.btop = {
+    host.home.applications.bat = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Process monitor";
+        description = "Text file viewer";
       };
     };
   };
 
   config = mkIf cfg.enable {
     programs = {
-      btop = {
+      bat = {
         enable = true;
-        settings = {
-          color_theme = "Default";
-          theme_background = false;
+        config = {
+          map-syntax = [ "*.jenkinsfile:Groovy" "*.props:Java Properties" ];
+          pager = "less -FR";
+          theme = "TwoDark";
         };
-      };
-
-      bash.shellAliases = {
-        top = "btop" ; # Process viewer
       };
     };
   };
