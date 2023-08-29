@@ -13,10 +13,7 @@ with lib;
     #../../features/cli/nix.nix # FIXME This is putting a secret for github
     ../../features/cli/bash.nix
     ../../features/cli/comma.nix
-    ../../features/cli/diceware.nix
     ../../features/cli/docker-compose.nix
-    ../../features/cli/duf.nix
-    ../../features/cli/dust.nix
     ../../features/cli/file-compression.nix
     ../../features/cli/git.nix
     ../../features/cli/ripgrep.nix
@@ -42,6 +39,7 @@ with lib;
           diffuse.enable = true;
           drawio.enable = true;
           duf.enable = true;
+          dust.enable = true;
           encfs.enable = true;
           eog.enable = true;
           file-roller.enable = true;
