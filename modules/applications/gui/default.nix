@@ -31,6 +31,7 @@ with lib;
     ./sqlitebrowser.nix
     ./thunar.nix
     ./thunderbird.nix
+    ./virtmanager.nix
     ./vivaldi.nix
     ./wpsoffice.nix
     ./zoom.nix

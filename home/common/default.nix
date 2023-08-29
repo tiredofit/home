@@ -73,6 +73,7 @@ with lib;
           seahorse.enable = true;
           smplayer.enable = true;
           thunar.enable = true;
+          virt-manager.enable = true;
           vivaldi.enable = true; # Workstation
         };
       };

@@ -8,7 +8,6 @@
     ../../features/cli/nmap.nix
     ../../features/cli/yt-dlp.nix
     ../../features/services/decrypt_encfs_workspace.nix
-    ../../features/gui/apps/virt-manager.nix
   ];
 
   host = {
@@ -40,6 +39,7 @@
         sqlite-browser.enable = true;
         thunar.enable = true;
         thunderbird.enable = true;
+        virt-manager.enable = true;
         wps-office.enable = true;
         zoom.enable = true;
       };
