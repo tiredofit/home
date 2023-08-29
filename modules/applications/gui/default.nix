@@ -8,6 +8,7 @@ with lib;
     ./chromium.nix
     ./diffuse.nix
     ./drawio.nix
+    ./dunst.nix
     ./eog.nix
     ./ferdium.nix
     ./file-roller.nix
@@ -34,6 +35,7 @@ with lib;
     ./thunderbird.nix
     ./virtmanager.nix
     ./vivaldi.nix
+    ./vscode.nix
     ./waybar.nix
     ./wpsoffice.nix
     ./zoom.nix

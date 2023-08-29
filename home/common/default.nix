@@ -46,7 +46,6 @@ with lib;
       ../../features/cli/zathura.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
-      ../../features/gui/apps/vscode.nix
     ];
 
     host = {

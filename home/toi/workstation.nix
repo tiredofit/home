@@ -40,6 +40,7 @@
         thunar.enable = true;
         thunderbird.enable = true;
         virt-manager.enable = true;
+        visual-studio-code.enable = true;
         wps-office.enable = true;
         zoom.enable = true;
       };
