@@ -10,10 +10,8 @@ with lib;
     ./home-manager.nix
     ./locale.nix
     ./nix.nix
-    #../../features/cli/nix.nix # FIXME This is putting a secret for github
     ]
     ++ optionals ( role == "workstation" ) [
-      ../../features/cli/nix-index.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
     ];
