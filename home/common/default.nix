@@ -26,7 +26,6 @@ with lib;
     ../../features/cli/htop.nix
     ../../features/cli/jq.nix
     ../../features/cli/lazygit.nix
-    ../../features/cli/less.nix
     ../../features/cli/liquidprompt.nix
     ../../features/cli/lsd.nix
     ../../features/cli/nano.nix
@@ -65,6 +64,7 @@ with lib;
           gparted.enable = true;
           greenclip.enable = true;
           kitty.enable = true;
+          less.enable = true;
           libreoffice.enable = true;
           mate-calc.enable = true;
           nextcloud-client.enable = true;
