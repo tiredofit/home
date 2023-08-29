@@ -50,7 +50,6 @@ with lib;
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
       ../../features/gui/apps/chromium.nix
-      ../../features/gui/apps/diffuse.nix
       ../../features/gui/apps/drawio.nix
       ../../features/gui/apps/eog.nix
       ../../features/gui/apps/ferdium.nix
@@ -67,6 +66,7 @@ with lib;
     host = {
       home = {
         applications = {
+          diffuse.enable = true;
           file-roller.enable = true;
           libreoffice.enable = true;
           pinta.enable = true;

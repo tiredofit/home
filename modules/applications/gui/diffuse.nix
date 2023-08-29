@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.smartgit;
+  cfg = config.host.home.applications.diffuse;
 in
   with lib;
 {
   options = {
-    host.home.applications.smartgit = {
+    host.home.applications.diffuse = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Git repository manager";
+        description = "Graphical diff analyzer";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          smartgithg
+          diffuse
         ];
     };
   };

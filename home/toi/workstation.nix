@@ -21,6 +21,7 @@
   host = {
     home = {
       applications = {
+        diffuse.enable = true;
         libreoffice.enable = true;
         pinta.enable = true;
         smartgit.enable = true;
