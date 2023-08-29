@@ -8,6 +8,7 @@ with lib;
     ./eog.nix
     ./file-roller.nix
     ./geeqie.nix
+    ./greenclip.nix
     ./libreoffice.nix
     ./mate-calc.nix
     ./pinta.nix

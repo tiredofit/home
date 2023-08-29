@@ -3,7 +3,6 @@
   imports = [
     ../../features/cli/android-tools.nix
     ../../features/cli/encfs.nix
-    ../../features/gui/apps/geeqie.nix
     ../../features/cli/gh.nix
     ../../features/cli/hugo.nix
     ../../features/cli/nmap.nix
@@ -24,6 +23,7 @@
         diffuse.enable = true;
         drawio.enable = true;
         eog.enable = true;
+        greenclip.enable = true;
         libreoffice.enable = true;
         mate-calc.enable = true
         pinta.enable = true;

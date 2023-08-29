@@ -2,9 +2,16 @@
 {
   imports = [
     ../apps/dunst.nix
-    ../apps/greenclip.nix
     ./x-common.nix
   ];
+
+  host = {
+    home = {
+      applications = {
+        greenclip.enable = true;
+      };
+    };
+  };
 
   home = {
     file = {
