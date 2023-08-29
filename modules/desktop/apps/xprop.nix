@@ -22,5 +22,13 @@ in
           xorg.xprop
         ];
     };
+
+    programs = {
+      bash = {
+        shellAliases = {
+          windowtitle = "xprop | grep WM_CLASS" ; # get window title from x application
+        };
+      };
+    };
   };
 }
