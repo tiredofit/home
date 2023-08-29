@@ -40,6 +40,7 @@ with lib;
         applications = {
           act.enable = true;
           blueman.enable = true;
+          btop.enable = true;
           chromium.enable = true;
           diffuse.enable = true;
           drawio.enable = true;
