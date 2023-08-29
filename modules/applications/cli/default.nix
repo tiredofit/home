@@ -4,6 +4,7 @@ with lib;
 {
   imports = [
     ./act.nix
+    ./android-tools.nix
     ./bat.nix
     ./btop.nix
     ./diceware.nix

@@ -31,6 +31,7 @@ with lib;
       home = {
         applications = {
           act.enable = true;
+          android-tools.enable = true;
           bat.enable = true;
           blueman.enable = true;
           btop.enable = true;
