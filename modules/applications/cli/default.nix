@@ -34,6 +34,7 @@ with lib;
     ./rclone.nix
     ./ripgrep.nix
     ./s3ql.nix
+    ./timewarrior.nix
     ./tmux.nix
     ./wget.nix
     ./yt-dlp.nix
