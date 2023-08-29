@@ -1,4 +1,5 @@
 { inputs, config, lib, pkgs, ... }:
+with lib;
 {
   home = {
     activation = {
@@ -11,9 +12,9 @@
 
   nix = {
     settings = {
-      auto-optimise-store = lib.mkDefault true;
+      auto-optimise-store = mkDefault true;
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-      warn-dirty = false;
+      warn-dirty = mkDefault false;
     };
 
     package = pkgs.nixFlakes;
@@ -22,7 +23,7 @@
 
   nixpkgs = {
     config = {
-      allowUnfree = true;
+      allowUnfree = mkDefault true;
       allowUnfreePredicate = (_: true);
     };
   };
@@ -37,8 +38,8 @@
     };
 
     nix-index = {
-      enable = true;
-      enableBashIntegration = true;
+      enable = mkDefault true;
+      enableBashIntegration = mkDefault true;
     };
   };
 }

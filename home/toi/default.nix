@@ -21,10 +21,10 @@ in
   imports = [
 
   ] ++ existing-imports [
-    ./${hostname}
-    ./${hostname}.nix
-    ./${role}
-    ./${role}.nix
+    ./hostname/${hostname}
+    ./hostname/${hostname}.nix
+    ./role/${role}
+    ./role/${role}.nix
   ];
 
   home = {
