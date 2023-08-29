@@ -8,7 +8,6 @@
     ../../features/cli/nmap.nix
     ../../features/cli/yt-dlp.nix
     ../../features/services/decrypt_encfs_workspace.nix
-    ../../features/gui/apps/calibre.nix
     ../../features/gui/apps/gnome-encfs-manager.nix
     ../../features/gui/apps/nextcloud-desktop.nix
     ../../features/gui/apps/masterpdfeditor.nix
@@ -20,6 +19,7 @@
   host = {
     home = {
       applications = {
+        calibre.nix = true;
         chromium.enable = true;
         diffuse.enable = true;
         drawio.enable = true;

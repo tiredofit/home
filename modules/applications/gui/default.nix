@@ -3,6 +3,7 @@
 with lib;
 {
   imports = [
+    ./calibre.nix
     ./chromium.nix
     ./diffuse.nix
     ./drawio.nix
