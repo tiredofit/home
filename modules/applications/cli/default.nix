@@ -27,6 +27,7 @@ with lib;
     ./ncdu.nix
     ./nmap.nix
     ./rclone.nix
+    ./ripgrep.nix
     ./tmux.nix
     ./wget.nix
     ./yt-dlp.nix
