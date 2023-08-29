@@ -20,7 +20,6 @@ with lib;
     ++ optionals ( role == "workstation" ) [
       ../../features/cli/direnv.nix
       ../../features/cli/nix-index.nix
-      ../../features/cli/zathura.nix
       ../../features/gui/desktop/${windowmanager}.nix
       ../../features/gui/fonts.nix
     ];
@@ -82,6 +81,7 @@ with lib;
           vivaldi.enable = true; # Workstation
           wget.enable = true;
           yt-dlp.enable = true;
+          zathura.enable = true;
           zoxide.enable = true;
         };
       };

@@ -29,6 +29,7 @@ with lib;
     ./nmap.nix
     ./rclone.nix
     ./ripgrep.nix
+    ./s3ql.nix
     ./tmux.nix
     ./wget.nix
     ./yt-dlp.nix
