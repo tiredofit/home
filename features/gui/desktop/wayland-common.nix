@@ -1,10 +1,17 @@
-{ pkgs, config, lib, ...}:
+{ config, lib, pkgs, ...}:
 {
   imports = [
     ./common.nix
     ../apps/swaync.nix
-    ../apps/waybar.nix
   ];
+
+  host = {
+    home = {
+      applications = {
+        waybar.enable = true;
+      };
+    };
+  };
 
   home = {
     packages = with pkgs;

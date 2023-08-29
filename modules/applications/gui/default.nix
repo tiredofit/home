@@ -33,6 +33,7 @@ with lib;
     ./thunderbird.nix
     ./virtmanager.nix
     ./vivaldi.nix
+    ./waybar.nix
     ./wpsoffice.nix
     ./zoom.nix
   ];
