@@ -1,13 +1,28 @@
-{ config, pkgs, ... }:
+{config, lib, pkgs, ...}:
 
+let
+  cfg = config.host.home.features.fonts;
+in
+  with lib;
 {
-  fonts = {
-    fontconfig = {
-      enable = true ;
+  options = {
+    host.home.features.fonts = {
+      enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Enable fonts";
+      };
     };
   };
 
-  home.packages = with pkgs; [
+  config = mkIf cfg.enable {
+    fonts = {
+      fontconfig = {
+        enable = true ;
+      };
+    };
+
+    home.packages = with pkgs; [
       caladea
       cantarell-fonts
       carlito
@@ -32,4 +47,5 @@
         "Noto"
       ];})
     ];
+  };
 }

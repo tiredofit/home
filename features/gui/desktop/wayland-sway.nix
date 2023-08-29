@@ -2,12 +2,10 @@
 
 {
   imports = [
-    ../apps/dunst.nix
     ./wayland-common.nix
   ];
 
   home = {
-
     file = {
       ".config/rofi".source = ../../../dotfiles/rofi;
     };
@@ -17,6 +15,14 @@
         autotiling
         i3status-rust                       # provide information to swaybar
       ];
+  };
+
+  host = {
+    home = {
+      applications = {
+        dunst.enable = true;
+      };
+    };
   };
 
   wayland.windowManager.sway = {

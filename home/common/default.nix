@@ -13,7 +13,6 @@ with lib;
     ]
     ++ optionals ( role == "workstation" ) [
       ../../features/gui/desktop/${windowmanager}.nix
-      ../../features/gui/fonts.nix
     ];
 
     host = {
@@ -81,6 +80,9 @@ with lib;
           yt-dlp.enable = true;
           zathura.enable = true;
           zoxide.enable = true;
+        };
+        features = {
+          fonts.enable = true;
         };
       };
     };
