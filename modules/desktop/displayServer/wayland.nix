@@ -22,7 +22,7 @@ in
           cliphist
           grim
           hyprpaper
-          nwg-displays
+          #nwg-displays
           qt5.qtwayland
           qt6.qtwayland
           rofi-wayland
