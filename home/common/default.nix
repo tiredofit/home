@@ -52,8 +52,6 @@ with lib;
       ../../features/gui/apps/flameshot.nix
       ../../features/gui/apps/firefox.nix
       ../../features/gui/apps/kitty.nix
-      ../../features/gui/apps/smplayer.nix
-      ../../features/gui/apps/thunar.nix
       ../../features/gui/apps/vscode.nix
     ];
 
@@ -73,6 +71,7 @@ with lib;
           mate-calc.enable = true;
           pinta.enable = true;
           seahorse.enable = true;
+          smplayer.enable = true;
           thunar.enable = true;
           vivaldi.enable = true; # Workstation
         };

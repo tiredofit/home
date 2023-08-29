@@ -32,6 +32,7 @@
         pinta.enable = true;
         seahorse.enable = true;
         smartgit.enable = true;
+        smplayer.enable = true;
         thunar.enable = true;
         thunderbird.enable = true;
         wps-office.enable = true;

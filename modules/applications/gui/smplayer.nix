@@ -1,14 +1,30 @@
-{ config, pkgs, ...}:
+{config, lib, pkgs, ...}:
+
+let
+  cfg = config.host.home.applications.smplayer;
+in
+  with lib;
 {
-  home = {
-    packages = with pkgs;
-      [
-        mpv
-        smplayer
-      ];
+  options = {
+    host.home.applications.smplayer = {
+      enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Video Player";
+      };
+    };
   };
 
-  xdg.configFile."smplayer/smplayer.ini".text = ''
+  config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+          mpv
+          smplayer
+        ];
+    };
+
+    xdg.configFile."smplayer/smplayer.ini".text = ''
 [%General]
 add_blackborders_on_fullscreen=false
 alang=
@@ -671,6 +687,6 @@ last_tv_channel=
 
 [update_checker]
 enabled=false
-'';
-
+    '';
+  };
 }

@@ -18,6 +18,7 @@ with lib;
     ./pinta.nix
     ./seahorse.nix
     ./smartgit.nix
+    ./smplayer.nix
     ./thunar.nix
     ./thunderbird.nix
     ./vivaldi.nix
