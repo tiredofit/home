@@ -362,7 +362,7 @@
         ## Popups during fullscreen (smart/ignore/leave_fullscreen)
         popup_during_fullscreen smart
 
-        for_window [title="Zoom - Licensed Account"] floating enable floating_minimum_size 360x690; floating_maximum_size 360x690;
+        for_window [title="Zoom - Licensed Account"] floating enable;
         for_window [title="Settings" ] floating enable
         for_window [class="virt-manager" ] floating enable
 
