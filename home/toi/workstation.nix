@@ -19,8 +19,17 @@
     ../../features/gui/apps/thunderbird.nix
     ../../features/gui/apps/virt-manager.nix
     ../../features/gui/apps/wpsoffice.nix
-    ../../features/gui/apps/zoom.nix
+
   ];
+
+  host = {
+    home = {
+      applications = {
+        pinta.enable = true;
+        zoom.enable = true;
+      };
+    };
+  };
 
   home = {
     packages = with pkgs;
