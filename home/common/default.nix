@@ -6,7 +6,6 @@ in
 with lib;
 {
   imports = [
-    ./colours.nix
     ./home-manager.nix
     ./locale.nix
     ./nix.nix
@@ -82,7 +81,10 @@ with lib;
           zoxide.enable = true;
         };
         features = {
-          fonts.enable = true;
+
+        };
+        services = {
+
         };
       };
     };

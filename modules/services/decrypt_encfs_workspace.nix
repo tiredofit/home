@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.service.decrypt_encfs_workspace;
+  cfg = config.host.home.services.decrypt_encfs_workspace;
   name = "decrypt_encfs_workspace";
 in
 with lib;
 {
- options.host.home.service.decrypt_encfs_workspace = {
+ options.host.home.services.decrypt_encfs_workspace = {
    enable = mkOption {
      default = false;
      type = with types; bool;

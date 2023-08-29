@@ -27,7 +27,6 @@
         swayidle
         swaylock-effects
         swayosd
-        waybar
         wayprompt
         wdisplays
         wev
@@ -36,6 +35,7 @@
         wl-gammarelay-rs
         wlr-randr
       ];
+
     sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       SDL_VIDEODRIVER = "wayland";

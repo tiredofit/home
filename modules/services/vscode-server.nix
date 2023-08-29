@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.service.vscode-server;
+  cfg = config.host.home.services.vscode-server;
 in
   with lib;
 {
   options = {
-    host.home.service.vscode-server = {
+    host.home.services.vscode-server = {
       enable = mkOption {
         default = false;
         type = with types; bool;
