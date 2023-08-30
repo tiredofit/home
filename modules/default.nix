@@ -7,7 +7,6 @@ with lib;
     ./applications/gui
     ./desktop
     ./feature
-    ./roles
     ./service
   ];
 }
