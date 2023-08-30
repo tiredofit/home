@@ -15,6 +15,7 @@ with lib;
     ./wdisplays.nix
     ./wev.nix
     ./wl-clipboard.nix
+    ./wl-gammarelay-rs.nix
     ./wlr-randr.nix
     ./wlogout.nix
     ./xbindkeys.nix
