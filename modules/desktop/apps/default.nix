@@ -23,6 +23,7 @@ with lib;
     ./swaynotificationcenter.nix
     ./swayosd.nix
     ./sysstat.nix
+    ./volctl.nix
     ./waybar.nix
     ./wayprompt.nix
     ./wdisplays.nix
@@ -35,6 +36,7 @@ with lib;
     ./xbindkeys.nix
     ./xdotool.nix
     ./xbacklight.nix
+    ./xidlehook.nix
     ./xdpyinfo.nix
     ./xev.nix
     ./xprop.nix

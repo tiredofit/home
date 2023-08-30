@@ -18,6 +18,8 @@ with lib;
           i3status-rust.enable = true;
           nitrogen.enable = true;
           picom.enable = true;
+          volctl.enable = true;
+          xbanish.enable = true;
         };
       };
     };
@@ -34,15 +36,14 @@ with lib;
           #alttab                              # application picker
           #autotiling                          # window management
           #betterlockscreen                    # a... better lock screen
-          dex                                 # autostart applications
           #feh                                 # set wallpaper
           #nitrogen                            # set wallpaper
           numlockx                            # auto enable number lock
           #picom                               # transparency and shadows, compositor
           rofi                                # application launcher
-          xbanish                             # hide mouse when typing
-          xidlehook                           # do things when system goes idle
-          volctl                              # volume control
+          #xbanish                             # hide mouse when typing
+          #xidlehook                           # do things when system goes idle
+          #volctl                              # volume control
         ];
     };
 
