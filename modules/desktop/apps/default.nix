@@ -15,6 +15,7 @@ with lib;
     ./i3status-rs.nix
     ./nitrogen.nix
     ./nwg-displays.nix
+    ./playerctl.nix
     ./picom.nix
     ./redshift.nix
     ./slurp.nix

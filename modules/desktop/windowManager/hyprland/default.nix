@@ -18,10 +18,17 @@ with lib;
 
       packages = with pkgs;
         [
-          playerctl
-          hyprpicker
-          hyprland-share-picker
+          hyprland-share-picker     # If this works outside of Hyprland modularize
         ];
+    };
+
+    host = {
+      home = {
+        applications = {
+          hyprpicker.enable = true;
+          playerctl.enable = true;
+        };
+      };
     };
 
     wayland.windowManager.hyprland = {
