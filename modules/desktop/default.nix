@@ -34,15 +34,12 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    ## TODO These should be seperated at some point to modules and loaded all as common to desktop environment
     home = {
       packages = with pkgs;
         [
-          gnome.zenity
-          pavucontrol      # Pulse Audio Volume Control
-          polkit
-          polkit_gnome
-          xdg-utils
+          polkit        # Allows unprivileged processes to speak to privileged processes
+          polkit_gnome  # Used to bring up authentication dialogs
+          xdg-utils     # Desktop integration
         ];
     };
 

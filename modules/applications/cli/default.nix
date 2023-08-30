@@ -51,6 +51,7 @@ with lib;
     ./yq.nix
     ./yt-dlp.nix
     ./zathura.nix
+    ./zenity.nix
     ./zoxide.nix
   ];
 }
