@@ -125,12 +125,19 @@
       ##
           sd111 = HomeConfiguration {
             extraSpecialArgs = {
-              org = "toi";
+              org = "sd";
               role = "server";
               inherit inputs outputs;
             };
           };
 
+          tesla = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              inherit inputs outputs;
+            };
+          };
       };
 
 
