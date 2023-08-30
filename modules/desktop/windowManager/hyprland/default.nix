@@ -5,10 +5,12 @@ let
 in
 with lib;
 {
+  imports = [
+    hyprland.homeManagerModules.default
+  ];
+
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
-    imports = [
-      hyprland.homeManagerModules.default
-    ];
+
 
     home = {
       file = {
