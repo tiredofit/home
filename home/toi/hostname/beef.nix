@@ -76,7 +76,7 @@
   sops.secrets = {
     "bashrc.d/toi_remotehosts.sh" = {
       format = "binary";
-      sopsFile = ./secrets/bash-toi_remotehosts.sh;
+      sopsFile = ../secrets/bash-toi_remotehosts.sh;
       mode = "500";
     };
   };
