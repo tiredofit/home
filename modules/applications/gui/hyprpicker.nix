@@ -10,7 +10,7 @@ in
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Color Picker";
+        description = "Wayland color picker";
       };
     };
   };
@@ -19,8 +19,9 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpicker
+          hyperpickr
         ];
     };
+
   };
 }
