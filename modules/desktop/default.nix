@@ -30,8 +30,6 @@ with lib;
         default = null;
         description = "Type of window manager (yes, I know some are desktop environments)";
       };
-
-
     };
   };
 
