@@ -19,6 +19,7 @@ with lib;
           nitrogen.enable = true;
           numlockx.enable = true;
           picom.enable = true;
+          rofi.enable = true;
           volctl.enable = true;
           xbanish.enable = true;
         };
@@ -29,13 +30,7 @@ with lib;
       file = {
         ".config/i3/status".source = ../../../../dotfiles/i3/status;
         ".config/i3/scripts".source = ../../../../dotfiles/i3/scripts;
-        ".config/rofi".source = ../../../../dotfiles/rofi;
       };
-        ## TODO - Modularize Rofi with X/Wayland configurations
-      packages = with pkgs;
-        [
-          rofi                                # application launcher
-        ];
     };
 
     xsession = {

@@ -12,6 +12,7 @@ with lib; {
             autotiling.enable = true;
             dunst.enable = true;
             i3status-rust.enable = true;
+            rofi.enable = true;
           };
         };
       };

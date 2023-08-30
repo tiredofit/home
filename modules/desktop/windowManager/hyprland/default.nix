@@ -27,6 +27,7 @@ with lib;
         applications = {
           hyprpicker.enable = true;
           playerctl.enable = true;
+          rofi.enable = true;
         };
       };
     };

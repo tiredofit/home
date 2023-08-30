@@ -262,7 +262,6 @@ in
         "terminal.integrated.enableMultiLinePasteWarning" = false;
         "terminal.integrated.fontFamily" = "Hack Nerd Font";
 
-        # Themes
         mutableExtensionsDir = false;
       };
 
