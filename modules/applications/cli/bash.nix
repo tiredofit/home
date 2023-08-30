@@ -33,6 +33,7 @@ with lib;
         bash_history_state_create = ''
           if [ -d "$HOME"/.local/state/bash ]; then
               mkdir -p "$HOME"/.local/state/bash
+              chown -R $USER "$HOME"/.local/state/bash
           fi
         '';
       };
