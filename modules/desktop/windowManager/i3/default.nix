@@ -13,8 +13,10 @@ with lib;
           autotiling.enable = true;
           betterlockscreen.enable = true;
           dunst.enable = true;
+          feh.enable = true;
           greenclip.enable = true;
           i3status-rust.enable = true;
+          nitrogen.enable = true;
         };
       };
     };
@@ -32,9 +34,8 @@ with lib;
           #autotiling                          # window management
           #betterlockscreen                    # a... better lock screen
           dex                                 # autostart applications
-          feh                                 # set wallpaper
-          i3status-rust                       # provide information to i3bar
-          nitrogen                            # set wallpaper
+          #feh                                 # set wallpaper
+          #nitrogen                            # set wallpaper
           numlockx                            # auto enable number lock
           picom                               # transparency and shadows, compositor
           rofi                                # application launcher
