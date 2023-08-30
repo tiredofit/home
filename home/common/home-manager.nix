@@ -25,7 +25,7 @@ with lib;
   };
 
   manual.manpages.enable = mkDefault false;
-  news.display = "show";
+  news.display = mkDefault "show";
 
   programs = {
     home-manager = {
