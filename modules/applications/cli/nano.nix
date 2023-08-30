@@ -1,30 +1,28 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.bat;
+  cfg = config.host.home.applications.nano;
 in
   with lib;
 {
   options = {
-    host.home.applications.bat = {
+    host.home.applications.nano = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Text file viewer";
+        description = "Text editor";
       };
     };
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      bat = {
-        enable = true;
-        config = {
-          map-syntax = [ "*.jenkinsfile:Groovy" "*.props:Java Properties" ];
-          pager = "less -FR";
-          theme = "TwoDark";
-        };
-      };
+    home = {
+      file = { ".config/nano".source = ../../dotfiles/nano; };
+
+      packages = with pkgs;
+      [
+        nano
+      ];
     };
   };
 }

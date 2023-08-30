@@ -7,9 +7,10 @@
         android-tools.enable = true;
         calibre.enable = true;
         encfs.enable = true;
-        gh.enable = true;
+        github-client.enable = true;
         hugo.enable = true;
         nextcloud-client.enable = true;
+        tea.enable = true;
       };
       feature = {
         gui = {
@@ -19,7 +20,7 @@
         };
       };
       service = {
-        decrypt_encfs_workspace = true;
+        decrypt_encfs_workspace.enable = true;
         vscode-server.enable = true;
       };
     };

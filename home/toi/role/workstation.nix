@@ -10,7 +10,7 @@ with lib;
         act.enable = mkDefault true;
         android-tools.enable = mkDefault true;
         calibre.enable = mkDefault true;
-        docker-compose = mkDefault true;
+        docker-compose.enable = mkDefault true;
         encfs.enable = mkDefault false;
         nextcloud-client.enable = mkDefault true;
         tea.enable = mkDefault true;
@@ -19,7 +19,7 @@ with lib;
 
       };
       service = {
-        decrypt_encfs_workspace = mkDefault true;
+        decrypt_encfs_workspace.enable = mkDefault true;
         vscode-server.enable = mkDefault true;
       };
     };

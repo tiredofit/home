@@ -2,7 +2,7 @@
 with lib;
 {
   home = {
-    stateVersion = mkDefault "23.11";
+    stateVersion = 23.11;
   };
 
   manual.manpages.enable = mkDefault false;

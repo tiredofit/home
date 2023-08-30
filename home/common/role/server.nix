@@ -7,7 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
-        docker-compose = mkDefault true;
+        docker-compose.enable = mkDefault true;
       };
       feature = {
       };

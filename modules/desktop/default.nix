@@ -7,6 +7,7 @@ in
 with lib;
 {
   imports = [
+    ./apps
     ./displayServer
     ./windowManager
   ];
