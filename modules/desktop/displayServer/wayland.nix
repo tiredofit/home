@@ -25,7 +25,7 @@ in
           wev.enable = true;
           wl-clipboard.enable = true;
           wl-gammarelay-rs.enable = true;
-          wl-logout.enable = true;
+          wlogout.enable = true;
           wlr-randr.enable = true;
         };
       };
