@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.xdotool;
+  cfg = config.host.home.applications.xbindkeys;
 in
   with lib;
 {
   options = {
-    host.home.applications.xdotool = {
+    host.home.applications.xbindkeys = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Automation";
+        description = "Bind keys to functions";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          xdotool
+          xbindkeys
         ];
     };
   };
