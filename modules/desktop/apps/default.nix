@@ -11,6 +11,7 @@ with lib;
     ./nwg-displays.nix
     ./redshift.nix
     ./slurp.nix
+    ./swayidle.nix
     ./sysstat.nix
     ./wdisplays.nix
     ./wev.nix
