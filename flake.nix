@@ -87,7 +87,6 @@
               hostname = "beef";
               displays = 3;
               networkInterface = "wlp10s0";
-              windowmanager = "i3";
               inherit inputs outputs;
             };
           };
@@ -109,7 +108,6 @@
               hostname = "selecta";
               displays = 1;
               networkInterface = "wlo1";
-              windowmanager = "x-cinnamon";
               inherit inputs outputs;
             };
           };
@@ -120,7 +118,6 @@
               role = "workstation";
               displays = 1;
               networkInterface = "wlo1";
-              windowmanager = "x-cinnamon";
               inherit inputs outputs;
             };
           };
