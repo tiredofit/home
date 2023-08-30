@@ -40,7 +40,7 @@ in
     };
 
     sops.secrets.gh_token = {
-      sopsFile = ../../home/common/secrets/gh.yaml ;
+      sopsFile = ../../../home/common/secrets/gh.yaml ;
       path = "%r/gh-token" ;
     };
   };
