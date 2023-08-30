@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.neofetch;
+  cfg = config.host.home.applications.ranger;
 in
   with lib;
 {
