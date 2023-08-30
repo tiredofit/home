@@ -22,6 +22,7 @@ with lib;
           rofi.enable = true;
           volctl.enable = true;
           xbanish.enable = true;
+          xidlehook.enable = true;
         };
       };
     };

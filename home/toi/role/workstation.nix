@@ -11,6 +11,7 @@ with lib;
         android-tools.enable = mkDefault true;
         calibre.enable = mkDefault true;
         docker-compose.enable = mkDefault true;
+        git.enable = mkDefault true;
         encfs.enable = mkDefault false;
         nextcloud-client.enable = mkDefault true;
         tea.enable = mkDefault true;

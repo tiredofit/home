@@ -7,8 +7,10 @@
         android-tools.enable = true;
         calibre.enable = true;
         encfs.enable = true;
+        git.enable = true;
         github-client.enable = true;
         hugo.enable = true;
+        lazygit.enable = true;
         nextcloud-client.enable = true;
         tea.enable = true;
       };

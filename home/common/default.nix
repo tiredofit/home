@@ -27,6 +27,7 @@ with lib;
           direnv.enable = mkDefault true;
           duf.enable = mkDefault true;
           dust.enable = mkDefault true;
+          file-compression.enable = mkDefault true;
           fzf.enable = mkDefault true;
           gnupg.enable = mkDefault true;
           htop.enable = mkDefault true;
