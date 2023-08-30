@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.numlockx;
+  cfg = config.host.home.applications.hyprpicker;
 in
   with lib;
 {
   options = {
-    host.home.applications.numlockx = {
+    host.home.applications.hyprpicker = {
       enable = mkOption {
         default = false;
         type = with types; bool;
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          numlockx
+          hyprpicker
         ];
     };
   };

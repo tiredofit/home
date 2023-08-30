@@ -21,6 +21,7 @@ with lib;
     ./gnomesystemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
+    ./hyprpicker.nix
     ./kitty.nix
     ./libreoffice.nix
     ./masterpdfeditor.nix
