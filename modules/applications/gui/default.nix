@@ -35,7 +35,7 @@ with lib;
     ./thunderbird.nix
     ./virt-manager.nix
     ./vivaldi.nix
-    #./vscode.nix
+    ./vscode.nix
     ./wpsoffice.nix
     ./zoom.nix
   ];
