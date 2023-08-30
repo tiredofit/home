@@ -21,7 +21,7 @@ with lib;
         gnome-system-monitor.enable = mkDefault true;
         gparted.enable = mkDefault true;
         greenclip.enable = mkDefault true;
-        hadolint.enable = mkDefault true;
+        hadolint.enable = mkDefault false ; ## TODO 20230829 - Broken ilist dependency
         kitty.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
