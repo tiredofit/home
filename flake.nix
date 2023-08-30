@@ -121,7 +121,18 @@
               inherit inputs outputs;
             };
           };
+
+      ##
+          sd111 = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              inherit inputs outputs;
+            };
+          };
+
       };
+
 
       inherit home-manager;
       inherit (home-manager) packages;
