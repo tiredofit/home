@@ -28,8 +28,8 @@ in
           rofi-wayland
           #slurp
           #swayidle
-          swaylock-effects
-          swayosd
+          #swaylock-effects
+          #swayosd
           wayprompt
           #wdisplays
           #wev

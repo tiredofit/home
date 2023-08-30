@@ -12,8 +12,10 @@ with lib;
     ./redshift.nix
     ./slurp.nix
     ./swayidle.nix
+    ./swaylock.nix
     ./swayosd.nix
     ./sysstat.nix
+    ./wayprompt.nix
     ./wdisplays.nix
     ./wev.nix
     ./wl-clipboard.nix
