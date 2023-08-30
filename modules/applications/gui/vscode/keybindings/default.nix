@@ -7,5 +7,4 @@
     ./terminal.nix
     ./toggles.nix
   ];
-
 }

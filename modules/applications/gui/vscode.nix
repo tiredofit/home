@@ -1,12 +1,7 @@
-{ config, lib, nix-colors, pkgs, ... }:
-
-let
-  cfg = config.host.home.applications.visual-studio-code;
-in
+{ config, lib, ... }:
   with lib;
 {
-
-  imports = config.host.home.applications.visual-studio-code.enable [
+  imports =  [
     ./vscode
   ];
 
