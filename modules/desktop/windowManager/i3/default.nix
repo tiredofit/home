@@ -9,8 +9,12 @@ with lib;
     host = {
       home = {
         applications = {
+          alttab.enable = true;
+          autotiling.enable = true;
+          betterlockscreen.enable = true;
           dunst.enable = true;
           greenclip.enable = true;
+          i3status-rust.enable = true;
         };
       };
     };
@@ -24,9 +28,9 @@ with lib;
 
       packages = with pkgs;
         [
-          alttab                              # application picker
-          autotiling                          # window management
-          betterlockscreen                    # a... better lock screen
+          #alttab                              # application picker
+          #autotiling                          # window management
+          #betterlockscreen                    # a... better lock screen
           dex                                 # autostart applications
           feh                                 # set wallpaper
           i3status-rust                       # provide information to i3bar
@@ -35,7 +39,6 @@ with lib;
           picom                               # transparency and shadows, compositor
           rofi                                # application launcher
           xbanish                             # hide mouse when typing
-          xbindkeys                           # bind keys to commands
           xidlehook                           # do things when system goes idle
           volctl                              # volume control
         ];

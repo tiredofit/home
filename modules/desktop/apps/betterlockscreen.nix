@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpaper;
+  cfg = config.host.home.applications.betterlockscreen;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpaper = {
+    host.home.applications.betterlockscreen = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland Wallpaper Manager";
+        description = "X Lock Screen";
       };
     };
   };
@@ -19,9 +19,8 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpaper
+          betterlockscreen
         ];
     };
-
   };
 }

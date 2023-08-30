@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpaper;
+  cfg = config.host.home.applications.alttab;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpaper = {
+    host.home.applications.alttab = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland Wallpaper Manager";
+        description = "Application Picker";
       };
     };
   };
@@ -19,9 +19,8 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpaper
+          alttab
         ];
     };
-
   };
 }

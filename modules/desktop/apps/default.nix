@@ -3,9 +3,11 @@
 with lib;
 {
   imports = [
+    ./alttab.nix
     ./autorandr.nix
     ./autotiling.nix
     ./autokey.nix
+    ./betterlockscreen.nix
     ./cliphist.nix
     ./grim.nix
     ./hyprpaper.nix
