@@ -33,13 +33,11 @@ with lib;
     ./smartgit.nix
     ./smplayer.nix
     ./sqlitebrowser.nix
-    ./swaynotificationcenter.nix
     ./thunar.nix
     ./thunderbird.nix
     ./virtmanager.nix
     ./vivaldi.nix
     ./vscode.nix
-    ./waybar.nix
     ./wpsoffice.nix
     ./zoom.nix
   ];

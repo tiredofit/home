@@ -13,8 +13,10 @@ with lib;
     ./slurp.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./swaynotificationcenter.nix
     ./swayosd.nix
     ./sysstat.nix
+    ./waybar.nix
     ./wayprompt.nix
     ./wdisplays.nix
     ./wev.nix

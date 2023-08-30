@@ -10,8 +10,23 @@ in
     host = {
       home = {
         applications = {
+          cliphist.enable = true;
+          grim.enable = true;
+          hyprpaper.enable = true;
+          nwg-displays.enable = true;
+          slurp.enable = true;
           sway-notification-center.enable = true;
+          swayidle.enable = true;
+          swaylock.enable = true;
+          swayosd.enable = true;
           waybar.enable = true;
+          wayprompt.enable = true;
+          wdisplays.enable = true;
+          wev.enable = true;
+          wl-clipboard.enable = true;
+          wl-gammarelay-rs.enable = true;
+          wl-logout.enable = true;
+          wlr-randr.enable = true;
         };
       };
     };
@@ -30,7 +45,7 @@ in
           #swayidle
           #swaylock-effects
           #swayosd
-          wayprompt
+          #wayprompt
           #wdisplays
           #wev
           #wl-clipboard
