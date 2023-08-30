@@ -37,6 +37,7 @@ with lib;
           less.enable = mkDefault true;
           lsd.enable = mkDefault true;
           liquidprompt.enable = mkDefault true;
+          mtr.enable = mkDefault true;
           nano.enable = mkDefault true;
           neofetch.enable = mkDefault true;
           ncdu.enable = mkDefault true;

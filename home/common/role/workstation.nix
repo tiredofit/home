@@ -20,15 +20,19 @@
         gnome-system-monitor.enable = mkDefault true;
         gparted.enable = mkDefault true;
         greenclip.enable = mkDefault true;
+        hadolint.enable = mkDefault true;
         kitty.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
+        nixfmt.enable = mkDefault true;
         nmap.enable = mkDefault true;
         opensnitch-ui.enable = mkDefault true;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
         seahorse.enable = mkDefault true;
+        shellcheck = mkDefault true;
+        shfmt = mkDefault true;
         smartgit.enable = mkDefault true;
         smplayer.enable = mkDefault true;
         sqlite-browser.enable = mkDefault true;
@@ -37,7 +41,11 @@
         virt-manager.enable = mkDefault true;
         visual-studio-code.enable = mkDefault true;
         wps-office.enable = mkDefault true;
+        xdg-ninja.enable = mkDefault true;
+        xmlstarlet = mkDefault true;
+        yq = mkDefault true;
         yt-dlp.enable = mkDefault true;
+        zenity.enable = mkDefault = true;
         zoom.enable = mkDefault true;
       };
       feature = {
