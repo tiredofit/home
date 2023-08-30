@@ -4,10 +4,12 @@ with lib;
 {
   imports = [
     ./autorandr.nix
+    ./autotiling.nix
     ./autokey.nix
     ./cliphist.nix
     ./grim.nix
     ./hyprpaper.nix
+    ./i3status-rs.nix
     ./nwg-displays.nix
     ./redshift.nix
     ./slurp.nix

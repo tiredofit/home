@@ -6,26 +6,18 @@ in
 with lib;
 {
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager = "sway") {
-    imports = [
-      ./wayland-common.nix
-    ];
 
     home = {
       file = {
         ".config/rofi".source = ../../../dotfiles/rofi;
       };
 
-      packages = with pkgs;
-        [
-          autotiling
-          i3status-rust                       # provide information to swaybar
-        ];
-    };
-
     host = {
       home = {
         applications = {
+          autotiling.enable = true;
           dunst.enable = true;
+          i3status-rust.enable = true;
         };
       };
     };
