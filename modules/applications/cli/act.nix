@@ -31,7 +31,7 @@ in
     };
 
     sops.secrets = {
-      "act/docker" = { sopsFile = ../../home/common/secrets/act.yaml ; };
+      "act/docker" = { sopsFile = ../../../home/common/secrets/act.yaml ; };
     };
   };
 }
