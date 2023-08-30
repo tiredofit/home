@@ -12,6 +12,7 @@ with lib;
     ./redshift.nix
     ./slurp.nix
     ./swayidle.nix
+    ./swayosd.nix
     ./sysstat.nix
     ./wdisplays.nix
     ./wev.nix

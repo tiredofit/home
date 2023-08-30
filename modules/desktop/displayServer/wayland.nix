@@ -27,7 +27,7 @@ in
           qt6.qtwayland
           rofi-wayland
           #slurp
-          swayidle
+          #swayidle
           swaylock-effects
           swayosd
           wayprompt
