@@ -22,7 +22,7 @@ in
   config = mkIf cfg.enable {
     home = {
       file = { ## TODO Turn this into options below and move away from the dotfiles folder
-        ".config/rofi".source = ../../../../dotfiles/rofi;
+        ".config/rofi".source = ../../../dotfiles/rofi;
       };
 
       packages = with pkgs;
