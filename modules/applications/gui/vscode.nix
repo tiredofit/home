@@ -1,9 +1,9 @@
 { config, lib, ... }:
   with lib;
 {
-  imports =  [
-    ./vscode
-  ];
+  #imports =  [
+  #  ./vscode
+  #];
 
   options = {
     host.home.applications.visual-studio-code = {
