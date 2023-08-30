@@ -1,17 +1,15 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ...}:
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
 in
 with lib;
 {
-  imports = [
-    hyprland.homeManagerModules.default
+  imports = [ ## TODO This needs fixing
+    #hyprland.homeManagerModules.default
   ];
 
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
-
-
     home = {
       file = {
         ".config/hypr/scripts".source = ../../../dotfiles/hypr/scripts;
