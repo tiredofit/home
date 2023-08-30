@@ -31,20 +31,10 @@ with lib;
         ".config/i3/scripts".source = ../../../dotfiles/i3/scripts;
         ".config/rofi".source = ../../../dotfiles/rofi;
       };
-
+        ## TODO - Modularize Rofi with X/Wayland configurations
       packages = with pkgs;
         [
-          #alttab                              # application picker
-          #autotiling                          # window management
-          #betterlockscreen                    # a... better lock screen
-          #feh                                 # set wallpaper
-          #nitrogen                            # set wallpaper
-          #numlockx                            # auto enable number lock
-          #picom                               # transparency and shadows, compositor
           rofi                                # application launcher
-          #xbanish                             # hide mouse when typing
-          #xidlehook                           # do things when system goes idle
-          #volctl                              # volume control
         ];
     };
 
