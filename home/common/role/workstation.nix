@@ -51,7 +51,7 @@ with lib;
       };
       feature = {
         fonts.enable = mkDefault true;
-        mime-defaults.enable = mkDefault true;
+        mime.defaults.enable = mkDefault true;
         theming.enable = mkDefault true;
       };
       service = {
