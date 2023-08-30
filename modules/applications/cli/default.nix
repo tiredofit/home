@@ -36,6 +36,7 @@ with lib;
     ./ncdu.nix
     ./nixfmt.nix
     ./nmap.nix
+    ./ranger.nix
     ./rclone.nix
     ./ripgrep.nix
     ./s3ql.nix
