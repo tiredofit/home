@@ -29,7 +29,13 @@ with lib;
 
   config = mkIf cfg.enable {
     home = {
-      file = { };
+      activation = {
+        bash_history_state_create = ''
+          if [ -d "$HOME"/.local/state/bash ]; then
+              mkdir -p "$HOME"/.local/state/bash
+          fi
+        '';
+      };
 
       packages = with pkgs; [ bashInteractive ];
     };
@@ -41,7 +47,7 @@ with lib;
         enableVteIntegration = true; # track working directory
         bashrcExtra = ''
           ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
-          export HISTFILE=$XDG_STATE_HOME/bash/history
+          export HISTFILE=$HOME/.local/state/bash/history
           ## Configure bash to append (rather than overwrite history)
           shopt -s histappend
 
