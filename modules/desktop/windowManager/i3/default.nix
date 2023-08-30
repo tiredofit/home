@@ -17,6 +17,7 @@ with lib;
           greenclip.enable = true;
           i3status-rust.enable = true;
           nitrogen.enable = true;
+          numlockx.enable = true;
           picom.enable = true;
           volctl.enable = true;
           xbanish.enable = true;
@@ -38,7 +39,7 @@ with lib;
           #betterlockscreen                    # a... better lock screen
           #feh                                 # set wallpaper
           #nitrogen                            # set wallpaper
-          numlockx                            # auto enable number lock
+          #numlockx                            # auto enable number lock
           #picom                               # transparency and shadows, compositor
           rofi                                # application launcher
           #xbanish                             # hide mouse when typing
