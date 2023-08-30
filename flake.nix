@@ -87,7 +87,7 @@
               hostname = "beef";
               displays = 3;
               networkInterface = "wlp10s0";
-              windowmanager = "x-i3";
+              windowmanager = "i3";
               inherit inputs outputs;
             };
           };

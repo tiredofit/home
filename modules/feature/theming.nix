@@ -5,7 +5,6 @@ let
 in
   with lib;
 {
-
   imports = [
     inputs.nix-colors.homeManagerModule
   ];
@@ -22,7 +21,6 @@ in
 
   config = mkIf cfg.enable {
     colorscheme = inputs.nix-colors.colorSchemes.dracula;
-
     gtk = {
       enable = true;
       iconTheme = {

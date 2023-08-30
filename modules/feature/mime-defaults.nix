@@ -299,5 +299,6 @@ in
             "x-scheme-handler/chrome" = browser;
             "x-scheme-handler/unknown" = browser;
         };
+     };
   };
 }

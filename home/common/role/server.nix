@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+with lib;
 {
   imports = [
   ];
@@ -9,7 +10,6 @@
         docker-compose = mkDefault true;
       };
       feature = {
-
       };
       service = {
       }

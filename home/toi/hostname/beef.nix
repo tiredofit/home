@@ -1,6 +1,5 @@
 { config, lib, pkgs, ...}:
 {
-
   host = {
     home = {
       applications = {
@@ -13,12 +12,16 @@
         nextcloud-client.enable = true;
       };
       feature = {
-
+        gui = {
+          enable = true;
+          displayServer = "x";
+          windowManager = "i3";
+        };
       };
       service = {
         decrypt_encfs_workspace = true;
         vscode-server.enable = true;
-      }
+      };
     };
   };
 

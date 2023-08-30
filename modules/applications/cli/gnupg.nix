@@ -16,11 +16,11 @@ in
   };
 
   config = mkIf cfg.enable {
-
-  home = {
-    packages = with pkgs;
-      [
-        mp3gain
-      ];
+    home = {
+      packages = with pkgs;
+        [
+          gnupg
+        ];
+    };
   };
 }

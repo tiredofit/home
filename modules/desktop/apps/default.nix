@@ -4,7 +4,7 @@ with lib;
 {
   imports = [
     ./alttab.nix
-    ./autorandr.nix
+    ./arandr.nix
     ./autotiling.nix
     ./autokey.nix
     ./betterlockscreen.nix

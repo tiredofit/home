@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+with lib;
 {
   imports = [
   ];
@@ -20,14 +21,7 @@
       service = {
         decrypt_encfs_workspace = mkDefault true;
         vscode-server.enable = mkDefault true;
-      }
+      };
     };
-  };
-
-  home = {
-    packages = with pkgs;
-      [
-        tea
-      ];
   };
 }

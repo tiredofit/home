@@ -19,7 +19,7 @@ with lib;
         description = "Enable Graphical User Interface";
       };
 
-      displayServer = = mkOption {
+      displayServer = mkOption {
         type = types.enum ["x" "wayland"];
         default = null;
         description = "Type of displayServer";

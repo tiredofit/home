@@ -15,9 +15,6 @@ with lib;
     ++ existing-imports [
     ./role/${role}
     ./role/${role}.nix
-    ]
-    ++ optionals ( role == "workstation" ) [
-      ../../features/gui/desktop/${windowmanager}.nix
     ];
 
     host = {

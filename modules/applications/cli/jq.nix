@@ -16,10 +16,9 @@ in
   };
 
   config = mkIf cfg.enable {
-      programs = {
-        jq = {
-          enable = true;
-        };
+    programs = {
+      jq = {
+        enable = true;
       };
     };
   };

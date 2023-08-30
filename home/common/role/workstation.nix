@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+with lib;
 {
   imports = [
   ];
@@ -45,7 +46,7 @@
         xmlstarlet = mkDefault true;
         yq = mkDefault true;
         yt-dlp.enable = mkDefault true;
-        zenity.enable = mkDefault = true;
+        zenity.enable = mkDefault true;
         zoom.enable = mkDefault true;
       };
       feature = {
@@ -54,7 +55,7 @@
         theming.enable = mkDefault true;
       };
       service = {
-      }
+      };
     };
   };
 }

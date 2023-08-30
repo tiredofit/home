@@ -5,7 +5,7 @@ let
 in
 with lib;
 {
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "x" && windowManager = "i3") {
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "x" && windowManager == "i3") {
     host = {
       home = {
         applications = {

@@ -5,7 +5,7 @@ let
 in
 with lib;
 {
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager = "hyprland") {
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     imports = [
       hyprland.homeManagerModules.default
     ];
