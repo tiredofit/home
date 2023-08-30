@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, vscode-server, ...}:
 
 let
   cfg = config.host.home.service.vscode-server;
@@ -17,9 +17,9 @@ in
 
   config = mkIf cfg.enable {
     services = {
-      vscode-server = {
-        enable = true;
-      };
+      #vscode-server = {
+      #  enable = true;
+      #};
     };
   };
 }
