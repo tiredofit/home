@@ -51,9 +51,9 @@ in
     };
 
     sops.secrets = {
-      "website_deploy/toi" = { sopsFile = ../../home/toi/secrets/website_deploy.yaml ; };
-      "website_deploy/cm" = { sopsFile = ../../home/toi/secrets/website_deploy.yaml ; };
-      "website_deploy/user" = { sopsFile = ../../home/toi/secrets/website_deploy.yaml ; };
+      "website_deploy/toi" = { sopsFile = ../../../home/toi/secrets/website_deploy.yaml ; };
+      "website_deploy/cm" = { sopsFile = ../../../home/toi/secrets/website_deploy.yaml ; };
+      "website_deploy/user" = { sopsFile = ../../../home/toi/secrets/website_deploy.yaml ; };
     };
   };
 }
