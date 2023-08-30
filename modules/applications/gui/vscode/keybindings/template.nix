@@ -1,9 +1,0 @@
-{ config, ... }: {
-  programs = {
-    vscode = {
-      keybindings = [
-
-      ];
-    };
-  };
-}
