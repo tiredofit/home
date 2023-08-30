@@ -14,6 +14,7 @@ with lib;
     ./hyprpaper.nix
     ./i3status-rs.nix
     ./nitrogen.nix
+    ./numlockx.nix
     ./nwg-displays.nix
     ./playerctl.nix
     ./picom.nix
