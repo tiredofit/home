@@ -14,28 +14,33 @@ If you would like to base your own configuration from this, you will need to be 
 - Some real interesting **bash scripts** for automating common tasks.
 - **Declarative** **themes** and **wallpapers** with **nix-colors**
 
-- I sort of blew the summer of 2023 moving into this configuration after waving a fond farewell to near 2 decades of running Arch Linux. This, as with life, is still WIP. I documented the process on the [Tired of IT! NixOS](https://notes.tiredofit.ca/books/linux/chapter/nixos) chapter on my website.
+- I ~sort of~ totally spent the summer of 2023 moving into this configuration after waving a fond farewell to near 2 decades of running Arch Linux. This, as with life, is still WIP. I documented the process on the [Tired of IT! NixOS](https://notes.tiredofit.ca/books/linux/chapter/nixos) chapter on my website.
 
 ## Tree Structure
 
 - `flake.nix`: Entrypoint for home configurations.
 - `dotfiles`: Configuration files that are outside of the Home-Manager configuration (not migrated to nix)
-- `features`: Configurations of various packages available in the nix / home-manager ecosystem.
-  - `cli`: Command line tools
-  - `gui`: Graphical applications and fonts
-    - `desktop`: Desktop / Window Manager environments
-  - `services`: Services that are useful
-  - `themes`: Color themes
 - `home`: Home Manager Configurations, accessible via `home-manager switch --flake `.
   - Split in between 'orgs' and common configuration this creates isolation. Based on 'roles' defaults are loaded
     and then each subfolder creates a different level of configuration specific to that host or role.
     - `common`: Shared configurations consumed by all users.
+      - `role`: Files related to what "role" is being selected as a template
       - `secrets`: Secrets that are available to all users
     - `toi`: The 'toi' org to allow for isolation of configurations, secrets and config from various clients
       - `secrets`: Secrets that are specific to the 'toi' org
-      - `<host>`: Optional subfolder to load more configuration files based on the home-manager profiles name
+      - `<hostname>`: Optional subfolder to load more configuration files based on the home-manager profiles name
+      - `<role>`: Optional subfolder to load more configuration files based on the roles name
     - `sd`: Similar to the above org, just another org for isolation
 - `modules`: Modules that are specific to this installation
+  - `applications`: Applications and configurations
+    - `cli`: Command line tools
+    - `gui`: Programs with a graphical interface
+  - `desktop`: Desktop environments
+    - `applications`: Programs specific to desktop and window environments
+    - `displayServer`: `x` or `wayland` configuration
+    - `windowManager`: A variety of configurations depending on the type of window manager, or Desktop environment
+  - `feature` - Switchable features
+  - `service` - Daemons and services
 
 ## Usage
 
