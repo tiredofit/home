@@ -27,9 +27,9 @@ with lib;
 
     home = {
       file = {
-        ".config/i3/status".source = ../../../dotfiles/i3/status;
-        ".config/i3/scripts".source = ../../../dotfiles/i3/scripts;
-        ".config/rofi".source = ../../../dotfiles/rofi;
+        ".config/i3/status".source = ../../../../dotfiles/i3/status;
+        ".config/i3/scripts".source = ../../../../dotfiles/i3/scripts;
+        ".config/rofi".source = ../../../../dotfiles/rofi;
       };
         ## TODO - Modularize Rofi with X/Wayland configurations
       packages = with pkgs;

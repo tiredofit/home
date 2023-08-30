@@ -12,8 +12,8 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     home = {
       file = {
-        ".config/hypr/scripts".source = ../../../dotfiles/hypr/scripts;
-        ".config/hypr/background".source = ../../../dotfiles/hypr/background;
+        ".config/hypr/scripts".source = ../../../../dotfiles/hypr/scripts;
+        ".config/hypr/background".source = ../../../../dotfiles/hypr/background;
       };
 
       packages = with pkgs;

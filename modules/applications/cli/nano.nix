@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      file = { ".config/nano".source = ../../dotfiles/nano; };
+      file = { ".config/nano".source = ../../../dotfiles/nano; };
 
       packages = with pkgs;
       [
