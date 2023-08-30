@@ -5,8 +5,8 @@ let
 in
 with lib;
 {
-  imports = [ ## TODO This needs fixing
-    #hyprland.homeManagerModules.default
+  imports = [
+    inputs.hyprland.homeManagerModules.default
   ];
 
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
@@ -35,7 +35,6 @@ with lib;
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      nvidiaPatches = false;
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
 
