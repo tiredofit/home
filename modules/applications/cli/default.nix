@@ -35,6 +35,7 @@ with lib;
     ./neovim.nix
     ./ncdu.nix
     ./nixfmt.nix
+    ./nix-init.nix
     ./nmap.nix
     ./ranger.nix
     ./rclone.nix
