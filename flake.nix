@@ -41,7 +41,6 @@
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-init.url = "github:nix-community/nix-init";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";

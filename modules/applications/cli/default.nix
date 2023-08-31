@@ -31,11 +31,10 @@ with lib;
     ./mp3gain.nix
     ./mtr.nix
     ./nano.nix
+    ./ncdu.nix
     ./neofetch.nix
     ./neovim.nix
-    ./ncdu.nix
-    ./nixfmt.nix
-    ./nix-init.nix
+    ./nix-developmenttools.nix
     ./nmap.nix
     ./ranger.nix
     ./rclone.nix

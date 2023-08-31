@@ -27,7 +27,7 @@ with lib;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
-        nixfmt.enable = mkDefault true;
+        nix-development_tools.enable = mkDefault true;
         nmap.enable = mkDefault true;
         opensnitch-ui.enable = mkDefault true;
         pinta.enable = mkDefault true;
