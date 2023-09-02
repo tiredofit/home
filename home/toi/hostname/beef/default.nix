@@ -65,7 +65,7 @@
               primary = false;
               position = "5120x0";
               mode = "2560x1440";
-              rate = "143.91";
+              rate = "60";
             };
           };
         };
