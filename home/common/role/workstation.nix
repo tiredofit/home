@@ -25,6 +25,7 @@ with lib;
         hadolint.enable = mkDefault false ; ## TODO 20230829 - Broken ilist dependency
         kitty.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
+        mp3gain.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
         nix-development_tools.enable = mkDefault true;

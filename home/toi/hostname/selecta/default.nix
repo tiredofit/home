@@ -11,6 +11,7 @@
         github-client.enable = false;
         hugo.enable = false;
         lazygit.enable = false;
+        mp3gain.enable = true;
         nextcloud-client.enable = false;
         tea.enable = false;
       };
