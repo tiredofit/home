@@ -1,10 +1,10 @@
 #  🏠 $HOME 🏠
 
-Here are my standalone [home-manager](https://nix-community.github.io/home-manager/) configuration files that are used on my NixOS systems and also other clients linux distribution systems.
+Here are my standalone [home-manager](https://nix-community.github.io/home-manager/) configuration files that are used on my NixOS systems and also other linux distribution systems.
 
-This allows for home directory portability from machine to machine to configure once and enjoy a many times forward. If you are looking for _system_ configuration have a peek at my [NixOS Configurations](https://github.com/tiredofit/nixos-config)
+This allows for home directory portability from machine to machine to configure once and enjoy a many times forward. If you are looking for NixOS _system_ configuration have a peek at my [NixOS Configurations](https://github.com/tiredofit/nixos-config).
 
-If you would like to base your own configuration from this, you will need to be able to use [Nix flakes](https://nixos.wiki/wiki/Flakes).
+If you would like to base your own configuration from this repository, you will need to be able to use [Nix flakes](https://nixos.wiki/wiki/Flakes).
 
 **Highlights**:
 
@@ -26,11 +26,13 @@ If you would like to base your own configuration from this, you will need to be 
     - `common`: Shared configurations consumed by all users.
       - `role`: Files related to what "role" is being selected as a template
       - `secrets`: Secrets that are available to all users
+    - `generic`: The 'generic' org to allow for isolation of configurations, secrets and config from various clients
     - `toi`: The 'toi' org to allow for isolation of configurations, secrets and config from various clients
       - `secrets`: Secrets that are specific to the 'toi' org
       - `<hostname>`: Optional subfolder to load more configuration files based on the home-manager profiles name
       - `<role>`: Optional subfolder to load more configuration files based on the roles name
     - `sd`: Similar to the above org, just another org for isolation
+    - `...`
 - `modules`: Modules that are specific to this installation
   - `applications`: Applications and configurations
     - `cli`: Command line tools
@@ -44,7 +46,7 @@ If you would like to base your own configuration from this, you will need to be 
 
 ## Usage
 
-I used option `3` (Standalone) of the  [home-manager](https://nix-community.github.io/home-manager/) installation guide. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
+ used option `1`` (Standalone) of the  [home-manager](https://nix-community.github.io/home-manager/) installation guide. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
 
 - Add Home Manager Channel
 
@@ -80,7 +82,7 @@ nix flake update ~/.config/home-manager
 
 ### Managing Secrets
 
-I document the process of getting encrypted secrets created and keeping up to date on my website. [Tired of IT! Secrets Management](https://notes.tiredofit.ca/books/linux/page/secrets-management).
+I took some notes and documented the process of getting encrypted secrets created and keeping up to date on my website. [Tired of IT! Secrets Management](https://notes.tiredofit.ca/books/linux/page/secrets-management).
 
 # License
 
