@@ -23,5 +23,13 @@ in
             libmtp
           ];
     };
+
+    programs = {
+      bash = {
+        sessionVariables = {
+          ANDROID_HOME = "$XDG_DATA_HOME/android"; # Keep $HOME clean
+        };
+      };
+    };
   };
 }
