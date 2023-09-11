@@ -2,6 +2,53 @@
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
+
+  lockScript = pkgs.writeShellScriptBin "lock_screen.sh" ''
+    # Grab window titles with wmctrl -l - Seperate by commas you want to skip lock screens if window is running.
+    #SKIP="Zoom Meeting"
+
+    ## Check to See if "Zoom Meeting" is running
+
+    #ignore_titles=$(echo "$SKIP" | tr "," "\n")
+    #for title in $ignore_titles
+    #  do
+    #    if test $(wmctrl -l | grep "$title" 2>&1 | wc -l) -eq 1; then
+    #      skip_lock=true
+    #    fi
+    #done
+
+    #if [ "''${skip_lock,,}" != "true" ] ; then
+    #  case $(date +%u) in
+    #  1 | 2 | 3 | 4 | 5 ) # Mon - Fri
+    #    echo "Stopping Timewarrior"
+    #    timew stop
+    #  ;;
+    #  6 | 7 ) # Sat and Sun
+    #    :
+    #  ;;
+    #  esac
+
+      powerprofilesctl set power-saver
+      betterlockscreen --off 10 --lock -- nofork
+      powerprofilesctl set balanced
+
+    #  case $(date +%u) in
+    #    1 | 2 | 3 | 4 | 5 ) # Mon - Fri
+    #      case $(date +%H:%M) in
+    #          (0[6789]:*) # 6am Start
+    #            ~/.config/scripts/timewarrior.sh start
+    #          ;;
+    #          (1[012345678]:*) # 6pm End
+    #            ~/.config/scripts/timewarrior.sh start
+    #          ;;
+    #      esac
+    #    ;;
+    #    6 | 7 ) # Sat- Sun
+    #      :
+    #    ;;
+    #  esac
+    #fi
+  '';
 in
 with lib;
 {
@@ -30,8 +77,12 @@ with lib;
     home = {
       file = {
         ".config/i3/status".source = ../../../../dotfiles/i3/status;
-        ".config/i3/scripts".source = ../../../../dotfiles/i3/scripts;
       };
+
+      packages = with pkgs;
+        [
+          lockScript
+        ];
     };
 
     xsession = {
@@ -283,7 +334,7 @@ with lib;
               "${mod}+Shift+d" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
               "Print" = "exec flameshot gui";                                                                                           # Flameshot
               "${mod}+Shift+s" = "exec flameshot gui";                                                                                  # Flameshot
-              "${mod}+Shift+x" = "exec ~/.config/i3/scripts/lock.sh";                                                                   # Lock screen
+              "${mod}+Shift+x" = "exec lock_screen.sh";                                                                   # Lock screen
               "${mod}+d" = "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
               "${mod}+Return" = "exec kitty";                                                                                           # Terminal
               "${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
@@ -310,7 +361,6 @@ with lib;
           };
           startup = [
             { command = "${pkgs.alttab}/bin/alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
-            #{ command = "${pkgs.autokey-gtk}/bin/autokey-gtk"; always = false; notification = false; }            # Autokey Parser for Firefox
             { command = "${pkgs.autotiling}/bin/autotiling"; always = true; notification = false; }              # Auto Tile H/V
             { command = "${pkgs.ferdium}/bin/ferdium"; always = false; notification = true; }                 # IM
             { command = "${pkgs.flameshot}/bin/flameshot"; always = false; notification = true; }               # Screenshot
@@ -322,10 +372,8 @@ with lib;
             { command = "${pkgs.redshift}/bin/redshift -P -O 3000"; always = false; notification = false; }    # Gamma correction
             { command = "${pkgs.volctl}/bin/volctl"; always = false; notification = false; }                 # Volume Control
             { command = "${pkgs.xbanish}/bin/xbanish"; always = false; notification = false; }                # Hide Mouse Cursor when typing
-            #{ command = "${pkgs.xidlehook}/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 600 ~/.config/i3/scripts/lock.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
-            { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 ~/.config/i3/scripts/lock.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
+            { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 lock_screen.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
             #{ command = "~/.config/i3/scripts/x_3screenlayout.sh"; always = false; notification = false; }     # Display Setup # TODO - Seperate for different screens / systems
-            #{ command = "~/.config/scripts/decrypt.sh"; always = false; notification = false; }  # Decryption script # TODO - Secrets and SystemD service
           ];
           terminal = "kitty";
           workspaceAutoBackAndForth = true;
