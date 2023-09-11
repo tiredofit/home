@@ -16,17 +16,36 @@ in
   };
 
   config = mkIf cfg.enable {
-
-
     home = {
-      file = {
-        ".config/draw-io/config.json".source = ../../../dotfiles/draw-io/config.json;
-        ".config/draw-io/Prefrences".source = ../../../dotfiles/draw-io/Preferences;
-      };
       packages = with pkgs;
         [
           drawio
         ];
     };
+
+    xdg.configFile."draw-io/config.json".text = ''
+{
+	"dontCheckUpdates": true,
+}
+    '';
+
+    xdg.configFile."draw-io/Preferences".text = ''
+{
+    "brightray": {
+        "media": {
+            "device_id_salt": "U3AJsbjfUzm8pTW61UoxGQ=="
+        }
+    },
+    "selectfile": {
+        "last_directory": "~/"
+    },
+    "spellcheck": {
+        "dictionaries": [
+            "en-US"
+        ],
+        "dictionary": ""
+    }
+}
+    '';
   };
 }
