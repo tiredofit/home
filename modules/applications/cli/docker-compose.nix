@@ -451,6 +451,11 @@ with lib;
               container_tool $arg
           fi
         '';
+
+        sessionVariables = {
+          DOCKER_BUILDKIT = 0; # Stop using the new buildx
+          DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
+        };
       };
     };
   };
