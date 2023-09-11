@@ -17,7 +17,7 @@ in
         description = "Enable theming";
       };
     };
-    };
+  };
 
   config = mkIf cfg.enable {
     colorscheme = inputs.nix-colors.colorSchemes.dracula;

@@ -2,19 +2,19 @@
 # alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 #export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+#export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 #export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
-export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME"/nv
+#export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME"/nv
 #export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
 #export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 #export HISTFILE="${XDG_STATE_HOME}"/bash/history
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 #export LESSHISTFILE="${XDG_CACHE_HOME}"/less/history
-export PYLINTHOME="${XDG_CACHE_HOME}"/pylint
-export STACK_ROOT="$XDG_DATA_HOME"/stack
-export WINEPREFIX="$XDG_DATA_HOME"/wine
+#export PYLINTHOME="${XDG_CACHE_HOME}"/pylint
+#export STACK_ROOT="$XDG_DATA_HOME"/stack
+#export WINEPREFIX="$XDG_DATA_HOME"/wine
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 
 if command -v "xdg-mime" &> /dev/null && command -v "rofi" &> /dev/null ; then
