@@ -17,11 +17,25 @@ in
 
   config = mkIf cfg.enable {
     home = {
+      file = {
+        ".config/hypr/background".source = ../../../../dotfiles/hypr/background;
+      };
+
       packages = with pkgs;
         [
           hyprpaper
         ];
-    };
 
+      ## TODO This should be dynamic based on amount of monitors
+      xdg.configFile."hypr/hyprpaper.conf".text = ''
+        preload = ~/.config/hypr/background/left.jpg
+        preload = ~/.config/hypr/background/middle.jpg
+        preload = ~/.config/hypr/background/right.jpg
+
+        wallpaper = HDMI-A-1,~/.config/hypr/background/right.jpg
+        wallpaper = DP-2,~/.config/hypr/background/middle.jpg
+        wallpaper = DP-3,~/.config/hypr/background/left.jpg
+      '';
+    };
   };
 }

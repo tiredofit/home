@@ -2,6 +2,31 @@
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
+
+  gameMode = pkgs.writeShellScriptBin "gamemode" ''
+    HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
+    if [ "$HYPRGAMEMODE" = 1 ] ; then
+      hyprctl --batch "\
+          keyword animations:enabled 0;\
+          keyword decoration:drop_shadow 0;\
+          keyword decoration:blur 0;\
+          keyword general:gaps_in 0;\
+          keyword general:gaps_out 0;\
+          keyword general:border_size 1;\
+          keyword decoration:rounding 0"
+      exit
+    else
+      hyprctl --batch "\
+          keyword animations:enabled 1;\
+          keyword decoration:drop_shadow 1;\
+          keyword decoration:blur 1;\
+          keyword general:gaps_in 1;\
+          keyword general:gaps_out 1;\
+          keyword general:border_size 1;\
+          keyword decoration:rounding 1"
+    fi
+    hyprctl reload
+  '';
 in
 with lib;
 {
@@ -11,13 +36,9 @@ with lib;
 
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     home = {
-      file = {
-        ".config/hypr/scripts".source = ../../../../dotfiles/hypr/scripts;
-        ".config/hypr/background".source = ../../../../dotfiles/hypr/background;
-      };
-
       packages = with pkgs;
         [
+          gameMode
           hyprland-share-picker     # If this works outside of Hyprland modularize
         ];
     };
