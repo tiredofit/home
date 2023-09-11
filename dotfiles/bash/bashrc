@@ -2,16 +2,5 @@ command_exist timew 'alias ts="timew summary :ids"'                             
 
 export NEWFILE_TEMPLATE_REPOUSERNAME=tiredofit
 
-var2readme() {
-     sed \
-	-e s%".*=\${%| \`%g" \
-  	-e "s%:-\"%\` | | \`%g" \
-	-e "s%\"}%\` |%g" \
-	${@}
-}
-
-yaml2var() {
-     cat "${1}" | sed "/#/d" | sed "s#:# = env(VAR_) | #g"
-}
 
 
