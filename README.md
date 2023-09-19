@@ -46,7 +46,7 @@ If you would like to base your own configuration from this repository, you will 
 
 ## Usage
 
- used option `1`` (Standalone) of the  [home-manager](https://nix-community.github.io/home-manager/) installation guide. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
+I chose option `1` (Standalone) of the  [home-manager](https://nix-community.github.io/home-manager/) installation guide. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
 
 - Add Home Manager Channel
 
