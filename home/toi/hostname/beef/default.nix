@@ -51,21 +51,21 @@
               primary = false;
               position = "0x0";
               mode = "2560x1440";
-              rate = "120.00";
+              rate = "120.02";
             };
             "DisplayPort-1" = {
               enable = true;
               primary = true;
               position = "2560x0";
               mode = "2560x1440";
-              rate = "120.00";
+              rate = "120.02";
             };
             "HDMI-A-0" = {
               enable = true;
               primary = false;
               position = "5120x0";
               mode = "2560x1440";
-              rate = "60";
+              rate = "60.02";
             };
           };
         };
@@ -73,7 +73,7 @@
     };
   };
 
-  services.autorandr.enable = true;
+  services.autorandr.enable = false;
 
   sops.secrets = {
     "bashrc.d/toi_remotehosts.sh" = {
