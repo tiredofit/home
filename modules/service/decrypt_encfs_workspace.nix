@@ -19,13 +19,13 @@ with lib;
      mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
        #set -uo pipefail
        if [ -d $HOME/Nextcloud/TOI/.encfs ] ; then
-         if grep -qs "$HOME/Documents/Workspace" /proc/mounts; then
-           echo "ERROR Skipping encfs 'workspace' as it's already mounted"
+         if ${pkgs.gnugrep}/bin/grep -qs "$HOME/Documents/Workspace" /proc/mounts; then
+           echo "WARN Skipping encfs 'workspace' as it's already mounted"
          else
-           if [ -f "$XDG_STATE_HOME/secrets/encfs/workspace" ] ; then
+           if [ -f "$XDG_RUNTIME_DIR/secrets/encfs/workspace" ] ; then
              echo "INFO Mounting encfs 'workspace'"
-             mkdir -p $HOME/Documents/Workspace
-             cat "$XDG_RUNTIME_DIR/secrets/encfs/workspace" | sudo encfs --public -S "$HOME/Nextcloud/TOI/.encfs" "$HOME/Documents/Workspace"
+             ${pkgs.coreutils}/bin/mkdir -p $HOME/Documents/Workspace
+             ${pkgs.coreutils}/bin/cat "$XDG_RUNTIME_DIR/secrets/encfs/workspace" | /run/wrappers/bin/sudo ${pkgs.encfs}/bin/encfs --public -S -f "$HOME/Nextcloud/TOI/.encfs" "$HOME/Documents/Workspace"
            else
              echo "ERROR Can't mount encfs 'workspace' as 'encfs_workspace' secret doesn't exist"
            fi
