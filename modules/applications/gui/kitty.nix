@@ -31,8 +31,8 @@ in
         };
         settings = {
           # Font
-          bold_font =        "auto";
-          italic_font =      "auto";
+          bold_font = "auto";
+          italic_font = "auto";
           bold_italic_font = "auto";
           ## Cursor
           cursor_shape = "block";
