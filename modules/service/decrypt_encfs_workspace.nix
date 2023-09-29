@@ -37,6 +37,7 @@ with lib;
      systemd.user.services.decrypt_encfs_workspace = {
        Unit = {
          Description = "Decrypt encfs 'workspace' upon login";
+         After = [ "sops-nix.service" ];
        };
        Install = {
          WantedBy = [ "default.target" ];
