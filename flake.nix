@@ -101,6 +101,17 @@
             };
           };
 
+          nakulaptop = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              hostname = "nakulaptop";
+              displays = 1;
+              networkInterface = "wlo1";
+              inherit inputs outputs;
+            };
+          };
+
           selecta = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";

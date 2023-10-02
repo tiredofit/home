@@ -8,6 +8,7 @@ with lib;
     home = {
       applications = {
         android-tools.enable = mkDefault true;
+        bleachbit.enable = mkDefault true;
         blueman.enable = mkDefault true;
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
