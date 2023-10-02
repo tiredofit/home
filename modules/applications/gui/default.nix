@@ -2,6 +2,7 @@
 with lib;
 {
   imports = [
+    ./bleachbit.nix
     ./blueman.nix
     ./calibre.nix
     ./chromium.nix
