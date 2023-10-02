@@ -17,9 +17,9 @@ in
 
   config = mkIf cfg.enable {
     services = {
-      #vscode-server = {
-      #  enable = true;
-      #};
+      vscode-server = {
+        enable = true;
+      };
     };
   };
 }
