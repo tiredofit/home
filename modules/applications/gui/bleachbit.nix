@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.calibre;
+  cfg = config.host.home.applications.bleachbit;
 in
   with lib;
 {
   options = {
-    host.home.applications.calibre = {
+    host.home.applications.bleachbit = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "E-Book Manager";
+        description = "System cleaner";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          calibre
+          bleachbit
         ];
     };
   };

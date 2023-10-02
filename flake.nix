@@ -80,53 +80,72 @@
       }) //
       {
         homeConfigurations = {
-          beef = HomeConfiguration {
+          "beef.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "beef";
+              username = "dave";
               displays = 3;
               networkInterface = "wlp10s0";
               inherit inputs outputs;
             };
           };
 
-          butcher = HomeConfiguration {
+          "butcher.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              hostname = "butcher";
+              username = "dave";
               displays = 1;
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
           };
 
-          nakulaptop = HomeConfiguration {
+          "nakulaptop.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "nakulaptop";
+              username = "dave";
               displays = 1;
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
           };
 
-          selecta = HomeConfiguration {
+          "selecta.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "selecta";
+              username = "dave";
               displays = 1;
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
           };
 
-          soy = HomeConfiguration {
+          "selecta.media" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
+              hostname = "selecta";
+              username = "media";
+              displays = 1;
+              networkInterface = "wlo1";
+              inherit inputs outputs;
+            };
+          };
+
+          "soy.dave" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              hostname = "soy";
+              username = "dave";
               displays = 1;
               networkInterface = "wlo1";
               inherit inputs outputs;
@@ -134,7 +153,7 @@
           };
 
       ##
-          sd111 = HomeConfiguration {
+          "sd111.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
@@ -142,7 +161,7 @@
             };
           };
 
-          tesla = HomeConfiguration {
+          "tesla.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";

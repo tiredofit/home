@@ -31,6 +31,7 @@ If you would like to base your own configuration from this repository, you will 
       - `secrets`: Secrets that are specific to the 'toi' org
       - `<hostname>`: Optional subfolder to load more configuration files based on the home-manager profiles name
       - `<role>`: Optional subfolder to load more configuration files based on the roles name
+      - `<users>`: Load some specific user profile information
     - `sd`: Similar to the above org, just another org for isolation
     - `...`
 - `modules`: Modules that are specific to this installation

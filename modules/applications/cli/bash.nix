@@ -87,7 +87,7 @@ with lib;
           if [ -d "/home/$USER/src/home" ] ; then
               alias hm="cd ~/src/home"
               alias hmupdate="nix flake update $HOME/src/home --extra-experimental-features 'nix-command flakes'"
-              alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME --extra-experimental-features 'nix-command flakes' $@"
+              alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER --extra-experimental-features 'nix-command flakes' $@"
           fi
 
           if [ -d "/home/$USER/src/nixos" ] ; then
