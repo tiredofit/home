@@ -11,6 +11,7 @@ with lib;
         blueman.enable = mkDefault true;
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
+        czkawka.enable = mkDefault true;
         diffuse.enable = mkDefault true;
         drawio.enable = mkDefault true;
         eog.enable = mkDefault true;

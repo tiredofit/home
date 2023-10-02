@@ -5,6 +5,7 @@ with lib;
     ./blueman.nix
     ./calibre.nix
     ./chromium.nix
+    ./czkawka.nix
     ./diffuse.nix
     ./drawio.nix
     ./dunst.nix
