@@ -116,6 +116,18 @@
             };
           };
 
+          "nakulaptop.ireen" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              hostname = "nakulaptop";
+              username = "ireen";
+              displays = 1;
+              networkInterface = "wlo1";
+              inherit inputs outputs;
+            };
+          };
+
           "selecta.dave" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
