@@ -9,6 +9,7 @@ with lib;
     home = {
       packages = with pkgs;
         [
+          cinnamon.bulky
           cinnamon.cinnamon-common
           cinnamon.cinnamon-control-center
           cinnamon.cinnamon-desktop
@@ -19,9 +20,27 @@ with lib;
           cinnamon.cinnamon-settings-daemon
           cinnamon.cinnamon-translations
           cinnamon.cjs
+          cinnamon.mint-artwork
+          cinnamon.mint-cursor-themes
+          cinnamon.mint-themes
+          cinnamon.mint-x-icons
+          cinnamon.mint-y-icons
           cinnamon.muffin
-          cinnamon.nemo
+          cinnamon.nemo-with-extensions
+          cinnamon.pix
+          cinnamon.warpinator
+          cinnamon.xapp
+          cinnamon.xreader
+          cinnamon.xviewer
+          glib
+          gsettings-desktop-schemas
+          killall
+          libgnomekbd
           networkmanagerapplet
+          polkit_gnome
+          sound-theme-freedesktop
+          xdg-user-dirs
+          xplayer
         ];
     };
 
