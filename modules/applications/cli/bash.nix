@@ -1,21 +1,21 @@
 { config, lib, pkgs, ... }:
 
 let
+  cfg = config.host.home.applications.bash;
   shellAliases = {
     ".." = "cd ..";
     "..." = "cd ...";
     dotfiles = "cd ~/.config/home-manager/dotfiles";
-    home = "cd ~";
     fuck = "sudo $(history -p !!)"; # run last command as root
+    home = "cd ~";
     mkdir = "mkdir -p"; # no error, create parents
     scstart = "systemctl start $@"; # systemd service start
     scstop = "systemctl stop $@"; # systemd service stop
     scenable = "systemctl disable $@"; # systemd service enable
     scdisable = "systemctl disable $@"; # systemd service disable
   };
-  cfg = config.host.home.applications.bash;
 in
-with lib;
+  with lib;
 {
   options = {
     host.home.applications.bash = {
@@ -29,15 +29,6 @@ with lib;
 
   config = mkIf cfg.enable {
     home = {
-      activation = {
-        bash_history_state_create = ''
-          if [ -d $HOME/.local/state/bash ]; then
-              mkdir -p $HOME/.local/state/bash
-              chown -R $USER $HOME/.local/state/bash
-          fi
-        '';
-      };
-
       packages = with pkgs; [ bashInteractive ];
     };
 
@@ -47,6 +38,11 @@ with lib;
         enableCompletion = true; # enable word completion by <tab>
         enableVteIntegration = true; # track working directory
         bashrcExtra = ''
+
+          if [ -d $HOME/.local/state/bash ]; then
+              mkdir -p $HOME/.local/state/bash
+              chown -R $USER $HOME/.local/state/bash
+          fi
           ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
           export HISTFILE=$HOME/.local/state/bash/history
           ## Configure bash to append (rather than overwrite history)
