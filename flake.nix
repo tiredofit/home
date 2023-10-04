@@ -101,7 +101,6 @@
               role = "server";
               hostname = "butcher";
               username = "dave";
-
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
@@ -113,7 +112,8 @@
               role = "workstation";
               hostname = "nakulaptop";
               username = "dave";
-
+              displays = 1;
+              display_center = "eDP";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
