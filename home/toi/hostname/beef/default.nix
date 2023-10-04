@@ -65,7 +65,7 @@
               primary = false;
               position = "5120x0";
               mode = "2560x1440";
-              rate = "60.02";
+              rate = "59.95";
             };
           };
         };
@@ -73,7 +73,7 @@
     };
   };
 
-  services.autorandr.enable = false;
+  services.autorandr.enable = true;
 
   sops.secrets = {
     "bashrc.d/toi_remotehosts.sh" = {
