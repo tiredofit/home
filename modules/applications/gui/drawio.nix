@@ -23,13 +23,13 @@ in
         ];
     };
 
-    xdg.configFile."draw-io/config.json".text = ''
+    xdg.configFile."draw.io/config.json".text = ''
 {
 	"dontCheckUpdates": true,
 }
     '';
 
-    xdg.configFile."draw-io/Preferences".text = ''
+    xdg.configFile."draw.io/Preferences".text = ''
 {
     "brightray": {
         "media": {
