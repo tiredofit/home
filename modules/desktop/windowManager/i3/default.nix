@@ -75,9 +75,9 @@ with lib;
     };
 
     home = {
-      file = {
-        ".config/i3/status".source = ../../../../dotfiles/i3/status;
-      };
+      #file = {
+      #  ".config/i3/status".source = ../../../../dotfiles/i3/status;
+      #};
 
       packages = with pkgs;
         [
@@ -102,7 +102,7 @@ with lib;
           in [
             {
               id = "bar-left"; # TODO - Adapt for various screens
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3/status/left.rs";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-left.toml";
               position = "top";
               trayOutput = "none";
               extraConfig = ''
@@ -143,7 +143,7 @@ with lib;
             }
             {
               id = "bar-center";
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3/status/center.rs";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-center.toml";
               position = "top";
               extraConfig = ''
                 output ${mon_center}
@@ -185,7 +185,7 @@ with lib;
             }
             {
               id = "bar-right";
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3/status/right.rs";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-right.toml";
               position = "top";
               trayOutput = "none";
               extraConfig = ''
@@ -375,7 +375,7 @@ with lib;
             { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 lock_screen.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
             #{ command = "~/.config/i3/scripts/x_3screenlayout.sh"; always = false; notification = false; }     # Display Setup # TODO - Seperate for different screens / systems
           ];
-          terminal = "kitty";
+          terminal = "${pkgs.kitty}/bin/kitty";
           workspaceAutoBackAndForth = true;
           workspaceLayout = "default"; # Bounce back and forth between workspaces using same workspace key
           workspaceOutputAssign = let  ## TODO This is used in multiple areas - move to top of configuration
