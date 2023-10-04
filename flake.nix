@@ -87,6 +87,9 @@
               hostname = "beef";
               username = "dave";
               displays = 3;
+              display_center = "DisplayPort-1";
+              display_left = "DisplayPort-2";
+              display_right = "HDMI-A-0";
               networkInterface = "wlp10s0";
               inherit inputs outputs;
             };
@@ -98,7 +101,7 @@
               role = "server";
               hostname = "butcher";
               username = "dave";
-              displays = 1;
+
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
@@ -110,7 +113,7 @@
               role = "workstation";
               hostname = "nakulaptop";
               username = "dave";
-              displays = 1;
+
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
@@ -123,6 +126,7 @@
               hostname = "nakulaptop";
               username = "ireen";
               displays = 1;
+              display_center = "eDP";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
@@ -135,6 +139,7 @@
               hostname = "selecta";
               username = "dave";
               displays = 1;
+              display_center = "HDMI-1";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
@@ -147,6 +152,7 @@
               hostname = "selecta";
               username = "media";
               displays = 1;
+              display_center = "HDMI-1";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
