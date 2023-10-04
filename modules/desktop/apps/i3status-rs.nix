@@ -37,70 +37,83 @@ in
                 theme = "native";
               };
               icons = {
-                icons = "awesome5";
+                icons = "awesome6";
               };
-              icons_format = " <span font_family='FantasqueSansMono Nerd Font'>{icon}</span> ";
             };
-            blocks = [
-              {
-                block = "time";
-                interval = 1;
-                format = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M:%S', l:en_US)";
-                click = [
-                  {
-                    button = "left";
-                    cmd = "${pkgs.gnome.zenity}/bin/zenity --calendar";
-                  }
-                ];
-              }
-              {
-                block = "hueshift";
-                hue_shifter = "redshift";
-                step = 500;
-                click_temp = 300;
-                max_temp = 6500;
-                min_temp = 1000;
-              }
-              {
-                block = "notify";
-                format = " $icon {($notification_count.eng(w:1)) |}";
-              }
-              {
-                block = "sound";
-                device_kind = "sink";
-                driver = "pulseaudio";
-                format = " $icon { $volume|} ";
-                mappings = {
-                  "alsa_output.pci-0000_2d_00.4.analog-stereo" = "";
-                  "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
-                };
-                #"bluez_output.00_00_00_00_00_00.1" = "";
-                step_width = 1;
-                max_vol = 100;
-                click = [
-                  {
-                    button = "left";
-                    cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                  }
-                ];
-              }
-              {
-                block = "net";
-                device = networkInterface;
-                format = " $icon ";
-                format_alt = " {$ssid $signal_strength | Wired connection}";
-                interval = 1;
-                click = [
-                  {
-                    button = "left";
-                    cmd = "${pkgs.kitty}/bin/kitty -e nmtui";
-                  }
-                ];
-              }
-              #{
-              #  block = "battery";
-              #  driver = "sysfs";
-              #}
+            blocks = mkMerge [
+              [
+                {
+                  block = "time";
+                  interval = 1;
+                  format = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M:%S', l:en_US)";
+                }
+#              (mkIf (role == "laptop") (mkAfter [
+#               {
+#                  block = "time";
+#                  interval = 60;
+#                  format = "$icon $timestamp.datetime(f:'%H:%M', l:en_US)";
+#                  format_alt = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M', l:en_US)";
+#               }
+#              ]))
+                {
+                  block = "hueshift";
+                  step = 500;
+                  click_temp = 300;
+                  max_temp = 6500;
+                  min_temp = 1000;
+                }
+                {
+                  block = "notify";
+                  format = " $icon {($notification_count.eng(w:1)) |}";
+                }
+                {
+                  block = "sound";
+                  device_kind = "sink";
+                  driver = "pulseaudio";
+                  format = " $icon { $volume|} ";
+                  mappings = {
+                    "alsa_output.pci-0000_2d_00.4.analog-stereo" = "";
+                    "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
+                  };
+                  #"bluez_output.00_00_00_00_00_00.1" = "";
+                  step_width = 1;
+                  max_vol = 100;
+                  click = [
+                    {
+                      button = "left";
+                      cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                    }
+                  ];
+                }
+              ]
+
+              (mkIf (role == "laptop") (mkAfter [
+                {
+                  block = "net";
+                  device = networkInterface;
+                  format = " $icon ";
+                  format_alt = " {$ssid $signal_strength | Wired connection}";
+                  interval = 60;
+                  click = [
+                    {
+                      button = "left";
+                      cmd = "${pkgs.kitty}/bin/kitty -e nmtui";
+                    }
+                    {
+                      button = "right";
+                      update = true;
+                    }
+                  ];
+                }
+              ]))
+
+              (mkIf (role == "laptop") (mkAfter [
+                {
+                  block = "battery";
+                  driver = "sysfs";
+                }
+              ]))
+
             ];
           };
           left = {
@@ -111,9 +124,8 @@ in
                 theme = "native";
               };
               icons = {
-                icons = "awesome5";
+                icons = "awesome6";
               };
-              icons_format = " <span font_family='FantasqueSansMono Nerd Font'>{icon}</span> ";
             };
             blocks = [
               {
@@ -130,7 +142,7 @@ in
               {
                 block = "custom";
                 command = "BLOCK_INSTANCE=tron echo \"$(curl -sSL https://cryptoprices.cc/TRX)\"";
-                interval = 900;
+                interval = 3600;
                 click = [
                   {
                     button = "left";
@@ -141,7 +153,7 @@ in
               {
                 block = "custom";
                 command = "BLOCK_INSTANCE=bitcoin echo \"$(curl -sSL https://cryptoprices.cc/BTC)\"";
-                interval = 900;
+                interval = 3600;
                 click = [
                   {
                     button = "left";
@@ -159,24 +171,23 @@ in
                 theme = "native";
               };
               icons = {
-                icons = "awesome5";
+                icons = "awesome6";
               };
-              icons_format = " <span font_family='FantasqueSansMono Nerd Font'>{icon}</span> ";
             };
             blocks = [
               {
                 block = "disk_space";
                 info_type = "free";
                 alert_unit = "GB";
-                alert = "10.0";
-                warning = "15.0";
+                alert = 10.0;
+                warning = 15.0;
                 format = " $icon $used.eng(w:2)";
                 format_alt = " $icon $used / $total ";
                 path = "/";
-                interval = 60;
+                interval = 600;
                 click = [
                   {
-                    button = "left";
+                    button = "right";
                     update = true;
                   }
                 ];

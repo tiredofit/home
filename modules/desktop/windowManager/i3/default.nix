@@ -75,10 +75,6 @@ with lib;
     };
 
     home = {
-      #file = {
-      #  ".config/i3/status".source = ../../../../dotfiles/i3/status;
-      #};
-
       packages = with pkgs;
         [
           lockScript
@@ -102,7 +98,7 @@ with lib;
           in [
             {
               id = "bar-left"; # TODO - Adapt for various screens
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-left.toml";
+              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-left.toml";
               position = "top";
               trayOutput = "none";
               extraConfig = ''
@@ -143,7 +139,7 @@ with lib;
             }
             {
               id = "bar-center";
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-center.toml";
+              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-center.toml";
               position = "top";
               extraConfig = ''
                 output ${mon_center}
@@ -185,7 +181,7 @@ with lib;
             }
             {
               id = "bar-right";
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-right.toml";
+              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-right.toml";
               position = "top";
               trayOutput = "none";
               extraConfig = ''

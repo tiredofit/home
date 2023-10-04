@@ -43,6 +43,7 @@ in
               mkdir -p $HOME/.local/state/bash
               chown -R $USER $HOME/.local/state/bash
           fi
+
           ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
           export HISTFILE=$HOME/.local/state/bash/history
           ## Configure bash to append (rather than overwrite history)
