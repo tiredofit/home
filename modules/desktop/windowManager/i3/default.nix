@@ -1,7 +1,40 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, specialArgs, ... }:
 let
-  displayServer = config.host.home.feature.gui.displayServer ;
-  windowManager = config.host.home.feature.gui.windowManager ;
+  inherit (specialArgs) displays display_center display_left display_right role;
+
+  bar_colors = {
+                  background = "#222222";
+                  focusedWorkspace = {
+                    background = "#0088CC";
+                    border = "#0088CC";
+                    text = "#ffffff";
+                  };
+                  activeWorkspace = {
+                    background = "#333333";
+                    border = "#333333";
+                    text = "#888888";
+                  };
+                  inactiveWorkspace = {
+                    background = "#333333";
+                    border = "#333333";
+                    text = "#888888";
+                  };
+                  separator = "#666666";
+                  statusline = "#dddddd";
+                  urgentWorkspace = {
+                    background = "#2f343a";
+                    border = "#900000";
+                    text = "#ffffff";
+                  };
+            };
+
+  bar_fonts = {
+      names = [ "pango:Noto Sans" "FontAwesome" ];
+      size = 12.0;
+  };
+
+  displayServer = config.host.home.feature.gui.displayServer;
+  windowManager = config.host.home.feature.gui.windowManager;
 
   lockScript = pkgs.writeShellScriptBin "lock_screen.sh" ''
     # Grab window titles with wmctrl -l - Seperate by commas you want to skip lock screens if window is running.
@@ -29,7 +62,7 @@ let
     #  esac
 
       powerprofilesctl set power-saver
-      betterlockscreen --off 10 --lock -- nofork
+      betterlockscreen --lock
       powerprofilesctl set balanced
 
     #  case $(date +%u) in
@@ -91,137 +124,52 @@ with lib;
           assigns = {
             "3" = [{ class = "^Ferdium"; }];
           };
-          bars = let  ## TODO This is used in multiple areas - move to top of configuration
-            mon_left = "DisplayPort-2";
-            mon_center = "DisplayPort-1";
-            mon_right = "HDMI-A-0";
-          in [
-            {
-              id = "bar-left"; # TODO - Adapt for various screens
-              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-left.toml";
-              position = "top";
-              trayOutput = "none";
-              extraConfig = ''
-                output ${mon_left}
-              '';
-              workspaceButtons = true;
-              workspaceNumbers = true;
-              fonts = {
-                  names = [ "pango:Noto Sans" "FontAwesome" ];
-                  size = 12.0;
-              };
+          bars = mkMerge [
+            (mkIf (displays >= 1) (mkAfter [
+              {
+                id = "bar-center";
+                statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-center.toml";
 
-              colors = {
-                background = "#222222";
-                focusedWorkspace = {
-                  background = "#0088CC";
-                  border = "#0088CC";
-                  text = "#ffffff";
-                };
-                activeWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                inactiveWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                separator = "#666666";
-                statusline = "#dddddd";
-                urgentWorkspace = {
-                  background = "#2f343a";
-                  border = "#900000";
-                  text = "#ffffff";
-                };
-              };
-            }
-            {
-              id = "bar-center";
-              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-center.toml";
-              position = "top";
-              extraConfig = ''
-                output ${mon_center}
-                tray_output ${mon_center}
-              '';
-              workspaceButtons = true;
-              workspaceNumbers = true;
+                extraConfig = ''
+                  output ${display_center}
+                  tray_output ${display_center}
+                '';
+                position = "top";
+                colors = bar_colors;
+                fonts = bar_fonts;
+              }
+            ]))
 
-              fonts = {
-                  names = [ "pango:Noto Sans NF" ];
-                  size = 12.0;
-              };
+            (mkIf (displays >= 3) (mkAfter [
+              {
+                id = "bar-left"; # TODO - Adapt for various screens
+                statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-left.toml";
+                position = "top";
+                trayOutput = "none";
+                extraConfig = ''
+                  output ${display_left}
+                '';
 
-              colors = {
-                background = "#222222";
-                focusedWorkspace = {
-                  background = "#0088CC";
-                  border = "#0088CC";
-                  text = "#ffffff";
-                };
-                activeWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                inactiveWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                separator = "#666666";
-                statusline = "#dddddd";
-                urgentWorkspace = {
-                  background = "#2f343a";
-                  border = "#900000";
-                  text = "#ffffff";
-                };
-              };
-            }
-            {
-              id = "bar-right";
-              statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-right.toml";
-              position = "top";
-              trayOutput = "none";
-              extraConfig = ''
-                output ${mon_right}
-                tray_output ${mon_right}
-              '';
-              workspaceButtons = true;
-              workspaceNumbers = true;
+                colors = bar_colors;
+                fonts = bar_fonts;
+              }
+            ]))
 
-              fonts = {
-                  names = [ "pango:Noto Sans" "FontAwesome" ];
-                  size = 12.0;
-              };
+            (mkIf (displays >= 2) (mkAfter [
+              {
+                id = "bar-right";
+                statusCommand = "i3status-rs $HOME/.config/i3status-rust/config-right.toml";
+                position = "top";
+                trayOutput = "none";
+                extraConfig = ''
+                  output ${display_right}
+                  tray_output ${display_right}
+                '';
 
-              colors = {
-                background = "#222222";
-                focusedWorkspace = {
-                  background = "#0088CC";
-                  border = "#0088CC";
-                  text = "#ffffff";
-                };
-                activeWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                inactiveWorkspace = {
-                  background = "#333333";
-                  border = "#333333";
-                  text = "#888888";
-                };
-                separator = "#666666";
-                statusline = "#dddddd";
-                urgentWorkspace = {
-                  background = "#2f343a";
-                  border = "#900000";
-                  text = "#ffffff";
-                };
-              };
-            }
+                colors = bar_colors;
+                fonts = bar_fonts;
+              }
+            ]))
           ];
           fonts = {
             names = [ "Hack Nerd Font" ];
@@ -257,7 +205,6 @@ with lib;
           modifier = "Mod4";
           keybindings = let
             mod = config.xsession.windowManager.i3.config.modifier;
-            mod_d_rofi = "exec rofi -combi-modi window,drun,ssh,run -show combi -show-icons";
             in {
                ### Keybind Applications (xmodmap -pke for grabbing keycodes)
                ### or xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
@@ -326,19 +273,18 @@ with lib;
               "button8" = "move right";                   # The side buttons move the window around
 
               ## Applications
-              "XF86Calculator" = "exec 'mate-calc'";                                                                                    # Calculator
-              "${mod}+Shift+d" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
-              "Print" = "exec flameshot gui";                                                                                           # Flameshot
-              "${mod}+Shift+s" = "exec flameshot gui";                                                                                  # Flameshot
-              "${mod}+Shift+x" = "exec lock_screen.sh";                                                                   # Lock screen
-              "${mod}+d" = "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
+              "XF86Calculator" = mkIf (config.host.home.applications.mate-calc.enable) "exec 'mate-calc'";                                                                                    # Calculator
+              "${mod}+Shift+d" = mkIf (config.host.home.applications.rofi.enable) "exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
+              "Print" = mkIf (config.host.home.applications.flameshot.enable) "exec flameshot gui";                                                                                           # Flameshot
+              "${mod}+Shift+s" = mkIf (config.host.home.applications.flameshot.enable) "exec flameshot gui";                                                                                  # Flameshot
+              "${mod}+Shift+x" = "exec lock_screen.sh";                                                                                 # Lock screen
+              "${mod}+d" = mkIf (config.host.home.applications.rofi.enable) "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
               "${mod}+Return" = "exec kitty";                                                                                           # Terminal
-              "${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
+              #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
               "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
               "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
               "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle  && killall -SIGUSR1 i3status-rs";      # Volume Controls
               "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status-rs";# Volume Controls
-
         };
         modes = {
             resize = {
@@ -355,39 +301,59 @@ with lib;
               "$mod+r" = "mode default";                          # back to normal: Enter or Escape or $mod+r
             };
           };
-          startup = [
-            { command = "${pkgs.alttab}/bin/alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; }  # Running Application Manager
-            { command = "${pkgs.autotiling}/bin/autotiling"; always = true; notification = false; }              # Auto Tile H/V
-            { command = "${pkgs.ferdium}/bin/ferdium"; always = false; notification = true; }                 # IM
-            { command = "${pkgs.flameshot}/bin/flameshot"; always = false; notification = true; }               # Screenshot
-            { command = "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = true; notification = false; }        # Clipboard Management
-            { command = "${pkgs.nextcloud-client}/bin/nextcloud --background"; always = false; notification = true; }  # Nextcloud Client
-            { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; always = false; notification = false; }     # Desktop Background
-            { command = "${pkgs.numlockx}/bin/numlockx on"; always = false; notification = false; }            # Number Lock on by Default TODO - Seperate for small keyboards
-            #{ command = "opensnitch-ui"; always = false; notification = true; }           # Firewall
-            { command = "${pkgs.redshift}/bin/redshift -P -O 3000"; always = false; notification = false; }    # Gamma correction
-            { command = "${pkgs.volctl}/bin/volctl"; always = false; notification = false; }                 # Volume Control
-            { command = "${pkgs.xbanish}/bin/xbanish"; always = false; notification = false; }                # Hide Mouse Cursor when typing
-            { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 lock_screen.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } # Power Management
-            #{ command = "~/.config/i3/scripts/x_3screenlayout.sh"; always = false; notification = false; }     # Display Setup # TODO - Seperate for different screens / systems
+          startup = mkMerge [
+            (mkIf (config.host.home.applications.alttab.enable) (mkAfter [ { command = "${pkgs.alttab}/bin/alttab -fg '#d58681' -bg '#4a4a4a' -frame '#eb564d' -t 128x150 -i 127x64"; always = false; notification = false; } ])) # Running Application Manager
+            (mkIf (config.host.home.applications.autotiling.enable) (mkAfter [ { command = "${pkgs.autotiling}/bin/autotiling"; always = true; notification = false; } ]))             # Auto Tile H/V
+            (mkIf (config.host.home.applications.ferdium.enable) (mkAfter [ { command = "${pkgs.ferdium}/bin/ferdium"; always = false; notification = true; } ]))                # IM
+            (mkIf (config.host.home.applications.flameshot.enable) (mkAfter [ { command = "${pkgs.flameshot}/bin/flameshot"; always = false; notification = true; } ]))              # Screenshot
+            (mkIf (config.host.home.applications.greenclip.enable) (mkAfter [ { command = "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; always = true; notification = false; } ]))       # Clipboard Management
+            (mkIf (config.host.home.applications.nextcloud-client.enable) (mkAfter [ { command = "${pkgs.nextcloud-client}/bin/nextcloud --background"; always = false; notification = true; } ])) # Nextcloud Client
+            (mkIf (config.host.home.applications.nitrogen.enable) (mkAfter [ { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; always = false; notification = false; } ]))    # Desktop Background
+            (mkIf (config.host.home.applications.numlockx.enable) (mkAfter [ { command = "${pkgs.numlockx}/bin/numlockx on"; always = false; notification = false; } ]))           # Number Lock on by Default TODO - Seperate for small keyboards
+            (mkIf (config.host.home.applications.opensnitch-ui.enable) (mkAfter [ { command = "opensnitch-ui"; always = false; notification = true; } ]))          # Firewall
+            (mkIf (config.host.home.applications.redshift.enable) (mkAfter [ { command = "${pkgs.redshift}/bin/redshift -P -O 3000"; always = false; notification = false; } ]))   # Gamma correction
+            (mkIf (config.host.home.applications.volctl.enable) (mkAfter [ { command = "${pkgs.volctl}/bin/volctl"; always = false; notification = false; } ]))                # Volume Control
+            (mkIf (config.host.home.applications.xbanish.enable) (mkAfter [ { command = "${pkgs.xbanish}/bin/xbanish"; always = false; notification = false; } ]))               # Hide Mouse Cursor when typing
           ];
           terminal = "${pkgs.kitty}/bin/kitty";
           workspaceAutoBackAndForth = true;
           workspaceLayout = "default"; # Bounce back and forth between workspaces using same workspace key
-          workspaceOutputAssign = let  ## TODO This is used in multiple areas - move to top of configuration
-            mon_left = "DisplayPort-2";
-            mon_center = "DisplayPort-1";
-            mon_right = "HDMI-A-0";
-          in [
-             { workspace = "1"; output = "${mon_left}"; }
-             { workspace = "4"; output = "${mon_left}"; }
-             { workspace = "7"; output = "${mon_left}"; }
-             { workspace = "2"; output = "${mon_center}"; }
-             { workspace = "5"; output = "${mon_center}"; }
-             { workspace = "8"; output = "${mon_center}"; }
-             { workspace = "3"; output = "${mon_right}"; }
-             { workspace = "6"; output = "${mon_right}"; }
-             { workspace = "9"; output = "${mon_right}"; }
+          workspaceOutputAssign = mkMerge [
+            (mkIf (displays == 1) (mkAfter [
+              { workspace = "1"; output = "${display_center}"; }
+              { workspace = "4"; output = "${display_center}"; }
+              { workspace = "7"; output = "${display_center}"; }
+              { workspace = "2"; output = "${display_center}"; }
+              { workspace = "5"; output = "${display_center}"; }
+              { workspace = "8"; output = "${display_center}"; }
+              { workspace = "3"; output = "${display_center}"; }
+              { workspace = "6"; output = "${display_center}"; }
+              { workspace = "9"; output = "${display_center}"; }
+            ]))
+
+          (mkIf (displays == 2) (mkAfter [
+              { workspace = "1"; output = "${display_center}"; }
+              { workspace = "4"; output = "${display_center}"; }
+              { workspace = "7"; output = "${display_center}"; }
+              { workspace = "2"; output = "${display_center}"; }
+              { workspace = "5"; output = "${display_center}"; }
+              { workspace = "8"; output = "${display_center}"; }
+              { workspace = "3"; output = "${display_right}"; }
+              { workspace = "6"; output = "${display_right}"; }
+              { workspace = "9"; output = "${display_right}"; }
+            ]))
+
+          (mkIf (displays == 3) (mkAfter [
+              { workspace = "1"; output = "${display_left}"; }
+              { workspace = "4"; output = "${display_left}"; }
+              { workspace = "7"; output = "${display_left}"; }
+              { workspace = "2"; output = "${display_center}"; }
+              { workspace = "5"; output = "${display_center}"; }
+              { workspace = "8"; output = "${display_center}"; }
+              { workspace = "3"; output = "${display_right}"; }
+              { workspace = "6"; output = "${display_right}"; }
+              { workspace = "9"; output = "${display_right}"; }
+            ]))
           ];
         };
         extraConfig = ''
