@@ -41,20 +41,36 @@ in
               };
             };
             blocks = mkMerge [
-              [
-                {
-                  block = "time";
-                  interval = 1;
-                  format = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M:%S', l:en_US)";
-                }
-#              (mkIf (role == "laptop") (mkAfter [
-#               {
-#                  block = "time";
-#                  interval = 60;
-#                  format = "$icon $timestamp.datetime(f:'%H:%M', l:en_US)";
-#                  format_alt = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M', l:en_US)";
-#               }
-#              ]))
+              (mkIf (role != "laptop") (mkAfter [
+                 {
+                   block = "time";
+                   interval = 1;
+                   format = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M:%S', l:en_US)";
+                   click = [
+                     {
+                       button = "left";
+                       cmd = "${pkgs.gnome.zenity}/bin/zenity --calendar";
+                     }
+                   ];
+                 }
+              ]))
+
+              (mkIf (role == "laptop") (mkAfter [
+                 {
+                   block = "time";
+                   interval = 60;
+                   format = "$icon $timestamp.datetime(f:'%H:%M', l:en_US)";
+                   format_alt = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %H:%M:%S', l:en_US)";
+                   click = [
+                     {
+                       button = "left";
+                       cmd = "${pkgs.gnome.zenity}/bin/zenity --calendar";
+                     }
+                   ];
+                 }
+              ]))
+
+              (mkIf ((config.host.home.applications.redshift.enable) || (config.host.home.applications.wl-gammarelay.enable)) (mkAfter [
                 {
                   block = "hueshift";
                   step = 500;
@@ -62,30 +78,37 @@ in
                   max_temp = 6500;
                   min_temp = 1000;
                 }
-                {
-                  block = "notify";
-                  format = " $icon {($notification_count.eng(w:1)) |}";
-                }
-                {
-                  block = "sound";
-                  device_kind = "sink";
-                  driver = "pulseaudio";
-                  format = " $icon { $volume|} ";
-                  mappings = {
-                    "alsa_output.pci-0000_2d_00.4.analog-stereo" = "";
-                    "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
-                  };
-                  #"bluez_output.00_00_00_00_00_00.1" = "";
-                  step_width = 1;
-                  max_vol = 100;
-                  click = [
-                    {
-                      button = "left";
-                      cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                    }
-                  ];
-                }
-              ]
+              ]))
+
+              (mkAfter [
+                 {
+                   block = "notify";
+                   format = " $icon {($notification_count.eng(w:1)) |}";
+                 }
+              ])
+
+              ## TODO Split for different hardware
+              (mkAfter [
+                  {
+                    block = "sound";
+                    device_kind = "sink";
+                    driver = "pulseaudio";
+                    format = " $icon { $volume|} ";
+                    mappings = {
+                      "alsa_output.pci-0000_2d_00.4.analog-stereo" = "";
+                      "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
+                    };
+                    #"bluez_output.00_00_00_00_00_00.1" = "";
+                    step_width = 1;
+                    max_vol = 100;
+                    click = [
+                      {
+                        button = "left";
+                        cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                      }
+                    ];
+                  }
+                ])
 
               (mkIf (role == "laptop") (mkAfter [
                 {
@@ -113,7 +136,6 @@ in
                   driver = "sysfs";
                 }
               ]))
-
             ];
           };
           left = {
