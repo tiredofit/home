@@ -22,5 +22,11 @@ in
           zoom-us
         ];
     };
+
+    xdg.mimeApps = mkIf (config.host.home.feature.mime.defaults.enable) {
+      defaultApplications = {
+        "x-scheme-handler/zoomtg" = "us.zoom.Zoom.desktop";
+      };
+    };
   };
 }
