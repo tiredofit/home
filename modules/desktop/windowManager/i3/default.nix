@@ -61,9 +61,11 @@ let
     #  ;;
     #  esac
 
-      powerprofilesctl set power-saver
+      #powerprofilesctl set power-saver
+      echo "LOCK: $(DATE)" >> $HOME/lock.log
       betterlockscreen --lock
-      powerprofilesctl set balanced
+      echo "UNLOCK: $(DATE)" >> $HOME/lock.log
+      #powerprofilesctl set balanced
 
     #  case $(date +%u) in
     #    1 | 2 | 3 | 4 | 5 ) # Mon - Fri
@@ -314,6 +316,7 @@ with lib;
             (mkIf (config.host.home.applications.redshift.enable) (mkAfter [ { command = "${pkgs.redshift}/bin/redshift -P -O 3000"; always = false; notification = false; } ]))   # Gamma correction
             (mkIf (config.host.home.applications.volctl.enable) (mkAfter [ { command = "${pkgs.volctl}/bin/volctl"; always = false; notification = false; } ]))                # Volume Control
             (mkIf (config.host.home.applications.xbanish.enable) (mkAfter [ { command = "${pkgs.xbanish}/bin/xbanish"; always = false; notification = false; } ]))               # Hide Mouse Cursor when typing
+            (mkIf (config.host.home.applications.xidlehook.enable) (mkAfter [ { command = "${pkgs.xidlehook}/bin/xidlehook --timer 600 lock_screen.sh ' ' --timer 300 'xset dpms force off' ' ' --timer 900 'systemctl suspend' ' '"; always = false; notification = false; } ])) # Power Management
           ];
           terminal = "${pkgs.kitty}/bin/kitty";
           workspaceAutoBackAndForth = true;

@@ -78,7 +78,7 @@ with lib;
     };
   };
 
-  services.autorandr.enable = true;
+  services.autorandr.enable = false;
 
   sops.secrets = {
     "bashrc.d/toi_remotehosts.sh" = {
