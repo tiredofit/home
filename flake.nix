@@ -112,8 +112,9 @@
               role = "workstation";
               hostname = "nakulaptop";
               username = "dave";
-              displays = 1;
-              display_center = "eDP";
+              displays = 2;
+              display_center = "HDMI-A-0";
+              display_right = "eDP";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
