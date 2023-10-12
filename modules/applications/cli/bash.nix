@@ -41,6 +41,7 @@ in
 
           if [ -d $HOME/.local/state/bash ]; then
               mkdir -p $HOME/.local/state/bash
+              touch $HOME/.local/state/bash/history
               chown -R $USER $HOME/.local/state/bash
           fi
 

@@ -62,9 +62,7 @@ let
     #  esac
 
       #powerprofilesctl set power-saver
-      echo "LOCK: $(DATE)" >> $HOME/lock.log
       betterlockscreen --lock
-      echo "UNLOCK: $(DATE)" >> $HOME/lock.log
       #powerprofilesctl set balanced
 
     #  case $(date +%u) in
