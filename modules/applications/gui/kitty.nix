@@ -140,11 +140,12 @@ in
 
               edit-in-kitty $edit_arg
           }
+
+          if [ -n "$KITTY_WINDOW_ID" ]; then
+              alias ssh="kitty +kitten ssh"
+              alias sssh="/run/current-system/sw/bin/ssh"
+          fi
         '';
-        shellAliases = {
-          ssh="kitty +kitten ssh" ;
-          sssh="/run/current-system/sw/bin/ssh" ;
-        };
       };
     };
   };
