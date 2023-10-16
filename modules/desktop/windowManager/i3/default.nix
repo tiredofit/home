@@ -281,6 +281,8 @@ with lib;
               "${mod}+d" = mkIf (config.host.home.applications.rofi.enable) "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
               "${mod}+Return" = "exec kitty";                                                                                           # Terminal
               #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
+              "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
+              "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
               "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
               "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
               "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle  && killall -SIGUSR1 i3status-rs";      # Volume Controls
