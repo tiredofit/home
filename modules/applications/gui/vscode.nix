@@ -196,10 +196,12 @@ in
         "editor.wordWrap" = "off";
         "workbench.editor.enablePreview" = false;
         "workbench.editor.enablePreviewFromQuickOpen" = false;
+        "workbench.editor.empty.hint" = "hidden";
         "workbench.editor.highlightModifiedTabs" = true;
         "workbench.editor.showTabs" = true;
         "workbench.editor.untitled.hint" = "hidden";
         "workbench.startupEditor" = "none" ;
+
 
         ## Formatting
         "[dockerfile]" = { "editor.defaultFormatter" = "foxundermoon.shell-format" ;};
