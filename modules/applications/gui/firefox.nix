@@ -106,7 +106,7 @@ in with lib; {
             copy-selection-as-markdown
             decentraleyes
             enhanced-github
-            enhancer-for-youtube
+            #enhancer-for-youtube
             facebook-container
             floccus
             hover-zoom-plus
