@@ -126,17 +126,17 @@ with lib;
 
           container_tool() {
               DOCKER_COMPOSE_STACK_DATA_PATH=''${DOCKER_COMPOSE_STACK_DATA_PATH:-"/var/local/data/"}
-              DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH=''${DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH:-"/var/local/data/_system/"}
+              DOCKER_STACK_SYSTEM_DATA_PATH=''${DOCKER_STACK_SYSTEM_DATA_PATH:-"/var/local/data/_system/"}
               DOCKER_COMPOSE_STACK_APP_RESTART_FIRST=''${DOCKER_COMPOSE_STACK_APP_RESTART_FIRST:-"auth.example.com"}
-              DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER=''${DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER:-"socket-proxy tinc error-pages traefik unbound openldap postfix-relay llng-handler restic clamav zabbix"}
+              DOCKER_STACK_SYSTEM_APP_RESTART_ORDER=''${DOCKER_STACK_SYSTEM_APP_RESTART_ORDER:-"socket-proxy tinc error-pages traefik unbound openldap postfix-relay llng-handler restic clamav zabbix"}
 
               ###
-              #  system directory: $DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH
+              #  system directory: $DOCKER_STACK_SYSTEM_DATA_PATH
               #  application directory: $DOCKER_COMPOSE_STACK_DATA_PATH
               #  order to start containers:
               #  1. if $DOCKER_COMPOSE_STACK_APP_RESTART_FIRST (under $DOCKER_COMPOSE_STACK_DATA_PATH), restart first
               #  2. restart containers under system directory in the order of:
-              #     \DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER
+              #     \DOCKER_STACK_SYSTEM_APP_RESTART_ORDER
               #  3. restart containers under application directory (no particular order)
               #
               #  Usage:
@@ -183,10 +183,34 @@ with lib;
                   done
               }
 
+              ct_restart_service () {
+                  for stack_dir in "$@" ; do
+                      if [ ! -f "$stack_dir"/.norestart ]; then
+                          if systemctl list-unit-files docker-"$stack_dir".service &>/dev/null ; then
+                              echo "**** [container-tool] [restart] Bringing down stack - $stack_dir"
+                              systemctl stop docker-"$stack_dir".service
+                              echo "**** [container-tool] [restart] Bringing up stack - $stack_dir"
+                              systemctl start docker-"$stack_dir".service
+                          else
+                              echo "**** [container-tool] [restart] Skipping - $stack_dir"
+                          fi
+                      fi
+                  done
+              }
+
               ct_stop () {
                   for stack_dir in "$@" ; do
-                          echo "**** [container-tool] [restart] Stopping stack - $stack_dir"
+                          echo "**** [container-tool] [stop] Stopping stack - $stack_dir"
                           $docker_compose_location -f "$stack_dir"/*compose.yml down --timeout $DOCKER_COMPOSE_TIMEOUT
+                  done
+              }
+
+              ct_stop_service() {
+                  for stack_dir in "$@" ; do
+                      if systemctl list-unit-files docker-"$stack_dir".service &>/dev/null ; then
+                          echo "**** [container-tool] [stop_service] Stopping stack - $stack_dir"
+                          systemctl stop docker-"$stack_dir".service
+                      fi
                   done
               }
 
@@ -201,28 +225,28 @@ with lib;
                           tmpitem=''${tmparr[$index]}
                           tmparr[$index]="''${tmparr[$j]}"
                           tmparr[$j]=$tmpitem
-                          let "index++"
-                          break
-                          fi
-                      done
-                  done
+                            let "index++"
+                            break
+                            fi
+                        done
+                    done
               }
 
               ct_restart_sys_containers () {
+                 set -x
                   # the order to restart system containers:
-                  predef_order=($(echo "$DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER"))
+                  predef_order=($(echo "$DOCKER_STACK_SYSTEM_APP_RESTART_ORDER"))
 
                   curr_order=()
 
-                  for stack_dir in "$DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH"/*/ ; do
-                      if [ -s "$stack_dir"/*compose.yml ]; then
-                          curr_order=("''${curr_order[@]}" "$stack_dir")
-                      fi
+                  for stack_dir in "$DOCKER_STACK_SYSTEM_DATA_PATH"/* ; do
+                      curr_order=("''${curr_order[@]}" "''${stack_dir##*/}")
                   done
 
                   # pass the array by reference
                   ct_sort_order curr_order
-                  ct_restart "''${curr_order[@]}"
+                  ct_restart_service "''${curr_order[@]}"
+                set +x
               }
 
               ct_stop_stack () {
@@ -244,42 +268,41 @@ with lib;
               ct_stop_sys_containers () {
                   # the order to restart system containers:
                   #predef_order=(tinc openldap unbound traefik error-pages postfix-relay llng-handler clamav zabbix fluent-bit)
-                  predef_order=($(echo "$DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER"))
+                  predef_order=($(echo "$DOCKER_STACK_SYSTEM_APP_RESTART_ORDER"))
 
                   curr_order=()
 
-                  for stack_dir in "$DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH"/*/ ; do
-                      if [ -s "$stack_dir"/*compose.yml ]; then
-                          curr_order=("''${curr_order[@]}" "$stack_dir")
-                      fi
+                  for stack_dir in "$DOCKER_STACK_SYSTEM_DATA_PATH"/* ; do
+                          curr_order=("''${curr_order[@]}" "''${stack_dir##*/}")
                   done
 
                   # pass the array by reference
                   ct_sort_order curr_order
-                  ct_stop "''${curr_order[@]}"
+                  ct_stop_service "''${curr_order[@]}"
               }
 
               ct_pull_restart_containers () {
+                  ## System containers have been moved to systemd
                   # the order to restart system containers:
-                  predef_order=($(echo "$DOCKER_COMPOSE_STACK_SYSTEM_APP_RESTART_ORDER"))
+                  #predef_order=($(echo "$DOCKER_STACK_SYSTEM_APP_RESTART_ORDER"))
 
-                  curr_order=()
+                  #curr_order=()
 
-                  for stack_dir in "$DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH"/*/ ; do
-                      if [ -s "$stack_dir"/*compose.yml ]; then
-                          curr_order=("''${curr_order[@]}" "$stack_dir")
-                      fi
-                  done
+                  #for stack_dir in "$DOCKER_STACK_SYSTEM_DATA_PATH"/*/ ; do
+                  #    if [ -s "$stack_dir"/*compose.yml ]; then
+                  #        curr_order=("''${curr_order[@]}" "''${stack_dir##*/}")
+                  #    fi
+                  #done
 
                   # pass the array by reference
-                  ct_sort_order curr_order
+                  #ct_sort_order curr_order
 
                   #echo "''${curr_order[@]}"
-                  if [ "$1" = restart ] ; then
-                      ct_pull_restart "''${curr_order[@]}"
-                  else
-                      ct_pull_images "''${curr_order[@]}"
-                  fi
+                  #if [ "$1" = restart ] ; then
+                  #    ct_pull_restart "''${curr_order[@]}"
+                  #else
+                  #    ct_pull_images "''${curr_order[@]}"
+                  #fi
 
                   # there is no particular order to retart application containers
                   # except the DOCKER_COMPOSE_STACK_APP_RESTART_FIRST, which should be restarted as the
@@ -334,10 +357,10 @@ with lib;
 
               ct_restart_first () {
                   if [ -s "$DOCKER_COMPOSE_STACK_DATA_PATH""$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"/*compose.yml ]; then
-                          echo "**** [container-tool] [restart_first] Bringing down stack - $DOCKER_COMPOSE_STACK_DATA_PATH$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"
-                          $docker_compose_location -f "$DOCKER_COMPOSE_STACK_DATA_PATH"/"$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"/*compose.yml down --timeout $DOCKER_COMPOSE_TIMEOUT
-                          echo "**** [container-tool] [restart_first] Bringing up stack - $DOCKER_COMPOSE_STACK_DATA_PATH$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"
-                          $docker_compose_location -f "$DOCKER_COMPOSE_STACK_DATA_PATH"/"$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"/*compose.yml up -d
+                        echo "**** [container-tool] [restart_first] Bringing down stack - $DOCKER_COMPOSE_STACK_DATA_PATH$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"
+                        $docker_compose_location -f "$DOCKER_COMPOSE_STACK_DATA_PATH"/"$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"/*compose.yml down --timeout $DOCKER_COMPOSE_TIMEOUT
+                        echo "**** [container-tool] [restart_first] Bringing up stack - $DOCKER_COMPOSE_STACK_DATA_PATH$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"
+                        $docker_compose_location -f "$DOCKER_COMPOSE_STACK_DATA_PATH"/"$DOCKER_COMPOSE_STACK_APP_RESTART_FIRST"/*compose.yml up -d
                   fi
               }
 
@@ -354,13 +377,15 @@ with lib;
 
               case "$1" in
                   core|system)
+                  set -x
                       echo "**** [container-tool] Restarting Core Applications"
                       ct_restart_first           # Restart $DOCKER_COMPOSE_STACK_APP_RESTART_FIRST
-                      ct_restart_sys_containers  # Restart $DOCKER_COMPOSE_STACK_SYSTEM_DATA_PATH
+                      ct_restart_sys_containers  # Restart $DOCKER_STACK_SYSTEM_DATA_PATH
                       if pgrep -x "sssd" >/dev/null ; then
                           echo "**** [container-tool] Restarting SSSD"
                           systemctl restart sssd
                       fi
+                  set +x
                   ;;
                   applications|apps)
                       echo "**** [container-tool] Restarting User Applications"
@@ -415,38 +440,38 @@ with lib;
           }
 
           docker-compose() {
-                  if [ "$2" != "--help" ] ; then
-                      case "$1" in
-                          "down" )
-                              arg=$(echo "$@" | sed "s|^$1||g")
-                              $dsudo $docker_compose_location down --timeout $DOCKER_COMPOSE_TIMEOUT $arg
-                          ;;
-                          "restart" )
-                              arg=$(echo "$@" | sed "s|^$1||g")
-                              $dsudo $docker_compose_location restart --timeout $DOCKER_COMPOSE_TIMEOUT $arg
-                          ;;
-                          "stop" )
-                              arg=$(echo "$@" | sed "s|^$1||g")
-                              $dsudo $docker_compose_location stop --timeout $DOCKER_COMPOSE_TIMEOUT $arg
-                          ;;
-                          "up" )
-                              arg=$(echo "$@" | sed "s|^$1||g")
-                              $dsudo $docker_compose_location up $arg
-                          ;;
-                          * )
-                              $dsudo $docker_compose_location ''${@}
-                          ;;
-                      esac
-                  fi
+             if [ "$2" != "--help" ] ; then
+                 case "$1" in
+                     "down" )
+                         arg=$(echo "$@" | sed "s|^$1||g")
+                         $dsudo $docker_compose_location down --timeout $DOCKER_COMPOSE_TIMEOUT $arg
+                     ;;
+                     "restart" )
+                         arg=$(echo "$@" | sed "s|^$1||g")
+                         $dsudo $docker_compose_location restart --timeout $DOCKER_COMPOSE_TIMEOUT $arg
+                     ;;
+                     "stop" )
+                         arg=$(echo "$@" | sed "s|^$1||g")
+                         $dsudo $docker_compose_location stop --timeout $DOCKER_COMPOSE_TIMEOUT $arg
+                     ;;
+                     "up" )
+                         arg=$(echo "$@" | sed "s|^$1||g")
+                         $dsudo $docker_compose_location up $arg
+                     ;;
+                     * )
+                         $dsudo $docker_compose_location ''${@}
+                     ;;
+                esac
+             fi
           }
 
           alias container-tool=container_tool
           alias dpull='$dsudo docker pull'                                                                                                 # Docker Pull
           alias dcpull='$dsudo docker-compose pull'                                                                                        # Docker-Compose Pull
-          alias dcu='$dsudo $docker_compose_location up'                                                                                    # Docker-Compose Up
-          alias dcud='$dsudo $docker_compose_location up -d'                                                                                # Docker-Compose Daemonize
-          alias dcd='$dsudo $docker_compose_location down --timeout $DOCKER_COMPOSE_TIMEOUT'                                              # Docker-Compose Down
-          alias dcl='$dsudo $docker_compose_location logs -f'                                                                               # Docker Compose Logs
+          alias dcu='$dsudo $docker_compose_location up'                                                                                   # Docker-Compose Up
+          alias dcud='$dsudo $docker_compose_location up -d'                                                                               # Docker-Compose Daemonize
+          alias dcd='$dsudo $docker_compose_location down --timeout $DOCKER_COMPOSE_TIMEOUT'                                               # Docker-Compose Down
+          alias dcl='$dsudo $docker_compose_location logs -f'                                                                              # Docker Compose Logs
           alias dcrecycle='$dsudo $docker_compose_location down --timeout $DOCKER_COMPOSE_TIMEOUT ; $dsudo $docker_compose_location up -d' # Docker Compose Restart
 
           if [ -n "$1" ] && [ "$1" = "container_tool" ] ; then
