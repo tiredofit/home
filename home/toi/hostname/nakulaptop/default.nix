@@ -31,14 +31,12 @@ with lib;
               enable = true;
               primary = true;
               mode = "2560x1440";
-              rate = "59.95";
             };
             "${display_right}" = {
               enable = true;
               primary = false;
               mode = "1920x1080";
               position = "320x1440";
-              rate = "60";
             };
           };
         };

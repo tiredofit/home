@@ -34,5 +34,15 @@
       sopsFile = ../../secrets/bash-toi_remotehosts.sh;
       mode = "500";
     };
+    ".ssh/id_ed25519" = {
+      format = "binary";
+      sopsFile = ../../user/dave/secrets/ssh/id_ed25519.enc;
+      mode = "600";
+    };
+    ".ssh/id_ed25519.pub" = {
+      format = "binary";
+      sopsFile = ../../user/dave/secrets/ssh/id_ed25519.pub.enc;
+      mode = "600";
+    };
   };
 }

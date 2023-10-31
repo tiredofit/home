@@ -9,3 +9,13 @@ creation_rules:
       - *user_dave
       - *host_beef
       - *host_butcher
+  - path_regex: home/*/secrets/.*
+    key_groups:
+    - age:
+      - *user_dave
+      - *host_beef
+      - *host_butcher
+  - path_regex: home/toi/user/dave/secrets/.*
+    key_groups:
+    - age:
+      - *user_dave
