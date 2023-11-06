@@ -13,6 +13,7 @@ with lib;
         docker-compose.enable = mkDefault true;
         git.enable = mkDefault true;
         encfs.enable = mkDefault false;
+        neovim.enable = mkDefault true;
         nextcloud-client.enable = mkDefault true;
         tea.enable = mkDefault true;
       };

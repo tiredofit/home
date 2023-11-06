@@ -37,6 +37,9 @@ in
           uyiosa-enabulele.reopenclosedtab          # Reopen last tab
           ziyasal.vscode-open-in-github             # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
 
+        ## CI
+          github.vscode-github-actions              # Github actions helper
+
         ## Prettify / Formatting
           brettm12345.nixfmt-vscode                 # Nix TODO: Split and force programs to be installed
           eriklynd.json-tools                       # JSON
@@ -44,7 +47,8 @@ in
           mohsen1.prettify-json                     # JSON
           richie5um2.vscode-sort-json               # JSON
           shakram02.bash-beautify                   # Bash
-          yzhang.markdown-all-in-one                # MarkDown
+          yzhang.markdown-all-in-one                # Markown
+          davidanson.vscode-markdownlint            # Markdown
 
         ## Remote
           ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
