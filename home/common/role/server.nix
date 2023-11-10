@@ -12,7 +12,7 @@ with lib;
       feature = {
       };
       service = {
-      }
+      };
     };
   };
 }
