@@ -21,7 +21,7 @@ with lib;
       };
 
       displayServer = mkOption {
-        type = types.enum ["x" "wayland"];
+        type = types.enum ["x" "wayland" null];
         default = null;
         description = "Type of displayServer";
       };
