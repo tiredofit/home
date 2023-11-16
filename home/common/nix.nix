@@ -12,7 +12,7 @@ with lib;
                 PROFILE_PATH=null
             fi
         else
-            PROFILE_PATH="/nix/var/nix/profiles/per-user/$USER
+            PROFILE_PATH="/nix/var/nix/profiles/per-user/$USER"
         fi
 
         if [ -n "$PROFILE_PATH" ] && [ "$PROFILE_PATH" != "null" ]; then
