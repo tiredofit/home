@@ -109,6 +109,17 @@
             };
           };
 
+          "cog.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              hostname = "cog" ;
+              username = gn;
+              networkInterface = "br0";
+              inherit inputs outputs;
+            };
+          };
+
           "nakulaptop.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
