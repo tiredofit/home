@@ -179,9 +179,20 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
-              hostname = "butcher";
+              hostname = "tentacle" ;
               username = gn;
               networkInterface = "enp6s18";
+              inherit inputs outputs;
+            };
+          };
+
+          "workspace.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              hostname = "workspace" ;
+              username = gn;
+              networkInterface = "br0";
               inherit inputs outputs;
             };
           };
