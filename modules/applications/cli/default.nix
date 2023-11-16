@@ -33,7 +33,7 @@ with lib;
     ./nano.nix
     ./ncdu.nix
     ./neofetch.nix
-    ./neovim.nix
+    ./neovim
     ./nix-developmenttools.nix
     ./nmap.nix
     ./ranger.nix
