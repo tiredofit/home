@@ -75,7 +75,7 @@
         pkgs = pkgsForSystem (args.system or "x86_64-linux");
       } // { inherit (args) extraSpecialArgs; });
     in
-      flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: rec {
+      flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ] (system: rec {
         legacyPackages = pkgsForSystem system;
       }) //
       {
@@ -167,6 +167,18 @@
               username = "dave";
               displays = 1;
               networkInterface = "wlo1";
+              inherit inputs outputs;
+            };
+          };
+
+          "tentacle.dave" = HomeConfiguration {
+            system = "aarch64-linux";
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              hostname = "butcher";
+              username = "dave";
+              networkInterface = "enp6s18";
               inherit inputs outputs;
             };
           };
