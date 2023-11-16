@@ -202,7 +202,7 @@ in
         "workbench.editor.enablePreviewFromQuickOpen" = false;
         "workbench.editor.empty.hint" = "hidden";
         "workbench.editor.highlightModifiedTabs" = true;
-        "workbench.editor.showTabs" = true;
+        "workbench.editor.showTabs" = "multiple";
         "workbench.editor.untitled.hint" = "hidden";
         "workbench.startupEditor" = "none" ;
 
