@@ -5,9 +5,23 @@ with lib;
     activation = {
       report-changes = ''
         PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-        mkdir -p $HOME/.local/state/home-manager/logs
-        ${pkgs.nvd}/bin/nvd diff $(ls -dv /nix/var/nix/profiles/per-user/$USER/profile-*-link | tail -2)
-        nvd diff $(ls -dv /nix/var/nix/profiles/per-user/$USER/profile-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv /nix/var/nix/profiles/per-user/$USER/profile-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv /nix/var/nix/profiles/per-user/$USER/profile-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
+        if [ ! -d /nix/var/nix/profiles/per-user/$USER ]; then
+            if [ -d $HOME/.local/state/nix/profiles ] ; then
+                PROFILE_PATH="$HOME/.local/state/nix/profiles"
+            else
+                PROFILE_PATH=null
+            fi
+        else
+            PROFILE_PATH="/nix/var/nix/profiles/per-user/$USER
+        fi
+
+        if [ -n "$PROFILE_PATH" ] && [ "$PROFILE_PATH" != "null" ]; then
+            mkdir -p $HOME/.local/state/home-manager/logs
+            ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2)
+            nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/profile-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/profile-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
+        else
+            echo "ERROR - Can't write Home-Manager generation log file"
+        fi
       '';
     };
   };
