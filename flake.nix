@@ -56,6 +56,9 @@
   outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
+      gn = "dave";
+      gnsn = "daveconroy";
+
       pkgsForSystem = system: import nixpkgs {
         overlays = [
           inputs.comma.overlays.default
@@ -80,12 +83,12 @@
       }) //
       {
         homeConfigurations = {
-          "beef.dave" = HomeConfiguration {
+          "beef.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "beef";
-              username = "dave";
+              username = gn;
               displays = 3;
               display_center = "DisplayPort-1";
               display_left = "DisplayPort-2";
@@ -95,23 +98,23 @@
             };
           };
 
-          "butcher.dave" = HomeConfiguration {
+          "butcher.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
               hostname = "butcher";
-              username = "dave";
+              username = gn;
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
           };
 
-          "nakulaptop.dave" = HomeConfiguration {
+          "nakulaptop.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "nakulaptop";
-              username = "dave";
+              username = gn;
               displays = 2;
               display_center = "HDMI-A-0";
               display_right = "eDP";
@@ -133,12 +136,12 @@
             };
           };
 
-          "selecta.dave" = HomeConfiguration {
+          "selecta.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "selecta";
-              username = "dave";
+              username = gn;
               displays = 1;
               display_center = "HDMI-1";
               networkInterface = "wlo1";
@@ -159,43 +162,108 @@
             };
           };
 
-          "soy.dave" = HomeConfiguration {
+          "soy.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               hostname = "soy";
-              username = "dave";
+              username = gn;
               displays = 1;
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
           };
 
-          "tentacle.dave" = HomeConfiguration {
+          "tentacle.${gn}" = HomeConfiguration {
             system = "aarch64-linux";
             extraSpecialArgs = {
               org = "toi";
               role = "server";
               hostname = "butcher";
-              username = "dave";
+              username = gn;
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
           };
 
       ##
-          "sd111.dave" = HomeConfiguration {
+          "bell.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              hostname = "bell";
+              username = gnsn;
               inherit inputs outputs;
             };
           };
 
-          "tesla.dave" = HomeConfiguration {
+          "edge.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              hostname = "edge";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "einstein.${gnsn}" = HomeConfiguration {
+            system = "aarch64-linux";
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "einstein";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "sd20.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "sd20";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "sd91.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "sd20";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "sd102.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "sd111";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "sd111.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "sd111";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
+
+          "tesla.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sd";
+              role = "server";
+              hostname = "tesla";
+              username = gnsn;
               inherit inputs outputs;
             };
           };
