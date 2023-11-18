@@ -247,7 +247,7 @@ in
                 click = [
                   {
                     button = "left";
-                    cmd = "${pkgs.kitty}/bin/kitty -e nmtui";
+                    cmd = "${pkgs.networkmanager}/bin/nmcli device wifi rescan && ${pkgs.kitty}/bin/kitty -e nmtui";
                   }
                 ];
               }
