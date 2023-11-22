@@ -29,13 +29,16 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ bashInteractive ];
+      packages = with pkgs; [
+        argc
+        bashInteractive
+      ];
     };
 
     programs = {
       bash = {
         enable = true;
-        enableCompletion = true; # enable word completion by <tab>
+        enableCompletion = false; # enable word completion by <tab>
         enableVteIntegration = true; # track working directory
         bashrcExtra = ''
 
@@ -180,7 +183,7 @@ in
                   sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
                   cd $original_dir
                   rm -rf $nixos_tmp
-                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                  ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
               }
 
               update_home() {
@@ -193,6 +196,8 @@ in
                   cd $original_dir
                   rm -rf $nixhome_tmp
                   echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                  ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+
               }
 
               case $1 in
@@ -212,6 +217,21 @@ in
                 ;;
               esac
           }
+
+          _argc_completer() {
+            local words=( ''${COMP_LINE:0:''${COMP_POINT}} )
+            local cur="''${COMP_WORDS[COMP_CWORD]}"
+            if [[ "$cur" == "" ]]; then
+              words+=( "" )
+            fi
+
+            export COMP_WORDBREAKS
+            while IFS=$'\n' read -r line; do
+              COMPREPLY+=( "$line" )
+            done < <(argc --argc-compgen bash "" "''${words[@]}" 2>/dev/null)
+          }
+
+          complete -F _argc_completer -o nospace -o nosort argc
         '';
 
         inherit shellAliases;
