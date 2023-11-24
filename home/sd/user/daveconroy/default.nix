@@ -10,7 +10,7 @@ let
   r = ".";
   a_ = "o";
   p_ = "rg";
-  username = "daveconroy";
+
   email = "${username}@${s}${_p}${_a}${m}${t}${r}${a_}${p_}";
 in
 {

@@ -197,7 +197,6 @@ in
                   rm -rf $nixhome_tmp
                   echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
                   ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
-
               }
 
               case $1 in
