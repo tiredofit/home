@@ -29,6 +29,7 @@ with lib;
     ./opensnitch-ui.nix
     ./pinta.nix
     ./pulsemixer.nix
+    ./remmina.nix
     ./rofi.nix
     ./seahorse.nix
     ./smartgit.nix
