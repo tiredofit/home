@@ -214,6 +214,7 @@ in
         #
         "text/english" = codeEditor;
         "text/plain" = codeEditor;
+        "test/markdown" = codeEditor;
         "text/x-makefile" = codeEditor;
         "text/x-c++hdr" = codeEditor;
         "text/x-c++src" = codeEditor;
