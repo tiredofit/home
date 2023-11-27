@@ -104,7 +104,8 @@ in
                     click = [
                       {
                         button = "left";
-                        cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                        #cmd = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                        cmd = "${pkgs.wireplumber/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
                       }
                     ];
                   }
