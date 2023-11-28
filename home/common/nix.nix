@@ -17,8 +17,13 @@ with lib;
 
         if [ -n "$PROFILE_PATH" ] && [ "$PROFILE_PATH" != "null" ]; then
             mkdir -p $HOME/.local/state/home-manager/logs
-            ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2)
-            nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/profile-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/profile-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
+            if [ -f "$PROFILE_PATH/profile-*-link" ]; then
+                ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2)
+                nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/profile-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/profile-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
+            elif [ -f "$PROFILE_PATH/home-manager-*-link" ] ; then
+                ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -2)
+                nvd diff $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/home-manager-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
+            fi
         else
             echo "ERROR - Can't write Home-Manager generation log file"
         fi
