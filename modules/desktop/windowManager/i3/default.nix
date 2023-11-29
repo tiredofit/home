@@ -283,21 +283,10 @@ with lib;
               #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
               "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
               "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
-### Pulseaudio
-#              "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
-#              "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
-#              "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle  && killall -SIGUSR1 i3status-rs";      # Volume Controls
-#              "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status-rs";# Volume Controls
-### Pipewire
-              "XF86AudioRaiseVolume" = "exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+ && killall -SIGUSR1 i3status-rs"; # Volume Controls
-              "XF86AudioLowerVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%- && killall -SIGUSR1 i3status-rs"; # Volume Controls
-              "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && killall -SIGUSR1 i3status-rs";       # Volume Controls
-              "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && killall -SIGUSR1 i3status-rs";    # Volume Controls
-
-# wpctl set-default 35
-# wpctl status
-# wpctl set-default $(wpctl status | grep "Name Of My Speakers" | grep "\d+" -Po | head -n 1)
-
+              "XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";             # Volume Controls
+              "XF86AudioLowerVolume" = "exec --no-startup-id sound-tool volume down && killall -SIGUSR1 i3status-rs";           # Volume Controls
+              "XF86AudioMute" = "exec --no-startup-id sound-tool volume mute && killall -SIGUSR1 i3status-rs";                  # Volume Controls
+              "XF86AudioMicMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs";                  # Volume Controls
         };
         modes = {
             resize = {
