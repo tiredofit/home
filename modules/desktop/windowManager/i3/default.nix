@@ -283,10 +283,13 @@ with lib;
               #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
               "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
               "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
+              "Ctrl+XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";        # Mic Controls
+              "Ctrl+XF86AudioLowerVolume" = "exec --no-startup-id sound-tool volume down && killall -SIGUSR1 i3status-rs";      # Mic Controls
+              "Ctrl+XF86AudioMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs";                # Mic Controls
               "XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";             # Volume Controls
               "XF86AudioLowerVolume" = "exec --no-startup-id sound-tool volume down && killall -SIGUSR1 i3status-rs";           # Volume Controls
               "XF86AudioMute" = "exec --no-startup-id sound-tool volume mute && killall -SIGUSR1 i3status-rs";                  # Volume Controls
-              "XF86AudioMicMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs";                  # Volume Controls
+              "XF86AudioMicMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs";                  # Mic Controls
         };
         modes = {
             resize = {

@@ -106,7 +106,7 @@ in
                         button = "left";
                         cmd = "sound-tool volume mute";
                       }
-                      }
+                      {
                         button = "right";
                         cmd = "sound-tool output cycle";
                       }
