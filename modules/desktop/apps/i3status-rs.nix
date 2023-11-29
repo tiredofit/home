@@ -95,8 +95,8 @@ in
                     driver = "pulseaudio";
                     format = " $icon { $volume|} ";
                     mappings = {
-                      "alsa_output.pci-0000_2d_00.4.analog-stereo" = "";
-                      "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
+                      "alsa_output.usb-0b0e_Jabra_SPEAK_510_USB_745C4BA487C2021900-00.analog-stereo" = "";
+                      "alsa_output.pci-0000_10_00.6.analog-stereo.2" = "";
                     };
                     #"bluez_output.00_00_00_00_00_00.1" = "";
                     step_width = 1;
