@@ -191,10 +191,10 @@ with lib;
               { "title" = "Preferences$"; }
               { "title" = "Timewarrior Tracking" ; }      # Timewarrior
               { "title" = "File Manager Preferences" ; }  # Thunar
+              { "title" = "Virtual Machine Manager" ; }   # QEMU Virtualization Manager
               { "title" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
               { "class" = "^join\?action=join.*$" ; }     # Zoom - For meetings that you have joined via a link
               { "title" = "^zoom\s?$" ; }                 # Zoom - notification window to floating with no focus
-              { "title" = "Virtual Machine Manager" ; }   # QEMU Virtualization Manager
               { "class" = ".zoom" ; }                     # Zoom
               { "window_role" = "(pop-up|bubble|dialog)" ; }
               { "window_role" = "pop-up"; }
@@ -283,7 +283,7 @@ with lib;
               #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
               "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
               "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
-              "Ctrl+XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";        # Mic Controls
+              "${mod}+XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";        # Mic Controls
               "Ctrl+XF86AudioLowerVolume" = "exec --no-startup-id sound-tool volume down && killall -SIGUSR1 i3status-rs";      # Mic Controls
               "Ctrl+XF86AudioMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs";                # Mic Controls
               "XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs";             # Volume Controls
@@ -460,7 +460,6 @@ with lib;
           bindcode Mod4+Shift+$KP_8 move container to workspace $ws8
           bindcode Mod4+Shift+$KP_9 move container to workspace $ws9
           bindcode Mod4+Shift+$KP_0 move container to workspace $ws10
-
         '';
       };
     };
