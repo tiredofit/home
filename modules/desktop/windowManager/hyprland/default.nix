@@ -322,12 +322,11 @@ with lib;
         bindl=,XF86AudioStop,exec,playerctl stop
 
         #bindle=,XF86AudioRaiseVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ +1%
-        ## TODO turn this into dynamic for other systems
-        bindle=,XF86AudioRaiseVolume,exec,swayosd --output-volume 1 --device=alsa_output.pci-0000_10_00.6.analog-stereo
+        bindle=,XF86AudioRaiseVolume,exec,swayosd --output-volume 1 --max-volume=100
         #bindle=,XF86AudioLowerVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ -1%
-        bindle=,XF86AudioLowerVolume,exec,swayosd --output-volume -1 --device=alsa_output.pci-0000_10_00.6.analog-stereo
+        bindle=,XF86AudioLowerVolume,exec,swayosd --output-volume -1
         #bindl=,XF86AudioMute,exec,pactl set-sink-mute @DEFAULT_SINK@ toggle
-        bindl=,XF86AudioMute,exec,swayosd --output-volume mute-toggle --device=alsa_output.pci-0000_10_00.6.analog-stereo
+        bindl=,XF86AudioMute,exec,swayosd --output-volume mute-toggle
 
         ## Turn off animations / game mode
         bind = WIN, F1, exec, ~/.config/hypr/gamemode.sh

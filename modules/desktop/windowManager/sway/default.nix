@@ -31,8 +31,7 @@ with lib; {
             in [
               {
                 id = "bar-left"; # TODO - Adapt for various screens
-                statusCommand =
-                  "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/left.rs";
+                statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/left.rs";
                 position = "top";
                 trayOutput = "none";
                 extraConfig = ''
@@ -72,8 +71,7 @@ with lib; {
               }
               {
                 id = "bar-center";
-                statusCommand =
-                  "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/center.rs";
+                statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/center.rs";
                 position = "top";
                 extraConfig = ''
                   output ${mon_center}
@@ -113,8 +111,7 @@ with lib; {
               }
               {
                 id = "bar-right";
-                statusCommand =
-                  "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/right.rs";
+                statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/sway/status/right.rs";
                 position = "top";
                 trayOutput = "none";
                 extraConfig = ''
@@ -168,21 +165,13 @@ with lib; {
               { "class" = "Arandr"; } # Display Management
               { "class" = "Calendar"; } # Thunderbird Detail Popup
               { "title" = "Volume Control"; } # PulseAudio Volume Control
-              {
-                "class" = "kitty_floating";
-              } # When Passing something to Kitty with WM_CLASS kitty_floating
+              { "class" = "kitty_floating"; } # When Passing something to Kitty with WM_CLASS kitty_floating
               { "class" = "virt-manager"; } # QEMU Virtualization Manager
               { "title" = "Preferences$"; }
               { "title" = "Timewarrior Tracking"; } # Timewarrior
-              {
-                "title" = "^join?action=join.*$";
-              } # Zoom - For meetings that you have joined via a link
-              {
-                "class" = "^join?action=join.*$";
-              } # Zoom - For meetings that you have joined via a link
-              {
-                "title" = "^zooms?$";
-              } # Zoom - notification window to floating with no focus
+              { "title" = "^join?action=join.*$"; } # Zoom - For meetings that you have joined via a link
+              { "class" = "^join?action=join.*$"; } # Zoom - For meetings that you have joined via a link
+              { "title" = "^zooms?$"; } # Zoom - notification window to floating with no focus
               { "class" = ".zoom"; } # Zoom
               { "window_role" = "(pop-up|bubble|dialog)"; }
               { "window_role" = "pop-up"; }
@@ -192,13 +181,11 @@ with lib; {
           modifier = "Mod4";
           keybindings = let
             mod = "Mod4";
-            mod_d_rofi =
-              "exec rofi -combi-modi window,drun,ssh,run -show combi -show-icons";
+            mod_d_rofi = "exec rofi -combi-modi window,drun,ssh,run -show combi -show-icons";
           in {
             ### Keybind Applications (xmodmap -pke for grabbing keycodes)
             ### or xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
-            "Mod4+Shift+e" =
-              "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+            "Mod4+Shift+e" = "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
             "Mod4+Shift+q" = "kill";
             "Mod4+space" = "floating toggle";
             # change focus
@@ -231,25 +218,21 @@ with lib; {
             "Mod4+s" = "layout stacking";
             "Mod4+w" = "layout tabbed";
             "Mod4+e" = "layout toggle split";
-            # toggle tiling / floating
-            "Mod4+Shift+space" = "floating toggle";
+            "Mod4+Shift+space" = "floating toggle"; # toggle tiling / floating
             # change focus between tiling / floating windows
             #"Mod4+space" = "focus mode_toggle";
             "Mod4+c" = "floating toggle";
-            # focus the parent container
-            "Mod4+a" = "focus parent";
-            ## Mode Launchers
-            "Mod4+r" = "mode resize";
+
+            "Mod4+a" = "focus parent"; # focus the parent container
+
+            "Mod4+r" = "mode resize"; ## Mode Launchers
             ## Misc
             "Mod4+Shift+p" = "bar mode toggle "; # Hide Bars
             ### Mouse Binds
-            "--release button2" =
-              "kill"; # The middle button over a titlebar kills the window
-            "--whole-window Mod4+button2" =
-              "kill"; # The middle button and a modifer over any part of the window kills the window
+            "--release button2" = "kill"; # The middle button over a titlebar kills the window
+            "--whole-window Mod4+button2" = "kill"; # The middle button and a modifer over any part of the window kills the window
             "button3" = "floating toggle"; # The right button toggles floating
-            "Mod4+button3" =
-              "floating toggle"; # The right button toggles floating
+            "Mod4+button3" = "floating toggle"; # The right button toggles floating
             "button9" = "move left"; # The side buttons move the window around
             "button8" = "move right"; # The side buttons move the window around
 
@@ -258,46 +241,28 @@ with lib; {
             #"Mod4+Shift+d" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
             "Print" = "exec flameshot gui"; # Flameshot
             "Mod4+Shift+s" = "exec flameshot gui"; # Flameshot
-            "Mod4+Shift+x" =
-              "exec swaylock -f -e -l -L  -c 000000"; # Lock screen
-            "Mod4+d" =
-              "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons"; # Program Launcher
+            "Mod4+Shift+x" = "exec swaylock -f -e -l -L  -c 000000"; # Lock screen
+            "Mod4+d" = "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons"; # Program Launcher
             "Mod4+Return" = "exec kitty"; # Terminal
-            "Mod4+Mod1+space" =
-              "exec ~/.config/scripts/timewarrior.sh start"; # Timewarrior GUI
-            "XF86AudioRaiseVolume" =
-              "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
-            "XF86AudioLowerVolume" =
-              "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && killall -SIGUSR1 i3status-rs"; # Volume Controls
-            "XF86AudioMute" =
-              "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle  && killall -SIGUSR1 i3status-rs"; # Volume Controls
-            "XF86AudioMicMute" =
-              "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status-rs"; # Volume Controls
+            "Mod4+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start"; # Timewarrior GUI
+            "XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs"; # Volume Controls
+            "XF86AudioLowerVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs"; # Volume Controls
+            "XF86AudioMute" = "exec --no-startup-id sound-tool volume mute && killall -SIGUSR1 i3status-rs"; # Volume Controls
+            "XF86AudioMicMute" = "exec --no-startup-id sound-tool mic mute && killall -SIGUSR1 i3status-rs"; # Volume Controls
           };
           modes = {
             resize = {
-              "j" =
-                "resize shrink width 40 px or 40 ppt"; # Pressing left will shrink the window’s width.
-              "k" =
-                "resize grow height 40 px or 40 ppt"; # Pressing down will grow the window’s height.
-              "l" =
-                "resize shrink height 40 px or 40 ppt"; # Pressing up will shrink the window’s height.
-              "semicolon" =
-                "resize grow width 40 px or 40 ppt"; # Pressing right will grow the window’s width.
-              "Left" =
-                "resize shrink width 40 px or 40 ppt"; # Pressing left will shrink the window’s width.
-              "Down" =
-                "resize grow height 40 px or 40 ppt"; # Pressing down will grow the window’s height.
-              "Up" =
-                "resize shrink height 40 px or 40 ppt"; # Pressing up will shrink the window’s height.
-              "Right" =
-                "resize grow width 40 px or 40 ppt"; # Pressing right will grow the window’s width.
-              "Return" =
-                "mode default"; # back to normal: Enter or Escape or $mod+r
-              "Escape" =
-                "mode default"; # back to normal: Enter or Escape or $mod+r
-              "Mod4+r" =
-                "mode default"; # back to normal: Enter or Escape or $mod+r
+              "j" = "resize shrink width 40 px or 40 ppt"; # Pressing left will shrink the window’s width.
+              "k" = "resize grow height 40 px or 40 ppt"; # Pressing down will grow the window’s height.
+              "l" =  "resize shrink height 40 px or 40 ppt"; # Pressing up will shrink the window’s height.
+              "semicolon" = "resize grow width 40 px or 40 ppt"; # Pressing right will grow the window’s width.
+              "Left" = "resize shrink width 40 px or 40 ppt"; # Pressing left will shrink the window’s width.
+              "Down" = "resize grow height 40 px or 40 ppt"; # Pressing down will grow the window’s height.
+              "Up" = "resize shrink height 40 px or 40 ppt"; # Pressing up will shrink the window’s height.
+              "Right" = "resize grow width 40 px or 40 ppt"; # Pressing right will grow the window’s width.
+              "Return" = "mode default"; # back to normal: Enter or Escape or $mod+r
+              "Escape" = "mode default"; # back to normal: Enter or Escape or $mod+r
+              "Mod4+r" = "mode default"; # back to normal: Enter or Escape or $mod+r
             };
           };
           startup = [
@@ -315,8 +280,7 @@ with lib; {
               always = false;
             } # Firewall
             {
-              command =
-                "ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations";
+              command = "ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations";
               always = false;
             } # IM
             #{ command = "flameshot"; always = false; }                                                                     # Screenshot
@@ -329,8 +293,7 @@ with lib; {
               always = false;
             } # Firewall
             {
-              command =
-                "swayidle -w timeout 600 'swaylock -f -e -l -L  -c 000000' timeout 1800 'swaymsg ''output * dpms off'' resume 'swaymsg ''output * dpms on'' timeout 2700 'systemctl suspend' before-sleep 'swaylock -f -e -l -L -c 000000'";
+              command = "swayidle -w timeout 600 'swaylock -f -e -l -L  -c 000000' timeout 1800 'swaymsg ''output * dpms off'' resume 'swaymsg ''output * dpms on'' timeout 2700 'systemctl suspend' before-sleep 'swaylock -f -e -l -L -c 000000'";
               always = false;
             }
             {
@@ -338,15 +301,13 @@ with lib; {
               always = false;
             } # Displays
             {
-              command =
-                "sleep 5; way-displays -c ~/.config/waydisplays/cfg.yaml -s ORDER DP-3 DP-2 HDMI-A-1";
+              command = "sleep 5; way-displays -c ~/.config/waydisplays/cfg.yaml -s ORDER DP-3 DP-2 HDMI-A-1";
               always = false;
             }
           ];
           terminal = "kitty";
           workspaceAutoBackAndForth = true;
-          workspaceLayout =
-            "default"; # Bounce back and forth between workspaces using same workspace key
+          workspaceLayout = "default"; # Bounce back and forth between workspaces using same workspace key
           workspaceOutputAssign =
             let # # TODO This is used in multiple areas - move to top of configuration
               mon_left = "DP-3";

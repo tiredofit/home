@@ -50,6 +50,7 @@ in
                "clock"
                "tray"
             ];
+            ## TODO: Make Dynamic
             "hyprland/workspaces" = {
                 "persistent_workspaces" = {
                    "1" = ["DP-3"];
