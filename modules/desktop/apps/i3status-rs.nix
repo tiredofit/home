@@ -108,7 +108,7 @@ in
                       }
                       {
                         button = "right";
-                        cmd = "sound-tool output cycle";
+                        cmd = "sound-tool output choose";
                       }
                     ];
                   }
