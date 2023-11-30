@@ -140,7 +140,7 @@ in
             done
           fi
 
-          if command -v "rg" &>/dev/null && command -v "fzf" &>/dev/null ; then
+          if command -v "rg" &>/dev/null && command -v "fzf" &>/dev/null && command -v "bat" &>/dev/null; then
             function frg {
               result=$(rg --ignore-case --color=always --line-number --no-heading "$@" |
                 fzf --ansi \
