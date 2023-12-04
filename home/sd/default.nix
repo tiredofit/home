@@ -13,6 +13,7 @@ in
 
   ] ++ existing-imports [
     ./hostname/${hostname}
+    ./hostname/${hostname}/${username}.nix
     ./hostname/${hostname}.nix
     ./role/${role}
     ./role/${role}.nix
