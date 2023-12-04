@@ -28,7 +28,7 @@ with lib;
               export DOCKER_CONFIG="$HOME/.config/docker"
           fi
 
-          export DOCKER_TIMEOUT=''${DOCKER_TIMEOUT:-"120"}'
+          export DOCKER_TIMEOUT=''${DOCKER_TIMEOUT:-"120"}
 
           # Figure out if we need to use sudo for docker commands
           if id -nG "$USER" | grep -qw "docker" || [ $(id -u) = "0" ]; then
