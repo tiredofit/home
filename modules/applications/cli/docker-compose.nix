@@ -23,9 +23,9 @@ with lib;
           ### Docker
 
           if [ -n "$XDG_CONFIG_HOME" ] ; then
-              export DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker"
+              export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
           else
-              export DOCKER_CONFIG = "$HOME/.config/docker"
+              export DOCKER_CONFIG="$HOME/.config/docker"
           fi
 
           export DOCKER_TIMEOUT=$DOCKER_TIMEOUT:-"120"
