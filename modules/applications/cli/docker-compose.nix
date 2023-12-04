@@ -22,6 +22,12 @@ with lib;
         initExtra = ''
           ### Docker
 
+          if [ -n "$XDG_CONFIG_HOME" ] ; then
+              export DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker"
+          else
+              export DOCKER_CONFIG = "$HOME/.config/docker"
+          fi
+
           export DOCKER_TIMEOUT=$DOCKER_TIMEOUT:-"120"
 
           # Figure out if we need to use sudo for docker commands
@@ -482,7 +488,6 @@ with lib;
 
         sessionVariables = {
           DOCKER_BUILDKIT = 0; # Stop using the new buildx
-          DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
         };
       };
     };
