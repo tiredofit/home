@@ -14,13 +14,13 @@ with lib;
         else
             PROFILE_PATH="/nix/var/nix/profiles/per-user/$USER"
         fi
-
+set 0x
         if [ -n "$PROFILE_PATH" ] && [ "$PROFILE_PATH" != "null" ]; then
             mkdir -p $HOME/.local/state/home-manager/logs
-            if [ -f "$PROFILE_PATH/profile-*-link" ]; then
+            if [ $(ls "$PROFILE_PATH"/profile-*-link 2> /dev/null | wc -l) -gt 0 ]; then
                 ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2)
                 nvd diff $(ls -dv $PROFILE_PATH/profile-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/profile-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/profile-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
-            elif [ -f "$PROFILE_PATH/home-manager-*-link" ] ; then
+            elif [ $(ls "$PROFILE_PATH"/home-manager-*-link 2> /dev/null | wc -l) -gt 0 ]; then
                 ${pkgs.nvd}/bin/nvd diff $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -2)
                 nvd diff $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -2) > "$HOME/.local/state/home-manager/logs/$(date +'%Y%m%d%H%M%S')-$USER-$(ls -dv $PROFILE_PATH/home-manager-*-link | tail -1 | cut -d '-' -f 3)-$(readlink $(ls -dv $PROFILE_PATH/home-manager-*-link | tail -1)| cut -d / -f 4 | cut -d - -f 1).log"
             fi

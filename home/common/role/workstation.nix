@@ -38,7 +38,7 @@ with lib;
         seahorse.enable = mkDefault true;
         shellcheck.enable = mkDefault true;
         shfmt.enable = mkDefault true;
-        smartgit.enable = mkDefault true;
+#        smartgit.enable = mkDefault true;
         smplayer.enable = mkDefault true;
         sqlite-browser.enable = mkDefault true;
         thunar.enable = mkDefault true;
