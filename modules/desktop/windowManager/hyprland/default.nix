@@ -39,7 +39,7 @@ with lib;
       packages = with pkgs;
         [
           gameMode
-          hyprland-share-picker     # If this works outside of Hyprland modularize
+          #hyprland-share-picker     # If this works outside of Hyprland modularize
         ];
     };
 
@@ -136,7 +136,7 @@ with lib;
         exec-once = hyprpaper
         exec-once = nextcloud --background
         exec-once = opensnitch-ui --background
-        #exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         exec      = swayidle -w timeout 600 'echo "$(date) 600" >> /tmp/swayidle.log ; swaylock -C ~/.config/swaylock/swaylock.conf -S --effect-pixelate 7' timeout 1200 'echo "$(date) 1200" >> /tmp/swayidle.log ; hyprctl dispatch dpms off' resume 'echo "$(date) resume" >> /tmp/swayidle.log ; hyprctl dispatch dpms on' before-sleep 'echo "$(date) before-sleep" >> /tmp/swayidle.log ; swaylock -C ~/.config/swaylock/swaylock.conf'
         exec      = swayosd --display=HDMI-A-1
         exec-once = swaync

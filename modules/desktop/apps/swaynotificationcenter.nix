@@ -115,7 +115,7 @@ in
           },
           {
             "label": "   Logout",
-            "command": "loginctl terminate-session ${XDG_SESSION_ID-}"
+            "command": "loginctl terminate-session ''${XDG_SESSION_ID-}"
           },
           {
             "label": "   Reboot",
