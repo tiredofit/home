@@ -10,6 +10,7 @@ with lib;
         act.enable = true;
         android-tools.enable = true;
         calibre.enable = true;
+        electrum.enable = true;
         encfs.enable = true;
         git.enable = true;
         github-client.enable = true;
