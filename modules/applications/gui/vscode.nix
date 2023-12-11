@@ -12,6 +12,35 @@ in
         type = with types; bool;
         description = "Integrated Development Environment";
       };
+    defaultApplication = {
+        enable = mkOption {
+          description = "MIME default application configuration";
+          type = with types; bool;
+          default = false;
+        };
+        mimeTypes = mkOption {
+          description = "MIME types to be the default application for";
+          type = types.listOf types.str;
+          default = [
+            "application/x-shellscript"
+            "text/english"
+            "text/markdown"
+            "text/plain"
+            "text/x-c"
+            "text/x-c++"
+            "text/x-c++hdr"
+            "text/x-c++src"
+            "text/x-chdr"
+            "text/x-csrc"
+            "text/x-java"
+            "text/x-makefile"
+            "text/x-moc"
+            "text/x-pascal"
+            "text/x-tcl"
+            "text/x-tex"
+          ];
+        };
+      };
     };
   };
 
@@ -269,8 +298,9 @@ in
 
         mutableExtensionsDir = false;
       };
-
-
     };
+    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
+      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "code.desktop")
+    );
   };
 }
