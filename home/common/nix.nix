@@ -14,7 +14,7 @@ with lib;
         else
             PROFILE_PATH="/nix/var/nix/profiles/per-user/$USER"
         fi
-set 0x
+
         if [ -n "$PROFILE_PATH" ] && [ "$PROFILE_PATH" != "null" ]; then
             mkdir -p $HOME/.local/state/home-manager/logs
             if [ $(ls "$PROFILE_PATH"/profile-*-link 2> /dev/null | wc -l) -gt 0 ]; then
