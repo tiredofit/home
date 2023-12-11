@@ -10,6 +10,7 @@ with lib;
     ./diffuse.nix
     ./drawio.nix
     ./dunst.nix
+    ./electrum.nix
     ./eog.nix
     ./ferdium.nix
     ./file-roller.nix
