@@ -8,6 +8,10 @@ with lib;
     home = {
       applications = {
         android-tools.enable = mkDefault true;
+        ark = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         bleachbit.enable = mkDefault true;
         blueman.enable = mkDefault true;
         chromium.enable = mkDefault true;
@@ -15,9 +19,15 @@ with lib;
         czkawka.enable = mkDefault true;
         diffuse.enable = mkDefault true;
         drawio.enable = mkDefault true;
-        eog.enable = mkDefault true;
+        eog = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         ferdium.enable = mkDefault true;
-        firefox.enable = mkDefault true;
+        firefox = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         flameshot.enable = mkDefault true;
         geeqie.enable = mkDefault true;
         gnome-encfs-manager.enable = mkDefault true;
@@ -44,19 +54,25 @@ with lib;
         thunar.enable = mkDefault true;
         thunderbird.enable = mkDefault true;
         virt-manager.enable = mkDefault true;
-        visual-studio-code.enable = mkDefault true;
+        visual-studio-code = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         wps-office.enable = mkDefault true;
         xdg-ninja.enable = mkDefault true;
         xmlstarlet.enable = mkDefault true;
         yq.enable = mkDefault true;
         yt-dlp.enable = mkDefault true;
-        zathura.enable = mkDefault true;
+        zathura = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         zenity.enable = mkDefault true;
         zoom.enable = mkDefault true;
       };
       feature = {
         fonts.enable = mkDefault true;
-        mime.defaults.enable = mkDefault true;
+        mime.defaults.enable = mkDefault true; ## TODO Phase out
         theming.enable = mkDefault true;
       };
       service = {
