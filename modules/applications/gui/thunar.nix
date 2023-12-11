@@ -19,7 +19,6 @@ in
     home = {
       packages = with pkgs;
         [
-          ark                             # GUI archiver for thunar archive plugin
           ffmpegthumbnailer
           libgsf                          # odf files
           xfce.thunar                     # xfce4's file manager
