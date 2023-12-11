@@ -1,5 +1,6 @@
-{ config, ... }: {
-
+{ config, lib, ... }:
+with lib;
+{
   home = {
     language = {
       base = mkDefault "en_US.UTF-8";
