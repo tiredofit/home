@@ -22,7 +22,11 @@ in
           description = "MIME types to be the default application for";
           type = types.listOf types.str;
           default = [
-
+            "application/x-remmina"
+            "x-scheme-handler/rdp"
+            "x-scheme-handler/remmina"
+            "x-scheme-handler/spice"
+            "x-scheme-handler/vnc"
           ];
         };
       };
