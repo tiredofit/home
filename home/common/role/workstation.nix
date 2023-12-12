@@ -45,11 +45,18 @@ with lib;
         opensnitch-ui.enable = mkDefault true;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
+        remmina = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         seahorse.enable = mkDefault true;
         shellcheck.enable = mkDefault true;
         shfmt.enable = mkDefault true;
 #        smartgit.enable = mkDefault true;
-        smplayer.enable = mkDefault true;
+        smplayer = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         sqlite-browser.enable = mkDefault true;
         thunar.enable = mkDefault true;
         thunderbird.enable = mkDefault true;
