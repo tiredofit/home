@@ -22,7 +22,18 @@ in
           description = "MIME types to be the default application for";
           type = types.listOf types.str;
           default = [
-
+            "application/x-extension-htm"
+            "application/x-extension-html"
+            "application/x-extension-shtml"
+            "application/x-extension-xht"
+            "application/x-extension-xhtml"
+            "application/xhtml+xml"
+            "text/html"
+            "x-scheme-handler/about"
+            "x-scheme-handler/chrome"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+            "x-scheme-handler/unknown"
           ];
         };
       };
