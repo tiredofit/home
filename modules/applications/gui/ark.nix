@@ -94,7 +94,7 @@ in
     home = {
       packages = with pkgs;
         [
-          gnome.eog
+          ark
         ];
     };
 

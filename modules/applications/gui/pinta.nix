@@ -36,6 +36,7 @@ in
           pinta
         ];
     };
+
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
       lib.genAttrs cfg.defaultApplication.mimeTypes (_: "pinta.desktop")
     );

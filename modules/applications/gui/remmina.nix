@@ -36,6 +36,7 @@ in
           remmina
         ];
     };
+
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
       lib.genAttrs cfg.defaultApplication.mimeTypes (_: "org.remmina.Remmina.desktop")
     );

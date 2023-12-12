@@ -12,6 +12,20 @@ in
         type = with types; bool;
         description = "Web browser and mail client";
       };
+      defaultApplication = {
+        enable = mkOption {
+          description = "MIME default application configuration";
+          type = with types; bool;
+          default = false;
+        };
+        mimeTypes = mkOption {
+          description = "MIME types to be the default application for";
+          type = types.listOf types.str;
+          default = [
+
+          ];
+        };
+      };
     };
   };
 
