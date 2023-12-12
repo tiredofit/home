@@ -12,6 +12,20 @@ in
         type = with types; bool;
         description = "Diagram tool";
       };
+      defaultApplication = {
+        enable = mkOption {
+          description = "MIME default application configuration";
+          type = with types; bool;
+          default = false;
+        };
+        mimeTypes = mkOption {
+          description = "MIME types to be the default application for";
+          type = types.listOf types.str;
+          default = [
+
+          ];
+        };
+      };
     };
   };
 
@@ -47,5 +61,9 @@ in
     }
 }
     '';
+
+    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
+      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "drawio.desktop")
+    );
   };
 }
