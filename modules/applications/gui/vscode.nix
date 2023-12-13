@@ -287,8 +287,6 @@ in
 
         ## Telemetry
         "redhat.telemetry.enabled" = false;
-        "telemetry.enableCrashReporter" = false;
-        "telemetry.enableTelemetry" = false;
         "telemetry.telemetryLevel" = "off";
         "update.mode" = "none";
 
