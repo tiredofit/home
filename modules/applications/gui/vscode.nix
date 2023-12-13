@@ -223,8 +223,8 @@ in
         "editor.guides.bracketPairs" = "active";
         "editor.mouseWheelZoom" = true ;
         "editor.overviewRulerBorder" = false;
-        "editor.renderControlCharacters" = true ;
-        "editor.scrollbar.vertical" = false;
+        "editor.renderControlCharacters" = true;
+        "editor.scrollbar.vertical" = "auto";
         "editor.tabSize" = 4 ;
         "editor.wordWrap" = "off";
         "workbench.editor.enablePreview" = false;
