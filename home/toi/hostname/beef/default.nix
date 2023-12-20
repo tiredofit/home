@@ -17,6 +17,7 @@ with lib;
         hugo.enable = true;
         lazygit.enable = true;
         nextcloud-client.enable = true;
+        obsidian.enable = true;
         remmina.enable = true;
         tea.enable = true;
       };

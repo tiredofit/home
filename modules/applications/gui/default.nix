@@ -28,6 +28,7 @@ with lib;
     ./masterpdfeditor.nix
     ./mate-calc.nix
     ./nextcloudclient.nix
+    ./obsidian.nix
     ./opensnitch-ui.nix
     ./pinta.nix
     ./pulsemixer.nix
