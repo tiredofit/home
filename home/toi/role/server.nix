@@ -13,7 +13,6 @@ with lib;
         tea.enable = mkDefault true;
       };
       feature = {
-
       };
       service = {
         vscode-server.enable = mkDefault true;

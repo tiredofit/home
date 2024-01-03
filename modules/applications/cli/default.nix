@@ -36,6 +36,7 @@ with lib;
     ./neovim
     ./nix-developmenttools.nix
     ./nmap.nix
+    ./python.nix
     ./ranger.nix
     ./rclone.nix
     ./ripgrep.nix
