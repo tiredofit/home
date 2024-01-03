@@ -3,7 +3,7 @@
 with lib;
 {
   imports = [
-    ./emulation.nix
+    ./emulation
     ./fonts.nix
     ./mime-defaults.nix
     ./theming.nix
