@@ -22,6 +22,9 @@ with lib;
         tea.enable = true;
       };
       feature = {
+        emulation = {
+          windows.enable = true;
+        };
         gui = {
           enable = true;
           displayServer = "x";
