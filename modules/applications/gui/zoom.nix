@@ -12,6 +12,20 @@ in
         type = with types; bool;
         description = "Video Conferencing";
       };
+      defaultApplication = {
+        enable = mkOption {
+          description = "MIME default application configuration";
+          type = with types; bool;
+          default = false;
+        };
+        mimeTypes = mkOption {
+          description = "MIME types to be the default application for";
+          type = types.listOf types.str;
+          default = [
+            "x-scheme-handler/zoomtg"
+          ];
+        };
+      };
     };
   };
 
@@ -23,10 +37,8 @@ in
         ];
     };
 
-    xdg.mimeApps = mkIf (config.host.home.feature.mime.defaults.enable) {
-      defaultApplications = {
-        "x-scheme-handler/zoomtg" = "us.zoom.Zoom.desktop";
-      };
-    };
+    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
+      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "us.zoom.Zoom.desktop")
+    );
   };
 }

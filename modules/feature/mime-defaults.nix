@@ -13,4 +13,8 @@ in
       };
     };
   };
+
+  config = mkIf cfg.enable {
+    xdg.mime.enable = true ;
+  };
 }

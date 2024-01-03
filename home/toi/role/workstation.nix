@@ -18,14 +18,11 @@ with lib;
         tea.enable = mkDefault true;
       };
       feature = {
-
       };
       service = {
         decrypt_encfs_workspace.enable = mkDefault true;
         vscode-server.enable = mkDefault true;
       };
     };
-
-    xdg.mime.enable = mkDefault true ;
   };
 }
