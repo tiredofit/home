@@ -1,7 +1,6 @@
 {config, lib, pkgs, ...}:
-
 let
-  cfg = config.host.home.feature.emulation;
+  cfg = config.host.home.feature.emulation.windows;
 in
   with lib;
 {
@@ -17,12 +16,11 @@ in
     };
   };
 
-  config = {
-
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
-    ] ++ mkIf config.host.home.feature.emulation.windows.enable [
-      winetricks
-      wineWowPackages.staging
-    ];
+      #] ++ mkIf (config.host.home.feature.emulation.windows.enable) [
+        winetricks
+        wineWowPackages.staging
+      ];
   };
 }
