@@ -25,5 +25,7 @@ with lib;
         vscode-server.enable = mkDefault true;
       };
     };
+
+    xdg.mime.enable = mkDefault true ;
   };
 }
