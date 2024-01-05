@@ -71,9 +71,7 @@ in
 
         ## Prettify / Formatting
           brettm12345.nixfmt-vscode                 # Nix TODO: Split and force programs to be installed
-          eriklynd.json-tools                       # JSON
           esbenp.prettier-vscode                    # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
-          mohsen1.prettify-json                     # JSON
           richie5um2.vscode-sort-json               # JSON
           shakram02.bash-beautify                   # Bash
           yzhang.markdown-all-in-one                # Markown
@@ -85,25 +83,14 @@ in
           ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
           ms-vscode.remote-explorer                 # View remote machines for SSH and Tunnels
 
-        ## Source Control
-          exelord.git-commits                       # Adds list of last commits in source control tab
-          donjayamanne.githistory                   # View git log, file history, compare branches or commits
-
         ## Syntax Highlighting | File Support | Linting
           bbenoist.nix                              # Nix
           bierner.markdown-mermaid                  # MermaidJS in MarkDown
           dunstontc.vscode-docker-syntax            # DockerFile
           evgeniypeshkov.syntax-highlighter         # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
           foxundermoon.shell-format                 # Bash
-          jtavin.ldif                               # LDAP LDIF
-          me-dutour-mathieu.vscode-github-actions   # Github Actions YAML Support
           redhat.vscode-yaml                        # YAML
           timonwong.shellcheck                      # Bash TODO: Split and force shellcheck binary to be installed
-
-        ## Web
-          anseki.vscode-color                       # Color Picker
-          budparr.language-hugo-vscode              # Hugo Syntax Support
-         # eliostruyf.vscode-front-matter            # Front Matter CMS
       ];
       keybindings = [
         ## Favorites
