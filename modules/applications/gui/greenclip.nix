@@ -17,21 +17,19 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs;
-        [
-          haskellPackages.greenclip
-        ];
-    };
-
-    programs = {
-      bash = {
-        bashrcExtra = ''
+      activation = {
+        config-greenclip = ''
           if [ ! -d $HOME/.cache/greenclip/images.cache ]; then
+              echo "Creating Greenclip Cache Directry"
               mkdir -p $HOME/.cache/greenclip/images.cache
               chown -R $USER $HOME/.cache/greenclip
           fi
         '';
       };
+      packages = with pkgs;
+        [
+          haskellPackages.greenclip
+        ];
     };
 
     xdg.configFile."greenclip.toml".text = ''
