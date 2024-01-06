@@ -29,6 +29,16 @@ in
 
   config = mkIf cfg.enable {
     home = {
+      activation = {
+        config-bash_history = ''
+          if [ ! -d $HOME/.local/state/bash ]; then
+              echo "** Creating Local Bash History directory"
+              mkdir -p $HOME/.local/state/bash
+              touch $HOME/.local/state/bash/history
+              chown -R $USER $HOME/.local/state/bash
+          fi
+        '';
+      };
       packages = with pkgs; [
         argc
         bashInteractive
@@ -41,13 +51,6 @@ in
         enableCompletion = false; # enable word completion by <tab>
         enableVteIntegration = true; # track working directory
         bashrcExtra = ''
-
-          if [ ! -d $HOME/.local/state/bash ]; then
-              mkdir -p $HOME/.local/state/bash
-              touch $HOME/.local/state/bash/history
-              chown -R $USER $HOME/.local/state/bash
-          fi
-
           ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
           export HISTFILE=$HOME/.local/state/bash/history
           ## Configure bash to append (rather than overwrite history)
