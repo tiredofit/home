@@ -23,12 +23,23 @@ in
         ];
     };
 
+    programs = {
+      bash = {
+        bashrcExtra = ''
+          if [ ! -d $HOME/.cache/greenclip/images.cache ]; then
+              mkdir -p $HOME/.cache/greenclip/images.cache
+              chown -R $USER $HOME/.cache/greenclip
+          fi
+        '';
+      };
+    };
+
     xdg.configFile."greenclip.toml".text = ''
       [greenclip]
         blacklisted_applications = []
         enable_image_support = true
-        history_file = "${config.home.homeDirectory}/.cache/greenclip.history"
-        image_cache_directory = "/tmp/greenclip"
+        history_file = "${config.home.homeDirectory}/.cache/greenclip/greenclip.history"
+        image_cache_directory = "${config.home.homeDirectory}/.cache/greenclip/images.cache"
         max_history_length = 50
         max_selection_size_bytes = 0
         static_history = [""]
