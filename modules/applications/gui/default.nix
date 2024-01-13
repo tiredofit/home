@@ -40,6 +40,7 @@ with lib;
     ./sqlitebrowser.nix
     ./thunar.nix
     ./thunderbird.nix
+    ./veracrypt.nix
     ./virt-manager.nix
     ./vivaldi.nix
     ./vscode.nix
