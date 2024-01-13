@@ -21,6 +21,7 @@ with lib;
         python.enable = true;
         remmina.enable = true;
         tea.enable = true;
+        veracrypt.enable = true;
       };
       feature = {
         emulation = {
