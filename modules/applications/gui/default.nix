@@ -38,6 +38,7 @@ with lib;
     ./smartgit.nix
     ./smplayer.nix
     ./sqlitebrowser.nix
+    ./szyszka.nix
     ./thunar.nix
     ./thunderbird.nix
     ./veracrypt.nix
