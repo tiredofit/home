@@ -20,6 +20,7 @@ with lib;
         obsidian.enable = true;
         python.enable = true;
         remmina.enable = true;
+        szyszka.enable = true;
         tea.enable = true;
         veracrypt.enable = true;
       };
