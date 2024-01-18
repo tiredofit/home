@@ -5,7 +5,7 @@
       applications = {
         act.enable = false;
         android-tools.enable = true;
-        calibre.enable = true;
+        calibre.enable = false;
         encfs.enable = false;
         git.enable = true;
         github-client.enable = false;
@@ -20,7 +20,6 @@
           displayServer = "x";
           windowManager = "cinnamon";
         };
-        #theming.enable = false;
       };
       service = {
         decrypt_encfs_workspace.enable = false;
@@ -28,4 +27,6 @@
       };
     };
   };
+
+  xdg.mimeApps.enable = false;
 }

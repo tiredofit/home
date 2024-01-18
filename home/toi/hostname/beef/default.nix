@@ -7,21 +7,14 @@ with lib;
   host = {
     home = {
       applications = {
-        act.enable = true;
-        android-tools.enable = true;
-        calibre.enable = true;
         electrum.enable = true;
         encfs.enable = true;
-        git.enable = true;
         github-client.enable = true;
         hugo.enable = true;
         lazygit.enable = true;
-        nextcloud-client.enable = true;
         obsidian.enable = true;
         python.enable = true;
-        remmina.enable = true;
         szyszka.enable = true;
-        tea.enable = true;
         veracrypt.enable = true;
       };
       feature = {
@@ -33,10 +26,6 @@ with lib;
           displayServer = "x";
           windowManager = "i3";
         };
-      };
-      service = {
-        decrypt_encfs_workspace.enable = true;
-        vscode-server.enable = true;
       };
     };
   };

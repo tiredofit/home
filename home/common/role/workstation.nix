@@ -17,8 +17,14 @@ with lib;
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
         czkawka.enable = mkDefault true;
-        diffuse.enable = mkDefault true;
-        drawio.enable = mkDefault true;
+        diffuse = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
+        drawio = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         eog = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
@@ -40,6 +46,7 @@ with lib;
         mp3gain.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
+        nextcloud-client.enable = mkDefault true;
         nix-development_tools.enable = mkDefault true;
         nmap.enable = mkDefault true;
         opensnitch-ui.enable = mkDefault true;
@@ -52,12 +59,11 @@ with lib;
         seahorse.enable = mkDefault true;
         shellcheck.enable = mkDefault true;
         shfmt.enable = mkDefault true;
-#        smartgit.enable = mkDefault true;
+        smartgit.enable = mkDefault true;
         smplayer = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        sqlite-browser.enable = mkDefault true;
         thunar.enable = mkDefault true;
         thunderbird.enable = mkDefault true;
         virt-manager.enable = mkDefault true;

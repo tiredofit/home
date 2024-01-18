@@ -28,11 +28,16 @@ in
             "image/jpg"
             "image/pjpeg"
             "image/png"
+            "image/svg+xml"
+            "image/svg+xml-compressed"
             "image/tiff"
+            "image/vnd.wap.wbmp;image/x-icns"
+            "image/webp"
             "image/x-bmp"
             "image/x-gray"
             "image/x-icb"
             "image/x-ico"
+            "image/x-pcx"
             "image/x-png"
             "image/x-portable-anymap"
             "image/x-portable-bitmap"
@@ -40,10 +45,6 @@ in
             "image/x-portable-pixmap"
             "image/x-xbitmap"
             "image/x-xpixmap"
-            "image/x-pcx"
-            "image/svg+xml"
-            "image/svg+xml-compressed"
-            "image/vnd.wap.wbmp;image/x-icns"
           ];
         };
       };
