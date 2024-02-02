@@ -31,7 +31,10 @@ in
     };
 
     sops.secrets = {
-      "act" = { sopsFile = ../../../home/common/secrets/act.env ; };
+      "act" = {
+         sopsFile = ../../../home/common/secrets/act.env;
+         format = "dotenv";
+       };
     };
   };
 }
