@@ -24,14 +24,14 @@ in
     };
     programs = {
       bash.initExtra = ''
-        if [ -f "$XDG_RUNTIME_DIR"/secrets/act/docker ] ; then
-            alias act="act --secret-file '$XDG_RUNTIME_DIR/secrets/act/docker'"
+        if [ -f "$XDG_RUNTIME_DIR"/secrets/act ] ; then
+            alias act="act --secret-file '$XDG_RUNTIME_DIR/secrets/act'"
         fi
         '';
     };
 
     sops.secrets = {
-      "act/docker" = { sopsFile = ../../../home/common/secrets/act.yaml ; };
+      "act" = { sopsFile = ../../../home/common/secrets/act.yaml ; };
     };
   };
 }
