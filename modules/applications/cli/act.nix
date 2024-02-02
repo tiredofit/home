@@ -31,7 +31,7 @@ in
     };
 
     sops.secrets = {
-      "act" = { sopsFile = ../../../home/common/secrets/act.yaml ; };
+      "act" = { sopsFile = ../../../home/common/secrets/act.env ; };
     };
   };
 }
