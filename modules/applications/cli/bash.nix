@@ -197,7 +197,7 @@ in
                   original_dir=$(pwd)
                   echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING SYSTEM"
                   nixos_tmp=$(mktemp -d)
-                  ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2&>1
+                  ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
                   cd $nixos_tmp
                   sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
                   cd $original_dir
@@ -209,7 +209,7 @@ in
                   original_dir=$(pwd)
                   echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING HOME"
                   nixhome_tmp=$(mktemp -d)
-                  ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" /dev/null 2&>1
+                  ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" > /dev/null 2>&1
                   cd $nixhome_tmp
                   home-manager switch --flake $nixhome_tmp#$HOSTNAME.$USER -b backup.$(date +%Y%m%d%H%M%S)
                   cd $original_dir
