@@ -142,6 +142,7 @@
               username = "ireen";
               displays = 1;
               display_center = "eDP";
+              display_right = "HDMI-A-0";
               networkInterface = "wlo1";
               inherit inputs outputs;
             };
