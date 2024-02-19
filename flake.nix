@@ -255,7 +255,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
-              hostname = "sd20";
+              hostname = "sd91";
               username = gnsn;
               inherit inputs outputs;
             };
@@ -265,7 +265,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
-              hostname = "sd111";
+              hostname = "sd102";
               username = gnsn;
               inherit inputs outputs;
             };
@@ -291,7 +291,6 @@
             };
           };
       };
-
 
       inherit home-manager;
       inherit (home-manager) packages;
