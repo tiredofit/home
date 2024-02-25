@@ -7,6 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
+        cura.enable = true;
         electrum.enable = true;
         encfs.enable = true;
         github-client.enable = true;
