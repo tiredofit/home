@@ -7,6 +7,7 @@ with lib;
     ./blueman.nix
     ./calibre.nix
     ./chromium.nix
+    ./cura.nix
     ./czkawka.nix
     ./diffuse.nix
     ./drawio.nix
