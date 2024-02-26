@@ -194,28 +194,32 @@ in
 
           system_update() {
               update_system() {
-                  original_dir=$(pwd)
-                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING SYSTEM"
-                  nixos_tmp=$(mktemp -d)
-                  ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
-                  cd $nixos_tmp
-                  sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
-                  cd $original_dir
-                  rm -rf $nixos_tmp
-                  ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                  if command -v "nixos-rebuild" &>/dev/null; then
+                    original_dir=$(pwd)
+                    echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING SYSTEM"
+                    nixos_tmp=$(mktemp -d)
+                    ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
+                    cd $nixos_tmp
+                    sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
+                    cd $original_dir
+                    rm -rf $nixos_tmp
+                    ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                  fi
               }
 
               update_home() {
-                  original_dir=$(pwd)
-                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING HOME"
-                  nixhome_tmp=$(mktemp -d)
-                  ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" > /dev/null 2>&1
-                  cd $nixhome_tmp
-                  home-manager switch --flake $nixhome_tmp#$HOSTNAME.$USER -b backup.$(date +%Y%m%d%H%M%S)
-                  cd $original_dir
-                  rm -rf $nixhome_tmp
-                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
-                  ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                  if command -v "home-manager" &>/dev/null; then
+                    original_dir=$(pwd)
+                    echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING HOME"
+                    nixhome_tmp=$(mktemp -d)
+                    ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" > /dev/null 2>&1
+                    cd $nixhome_tmp
+                    home-manager switch --flake $nixhome_tmp#$HOSTNAME.$USER -b backup.$(date +%Y%m%d%H%M%S)
+                    cd $original_dir
+                    rm -rf $nixhome_tmp
+                    echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                    ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                  fi
               }
 
               case $1 in
