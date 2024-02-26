@@ -1,10 +1,12 @@
-{config, lib, pkgs, ...}:
+{config, inputs, lib, pkgs, ...}:
 
 let
   cfg = config.host.home.applications.comma;
 in
   with lib;
 {
+  imports = [ inputs.nix-index-database.hmModules.nix-index ];
+
   options = {
     host.home.applications.comma = {
       enable = mkOption {
