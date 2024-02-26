@@ -203,7 +203,9 @@ in
                     sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
                     cd $original_dir
                     rm -rf $nixos_tmp
-                    ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                    if [ "$SSH_CONNECTION" = "" ]; then
+                        ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                    fi
                   fi
               }
 
@@ -218,7 +220,9 @@ in
                     cd $original_dir
                     rm -rf $nixhome_tmp
                     echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
-                    ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                    if [ "$SSH_CONNECTION" = "" ]; then
+                        ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                    fi
                   fi
               }
 
