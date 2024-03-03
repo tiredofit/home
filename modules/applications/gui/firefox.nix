@@ -138,9 +138,9 @@ in with lib; {
             multi-account-containers
             image-search-options
             reddit-enhancement-suite
+            sidebery
             sponsorblock
             torrent-control
-            tree-style-tab
             ublock-origin
             undoclosetabbutton
             user-agent-string-switcher

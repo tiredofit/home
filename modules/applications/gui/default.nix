@@ -20,6 +20,7 @@ with lib;
     ./flameshot.nix
     ./geeqie.nix
     ./gnomeencfsmanager.nix
+    ./gnomesoftware.nix
     ./gnomesystemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
