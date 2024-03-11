@@ -35,6 +35,7 @@ with lib;
     settings = {
       auto-optimise-store = mkDefault true;
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      use-xdg-base-directories = mkDefault true;
       warn-dirty = mkDefault false;
     };
 
