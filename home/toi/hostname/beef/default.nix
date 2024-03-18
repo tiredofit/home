@@ -86,6 +86,16 @@ with lib;
       sopsFile = ../../secrets/bash-toi_remotehosts.sh;
       mode = "500";
     };
+    "bashrc.d/sd_remotehosts.sh" = {
+      format = "binary";
+      sopsFile = ../../../sd/secrets/bash-sd_remotehosts.sh;
+      mode = "500";
+    };
+    "bashrc.d/sr_remotehosts.sh" = {
+      format = "binary";
+      sopsFile = ../../../sr/secrets/bash-sr_remotehosts.sh;
+      mode = "500";
+    };
     ".ssh/id_ed25519" = {
       format = "binary";
       sopsFile = ../../user/dave/secrets/ssh/id_ed25519.enc;
@@ -94,6 +104,36 @@ with lib;
     ".ssh/id_ed25519.pub" = {
       format = "binary";
       sopsFile = ../../user/dave/secrets/ssh/id_ed25519.pub.enc;
+      mode = "600";
+    };
+    ".ssh/toi-id_ed25519" = {
+      format = "binary";
+      sopsFile = ../../user/dave/secrets/ssh/id_ed25519.enc;
+      mode = "600";
+    };
+    ".ssh/toi-id_ed25519.pub" = {
+      format = "binary";
+      sopsFile = ../../user/dave/secrets/ssh/id_ed25519.pub.enc;
+      mode = "600";
+    };
+    ".ssh/sd-id_ed25519" = {
+      format = "binary";
+      sopsFile = ../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.enc;
+      mode = "600";
+    };
+    ".ssh/sd-id_ed25519.pub" = {
+      format = "binary";
+      sopsFile = ../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.pub.enc;
+      mode = "600";
+    };
+    ".ssh/sr-id_ed25519" = {
+      format = "binary";
+      sopsFile = ../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.enc;
+      mode = "600";
+    };
+    ".ssh/sr-id_ed25519.pub" = {
+      format = "binary";
+      sopsFile = ../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.pub.enc;
       mode = "600";
     };
   };
