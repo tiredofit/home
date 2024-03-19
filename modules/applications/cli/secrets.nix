@@ -22,7 +22,13 @@ in
   config = mkIf cfg.enable {
     home = {
       activation.reload_secrets = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-        /run/current-system/sw/bin/systemctl start --user sops-nix
+        if [ -e /run/current-system/sw/bin/systemctl ] ; then
+            _systemctl="/run/current-system/sw/bin/systemctl"
+        elif [ -e /usr/bin/systemctl ] ; then
+            _systemctl="/usr/bin/systemctl"
+        fi
+
+        $_systemctl restart --user sops-nix
       '';
 
       packages = with pkgs;
