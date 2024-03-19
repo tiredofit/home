@@ -21,6 +21,10 @@ in
 
   config = mkIf cfg.enable {
     home = {
+      activation.reload_secrets = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        /run/current-system/sw/bin/systemctl start --user sops-nix
+      '';
+
       packages = with pkgs;
         [
           age
@@ -33,6 +37,5 @@ in
     };
 
     sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    systemd.user.services.sops-nix.Unit.After = [ "sops-nix.service" ];
   };
 }

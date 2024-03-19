@@ -44,6 +44,7 @@ with lib;
     ./secrets.nix
     ./shfmt.nix
     ./shellcheck.nix
+    ./ssh.nix
     ./tea.nix
     ./timewarrior.nix
     ./tmux.nix

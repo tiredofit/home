@@ -294,6 +294,18 @@
               inherit inputs outputs;
             };
           };
+
+          ###
+
+          "lambda-quad.${gnsn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "sr";
+              role = "server";
+              hostname = "lamda-quad";
+              username = gnsn;
+              inherit inputs outputs;
+            };
+          };
       };
 
       inherit home-manager;

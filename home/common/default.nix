@@ -3,7 +3,7 @@
 let
   if-exists = f: builtins.pathExists f;
   existing-imports = imports: builtins.filter if-exists imports;
-  inherit (specialArgs) role windowmanager;
+  inherit (specialArgs) role username windowmanager;
 in
 with lib;
 {
@@ -15,6 +15,8 @@ with lib;
     ++ existing-imports [
     ./role/${role}
     ./role/${role}.nix
+    ./user/${username}
+    ./user/${username}.nix
     ];
 
     host = {
