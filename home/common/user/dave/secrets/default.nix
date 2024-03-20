@@ -3,6 +3,8 @@
 with lib;
 {
   imports = [
-    ./secrets
+    ./act
+    ./github
+    ./ssh
   ];
 }

@@ -22,19 +22,5 @@ in
           act
         ];
     };
-    programs = {
-      bash.initExtra = ''
-        if [ -f "$XDG_RUNTIME_DIR"/secrets/act ] ; then
-            alias act="act --secret-file '$XDG_RUNTIME_DIR/secrets/act'"
-        fi
-        '';
-    };
-
-    sops.secrets = {
-      "act" = {
-         sopsFile = ../../../home/common/secrets/act.env;
-         format = "dotenv";
-       };
-    };
   };
 }

@@ -2,7 +2,7 @@
 
 let
   inherit (specialArgs) username;
-  cfg = config.host.home.user.remoteaccess.sd;
+  cfg = config.host.home.user.dave.secrets.ssh.sd;
   s = "se";
   _p = "lf";
   _a = "de";
@@ -16,9 +16,9 @@ in
 {
 
   options = {
-    host.home.user.remoteaccess.sd = {
+    host.home.user.dave.secrets.ssh.sd = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = with types; bool;
         description = "Enable SSH to these hosts with unique Keypair";
       };
@@ -29,18 +29,18 @@ in
     sops.secrets = {
       "bashrc.d/sd_remotehosts.sh" = {
         format = "binary";
-        sopsFile = ../../../../../sd/secrets/bash-sd_remotehosts.sh;
+        sopsFile = ../../../../../../sd/secrets/bash-sd_remotehosts.sh;
         mode = "500";
       };
       "ssh/sd-id_ed25519" = {
         format = "binary";
-        sopsFile = ../../../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.enc;
+        sopsFile = ../../../../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.enc;
         path = config.home.homeDirectory+"/.ssh/keys/sd-id_ed25519";
         mode = "600";
       };
       "ssh/sd-id_ed25519.pub" = {
         format = "binary";
-        sopsFile = ../../../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.pub.enc;
+        sopsFile = ../../../../../../sd/user/daveconroy/secrets/ssh/sd-id_ed25519.pub.enc;
         path = config.home.homeDirectory+"/.ssh/keys/sd-id_ed25519.pub";
         mode = "600";
       };

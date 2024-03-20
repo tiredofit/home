@@ -2,7 +2,7 @@
 
 let
   inherit (specialArgs) username;
-  cfg = config.host.home.user.remoteaccess.toi;
+  cfg = config.host.home.user.dave.secrets.ssh.toi;
   s = "ti";
   _p = "re";
   _a = "do";
@@ -16,9 +16,9 @@ in
 {
 
   options = {
-    host.home.user.remoteaccess.toi = {
+    host.home.user.dave.secrets.ssh.toi = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = with types; bool;
         description = "Enable SSH to these hosts with unique Keypair";
       };
@@ -29,18 +29,18 @@ in
     sops.secrets = {
       "bashrc.d/toi_remotehosts.sh" = {
         format = "binary";
-        sopsFile = ../../../../../toi/secrets/bash-toi_remotehosts.sh;
+        sopsFile = ../../../../../../toi/secrets/bash-toi_remotehosts.sh;
         mode = "500";
       };
       "ssh/toi-id_ed25519" = {
         format = "binary";
-        sopsFile = ../../../../../toi/user/dave/secrets/ssh/toi-id_ed25519.enc;
+        sopsFile = ../../../../../../toi/user/dave/secrets/ssh/toi-id_ed25519.enc;
         path = config.home.homeDirectory+"/.ssh/keys/toi-id_ed25519";
         mode = "600";
       };
       "ssh/toi-id_ed25519.pub" = {
         format = "binary";
-        sopsFile = ../../../../../toi/user/dave/secrets/ssh/toi-id_ed25519.pub.enc;
+        sopsFile = ../../../../../../toi/user/dave/secrets/ssh/toi-id_ed25519.pub.enc;
         path = config.home.homeDirectory+"/.ssh/keys/toi-id_ed25519.pub";
         mode = "600";
       };

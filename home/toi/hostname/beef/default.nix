@@ -36,7 +36,24 @@ with lib;
           windowManager = "i3";
         };
       };
-      user.remoteaccess.toi.enable = true;
+      user = {
+        dave = {
+          secrets = {
+            act = {
+              toi.enable = true;
+            };
+            github = {
+              toi.enable = true;
+            };
+            ssh = {
+              generic.enable = true;
+              sd.enable = true;
+              sr.enable = true;
+              toi.enable = true;
+            };
+          };
+        };
+      };
     };
   };
 

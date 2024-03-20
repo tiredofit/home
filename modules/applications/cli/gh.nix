@@ -31,17 +31,6 @@ in
           };
         };
       };
-
-      bash.initExtra = ''
-        if [ -f "$XDG_RUNTIME_DIR/secrets/gh_token" ] ; then
-          export GITHUB_TOKEN=$(cat $XDG_RUNTIME_DIR/secrets/gh_token)
-        fi
-      '';
-    };
-
-    sops.secrets.gh_token = {
-      sopsFile = ../../../home/common/secrets/gh.yaml ;
-      path = "%r/gh-token" ;
     };
   };
 }

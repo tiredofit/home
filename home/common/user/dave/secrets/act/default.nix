@@ -3,6 +3,6 @@
 with lib;
 {
   imports = [
-    ./secrets
+    ./toi
   ];
 }
