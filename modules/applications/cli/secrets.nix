@@ -28,7 +28,9 @@ in
             _systemctl="/usr/bin/systemctl"
         fi
 
-        $_systemctl restart --user sops-nix
+        if $_systemctl --user list-unit-files sops-nix.service &>/dev/null ; then
+            $_systemctl restart --user sops-nix
+        fi
       '';
 
       packages = with pkgs;
