@@ -12,7 +12,7 @@ with lib;
         encfs.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
-        hugo.enable = true;
+        hugo.enable = false;
         lazygit.enable = true;
         obsidian.enable = true;
         python.enable = true;
