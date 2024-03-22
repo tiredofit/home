@@ -46,7 +46,6 @@ with lib;
               toi.enable = true;
             };
             ssh = {
-              generic.enable = true;
               sd.enable = true;
               sr.enable = true;
               toi.enable = true;

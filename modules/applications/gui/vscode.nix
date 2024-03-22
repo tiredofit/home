@@ -272,6 +272,9 @@ in
         "security.workspace.trust.enabled" = false;
         "security.workspace.trust.untrustedFiles" = "open";
 
+        ## SSH
+        "remote.SSH.configFile"= "~/.ssh/vscode_remote_ssh_config";
+
         ## Telemetry
         "redhat.telemetry.enabled" = false;
         "telemetry.telemetryLevel" = "off";
