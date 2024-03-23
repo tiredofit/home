@@ -36,6 +36,7 @@ in
       wallpaper = HDMI-A-1,~/.config/hypr/background/right.jpg
       wallpaper = DP-2,~/.config/hypr/background/middle.jpg
       wallpaper = DP-3,~/.config/hypr/background/left.jpg
+      splash = false
     '';
   };
 }

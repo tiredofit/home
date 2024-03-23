@@ -274,11 +274,11 @@ with lib;
 
               ## Applications
               "XF86Calculator" = mkIf (config.host.home.applications.mate-calc.enable) "exec 'mate-calc'";                                                                                    # Calculator
-              "${mod}+Shift+d" = mkIf (config.host.home.applications.rofi.enable) "exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
+              "${mod}+Shift+d" = mkIf (config.host.home.applications.rofi.enable) "exec ${config.programs.rofi.package}/bin/rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'";                    # Clipboard
               "Print" = mkIf (config.host.home.applications.flameshot.enable) "exec flameshot gui";                                                                                           # Flameshot
               "${mod}+Shift+s" = mkIf (config.host.home.applications.flameshot.enable) "exec flameshot gui";                                                                                  # Flameshot
               "${mod}+Shift+x" = "exec lock_screen.sh";                                                                                 # Lock screen
-              "${mod}+d" = mkIf (config.host.home.applications.rofi.enable) "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
+              "${mod}+d" = mkIf (config.host.home.applications.rofi.enable) "exec ${config.programs.rofi.package}/bin/rofi -combi-modi window#drun#ssh#run -show combi -show-icons";                                         # Program Launcher
               "${mod}+Return" = "exec kitty";                                                                                           # Terminal
               #"${mod}+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start";                                                      # Timewarrior GUI
               "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
