@@ -579,6 +579,11 @@ in
               color: #000000;
           }
 
+          #tray menu *:hover {
+            background: #2980b9;
+            color: #000000
+          }
+
           #idle_inhibitor {
               background-color: #2d3436;
           }
