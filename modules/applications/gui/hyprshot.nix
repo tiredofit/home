@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpicker;
+  cfg = config.host.home.applications.hyprshot;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpicker = {
+    host.home.applications.hyprshot = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland color picker";
+        description = "Hyprshot is an utility to easily take screenshots in Hyprland using your mouse.";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpicker
+          hyprshot
         ];
     };
 

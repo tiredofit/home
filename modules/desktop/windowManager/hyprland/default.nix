@@ -46,7 +46,11 @@ with lib;
     host = {
       home = {
         applications = {
+          hyprdim.enable = true;
+          hypridle.enable = true;
           hyprpicker.enable = true;
+          hyprkeys.enable = true;
+          hyprshot.enable = true;
           playerctl.enable = true;
           rofi.enable = true;
         };

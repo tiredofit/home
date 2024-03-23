@@ -11,7 +11,9 @@ with lib;
     ./cliphist.nix
     ./feh.nix
     ./grim.nix
+    ./hyprkeys.nix
     ./hyprpaper.nix
+    ./hypridle.nix
     ./i3status-rs.nix
     ./nitrogen.nix
     ./numlockx.nix

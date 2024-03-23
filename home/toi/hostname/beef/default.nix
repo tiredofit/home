@@ -32,8 +32,8 @@ with lib;
         };
         gui = {
           enable = true;
-          displayServer = "x";
-          windowManager = "i3";
+          displayServer = "wayland";
+          windowManager = "hyprland";
         };
       };
       user = {

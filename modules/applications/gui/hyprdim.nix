@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpicker;
+  cfg = config.host.home.applications.hyprdim;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpicker = {
+    host.home.applications.hyprdim = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland color picker";
+        description = "hyprdim is a daemon that automatically dims windows in Hyprland when switching between them";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpicker
+          hyprdim
         ];
     };
 

@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpicker;
+  cfg = config.host.home.applications.hyprkeys;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpicker = {
+    host.home.applications.hyprkeys = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland color picker";
+        description = "A simple, scriptable keybind retrieval utility for Hyprland";
       };
     };
   };
@@ -19,9 +19,8 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpicker
+          hyprkeys
         ];
     };
-
   };
 }
