@@ -20,17 +20,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      #file = { ## TODO Turn this into options below and move away from the dotfiles folder
-      #  ".config/rofi".source = ../../../dotfiles/rofi;
-      #};
-
-      #packages = with pkgs;
-      #  [
-      #    rofi-wayland-unwrapped
-      #  ];
-    };
-
     programs.rofi = {
       enable = true;
       terminal = "${pkgs.kitty}/bin/kitty";
