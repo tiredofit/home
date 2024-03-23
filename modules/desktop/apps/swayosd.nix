@@ -22,5 +22,46 @@ in
           swayosd
         ];
     };
+
+    xdg.configFile."swayosd/style.css".text = ''
+      window {
+          padding: 12px 20px;
+          border-radius: 999px;
+          border: 10px;
+          background: alpha(#000000, 0.4);
+      }
+
+      #container {
+          margin: 16px;
+      }
+
+      image, label {
+          color: #FFFFFF;
+      }
+
+      progressbar:disabled,
+      image:disabled {
+          opacity: 0.8;
+      }
+
+      progressbar {
+          min-height: 6px;
+          border-radius: 999px;
+          background: transparent;
+          border: none;
+      }
+      trough {
+          min-height: inherit;
+          border-radius: inherit;
+          border: none;
+          background: alpha(#CCCCCC, 0.1);
+      }
+      progress {
+          min-height: inherit;
+          border-radius: inherit;
+          border: none;
+          background: #FFFFFF;
+      }
+    '';
   };
 }
