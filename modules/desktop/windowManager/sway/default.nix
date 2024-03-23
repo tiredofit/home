@@ -12,12 +12,12 @@ with lib; {
             autotiling.enable = true;
             dunst.enable = true;
             i3status-rust.enable = true;
+            swayidle.enable = true;
+            swaylock.enable = true;
             rofi.enable = true;
           };
         };
       };
-
-      home = { file = { ".config/rofi".source = ../../../dotfiles/rofi; }; };
 
       wayland.windowManager.sway = {
         enable = true;
@@ -181,7 +181,7 @@ with lib; {
           modifier = "Mod4";
           keybindings = let
             mod = "Mod4";
-            mod_d_rofi = "exec rofi -combi-modi window,drun,ssh,run -show combi -show-icons";
+            mod_d_rofi = "exec ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons";
           in {
             ### Keybind Applications (xmodmap -pke for grabbing keycodes)
             ### or xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
@@ -242,7 +242,7 @@ with lib; {
             "Print" = "exec flameshot gui"; # Flameshot
             "Mod4+Shift+s" = "exec flameshot gui"; # Flameshot
             "Mod4+Shift+x" = "exec swaylock -f -e -l -L  -c 000000"; # Lock screen
-            "Mod4+d" = "exec rofi -combi-modi window#drun#ssh#run -show combi -show-icons"; # Program Launcher
+            "Mod4+d" = "exec ${config.programs.rofi.package}/bin/rofi -combi-modi window#drun#ssh#run -show combi -show-icons"; # Program Launcher
             "Mod4+Return" = "exec kitty"; # Terminal
             "Mod4+Mod1+space" = "exec ~/.config/scripts/timewarrior.sh start"; # Timewarrior GUI
             "XF86AudioRaiseVolume" = "exec --no-startup-id sound-tool volume up && killall -SIGUSR1 i3status-rs"; # Volume Controls

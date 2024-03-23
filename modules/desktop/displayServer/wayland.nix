@@ -6,18 +6,17 @@ let
 in
 {
   config = mkIf (displayServer == "wayland" && config.host.home.feature.gui.enable ) {
-    ## TODO This should be modularized as these are common settings for all wayland desktops or window managers
+
     host = {
       home = {
         applications = {
           cliphist.enable = true;
           grim.enable = true;
-          hyprpaper.enable = true;
           nwg-displays.enable = true;
           slurp.enable = true;
           sway-notification-center.enable = true;
-          swayidle.enable = true;
-          swaylock.enable = true;
+          swayidle.enable = false;
+          swaylock.enable = false;
           swayosd.enable = true;
           waybar.enable = true;
           wayprompt.enable = true;
@@ -34,24 +33,8 @@ in
     home = {
       packages = with pkgs;
         [
-          #cliphist
-          #grim
-          #hyprpaper
-          #nwg-displays
           qt5.qtwayland
           qt6.qtwayland
-          rofi-wayland
-          #slurp
-          #swayidle
-          #swaylock-effects
-          #swayosd
-          #wayprompt
-          #wdisplays
-          #wev
-          #wl-clipboard
-          #wlogout
-          #wl-gammarelay-rs
-          #wlr-randr
         ];
 
       sessionVariables = {

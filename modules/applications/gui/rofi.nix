@@ -42,13 +42,6 @@ in
     };
 
     xdg.configFile."rofi/themes/top-down.rasi".text = ''
-      /*
-       *
-       * Rofi Theme
-       * tiredofit@github
-       *
-       */
-
       * {
           background:                     #EFF0F1FF;
           background-alt:                 #00000000;
