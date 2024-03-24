@@ -190,6 +190,7 @@ in
             "modules-right" = [
               "temperature"
               "cpu"
+              "disk"
               "memory"
               "bluetooth"
               "network"
@@ -199,12 +200,21 @@ in
               "active-only" = "true";
             };
             "cpu" = {
-              "interval" = 30;
+              "interval" = 10;
               "format" = "{load} {usage} {avg_frequency} ";
+              "on-click" = "gnome-system-monitor --show-resources-tab";
+            };
+            "disk" = {
+              "interval" = 30;
+              "format" = "{used}/{total}";
+              "path" = "/";
+              "on-click" = "kitty ncdu ~";
+              "on-click-right" = "gnome-system-monitor --show-file-systems-tab";
             };
             "memory" = {
               "interval" = 10;
               "format" = "{used:0.1f}G/{total:0.1f}G ";
+              "on-click" = "gnome-system-monitor --show-processes-tab";
             };
             "temperature" = {
               # "thermal-zone" = 2,
@@ -226,6 +236,7 @@ in
                "tooltip-format" = "{controller_alias}\t{controller_address}";
                "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
                "tooltip-format-enumerate-connected" = "{device_alias}\t{device_address}";
+               "on-click" = "blueman-manager";
             };
             "network" = {
                # "interface" = "wlp2*"; # (Optional) To force the use of this interface
@@ -235,6 +246,7 @@ in
                "format-linked" = "{ifname} (No IP) ";
                "format-disconnected" = "Disconnected ⚠";
                "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+               "on-click-right" = "kitty sudo nmtui";
             };
           }
           {
