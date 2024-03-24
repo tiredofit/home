@@ -3007,6 +3007,10 @@ in with lib; {
                 padding-bottom: 0px !important;
                 }
 
+            /* CUSTOM Allow Bookmark Bar in Fullscreen */
+                #navigator-toolbox[inFullscreen="true"] #PersonalToolbar {
+                    visibility: unset !important;
+                }
           '';
 
           userContent = "\n";
