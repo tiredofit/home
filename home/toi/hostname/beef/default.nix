@@ -102,5 +102,5 @@ with lib;
     };
   };
 
-  services.autorandr.enable = true;
+  services.autorandr.enable = false;
 }
