@@ -616,13 +616,14 @@ in
           }
 
           #custom-notification {
+              font-family: "NotoSansMono NF";
               background: #98bb6c;
               color: #ffffff;
               padding: 0 20px;
               opacity: 1;
               transition-property: opacity;
               transition-duration: 0.25s;
-              font-family: "Noto Sans NF";
+              /*font-family: "Noto Sans NF";*/
           }
         '';
       };
