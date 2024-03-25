@@ -20,12 +20,22 @@ in
   };
 
   config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+        ];
+    };
+
     programs.rofi = {
       enable = true;
+      plugins = with pkgs; [
+        rofi-emoji
+        rofi-calc
+      ];
       terminal = "${pkgs.kitty}/bin/kitty";
       package = rofiPackage;
       extraConfig = {
-        combi-modi = "window,drun,run,emoji";
+        combi-modi = "window,drun,run";
         cycle = true;
         disable-history = false;
         display-drun = "";
