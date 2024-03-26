@@ -24,53 +24,61 @@ in
     };
 
     xdg.configFile."hypr/hyprlock.conf".text = ''
+      $text_color = rgba(E2E2E2FF)
+      $entry_background_color = rgba(43434341)
+      $entry_border_color = rgba(21212125)
+      $entry_color = rgba(C6C6C6FF)
+      $font_family = Noto Sans NF
+      $font_family_clock = Noto Sans NF
+      $font_symbols = Noto Sans NF
+
       background {
-          monitor =
+        color = rgba(3131377)
+        path = screenshot
+        blur_size = 5
+        blur_passes = 4
       }
 
       input-field {
-          monitor = DP-2
-          size = 300, 50
-          outline_thickness = 3
-          dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
-          dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
-          dots_center = true
-          dots_rounding = -1 # -1 default circle, -2 follow input-field rounding
-          outer_color = rgb(151515)
-          inner_color = rgb(200, 200, 200)
-          font_color = rgb(10, 10, 10)
-          fade_on_empty = true
-          fade_timeout = 1000 # Milliseconds before fade_on_empty is triggered.
-          placeholder_text = <i>Input Password...</i> # Text rendered in the input box when it's empty.
-          hide_input = false
-          rounding = -1 # -1 means complete rounding (circle/oval)
-          check_color = rgb(204, 136, 34)
-          fail_color = rgb(204, 34, 34) # if authentication failed, changes outer_color and fail message color
-          fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i> # can be set to empty
-          fail_transition = 300 # transition time in ms between normal outer_color and fail_color
-          capslock_color = -1
-          numlock_color = -1
-          bothlock_color = -1 # when both locks are active. -1 means don't change outer color (same for above)
-          invert_numlock = false # change color if numlock is off
-          swap_font_color = false # see below
-          position = 0, -20
-          halign = center
-          valign = center
+        monitor = DP-2
+        size = 350, 50
+        outline_thickness = 4
+        dots_size = 0.1
+        dots_spacing = 0.5
+        outer_color = $entry_border_color
+        inner_color = $entry_background_color
+        font_color = $entry_color
+        fade_on_empty = true
+        position = 0, 20
+        halign = center
+        valign = center
       }
 
-      label {
-          monitor = DP-2
-          text = cmd[update:1000] echo "$(date +'%Y-%m-%d %H:%M:%S')"
-          color = rgba(200, 200, 200, 1.0)
-          font_size = 20
-          font_family = Fira Semibold
-          position = 30, 10
-          halign = left
-          valign = bottom
-          shadow_passes = 5
-          shadow_size = 10
+      label { # Clock
+         monitor = DP-2
+         text = cmd[update:1000] date +"%Y-%m-%d %H:%m:%S"
+         shadow_passes = 1
+         shadow_boost = 0.5
+         color = $text_color
+         font_size = 20
+         font_family = $font_family_clock
+         position = 30, 10
+         halign = left
+         valign = bottom
+      }
+
+      label { # "Locked" text
+        monitor =
+        text =  Locked
+        shadow_passes = 1
+        shadow_boost = 0.5
+        color = $text_color
+        font_size = 16
+        font_family = $font_family
+        position = 80, 55
+        halign = left
+        valign = bottom
       }
     '';
-
   };
 }
