@@ -152,40 +152,13 @@
             };
           };
 
-          "selecta.${gn}" = HomeConfiguration {
+          "seed.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
-              role = "workstation";
-              hostname = "selecta";
+              role = "server";
+              hostname = "seed" ;
               username = gn;
-              displays = 1;
-              display_center = "HDMI-1";
-              networkInterface = "wlo1";
-              inherit inputs outputs;
-            };
-          };
-
-          "selecta.media" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "workstation";
-              hostname = "selecta";
-              username = "media";
-              displays = 1;
-              display_center = "HDMI-1";
-              networkInterface = "wlo1";
-              inherit inputs outputs;
-            };
-          };
-
-          "soy.${gn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "workstation";
-              hostname = "soy";
-              username = gn;
-              displays = 1;
-              networkInterface = "wlo1";
+              networkInterface = "enp1s0f0";
               inherit inputs outputs;
             };
           };
