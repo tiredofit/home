@@ -10,7 +10,7 @@ in
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Color Picker";
+        description = "Enable Numberlock on boot";
       };
     };
   };

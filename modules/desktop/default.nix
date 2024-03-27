@@ -7,9 +7,9 @@ in
 with lib;
 {
   imports = [
-    ./apps
     ./displayServer
     ./windowManager
+    ./utils
   ];
 
   options = {

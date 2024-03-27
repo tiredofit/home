@@ -11,7 +11,6 @@ with lib;
     ./czkawka.nix
     ./diffuse.nix
     ./drawio.nix
-    ./dunst.nix
     ./electrum.nix
     ./eog.nix
     ./feh.nix
