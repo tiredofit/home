@@ -1,10 +1,15 @@
-{config, lib, pkgs, vscode-server, ...}:
+{inputs, config, lib, pkgs, ...}:
 
 let
   cfg = config.host.home.service.vscode-server;
 in
   with lib;
 {
+
+  imports = [
+    inputs.vscode-server.homeModules.default
+  ];
+
   options = {
     host.home.service.vscode-server = {
       enable = mkOption {
