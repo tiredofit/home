@@ -1,4 +1,4 @@
-{ config, inputs, lib, nix-vscode-extensions, ... }:
+{ config, inputs, lib, nix-vscode-extensions, pkgs, ... }:
 let
   cfg = config.host.home.applications.visual-studio-code;
 in
