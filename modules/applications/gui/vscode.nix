@@ -268,12 +268,68 @@ in
         "editor.minimap.maxColumn" = 80;
 
         ## Security
-        "remote.downloadExtensionsLocally" = true;
         "security.workspace.trust.enabled" = false;
         "security.workspace.trust.untrustedFiles" = "open";
 
         ## SSH
+        "remote.downloadExtensionsLocally" = true;
         "remote.SSH.configFile"= "~/.ssh/vscode_remote_ssh_config";
+        "remote.SSH.enableRemoteCommand" = true;
+        "remote.SSH.allowLocalServerDownload" = "off";
+        "remote.SSH.defaultExtensions" = [ ## TODO - Merge this, this is mostly duplicates with exception of remote plugins
+           "lizebang.bash-extension-pack"
+           "ms-azuretools.vscode-docker"
+           "tyriar.sort-lines"
+           "fabiospampinato.vscode-diff"
+           "hilleer.yaml-plus-json"
+           "jinhyuk.replace-curly-quotes"
+           "nickdemayo.vscode-json-editor"
+           "rpinski.shebang-snippets"
+           "shd101wyy.markdown-preview-enhanced"
+           "tombonnike.vscode-status-bar-format-toggle"
+           "uyiosa-enabulele.reopenclosedtab"
+           "ziyasal.vscode-open-in-github"
+           "github.vscode-github-actions"
+           "brettm12345.nixfmt-vscode"
+           "esbenp.prettier-vscode"
+           "richie5um2.vscode-sort-json"
+           "shakram02.bash-beautify"
+           "yzhang.markdown-all-in-one"
+           "davidanson.vscode-markdownlint"
+           "bbenoist.nix"
+           "bierner.markdown-mermaid"
+           "dunstontc.vscode-docker-syntax"
+           "evgeniypeshkov.syntax-highlighter"
+           "foxundermoon.shell-format"
+           "redhat.vscode-yaml"
+           "timonwong.shellcheck"
+           "lizebang.bash-extension-pack"
+           "ms-azuretools.vscode-docker"
+           "tyriar.sort-lines"
+           "fabiospampinato.vscode-diff"
+           "hilleer.yaml-plus-json"
+           "jinhyuk.replace-curly-quotes"
+           "nickdemayo.vscode-json-editor"
+           "rpinski.shebang-snippets"
+           "shd101wyy.markdown-preview-enhanced"
+           "tombonnike.vscode-status-bar-format-toggle"
+           "uyiosa-enabulele.reopenclosedtab"
+           "ziyasal.vscode-open-in-github"
+           "github.vscode-github-actions"
+           "brettm12345.nixfmt-vscode"
+           "esbenp.prettier-vscode"
+           "richie5um2.vscode-sort-json"
+           "shakram02.bash-beautify"
+           "yzhang.markdown-all-in-one"
+           "davidanson.vscode-markdownlint"
+           "bbenoist.nix"
+           "bierner.markdown-mermaid"
+           "dunstontc.vscode-docker-syntax"
+           "evgeniypeshkov.syntax-highlighter"
+           "foxundermoon.shell-format"
+           "redhat.vscode-yaml"
+           "timonwong.shellcheck"
+        ];
 
         ## Telemetry
         "redhat.telemetry.enabled" = false;
