@@ -61,13 +61,17 @@ with lib;
         shfmt.enable = mkDefault true;
         smartgit.enable = mkDefault true;
         smplayer = {
-          enable = mkDefault true;
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
         thunar.enable = mkDefault true;
         thunderbird.enable = mkDefault true;
         virt-manager.enable = mkDefault true;
         visual-studio-code = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
+        vlc = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
