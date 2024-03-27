@@ -14,6 +14,7 @@ with lib;
     ./dunst.nix
     ./electrum.nix
     ./eog.nix
+    ./feh.nix
     ./ferdium.nix
     ./file-roller.nix
     ./firefox.nix
@@ -24,9 +25,6 @@ with lib;
     ./gnomesystemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
-    ./hyprdim.nix
-    ./hyprpicker.nix
-    ./hyprshot.nix
     ./kitty.nix
     ./libreoffice.nix
     ./masterpdfeditor.nix

@@ -4,7 +4,6 @@ let
 in
   with lib;
 {
-
   options = {
     host.home.applications.visual-studio-code = {
       enable = mkOption {
@@ -47,51 +46,62 @@ in
   config = mkIf cfg.enable {
     programs.vscode =  {
       enable = true;
-      extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
-        ## Bundles
-          lizebang.bash-extension-pack              # Bash shell
+      extensions = (with pkgs.vscode-extensions; [
+          # From NixPkgs
+          ## CI
+            github.vscode-github-actions              # Github actions helper
 
-        ## Docker
-          ms-azuretools.vscode-docker               # Docker containers, images, and volumes
+          ## Docker
+            ms-azuretools.vscode-docker               # Docker containers, images, and volumes
 
-        ## Editor Helpers
-          tyriar.sort-lines                         # Sort Lines
-          fabiospampinato.vscode-diff               # Show differences between files
-          hilleer.yaml-plus-json                    # JSON <> YAML converter
-          jinhyuk.replace-curly-quotes              # Replace all ` with '
-          nickdemayo.vscode-json-editor             # JSON Editor
-          rpinski.shebang-snippets                  # Shebang helpers when typing #!
-          shd101wyy.markdown-preview-enhanced       # Better Markdown Preview
-          tombonnike.vscode-status-bar-format-toggle # Toggle formatting with a single click
-          uyiosa-enabulele.reopenclosedtab          # Reopen last tab
-          ziyasal.vscode-open-in-github             # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
+          ## Editor Helpers
+            tyriar.sort-lines                         # Sort Lines
+            shd101wyy.markdown-preview-enhanced       # Better Markdown Preview
 
-        ## CI
-          github.vscode-github-actions              # Github actions helper
+          ## Prettify / Formatting
+            brettm12345.nixfmt-vscode                 # Nix TODO: Split and force programs to be installed
+            davidanson.vscode-markdownlint            # Markdown
+            esbenp.prettier-vscode                    # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
+            yzhang.markdown-all-in-one                # Markown
 
-        ## Prettify / Formatting
-          brettm12345.nixfmt-vscode                 # Nix TODO: Split and force programs to be installed
-          esbenp.prettier-vscode                    # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
-          richie5um2.vscode-sort-json               # JSON
-          shakram02.bash-beautify                   # Bash
-          yzhang.markdown-all-in-one                # Markown
-          davidanson.vscode-markdownlint            # Markdown
+          ## Remote
+            ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
+            ms-vscode-remote.remote-ssh               # Open any folder on remote system
 
-        ## Remote
-          ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
-          ms-vscode-remote.remote-ssh               # Open any folder on remote system
-          ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
-          ms-vscode.remote-explorer                 # View remote machines for SSH and Tunnels
+          ## Syntax Highlighting | File Support | Linting
+            bbenoist.nix                              # Nix
+            bierner.markdown-mermaid                  # MermaidJS in MarkDown
+            foxundermoon.shell-format                 # Bash
+            redhat.vscode-yaml                        # YAML
+            timonwong.shellcheck                      # Bash TODO: Split and force shellcheck binary to be installed
 
-        ## Syntax Highlighting | File Support | Linting
-          bbenoist.nix                              # Nix
-          bierner.markdown-mermaid                  # MermaidJS in MarkDown
-          dunstontc.vscode-docker-syntax            # DockerFile
-          evgeniypeshkov.syntax-highlighter         # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
-          foxundermoon.shell-format                 # Bash
-          redhat.vscode-yaml                        # YAML
-          timonwong.shellcheck                      # Bash TODO: Split and force shellcheck binary to be installed
-      ];
+        ]) ++ (with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
+          # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
+          ## Bundles
+            lizebang.bash-extension-pack              # Bash shell
+
+          ## Editor Helpers
+            fabiospampinato.vscode-diff               # Show differences between files
+            hilleer.yaml-plus-json                    # JSON <> YAML converter
+            jinhyuk.replace-curly-quotes              # Replace all ` with '
+            nickdemayo.vscode-json-editor             # JSON Editor
+            rpinski.shebang-snippets                  # Shebang helpers when typing #!
+            tombonnike.vscode-status-bar-format-toggle # Toggle formatting with a single click
+            uyiosa-enabulele.reopenclosedtab          # Reopen last tab
+            ziyasal.vscode-open-in-github             # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
+
+          ## Prettify / Formatting
+            richie5um2.vscode-sort-json               # JSON
+            shakram02.bash-beautify                   # Bash
+
+          ## Remote
+            ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
+            ms-vscode.remote-explorer                 # View remote machines for SSH and Tunnels
+
+          ## Syntax Highlighting | File Support | Linting
+            dunstontc.vscode-docker-syntax            # DockerFile
+            evgeniypeshkov.syntax-highlighter         # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
+      ]);
       keybindings = [
         ## Favorites
         {

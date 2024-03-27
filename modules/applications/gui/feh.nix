@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.hyprpicker;
+  cfg = config.host.home.applications.feh;
 in
   with lib;
 {
   options = {
-    host.home.applications.hyprpicker = {
+    host.home.applications.feh = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Wayland color picker";
+        description = "X Image Viewer (great as a wallpaper manager)";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          hyprpicker
+          feh
         ];
     };
 
