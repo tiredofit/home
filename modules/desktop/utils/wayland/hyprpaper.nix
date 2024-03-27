@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     home = {
       file = {
-        ".config/hypr/background".source = ../../../dotfiles/hypr/background;
+        ".config/hypr/background".source = ../../../../dotfiles/hypr/background;
       };
 
       packages = with pkgs;

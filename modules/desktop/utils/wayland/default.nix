@@ -12,6 +12,7 @@ with lib;
     ./hyprlock.nix
     ./hyprpaper.nix
     ./hyprpicker.nix
+    ./hyprshot.nix
     ./nwg-displays.nix
     ./slurp.nix
     ./swayidle.nix

@@ -8,7 +8,6 @@ with lib;
     ./autotiling.nix
     ./autokey.nix
     ./betterlockscreen.nix
-    ./cliphist.nix
     ./i3status-rs.nix
     ./nitrogen.nix
     ./numlockx.nix
