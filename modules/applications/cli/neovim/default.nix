@@ -63,7 +63,7 @@ in
             extensions.fzf-native.enable = true;
             extensions.fzf-native.fuzzy = true;
           };
-          comment-nvim = { enable = true; };
+          comment.enable = true;
           lsp = {
             enable = true;
             servers.bashls.enable = true;
