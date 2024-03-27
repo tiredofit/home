@@ -48,6 +48,7 @@ with lib;
     ./veracrypt.nix
     ./virt-manager.nix
     ./vivaldi.nix
+    ./vlc.nix
     ./vscode.nix
     ./wpsoffice.nix
     ./zoom.nix
