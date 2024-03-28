@@ -11,7 +11,7 @@ If you would like to base your own configuration from this repository, you will 
 - Flexible **roles** such as **workstation**, **server**, **kiosk**
 - Deployment of secrets using **sops-nix**
 - Highly configured desktop environments for **i3** **sway** and **hyprland**
-- Some real interesting **bash scripts** for automating common tasks.
+- Some interesting **bash scripts** for automating common tasks.
 - **Declarative** **themes** and **wallpapers** with **nix-colors**
 
 - I ~sort of~ totally spent the summer of 2023 moving into this configuration after waving a fond farewell to near 2 decades of running Arch Linux. This, as with life, is still WIP. I documented the process on the [Tired of IT! NixOS](https://notes.tiredofit.ca/books/linux/chapter/nixos) chapter on my website.
@@ -33,14 +33,19 @@ If you would like to base your own configuration from this repository, you will 
       - `<role>`: Optional subfolder to load more configuration files based on the roles name
       - `<users>`: Load some specific user profile information
     - `sd`: Similar to the above org, just another org for isolation
+    - `sr`: Similar to the above org, just another org for isolation
     - `...`
 - `modules`: Modules that are specific to this installation
   - `applications`: Applications and configurations
     - `cli`: Command line tools
     - `gui`: Programs with a graphical interface
   - `desktop`: Desktop environments
-    - `applications`: Programs specific to desktop and window environments
+    - ``:
     - `displayServer`: `x` or `wayland` configuration
+    - `utils`: Programs specific to desktop and window environments
+      - `agnostic` - runs great on whatever window manager
+      - `wayland` - wayland specific utilities to complement window managers
+      - `x` - x specific utilties to complement window managers
     - `windowManager`: A variety of configurations depending on the type of window manager, or Desktop environment
   - `feature` - Switchable features
   - `service` - Daemons and services
