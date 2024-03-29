@@ -133,9 +133,9 @@ in
                 "format-alt" = "{:%Y-%m-%d}";
                 "tooltip-format" = "<tt><small>{calendar}</small></tt>";
                 "calendar" = {
-                    "mode" = "year";
-                    "mode-mon-col" = 3;
-                    "weeks-pos" = "right";
+                    "mode" = "month";
+                    "mode-mon-col" = 2;
+                    "weeks-pos" = "";
                     "on-scroll" = 1;
                     "on-click-right" = "mode";
                     "format" = {
@@ -181,12 +181,13 @@ in
             # RIGHT
             "layer" = "top";
             "output" = "HDMI-A-1";
-            "height" = 30;
+            "height" = 36;
             "spacing" = 4;
             "modules-left" = [
               "hyprland/workspaces"
             ];
             "modules-center" = [
+              "wlr/taskbar"
             ];
             "modules-right" = [
               "temperature"
@@ -199,6 +200,21 @@ in
             "hyprland/workspaces" = {
               "on-click" = "activate";
               "active-only" = "true";
+            };
+            "wlr/taskbar" = {
+                "format" = "{icon} {title}";
+                "icon-size" = 28;
+                "icon-theme" = "Numix-Circle";
+                "tooltip-format" = "{title}";
+                "on-click" = "activate";
+                "on-click-middle" = "close";
+                "on-click-right" = "minimize";
+                "ignore-list" = [
+                   "Alacritty"
+                ];
+                "app_ids-mapping" = {
+                   "firefoxdeveloperedition" = "firefox-developer-edition";
+                };
             };
             "cpu" = {
               "interval" = 10;
