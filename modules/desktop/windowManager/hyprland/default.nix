@@ -69,6 +69,10 @@ with lib;
         bind = $mainMod, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons
         bind = SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy
       '';
+      plugins = [
+        inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+        # ...
+      ];
     };
 
     xdg.configFile."hypr/hyprpaper.conf".text = ''
