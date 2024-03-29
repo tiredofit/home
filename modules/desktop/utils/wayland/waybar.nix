@@ -39,6 +39,7 @@ in
                "hyprland/workspaces"
             ];
             "modules-center" = [
+                "wlr/taskbar"
             ];
             "modules-right" = [
                "custom/wl-gammarelay-temperature"
@@ -123,7 +124,7 @@ in
                 };
             };
             "tray" = {
-                "icon-size" = 21;
+                "icon-size" = 22;
                 "spacing" = 10;
             };
             "clock" = {
@@ -359,7 +360,7 @@ in
               background: rgba(0, 0, 0, 0.2);
           }
 
-          #workspaces button.focused {
+          #workspaces button.active {
               background-color: #64727D;
               box-shadow: inset 0 -3px #ffffff;
           }
