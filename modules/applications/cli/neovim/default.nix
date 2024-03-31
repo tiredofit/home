@@ -27,12 +27,11 @@ in
         #extraPlugins = with pkgs.vimPlugins; [
          #catppuccin-nvim luasnip
         #];
-        options = {
+        opts = {
           number = true;
           shiftwidth = 4;
           relativenumber = false;
           termguicolors = true;
-
         };
         plugins = {
           airline.enable = true;
