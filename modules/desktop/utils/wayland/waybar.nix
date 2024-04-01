@@ -263,7 +263,7 @@ in
                "format-linked" = "{ifname} (No IP) ";
                "format-disconnected" = "Disconnected ⚠";
                "format-alt" = "{ifname}: {ipaddr}/{cidr}";
-               "on-click-right" = "kitty sudo nmtui";
+               "on-click-right" = "nmcli device wifi rescan && kitty sudo nmtui";
             };
           }
           {
