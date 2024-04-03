@@ -2,6 +2,91 @@
 
 let
   cfg = config.host.home.applications.hypridle;
+
+  hypridle-companion-script = pkgs.writeShellScriptBin "hypridle-companion" ''
+    _hypridle_logfile="$HOME/lock.log"
+    HYPRIDLE_DEBUG=''${HYPRIDLE_DEBUG:-"FALSE"}
+
+    _hypridle_gamma() {
+        case "$1" in
+            get )
+                busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature > "$XDG_RUNTIME_DIR"/gamma.temp
+            ;;
+            set )
+                busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature > "$(cat "$XDG_RUNTIME_DIR"/gamma.temp)"
+            ;;
+        esac
+    }
+
+    _hypridle_exec() {
+        if [ "''${HYPRIDLE_DEBUG,,}" = "true" ]; then
+            "$@"
+        else
+            "$@" >> "$_hypridle_logfile"
+        fi
+    }
+
+    _hypridle_log() {
+        if [ "''${HYPRIDLE_DEBUG,,}" = "true" ]; then
+            echo "$@" >> "$_hypridle_logfile"
+        else
+            echo "$@"
+        fi
+    }
+
+    case "$1" in
+        blank )
+            case "$2" in
+                before )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [blank] [timeout] 'hyprctl dispatch dpms off'"
+                    gamma set
+                    _hypridle_exec hyprctl dispatch dpms off
+                ;;
+                after )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [blank] [resume] 'hyprctl dispatch dpms on'"
+                    _hypridle_exec hyprctl dispatch dpms on
+                    gamma get
+                ;;
+            esac
+        ;;
+        lock )
+            case "$2" in
+                before )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [lock] [timeout] 'loginctl lock-session'"
+                    _hypridle_exec loginctl lock-session
+                ;;
+                after )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [lock] [resume]"
+                ;;
+            esac
+        ;;
+        suspend )
+            case "$2" in
+                before )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [suspend] [timeout] 'systemctl suspend'"
+                    _hypridle_exec systemctl suspend
+                ;;
+                after )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [suspend] [resume]"
+                ;;
+            esac
+        ;;
+        sleep )
+            case "$2" in
+                before )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [sleep] [before] 'loginctl lock-session'"
+                    gamma set
+                    _hypridle_exec loginctl lock-session
+                ;;
+                after )
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [after] [after] 'hyprctl dispatch dpms on'"
+                    _hypridle_exec hyprctl dispatch dpms on
+                    gamma get
+                ;;
+            esac
+        ;;
+    esac
+  '';
 in
   with lib;
 {
@@ -20,30 +105,33 @@ in
       packages = with pkgs;
         [
           hypridle
+          hypridle-companion-script
         ];
     };
 
     xdg.configFile."hypr/hypridle.conf".text = ''
       general {
-          lock_cmd = pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock       # avoid starting multiple hyprlock instances.
-          before_sleep_cmd = loginctl lock-session                         # lock before suspend.
-          after_sleep_cmd = hyprctl dispatch dpms on                       # to avoid having to press a key twice to turn on the display.
+          lock_cmd = pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock        # avoid starting multiple hyprlock instances.
+          before_sleep_cmd = hypridle-companion sleep before                # lock before suspend.
+          after_sleep_cmd = hypridle-companion sleep  after                 # to avoid having to press a key twice to turn on the display.
       }
 
       listener {
-          timeout = 600                                 # 10min
-          on-timeout = loginctl lock-session            # lock screen when timeout has passed
+          timeout = 600                                                     # 10min
+          on-timeout = hypridle-companion lock before                       # lock screen when timeout has passed
+          on-resume = hypridle-companion lock after                         # reset gamma
       }
 
       listener {
-          timeout = 660                                 # 11min
-          on-timeout = hyprctl dispatch dpms off        # screen off when timeout has passed
-          on-resume = hyprctl dispatch dpms on          # screen on when activity is detected after timeout has fired.
+          timeout = 660                                                     # 11min
+          on-timeout = hypridle-companion blank before                      # screen off when timeout has passed
+          on-timeout = hypridle-companion blank after                       # screen on when activity is detected after timeout has fired.
       }
 
       listener {
-          timeout = 900                                 # 15min
-          on-timeout = systemctl suspend                # suspend pc
+          timeout = 900                                                     # 15min
+          on-timeout = hypridle-companion suspend before                    # suspend pc
+          on-resume = hypridle-companion suspend after                      # reset gamma
       }
     '';
   };
