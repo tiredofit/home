@@ -33,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
+      url = "github:hyprwm/hyprland-plugins/00519a43c11f3343a63a6fc15deb7f7bc5624324";
       inputs.hyprland.follows = "hyprland";
     };
     nixvim = {
