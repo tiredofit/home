@@ -52,38 +52,25 @@ If you would like to base your own configuration from this repository, you will 
 
 ## Usage
 
-I chose option `1` (Standalone) of the  [home-manager](https://nix-community.github.io/home-manager/) installation guide. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
+I used nix flakes in a system that had a multi user installation of Nix. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
 
-- Add Home Manager Channel
-
-```
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
-nix-channel --update
-```
-
-- Logout and log back in to install
+-
+- Initialize Home Manager
 
 ```
-nix-shell '<home-manager>' -A install
+nix --extra-experimental-features "nix-command flakes" run home-manager/master --init
 ```
 
-- This will create a default configuration flie at `~/.config/home-manager/home.nix`. Lets get rid of it and clone this repository instead.
+- Activate the Configuration
 
 ```
-rm -rf ~/.config/home-manager
-git clone https://github.com/tiredofit/dotfiles.git ~/.config/home-manager
-```
-
-- Activate the configuration
-
-```
-home-manager switch --flake ~/.config/home-manager/#<config> -v
+home-manager switch --flake .#${HOSTNAME}.${USERNAME} --extra-experimental-features 'nix-command flakes'
 ```
 
 ### Keep it up to date
 
 ```
-nix flake update ~/.config/home-manager
+nix flake update .
 ```
 
 ### Managing Secrets
