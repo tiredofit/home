@@ -68,6 +68,7 @@
       inherit (self) outputs;
       gn = "dave";
       gnsn = "daveconroy";
+      handle = "tiredofit";
 
       pkgsForSystem = system: import nixpkgs {
         overlays = [
@@ -276,12 +277,12 @@
 
           ###
 
-          "lambda-quad.${gnsn}" = HomeConfiguration {
+          "lambda-quad.${handle}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sr";
               role = "server";
               hostname = "lamda-quad";
-              username = gnsn;
+              username = handle;
               inherit inputs outputs;
             };
           };
