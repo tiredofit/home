@@ -18,6 +18,7 @@ with lib;
     ./file-roller.nix
     ./firefox.nix
     ./flameshot.nix
+    ./floorp.nix
     ./geeqie.nix
     ./gnomeencfsmanager.nix
     ./gnomesoftware.nix
