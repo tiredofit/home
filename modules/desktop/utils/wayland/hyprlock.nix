@@ -56,7 +56,7 @@ in
 
       label { # Clock
          monitor = DP-2
-         text = cmd[update:1000] date +"%Y-%m-%d %H:%m:%S"
+         text = cmd[update:1000] date +"%Y-%m-%d %H:%M:%S"
          shadow_passes = 1
          shadow_boost = 0.5
          color = $text_color
