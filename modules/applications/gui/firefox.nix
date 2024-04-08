@@ -41,17 +41,23 @@ in with lib; {
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ pkgs.nur.repos.rycee.mozilla-addons-to-nix ];
+      packages = with pkgs; [
+        pkgs.nur.repos.rycee.mozilla-addons-to-nix
+      ];
     };
 
     programs.firefox = {
       enable = true;
       package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
+      nativeMessagingHosts = with pkgs; mkIf (username == "dave") [
+        pkgs.firefoxpwa
+      ];
       profiles = {
         dave = mkIf (username == "dave" || username == "media") {
           name = username;
           #id = 777;
           isDefault = true;
+
           search = {
             force = true;
             default = "DuckDuckGo";
