@@ -60,7 +60,9 @@ in
           telescope = {
             enable = true;
             extensions.fzf-native.enable = true;
-            extensions.fzf-native.fuzzy = true;
+            extensions.fzf-native.settings = {
+              fuzzy = true;
+            };
           };
           comment.enable = true;
           lsp = {
