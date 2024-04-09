@@ -200,7 +200,7 @@ in
                     nixos_tmp=$(mktemp -d)
                     ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
                     cd $nixos_tmp
-                    sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
+                    sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME -b backup.$(date +"%Y%m%d%H%M%S")
                     cd $original_dir
                     rm -rf $nixos_tmp
                     if [ "$SSH_CONNECTION" = "" ]; then

@@ -46,7 +46,6 @@ env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 
 # Misc
 misc {
-  force_default_wallpaper = -3
   disable_hyprland_logo = true
   disable_splash_rendering = true
 }
@@ -115,12 +114,6 @@ windowrulev2 = noborder,title:^as_toolbar$,class:(^Zoom)$
 windowrulev2 = noshadow,title:^as_toolbar$,class:(^Zoom)$
 windowrulev2 = noblur,title:^as_toolbar$,class:(^Zoom)$
 
-# ZoomPWA
-windowrulev2 = workspace 3,class:(^FFPWA-01HTZ7G5XDG9A8VH9ZNCBBS9RT)$
-windowrule = float,^(Zoom)$
-#windowrule = float,^(My Meeting)$
-windowrulev2 = float,title:^My Meeting$
-windowrulev2 = float,class:(^FFPWA-01HTZ7G5XDG9A8VH9ZNCBBS9RT)$
 # ### X Wayland Application Fix
 windowrulev2 = rounding 0, xwayland:1, floating:1
 windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
@@ -147,7 +140,7 @@ general {
     cursor_inactive_timeout = 60
     layout = master
     resize_on_border = true
-    allow_tearing = false
+    allow_tearing = true
     resize_corner = 2
 }
 
@@ -155,18 +148,10 @@ decoration {
   rounding = 5
   blur {
     enabled = true
-    size = 4
-    passes = 3
+    size = 8
+    passes = 1
     new_optimizations = true
-    ignore_opacity = on
-    xray = false
-    brightness = 1
-    vibrancy = 0.50
-    vibrancy_darkness = 0.50
-    contrast = 1.0
-    popups = true
   }
-
   dim_inactive = false
   dim_strength = 0.2
   drop_shadow = yes
@@ -204,104 +189,103 @@ master {
 # Keybinds
 $mainMod = SUPER
 #bind = $mainMod, D, exec, pkill rofi || rofi -combi-modi window,drun,ssh,run -show combi -show-icons
-bind = $mainMod, J,                 togglesplit, # dwindle
-bind = $mainMod, P,                 pseudo,      # dwindle
-bind = $mainMod, Return,            exec, kitty
-bind = $mainMod, V,                 togglefloating,
-bind = $mainMod,                    mouse:274, killactive # Middle Mouse
-bind = $mainMod, F,                 fullscreen
-bind = $mainMod, space,             pseudo,
-bind = $mainMod, P,                 exec, pkill hyprpicker || hyprpicker --autocopy --no-fancy --format=hex
-bind = $mainMod, grave,             hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
-bind = SUPER_SHIFT, E,              exec, pkill wlogout || wlogout
-bind = SUPER_SHIFT, Q,              killactive
-bind = SUPER_SHIFT, R,              exec, pkill rofi || kitty bash -c $(/nix/store/84d9n102xq8c5j3qlldi9gvglri25ixq-rofi-1.7.5+wayland3/bin/rofi -dmenu -p terminal)
-bind = SUPER_SHIFT, S,              exec, hyprshot -s -r -m region | swappy --file -
-bind = SUPER_SHIFT, W,              exec, pkill waybar || waybar
-bind = SUPER_SHIFT, X,              exec, hyprlock
+bind = $mainMod, J, togglesplit, # dwindle
+bind = $mainMod, P, pseudo,      # dwindle
+bind = $mainMod, Return, exec, kitty
+bind = $mainMod, V, togglefloating,
+bind = $mainMod, mouse:274, killactive # Middle Mouse
+bind = $mainMod,F,fullscreen
+bind = $mainMod,space,pseudo,
+bind = SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c $(/nix/store/84d9n102xq8c5j3qlldi9gvglri25ixq-rofi-1.7.5+wayland3/bin/rofi -dmenu -p terminal)
+bind = SUPER_SHIFT, W, exec, pkill waybar || waybar
+bind = SUPER_SHIFT, E, exec, pkill wlogout || wlogout
+bind = SUPER_SHIFT, Q, killactive
+#bind = SUPER_SHIFT, S, exec, grim -g "$(slurp)" - | wl-copy
+bind = SUPER_SHIFT, S, exec, hyprshot --clipboard-only --silent -m region -- swappy
+bind = SUPER_SHIFT, X, exec, hyprlock
 
-bind = ALT,         Tab,            cyclenext,
-bind = ALT,         Tab,            bringactivetotop,
+bind = ALT, Tab, cyclenext, bind = ALT, Tab, bringactivetotop,
 #bind=ALT,TAB,workspace,previous
 
 # Move focus with mainMod + arrow keys
-bind = $mainMod, left,              movefocus, l
-bind = $mainMod, right,             movefocus, r
-bind = $mainMod, up,                movefocus, u
-bind = $mainMod, down,              movefocus, d
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
 
 # Switch workspaces with mainMod + [0-9]
-bind = $mainMod, KP_End,            workspace, 1
-bind = $mainMod, KP_Down,           workspace, 2
-bind = $mainMod, KP_Next,           workspace, 3
-bind = $mainMod, KP_Left,           workspace, 4
-bind = $mainMod, KP_Begin,          workspace, 5
-bind = $mainMod, KP_Right,          workspace, 6
-bind = $mainMod, KP_Home,           workspace, 7
-bind = $mainMod, KP_Up,             workspace, 8
-bind = $mainMod, KP_Prior,          workspace, 9
+bind = $mainMod, KP_End, workspace, 1
+bind = $mainMod, KP_Down, workspace, 2
+bind = $mainMod, KP_Next, workspace, 3
+bind = $mainMod, KP_Left, workspace, 4
+bind = $mainMod, KP_Begin, workspace, 5
+bind = $mainMod, KP_Right, workspace, 6
+bind = $mainMod, KP_Home, workspace, 7
+bind = $mainMod, KP_Up, workspace, 8
+bind = $mainMod, KP_Prior, workspace, 9
 #bind = $mainMod, KP_Insert, workspace, 10
 
 # Move active window to a workspace with mainMod + SHIFT + [0-9]
-bind = $mainMod SHIFT, KP_End,      movetoworkspace, 1
-bind = $mainMod SHIFT, KP_Down,     movetoworkspace, 2
-bind = $mainMod SHIFT, KP_Next,     movetoworkspace, 3
-bind = $mainMod SHIFT, KP_Left,     movetoworkspace, 4
-bind = $mainMod SHIFT, KP_Begin,    movetoworkspace, 5
-bind = $mainMod SHIFT, KP_Right,    movetoworkspace, 6
-bind = $mainMod SHIFT, KP_Home,     movetoworkspace, 7
-bind = $mainMod SHIFT, KP_Up,       movetoworkspace, 8
-bind = $mainMod SHIFT, KP_Prior,    movetoworkspace, 9
+bind = $mainMod SHIFT, KP_End, movetoworkspace, 1
+bind = $mainMod SHIFT, KP_Down, movetoworkspace, 2
+bind = $mainMod SHIFT, KP_Next, movetoworkspace, 3
+bind = $mainMod SHIFT, KP_Left, movetoworkspace, 4
+bind = $mainMod SHIFT, KP_Begin, movetoworkspace, 5
+bind = $mainMod SHIFT, KP_Right, movetoworkspace, 6
+bind = $mainMod SHIFT, KP_Home, movetoworkspace, 7
+bind = $mainMod SHIFT, KP_Up, movetoworkspace, 8
+bind = $mainMod SHIFT, KP_Prior, movetoworkspace, 9
 #bind = $mainMod SHIFT, KP_Insert, movetoworkspace, 10
 
 # moving windows to other workspaces (silent)
-bind = $mainMod ALT,   KP_End,       movetoworkspacesilent,1
-bind = $mainMod ALT,   KP_Down,      movetoworkspacesilent,2
-bind = $mainMod ALT,   KP_Next,      movetoworkspacesilent,3
-bind = $mainMod ALT,   KP_Left,      movetoworkspacesilent,4
-bind = $mainMod ALT,   KP_Begin,     movetoworkspacesilent,5
-bind = $mainMod ALT,   KP_Right,     movetoworkspacesilent,6
-bind = $mainMod ALT,   KP_Home,      movetoworkspacesilent,7
-bind = $mainMod ALT,   KP_Up,        movetoworkspacesilent,8
-bind = $mainMod ALT,   KP_Prior,     movetoworkspacesilent,9
-#bind = $mainMod ALT, KP_Insert,      movetoworkspacesilent,0
+bind = $mainMod ALT, KP_End, movetoworkspacesilent,1
+bind = $mainMod ALT, KP_Down, movetoworkspacesilent,2
+bind = $mainMod ALT, KP_Next, movetoworkspacesilent,3
+bind = $mainMod ALT, KP_Left, movetoworkspacesilent,4
+bind = $mainMod ALT, KP_Begin, movetoworkspacesilent,5
+bind = $mainMod ALT, KP_Right, movetoworkspacesilent,6
+bind = $mainMod ALT, KP_Home, movetoworkspacesilent,7
+bind = $mainMod ALT, KP_Up, movetoworkspacesilent,8
+bind = $mainMod ALT, KP_Prior, movetoworkspacesilent,9
+#bind = $mainMod ALT, KP_Insert, movetoworkspacesilent,0
 
 #
-bind = SUPERSHIFT,     left,         movewindow,l
-bind = SUPERSHIFT,     right,        movewindow,r
-bind = SUPERSHIFT,     up,           movewindow,u
-bind = SUPERSHIFT,     down,         movewindow,d
+bind = SUPERSHIFT,left,movewindow,l
+bind = SUPERSHIFT,right,movewindow,r
+bind = SUPERSHIFT,up,movewindow,u
+bind = SUPERSHIFT,down,movewindow,d
 
 # special workspace
-#bind = $mainMod     SHIFT, grave, movetoworkspace, special
-#bind = $mainMod, grave, togglespecialworkspace, DP-2
+bind = $mainMod SHIFT, grave, movetoworkspace, special
+bind = $mainMod, grave, togglespecialworkspace, DP-2
 
 # Scroll through existing workspaces with mainMod + scroll
 #bind = $mainMod, mouse_down, workspace, e+1
 #bind = $mainMod, mouse_up, workspace, e-1
 
 # Move/resize windows with mainMod + LMB/RMB and dragging
-bindm = $mainMod,      mouse:272,     movewindow
-bindm = $mainMod,      mouse:273,     resizewindow
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
 #bind=,mouse:276,workspace,e-1
 #bind=,mouse:275,workspace,e+1
-binde = SUPERCTRL,     left,           resizeactive,-20 0
-binde = SUPERCTRL,     right,          resizeactive,20 0
-binde = SUPERCTRL,     up,             resizeactive,0 -20
-binde = SUPERCTRL,     down,           resizeactive,0 20
+binde = SUPERCTRL,left,resizeactive,-20 0
+binde = SUPERCTRL,right,resizeactive,20 0
+binde = SUPERCTRL,up,resizeactive,0 -20
+binde = SUPERCTRL,down,resizeactive,0 20
 
 # Audio
-bindl =  ,XF86AudioPlay,        exec,  playerctl play-pause
-bindl =  ,XF86AudioPrev,        exec,  playerctl previous
-bindl =  ,XF86AudioNext,        exec,  playerctl next
-bindl =  ,XF86AudioMedia,       exec,  playerctl play-pause
-bindl =  ,XF86AudioStop,        exec,  playerctl stop
-bindle = ,XF86AudioRaiseVolume, exec,  swayosd-client --output-volume +1 --max-volume=100
-bindle = ,XF86AudioLowerVolume, exec,  swayosd-client --output-volume -1
-bindl  = ,XF86AudioMute,        exec,  swayosd-client --output-volume mute-toggle
+bindl=,XF86AudioPlay,exec,playerctl play-pause
+bindl=,XF86AudioPrev,exec,playerctl previous
+bindl=,XF86AudioNext,exec,playerctl next
+bindl=,XF86AudioMedia,exec,playerctl play-pause
+bindl=,XF86AudioStop,exec,playerctl stop
+
+bindle=,XF86AudioRaiseVolume,exec,swayosd-client --output-volume 1 --max-volume=100
+bindle=,XF86AudioLowerVolume,exec,swayosd-client --output-volume -1
+bindl=,XF86AudioMute,exec,swayosd-client --output-volume mute-toggle
 
 # Turn off animations / game mode
-bind =  WIN, F1,                exec,  ~/.config/hypr/gamemode.sh
+bind = WIN, F1, exec, ~/.config/hypr/gamemode.sh
 
 # Clipboard
 exec-once = wl-paste --type text --watch cliphist store #Stores only text data
@@ -316,20 +300,10 @@ plugin {
     hyprbars {
         # example config
         bar_height = 20
+
         # example buttons (R -> L)
         # hyprbars-button = color, size, on-click
         #hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
         #hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
-    }
-
-    hyprexpo {
-        columns = 3
-        gap_size = 5
-        bg_col = rgb(111111)
-        workspace_method = workspace # [center/first] [workspace] e.g. first 1 or center m+1
-
-        enable_gesture = true # laptop touchpad, 4 fingers
-        gesture_distance = 300 # how far is the "max"
-        gesture_positive = true # positive = swipe down. Negative = swipe up.
     }
 }
