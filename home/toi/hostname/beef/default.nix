@@ -10,6 +10,7 @@ with lib;
         cura.enable = true;
         electrum.enable = true;
         encfs.enable = true;
+        floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
         hugo.enable = false;

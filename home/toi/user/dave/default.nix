@@ -19,6 +19,7 @@ in
     home = {
       applications = {
         git.enable = mkDefault true;
+        zoom.enable = mkForce false;
       };
     };
   };

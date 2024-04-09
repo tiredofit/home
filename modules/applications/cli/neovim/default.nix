@@ -59,9 +59,11 @@ in
           #};
           telescope = {
             enable = true;
-            extensions.fzf-native.enable = true;
-            extensions.fzf-native.settings = {
-              fuzzy = true;
+            extensions.fzf-native = {
+              enable = true;
+              settings = {
+                fuzzy = true;
+              };
             };
           };
           comment.enable = true;

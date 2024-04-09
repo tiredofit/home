@@ -7,7 +7,7 @@ in with lib; {
   options = {
     host.home.applications.floorp = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = with types; bool;
         description = "Web Browser";
       };
