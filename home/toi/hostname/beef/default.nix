@@ -7,6 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
+        avidemux.enable = true;
         cura.enable = true;
         electrum.enable = true;
         encfs.enable = true;
@@ -26,6 +27,7 @@ with lib;
         };
         szyszka.enable = true;
         veracrypt.enable = true;
+        zoom.enable = mkForce false;
       };
       feature = {
         emulation = {
