@@ -3,6 +3,7 @@ with lib;
 {
   imports = [
     ./ark.nix
+    ./avidemux.nix
     ./bleachbit.nix
     ./blueman.nix
     ./calibre.nix
