@@ -40,7 +40,6 @@ If you would like to base your own configuration from this repository, you will 
     - `cli`: Command line tools
     - `gui`: Programs with a graphical interface
   - `desktop`: Desktop environments
-    - ``:
     - `displayServer`: `x` or `wayland` configuration
     - `utils`: Programs specific to desktop and window environments
       - `agnostic` - runs great on whatever window manager
@@ -54,7 +53,6 @@ If you would like to base your own configuration from this repository, you will 
 
 I used nix flakes in a system that had a multi user installation of Nix. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
 
--
 - Initialize Home Manager
 
 ```
