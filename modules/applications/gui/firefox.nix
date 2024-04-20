@@ -131,7 +131,7 @@ in with lib; {
 
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             bitwarden
-            bypass-paywalls-clean
+            #bypass-paywalls-clean
             clearurls
             copy-selected-links
             copy-selection-as-markdown
