@@ -39,7 +39,7 @@ in
                "hyprland/workspaces"
             ];
             "modules-center" = [
-                "wlr/taskbar"
+                "hyprland/window"
             ];
             "modules-right" = [
                "custom/wl-gammarelay-temperature"
@@ -54,6 +54,10 @@ in
                "on-click" = "activate";
                "active-only" = "false";
                "sort-by-number" = true;
+            };
+            "hyprland/window" = {
+               "max-length" = 200;
+               "separate-outputs" = true;
             };
             "wlr/taskbar" = {
                 "format" = "{icon} {title}";
@@ -187,7 +191,7 @@ in
               "hyprland/workspaces"
             ];
             "modules-center" = [
-              "wlr/taskbar"
+              "hyprland/window"
             ];
             "modules-right" = [
               "temperature"
@@ -200,6 +204,10 @@ in
             "hyprland/workspaces" = {
               "on-click" = "activate";
               "active-only" = "true";
+            };
+            "hyprland/window" = {
+               "max-length" = 200;
+               "separate-outputs" = true;
             };
             "wlr/taskbar" = {
                 "format" = "{icon} {title}";
