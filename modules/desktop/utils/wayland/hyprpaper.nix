@@ -27,6 +27,14 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "hyprpaper"
+        ];
+      };
+    };
+
     ## TODO This should be dynamic based on amount of monitors
     xdg.configFile."hypr/hyprpaper.conf".text = ''
       preload = ~/.config/hypr/background/left.jpg
