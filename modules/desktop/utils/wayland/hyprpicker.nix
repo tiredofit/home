@@ -22,5 +22,13 @@ in
           hyprpicker
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        bind = [
+          "SUPER_SHIFT, C, exec, pkill hyprpicker || hyprpicker --autocopy --no-fancy --format=hex"
+        ];
+      };
+    };
   };
 }
