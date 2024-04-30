@@ -26,6 +26,9 @@ in
 
     wayland.windowManager.hyprland = {
       settings = {
+        bind = [
+          "SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
+        ];
         windowrulev2 = [
           "float,class:^(com.gabm.satty)$"
           "pin,class:^(com.gabm.satty)$"
