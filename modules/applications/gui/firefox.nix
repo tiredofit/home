@@ -3229,6 +3229,20 @@ in with lib; {
         };
       };
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        windowrulev2 = [
+           ### Make Firefox PiP window floating and sticky
+           windowrulev2 = float, title:^(Picture-in-Picture)$
+           windowrulev2 = pin, title:^(Picture-in-Picture)$
+           ### Throw sharing indicators away
+           windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
+           windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
+         ];
+      };
+    };
+
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
       lib.genAttrs cfg.defaultApplication.mimeTypes (_: "firefox.desktop")
     );
