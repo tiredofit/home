@@ -63,16 +63,38 @@ with lib;
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
+      settings = {
+        input = {
+          follow_mouse = 1;
+          kb_layout = "us";
+          kb_model = "";
+          kb_options = "";
+          kb_rules = "";
+          kb_variant = "";
+          numlock_by_default = true;
+          repeat_delay = 200;
+          repeat_rate = 40;
+          sensitivity = 0;
+          touchpad = {
+            natural_scroll = false;
+          };
+        };
+        gestures = {
+          workspace_swipe = false;
+        };
+      };
+
+
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
 
         bind = $mainMod, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons
         bind = SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy
       '';
-      plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      ];
+      #plugins = [
+      #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      #];
     };
 
     xdg.configFile."hypr/hyprpaper.conf".text = ''
@@ -89,21 +111,21 @@ with lib;
       enable = true;
       scriptPath = ".hm-xsession";
       windowManager.command = ''
-        export MOZ_ENABLE_WAYLAND=1
         #export NIXOS_OZONE_WL=1
-        export WLR_RENDERER=vulkan
-        export XDG_SESSION_TYPE=wayland
-        export XDG_SESSION_DESKTOP=Hyprland
-        export XDG_CURRENT_DESKTOP=Hyprland
-        export QT_AUTO_SCREEN_SCALE_FACTOR=1
-        export QT_QPA_PLATFORM=wayland;xcb
+        export CLUTTER_BACKEND="wayland"
         export ECORE_EVAS_ENGINE=wayland-egl
         export ELM_ENGINE=wayland_egl
-        export SDL_VIDEODRIVER=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export NO_AT_BRIDGE=1
         export GDK_BACKEND=wayland,X11
-        export CLUTTER_BACKEND="wayland"
+        export MOZ_ENABLE_WAYLAND=1
+        export NO_AT_BRIDGE=1
+        export QT_AUTO_SCREEN_SCALE_FACTOR=1
+        export QT_QPA_PLATFORM=wayland;xcb
+        export SDL_VIDEODRIVER=wayland
+        export WLR_RENDERER=vulkan
+        export XDG_CURRENT_DESKTOP=Hyprland
+        export XDG_SESSION_DESKTOP=Hyprland
+        export XDG_SESSION_TYPE=wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
         Hyprland
       '';
     };
