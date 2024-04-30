@@ -590,6 +590,9 @@ in
         exec-once = [
           "waybar"
         ];
+        bind = [
+          "SUPER_SHIFT, W, exec, pkill waybar || waybar"
+        ];
       };
     };
   };
