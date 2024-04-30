@@ -96,32 +96,32 @@ with lib;
 
         # UI
         general = {
+          #col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          #col.inactive_border = "rgba(595959aa)";
+          allow_tearing = false;
+          border_size = 2;
+          cursor_inactive_timeout = 60;
           gaps_in = 2;
           gaps_out = 5;
-          border_size = 2;
-          col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          col.inactive_border = "rgba(595959aa)";
-          cursor_inactive_timeout = 60;
           layout = "master";
-          resize_on_border = true;
-          allow_tearing = false;
           resize_corner = 2;
+          resize_on_border = true;
         };
 
         master = {
           allow_small_split = true;
+          always_center_master = false;
+          drop_at_cursor = true;
           inherit_fullscreen = true;
+          mfact = 0.55;
           new_is_master = true;
           new_on_top = true;
-          mfact = 0.55;
           orientation = "center";
-          always_center_master = false;
           smart_resizing = true;
-          drop_at_cursor = true;
         };
 
         decoration = {
-          blur ={
+          blur = {
             enabled = true;
             brightness = 1;
             contrast = 1.0;
@@ -135,7 +135,7 @@ with lib;
             xray = false;
           };
 
-          col.shadow = "rgba(1a1a1aee)";
+          #col.shadow = "rgba(1a1a1aee)";
           dim_inactive = false;
           dim_strength = 0.2;
           drop_shadow = true;
@@ -147,35 +147,139 @@ with lib;
         animations = {
           enabled = true;
           animation = [
-          "border, 1, 10, default"
-          "fade, 1, 7, default"
-          "windows, 1, 5, myBezier"
-          "windowsMove, 1, 5, myBezier"
-          "windowsOut, 1, 7, myBezier"
-          "windowsOut, 1, 7, default, popin 20%"
-          "workspaces, 1, 10, overshot , slidevert"
-        ];
-        bezier = [
-          "myBezier, 0.05, 0.9, 0.1, 1.1"
-          "overshot, 0.05, 0.9, 0.1, 1.1"
-        ];
-      };
+            "border, 1, 10, default"
+            "fade, 1, 7, default"
+            "windows, 1, 5, myBezier"
+            "windowsMove, 1, 5, myBezier"
+            "windowsOut, 1, 7, myBezier"
+            "windowsOut, 1, 7, default, popin 20%"
+            "workspaces, 1, 10, overshot , slidevert"
+          ];
+          bezier = [
+            "myBezier, 0.05, 0.9, 0.1, 1.1"
+            "overshot, 0.05, 0.9, 0.1, 1.1"
+          ];
+        };
 
         misc = {
-          force_default_wallpaper = -3;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
+          force_default_wallpaper = -3;
         };
 
         plugin = {
 
         };
+
+        # Keybinds
+        bind = [
+          "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
+          "SUPER, Return, exec, kitty"
+          "SUPER, V, togglefloating,"
+          "SUPER, mouse:274, killactive" # Middle Mouse
+          "SUPER, F, fullscreen"
+          "SUPER, space, pseudo,"
+          "SUPER_SHIFT, C, exec, pkill hyprpicker || hyprpicker --autocopy --no-fancy --format=hex"
+          "SUPER_SHIFT, E, exec, pkill wlogout || wlogout"
+          "SUPER_SHIFT, Q, killactive"
+          "SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c $(/nix/store/84d9n102xq8c5j3qlldi9gvglri25ixq-rofi-1.7.5+wayland3/bin/rofi -dmenu -p terminal)"
+          "SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
+          "SUPER_SHIFT, W, exec, pkill waybar || waybar"
+          "SUPER_SHIFT, X, exec, hyprlock"
+          "ALT, Tab, cyclenext,"
+          "ALT, Tab, bringactivetotop,"
+          #"ALT,TAB,workspace,previous"
+
+          # Move focus with mainMod + arrow keys
+          "SUPER, left, movefocus, l"
+          "SUPER, right, movefocus, r"
+          "SUPER, up, movefocus, u"
+          "SUPER, down, movefocus, d"
+
+          # Switch workspaces with mainMod + [0-9]
+          "SUPER, KP_End, workspace, 1"
+          "SUPER, KP_Down, workspace, 2"
+          "SUPER, KP_Next, workspace, 3"
+          "SUPER, KP_Left, workspace, 4"
+          "SUPER, KP_Begin, workspace, 5"
+          "SUPER, KP_Right, workspace, 6"
+          "SUPER, KP_Home, workspace, 7"
+          "SUPER, KP_Up, workspace, 8"
+          "SUPER, KP_Prior, workspace, 9"
+          #"SUPER, KP_Insert, workspace, 10"
+
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          "SUPER SHIFT, KP_End, movetoworkspace, 1"
+          "SUPER SHIFT, KP_Down, movetoworkspace, 2"
+          "SUPER SHIFT, KP_Next, movetoworkspace, 3"
+          "SUPER SHIFT, KP_Left, movetoworkspace, 4"
+          "SUPER SHIFT, KP_Begin, movetoworkspace, 5"
+          "SUPER SHIFT, KP_Right, movetoworkspace, 6"
+          "SUPER SHIFT, KP_Home, movetoworkspace, 7"
+          "SUPER SHIFT, KP_Up,  movetoworkspace, 8"
+          "SUPER SHIFT, KP_Prior, movetoworkspace, 9"
+          #"SUPER SHIFT, KP_Insert, movetoworkspace, 10"
+
+          # moving windows to other workspaces (silent)
+          "SUPER ALT, KP_End,   movetoworkspacesilent,1"
+          "SUPER ALT, KP_Down,  movetoworkspacesilent,2"
+          "SUPER ALT, KP_Next,  movetoworkspacesilent,3"
+          "SUPER ALT, KP_Left,  movetoworkspacesilent,4"
+          "SUPER ALT, KP_Begin, movetoworkspacesilent,5"
+          "SUPER ALT, KP_Right, movetoworkspacesilent,6"
+          "SUPER ALT, KP_Home,  movetoworkspacesilent,7"
+          "SUPER ALT, KP_Up,    movetoworkspacesilent,8"
+          "SUPER ALT, KP_Prior, movetoworkspacesilent,9"
+          #"SUPER ALT, KP_Insert, movetoworkspacesilent,0"
+
+          # moving windows around
+          "SUPERSHIFT, left, movewindow,l"
+          "SUPERSHIFT, right,movewindow,r"
+          "SUPERSHIFT, up, movewindow,u"
+          "SUPERSHIFT, down, movewindow,d"
+
+          # Turn off animations / game mode
+          "WIN, F1, exec,  ~/.config/hypr/gamemode.sh"
+
+          # special workspace
+          ## TODO Dynamic Configuration
+          "SUPER     SHIFT, grave, movetoworkspace, special"
+          "SUPER, grave, togglespecialworkspace, DP-2"
+
+          # Scroll through existing workspaces with mainMod + scroll
+          "SUPER, mouse_down, workspace, e+1"
+          "SUPER, mouse_up, workspace, e-1"
+        ];
+
+        binde = [
+          "SUPERCTRL, left, resizeactive,-20 0"
+          "SUPERCTRL, right, resizeactive,20 0"
+          "SUPERCTRL, up, resizeactive,0 -20"
+          "SUPERCTRL, down, resizeactive,0 20"
+        ];
+        bindl = [
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioPrev, exec, playerctl previous"
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioMedia, exec, playerctl play-pause"
+          ",XF86AudioStop, exec, playerctl stop"
+          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ];
+        bindle = [
+          ",XF86AudioRaiseVolume, exec, swayosd-client --output-volume +1 --max-volume=100"
+          ",XF86AudioLowerVolume, exec, swayosd-client --output-volume -1"
+        ];
+        bindm = [
+          # Move/resize windows with mainMod + LMB/RMB and dragging
+          "SUPER, mouse:272, movewindow"
+          "SUPER, mouse:273, resizewindow"
+        ];
       };
 
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
 
-        bind = $mainMod, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons
+        bind = SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons
         bind = SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy
       '';
       #plugins = [

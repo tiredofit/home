@@ -27,7 +27,7 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         windowrulev2 = [
-          "float,^(pavucontrol)$"
+          "float,title: ^(pavucontrol)$"
         ];
       };
     };

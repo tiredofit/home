@@ -26,7 +26,7 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         windowrulev2 = [
-          "windowrule=float,^(virt-manager)$"
+          "float,title:^(virt-manager)$"
         ];
       };
     };
