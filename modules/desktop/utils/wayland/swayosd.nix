@@ -23,6 +23,15 @@ in
         ];
     };
 
+    ## TODO Make this work for dynamic Display (monitor_primary)
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "swayosd-server --display=HDMI-A-1"
+        ];
+      };
+    };
+
     xdg.configFile."swayosd/style.css".text = ''
       window {
           padding: 12px 20px;
