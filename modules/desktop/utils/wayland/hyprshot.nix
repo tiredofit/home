@@ -24,6 +24,15 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        windowrulev2 = [
+          "float,class:^(com.gabm.satty)$"
+          "pin,class:^(com.gabm.satty)$"
+        ];
+      };
+    };
+
     xdg.configFile."satty/config.toml".text = ''
       [general]
       fullscreen = false
