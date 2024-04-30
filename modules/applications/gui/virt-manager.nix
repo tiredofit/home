@@ -22,5 +22,13 @@ in
           virt-manager
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        windowrulev2 = [
+          "windowrule=float,^(virt-manager)$"
+        ];
+      };
+    };
   };
 }
