@@ -37,6 +37,24 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        windowrulev2 = [
+          "size 360 690,title:^Zoom - Licensed Account$,class:(^Zoom)$"
+          "float,title:^Zoom - Licensed Account$"
+          "noanim,class:(^Zoom)$"
+          "nodim,class:(^Zoom)$"
+          "noblur,class:(^Zoom)$"
+
+          ## ### Zoom Screen Sharing
+          "float,title:^as_toolbar$,class:(^Zoom)$"
+          "noborder,title:^as_toolbar$,class:(^Zoom)$"
+          "noshadow,title:^as_toolbar$,class:(^Zoom)$"
+          "noblur,title:^as_toolbar$,class:(^Zoom)$"
+        ];
+      };
+    };
+
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
       lib.genAttrs cfg.defaultApplication.mimeTypes (_: "us.zoom.Zoom.desktop")
     );
