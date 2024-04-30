@@ -109,6 +109,14 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "hypridle"
+        ];
+      };
+    };
+
     xdg.configFile."hypr/hypridle.conf".text = ''
       general {
           lock_cmd = pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock        # avoid starting multiple hyprlock instances.
