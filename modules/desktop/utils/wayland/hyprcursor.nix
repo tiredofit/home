@@ -22,5 +22,13 @@ in
           hyprcursor
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        env = [
+          "HYPRCURSOR_SIZE,24"
+        ];
+      };
+    };
   };
 }
