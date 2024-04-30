@@ -108,8 +108,48 @@ with lib;
           smart_resizing = true;
           drop_at_cursor = true;
         };
-      };
 
+        decoration = {
+          blur ={
+            enabled = true;
+            brightness = 1;
+            contrast = 1.0;
+            ignore_opacity = true;
+            new_optimizations = true;
+            passes = 3;
+            popups = true;
+            size = 4;
+            vibrancy = 0.50;
+            vibrancy_darkness = 0.50;
+            xray = false;
+          };
+
+          col.shadow = "rgba(1a1a1aee)";
+          dim_inactive = false;
+          dim_strength = 0.2;
+          drop_shadow = true;
+          rounding = 5;
+          shadow_range = 4;
+          shadow_render_power = 3;
+        };
+
+        animations = {
+          enabled = true;
+          animation = [
+          "border, 1, 10, default"
+          "fade, 1, 7, default"
+          "windows, 1, 5, myBezier"
+          "windowsMove, 1, 5, myBezier"
+          "windowsOut, 1, 7, myBezier"
+          "windowsOut, 1, 7, default, popin 20%"
+          "workspaces, 1, 10, overshot , slidevert"
+        ];
+        bezier = [
+          "myBezier, 0.05, 0.9, 0.1, 1.1"
+          "overshot, 0.05, 0.9, 0.1, 1.1"
+        ];
+      };
+      };
 
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
