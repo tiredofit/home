@@ -22,5 +22,13 @@ in
           nextcloud-client
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "nextcloud --background"
+        ];
+      };
+    };
   };
 }
