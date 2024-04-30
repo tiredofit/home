@@ -23,6 +23,14 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "swaync"
+        ];
+      };
+    };
+
     xdg.configFile."swaync/config.json".text = ''
       {
         "positionX": "right",
