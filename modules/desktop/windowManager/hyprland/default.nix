@@ -96,6 +96,18 @@ with lib;
           allow_tearing = false;
           resize_corner = 2;
         };
+
+        master = {
+          allow_small_split = true;
+          inherit_fullscreen = true;
+          new_is_master = true;
+          new_on_top = true;
+          mfact = 0.55;
+          orientation = "center";
+          always_center_master = false;
+          smart_resizing = true;
+          drop_at_cursor = true;
+        };
       };
 
 
