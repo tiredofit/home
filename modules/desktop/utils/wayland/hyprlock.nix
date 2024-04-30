@@ -23,6 +23,14 @@ in
         ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        bind = [
+          "SUPER_SHIFT, X, exec, hyprlock"
+        ];
+      };
+    };
+
     xdg.configFile."hypr/hyprlock.conf".text = ''
       $text_color = rgba(E2E2E2FF)
       $entry_background_color = rgba(43434341)
