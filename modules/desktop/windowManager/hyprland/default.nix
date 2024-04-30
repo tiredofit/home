@@ -67,13 +67,13 @@ with lib;
         env = [
           "CLUTTER_BACKEND,wayland"
           "GDK_BACKEND,wayland,x11"
-          "HYPRCURSOR_SIZE,24"
           "QT_QPA_PLATFORM,wayland;xcb"
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
           "SDL_VIDEODRIVER,wayland"
           "XCURSOR_SIZE,24"
           "XDG_SESSION_DESKTOP,Hyprland"
         ];
+
         input = {
           follow_mouse = 1;
           kb_layout = "us";
@@ -89,6 +89,7 @@ with lib;
             natural_scroll = false;
           };
         };
+
         gestures = {
           workspace_swipe = false;
         };
