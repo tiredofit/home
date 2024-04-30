@@ -22,5 +22,15 @@ in
           ferdium
         ];
     };
+
+
+    ## TODO - Only write this is hyprland.enable
+    wayland.windowManager.hyprland = {
+      settings = {
+        exec-once = [
+          "ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations"
+        ];
+      };
+    };
   };
 }
