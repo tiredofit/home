@@ -22,5 +22,13 @@ in
           wlogout
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        bind = [
+          "SUPER_SHIFT, E, exec, pkill wlogout || wlogout"
+        ];
+      };
+    };
   };
 }

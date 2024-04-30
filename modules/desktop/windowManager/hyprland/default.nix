@@ -173,21 +173,17 @@ with lib;
 
         # Keybinds
         bind = [
+          "SUPER, F, fullscreen"
           "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
           "SUPER, Return, exec, kitty"
           "SUPER, V, togglefloating,"
           "SUPER, mouse:274, killactive" # Middle Mouse
-          "SUPER, F, fullscreen"
           "SUPER, space, pseudo,"
           "SUPER_SHIFT, C, exec, pkill hyprpicker || hyprpicker --autocopy --no-fancy --format=hex"
-          "SUPER_SHIFT, E, exec, pkill wlogout || wlogout"
           "SUPER_SHIFT, Q, killactive"
           "SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c $(/nix/store/84d9n102xq8c5j3qlldi9gvglri25ixq-rofi-1.7.5+wayland3/bin/rofi -dmenu -p terminal)"
-          "SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
-          "SUPER_SHIFT, W, exec, pkill waybar || waybar"
-          "SUPER_SHIFT, X, exec, hyprlock"
-          "ALT, Tab, cyclenext,"
           "ALT, Tab, bringactivetotop,"
+          "ALT, Tab, cyclenext,"
           #"ALT,TAB,workspace,previous"
 
           # Move focus with mainMod + arrow keys
