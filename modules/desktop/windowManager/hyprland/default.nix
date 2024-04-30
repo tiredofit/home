@@ -64,6 +64,16 @@ with lib;
       enable = true;
       xwayland.enable = true;
       settings = {
+        env = [
+          "CLUTTER_BACKEND,wayland"
+          "GDK_BACKEND,wayland,x11"
+          "HYPRCURSOR_SIZE,24"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "SDL_VIDEODRIVER,wayland"
+          "XCURSOR_SIZE,24"
+          "XDG_SESSION_DESKTOP,Hyprland"
+        ];
         input = {
           follow_mouse = 1;
           kb_layout = "us";
@@ -149,6 +159,16 @@ with lib;
           "overshot, 0.05, 0.9, 0.1, 1.1"
         ];
       };
+
+        misc = {
+          force_default_wallpaper = -3;
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
+        };
+
+        plugin = {
+
+        };
       };
 
       extraConfig = ''
