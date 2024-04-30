@@ -30,6 +30,9 @@ in
         exec-once = [
           "ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations"
         ];
+        windowrulev2 = [
+          "workspace 3,class:(^Ferdium)$"
+        ];
       };
     };
   };
