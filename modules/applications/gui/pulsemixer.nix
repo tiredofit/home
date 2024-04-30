@@ -23,5 +23,13 @@ in
           pavucontrol
         ];
     };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        windowrulev2 = [
+          "windowrule=float,^(pavucontrol)$"
+        ];
+      };
+    };
   };
 }
