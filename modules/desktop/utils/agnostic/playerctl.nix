@@ -22,5 +22,18 @@ in
           playerctl
         ];
     };
+
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      settings = {
+        bindl = [
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioPrev, exec, playerctl previous"
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioMedia, exec, playerctl play-pause"
+          ",XF86AudioStop, exec, playerctl stop"
+          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ];
+      };
+    };
   };
 }
