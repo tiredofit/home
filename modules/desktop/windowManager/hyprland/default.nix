@@ -232,10 +232,7 @@ with lib;
           "SUPERSHIFT, left, movewindow,l"
           "SUPERSHIFT, right,movewindow,r"
           "SUPERSHIFT, up, movewindow,u"
-          "SUPERSHIFT, down, movewindow,d"
-
-          # Turn off animations / game mode
-          "WIN, F1, exec,  ~/.config/hypr/gamemode.sh"
+          "SUPERSHIFT, dow        bind = [  ~/.config/hypr/gamemode.sh"
 
           # special workspace
           ## TODO Dynamic Configuration
@@ -294,9 +291,6 @@ with lib;
 
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
-
-        bind = SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons
-        bind = SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy
       '';
       #plugins = [
       #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
