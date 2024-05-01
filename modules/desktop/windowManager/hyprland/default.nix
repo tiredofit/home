@@ -1,5 +1,7 @@
-{ config, inputs, lib, pkgs, ...}:
+{ config, inputs, lib, pkgs, specialArgs, ... }:
 let
+  inherit (specialArgs) displays display_center display_left display_right role;
+
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
 
@@ -205,38 +207,41 @@ with lib;
           #"SUPER, KP_Insert, workspace, 10"
 
           # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "SUPER SHIFT, KP_End, movetoworkspace, 1"
-          "SUPER SHIFT, KP_Down, movetoworkspace, 2"
-          "SUPER SHIFT, KP_Next, movetoworkspace, 3"
-          "SUPER SHIFT, KP_Left, movetoworkspace, 4"
-          "SUPER SHIFT, KP_Begin, movetoworkspace, 5"
-          "SUPER SHIFT, KP_Right, movetoworkspace, 6"
-          "SUPER SHIFT, KP_Home, movetoworkspace, 7"
-          "SUPER SHIFT, KP_Up,  movetoworkspace, 8"
-          "SUPER SHIFT, KP_Prior, movetoworkspace, 9"
-          #"SUPER SHIFT, KP_Insert, movetoworkspace, 10"
+          "SUPER_SHIFT, KP_End, movetoworkspace, 1"
+          "SUPER_SHIFT, KP_Down, movetoworkspace, 2"
+          "SUPER_SHIFT, KP_Next, movetoworkspace, 3"
+          "SUPER_SHIFT, KP_Left, movetoworkspace, 4"
+          "SUPER_SHIFT, KP_Begin, movetoworkspace, 5"
+          "SUPER_SHIFT, KP_Right, movetoworkspace, 6"
+          "SUPER_SHIFT, KP_Home, movetoworkspace, 7"
+          "SUPER_SHIFT, KP_Up,  movetoworkspace, 8"
+          "SUPER_SHIFT, KP_Prior, movetoworkspace, 9"
+          #"SUPER_SHIFT, KP_Insert, movetoworkspace, 10"
 
           # moving windows to other workspaces (silent)
-          "SUPER ALT, KP_End,   movetoworkspacesilent,1"
-          "SUPER ALT, KP_Down,  movetoworkspacesilent,2"
-          "SUPER ALT, KP_Next,  movetoworkspacesilent,3"
-          "SUPER ALT, KP_Left,  movetoworkspacesilent,4"
-          "SUPER ALT, KP_Begin, movetoworkspacesilent,5"
-          "SUPER ALT, KP_Right, movetoworkspacesilent,6"
-          "SUPER ALT, KP_Home,  movetoworkspacesilent,7"
-          "SUPER ALT, KP_Up,    movetoworkspacesilent,8"
-          "SUPER ALT, KP_Prior, movetoworkspacesilent,9"
-          #"SUPER ALT, KP_Insert, movetoworkspacesilent,0"
+          "SUPER_ALT, KP_End,   movetoworkspacesilent,1"
+          "SUPER_ALT, KP_Down,  movetoworkspacesilent,2"
+          "SUPER_ALT, KP_Next,  movetoworkspacesilent,3"
+          "SUPER_ALT, KP_Left,  movetoworkspacesilent,4"
+          "SUPER_ALT, KP_Begin, movetoworkspacesilent,5"
+          "SUPER_ALT, KP_Right, movetoworkspacesilent,6"
+          "SUPER_ALT, KP_Home,  movetoworkspacesilent,7"
+          "SUPER_ALT, KP_Up,    movetoworkspacesilent,8"
+          "SUPER_ALT, KP_Prior, movetoworkspacesilent,9"
+          #"SUPER_ALT, KP_Insert, movetoworkspacesilent,0"
 
           # moving windows around
-          "SUPERSHIFT, left, movewindow,l"
-          "SUPERSHIFT, right,movewindow,r"
-          "SUPERSHIFT, up, movewindow,u"
-          "SUPERSHIFT, dow        bind = [  ~/.config/hypr/gamemode.sh"
+          "SUPER_SHIFT, left, movewindow,l"
+          "SUPER_SHIFT, right,movewindow,r"
+          "SUPER_SHIFT, up, movewindow,u"
+          "SUPER_SHIFT, down, movewindow,d"
+
+           # Turn off animations / game mode
+          "WIN, F1, exec,  ~/.config/hypr/gamemode.sh"
 
           # special workspace
           ## TODO Dynamic Configuration
-          "SUPER     SHIFT, grave, movetoworkspace, special"
+          "SUPER_SHIFT, grave, movetoworkspace, special"
           "SUPER, grave, togglespecialworkspace, DP-2"
 
           # Scroll through existing workspaces with mainMod + scroll
@@ -250,18 +255,7 @@ with lib;
           "SUPERCTRL, up, resizeactive,0 -20"
           "SUPERCTRL, down, resizeactive,0 20"
         ];
-        bindl = [
-          ",XF86AudioPlay, exec, playerctl play-pause"
-          ",XF86AudioPrev, exec, playerctl previous"
-          ",XF86AudioNext, exec, playerctl next"
-          ",XF86AudioMedia, exec, playerctl play-pause"
-          ",XF86AudioStop, exec, playerctl stop"
-          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
-        ];
-        bindle = [
-          ",XF86AudioRaiseVolume, exec, swayosd-client --output-volume +1 --max-volume=100"
-          ",XF86AudioLowerVolume, exec, swayosd-client --output-volume -1"
-        ];
+
         bindm = [
           # Move/resize windows with mainMod + LMB/RMB and dragging
           "SUPER, mouse:272, movewindow"
@@ -279,7 +273,6 @@ with lib;
           #"idleinhibit focus, class:^(mpv|.+exe)$"
           #"idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
           #"idleinhibit fullscreen, class:^(firefox)$"
-
 
           # XDG-Portal-GTK File Picker annoyances
           "dimaround,title:^Open Files$"

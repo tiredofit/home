@@ -26,6 +26,13 @@ in
     ## TODO Make this work for dynamic Display (monitor_primary)
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
+        bindl = [
+          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ];
+        bindle = [
+          ",XF86AudioRaiseVolume, exec, swayosd-client --output-volume +1 --max-volume=100"
+          ",XF86AudioLowerVolume, exec, swayosd-client --output-volume -1"
+        ];
         exec-once = [
           "swayosd-server --display=HDMI-A-1"
         ];
