@@ -31,7 +31,6 @@ in
           ",XF86AudioNext, exec, playerctl next"
           ",XF86AudioMedia, exec, playerctl play-pause"
           ",XF86AudioStop, exec, playerctl stop"
-          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
         ];
       };
     };
