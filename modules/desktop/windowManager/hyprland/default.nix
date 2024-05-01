@@ -179,7 +179,7 @@ with lib;
           "SUPER, V, togglefloating,"
           "SUPER, mouse:274, killactive" # Middle Mouse
           "SUPER, space, pseudo,"
-          "SUPER_SHIFT, C, exec, pkill hyprpicker || hyprpicker --autocopy --no-fancy --format=hex"
+
           "SUPER_SHIFT, Q, killactive"
           "SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c $(/nix/store/84d9n102xq8c5j3qlldi9gvglri25ixq-rofi-1.7.5+wayland3/bin/rofi -dmenu -p terminal)"
           "ALT, Tab, bringactivetotop,"
@@ -270,7 +270,27 @@ with lib;
           "SUPER, mouse:272, movewindow"
           "SUPER, mouse:273, resizewindow"
         ];
+
+        windowrulev2 = [
+          # ZoomPWA
+          "workspace 3,class:(^FFPWA-01HTZ7G5XDG9A8VH9ZNCBBS9RT$)"
+          "size 1200 1155,class:(^FFPWA-01HTZ7G5XDG9A8VH9ZNCBBS9RT$)"
+          "float,title:^My Meeting$"
+          "float,class:(^FFPWA-01HTZ7G5XDG9A8VH9ZNCBBS9RT$)"
+
+          # IDLE inhibit while watching videos
+          #"idleinhibit focus, class:^(mpv|.+exe)$"
+          #"idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
+          #"idleinhibit fullscreen, class:^(firefox)$"
+
+
+          # XDG-Portal-GTK File Picker annoyances
+          "dimaround,title:^Open Files$"
+          "float,title:^Open Files$"
+          "size 1290 800, title:^Open Files$"
+        ];
       };
+
 
       extraConfig = ''
         source=~/src/home/dotfiles/hypr/hyprland.conf
