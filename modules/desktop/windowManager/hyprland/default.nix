@@ -36,12 +36,22 @@ with lib;
   imports = [
     inputs.hyprland.homeManagerModules.default
     ./binds.nix
+    ./decorations.nix
     ./displays.nix
+    ./input.nix
     ./settings.nix
     ./startup.nix
     ./windowrules.nix
-
   ];
+
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
+    home = {
+      packages = with pkgs;
+        [
+          gameMode
+          #hyprland-share-picker     # If this works outside of Hyprland modularize
+        ];
+    };
 
     host = {
       home = {
