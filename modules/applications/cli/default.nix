@@ -40,6 +40,7 @@ with lib;
     ./ranger.nix
     ./rclone.nix
     ./ripgrep.nix
+    ./rs-tftpd.nix
     ./s3ql.nix
     ./secrets.nix
     ./shfmt.nix
