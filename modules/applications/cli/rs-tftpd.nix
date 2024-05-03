@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.lazygit;
+  cfg = config.host.home.applications.rs-tftpd;
 in
   with lib;
 {
   options = {
-    host.home.applications.lazygit = {
+    host.home.applications.rs-tftpd = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Git Interface";
+        description = "TFTPD Server";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          lazygit
+          rs-tftpd
         ];
     };
   };
