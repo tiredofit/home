@@ -18,6 +18,7 @@ with lib;
         lazygit.enable = true;
         obsidian.enable = true;
         python.enable = true;
+        rs-tftpd.enable = true;
         ssh = {
           enable = true;
           ignore = {

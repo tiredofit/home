@@ -100,9 +100,9 @@
               hostname = "beef";
               username = gn;
               displays = 3;
-              display_center = "DisplayPort-1";
-              display_left = "DisplayPort-2";
-              display_right = "HDMI-A-0";
+              display_center = "DP-2";
+              display_left = "DP-3";
+              display_right = "HDMI-A-1";
               networkInterface = "wlp10s0";
               inherit inputs outputs;
             };
