@@ -9,23 +9,23 @@ with lib;
       applications = {
         avidemux.enable = true;
         cura.enable = true;
-        electrum.enable = true;
+        electrum.enable = false;
         encfs.enable = true;
         floorp.enable = true;
         github-client.enable = true;
-        gnome-encfs-manager.enable = mkDefault true;
+        gnome-encfs-manager.enable = true;
         gnome-software.enable = true;
-        hadolint.enable = mkDefault true;
+        hadolint.enable = true;
         hugo.enable = false;
         lazygit.enable = true;
-        nix-development_tools.enable = mkDefault true;
+        nix-development_tools.enable = true;
         obsidian.enable = true;
-        opensnitch-ui.enable = mkDefault true;
+        opensnitch-ui.enable = true;
         python.enable = true;
         rs-tftpd.enable = true;
-        shellcheck.enable = mkDefault true;
-        shfmt.enable = mkDefault true;
-        smartgit.enable = mkDefault false;
+        shellcheck.enable = true;
+        shfmt.enable = true;
+        smartgit.enable = false;
         ssh = {
           enable = true;
           ignore = {
@@ -35,8 +35,8 @@ with lib;
         };
         szyszka.enable = true;
         veracrypt.enable = true;
-        xmlstarlet.enable = mkDefault true;
-        yq.enable = mkDefault true;
+        xmlstarlet.enable = true;
+        yq.enable = true;
         zoom.enable = mkForce false;
       };
       feature = {
