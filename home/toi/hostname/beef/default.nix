@@ -13,12 +13,19 @@ with lib;
         encfs.enable = true;
         floorp.enable = true;
         github-client.enable = true;
+        gnome-encfs-manager.enable = mkDefault true;
         gnome-software.enable = true;
+        hadolint.enable = mkDefault true;
         hugo.enable = false;
         lazygit.enable = true;
+        nix-development_tools.enable = mkDefault true;
         obsidian.enable = true;
+        opensnitch-ui.enable = mkDefault true;
         python.enable = true;
         rs-tftpd.enable = true;
+        shellcheck.enable = mkDefault true;
+        shfmt.enable = mkDefault true;
+        smartgit.enable = mkDefault false;
         ssh = {
           enable = true;
           ignore = {
@@ -28,6 +35,8 @@ with lib;
         };
         szyszka.enable = true;
         veracrypt.enable = true;
+        xmlstarlet.enable = mkDefault true;
+        yq.enable = mkDefault true;
         zoom.enable = mkForce false;
       };
       feature = {
