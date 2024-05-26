@@ -114,24 +114,24 @@ in
         settings = {
           general = {
             lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";        # avoid starting multiple hyprlock instances.
-            before_sleep_cmd = "hypridle-companion sleep before";                # lock before suspend.
-            after_sleep_cmd = "hypridle-companion sleep  after";                 # to avoid having to press a key twice to turn on the display.
+            before_sleep_cmd = "$HOME/.local/state/nix/profile/bin/hypridle-companion sleep before";                # lock before suspend.
+            after_sleep_cmd = "$HOME/.local/state/nix/profile/bin/hypridle-companion sleep  after";                 # to avoid having to press a key twice to turn on the display.
           };
          listener = [
             {
               timeout = 600;                                                       # 10min
-              on-timeout = "hypridle-companion lock before";                       # lock screen when timeout has passed
-              on-resume = "hypridle-companion lock after";                         # reset gamma
+              on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion lock before";                       # lock screen when timeout has passed
+              on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion lock after";                         # reset gamma
             }
             {
               timeout = 660;                                                       # 11min
-              on-timeout = "hypridle-companion blank before";                      # screen off when timeout has passed
-              on-resume = "hypridle-companion blank after";                        # screen on when activity is detected after timeout has fired.
+              on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion blank before";                      # screen off when timeout has passed
+              on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion blank after";                        # screen on when activity is detected after timeout has fired.
             }
             {
               timeout = 900;                                                       # 15min
-              on-timeout = "hypridle-companion suspend before";                    # suspend pc
-              on-resume = "hypridle-companion suspend after";                      # reset gamma
+              on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion suspend before";                    # suspend pc
+              on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion suspend after";                      # reset gamma
             }
           ];
         };
