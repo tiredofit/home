@@ -104,16 +104,10 @@ in
     home = {
       packages = with pkgs;
         [
-          #hypridle
           hypridle-companion-script
         ];
     };
 
-      #settings = {
-      #  exec-once = [
-      #    "hypridle"
-      #  ];
-      #};
     services = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       hypridle = {
         enable = true;
