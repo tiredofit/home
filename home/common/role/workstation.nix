@@ -42,6 +42,7 @@ with lib;
         mp3gain.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
+        nemo.enable = mkDefault true;
         nextcloud-client.enable = mkDefault true;
         nmap.enable = mkDefault true;
         pinta.enable = mkDefault true;
@@ -51,7 +52,7 @@ with lib;
           defaultApplication.enable = mkDefault true;
         };
         seahorse.enable = mkDefault true;
-        thunar.enable = mkDefault true;
+        thunar.enable = mkDefault false;
         thunderbird.enable = mkDefault true;
         virt-manager.enable = mkDefault true;
         visual-studio-code = {

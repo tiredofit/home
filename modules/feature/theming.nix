@@ -27,6 +27,8 @@ in
       iconTheme = {
         name = "Papirus";
         package = pkgs.papirus-icon-theme;
+        #name = "BeautyLine";
+        #package = pkgs.beauty-line-icon-theme;
       };
       theme = {
         name = "Zukitwo";
