@@ -20,17 +20,17 @@ let
 
     _hypridle_exec() {
         if [ "''${HYPRIDLE_DEBUG,,}" = "true" ]; then
-            "$@"
-        else
             "$@" >> "$_hypridle_logfile"
+        else
+            "$@"
         fi
     }
 
     _hypridle_log() {
         if [ "''${HYPRIDLE_DEBUG,,}" = "true" ]; then
-            echo "$@" >> "$_hypridle_logfile"
-        else
             echo "$@"
+        else
+            echo "$@" >> "$_hypridle_logfile"
         fi
     }
 
