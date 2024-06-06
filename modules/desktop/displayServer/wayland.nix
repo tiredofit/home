@@ -15,8 +15,6 @@ in
           nwg-displays.enable = true;
           slurp.enable = true;
           sway-notification-center.enable = true;
-          swayidle.enable = false;
-          swaylock.enable = false;
           swayosd.enable = true;
           waybar.enable = true;
           wayprompt.enable = true;

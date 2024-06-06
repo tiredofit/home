@@ -22,6 +22,5 @@ in
           wayprompt
         ];
     };
-
   };
 }
