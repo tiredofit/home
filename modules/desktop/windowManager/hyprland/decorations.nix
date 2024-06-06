@@ -14,12 +14,17 @@ with lib;
           #col.inactive_border = "rgba(595959aa)";
           allow_tearing = false;
           border_size = 2;
-          cursor_inactive_timeout = 60;
           gaps_in = 2;
           gaps_out = 5;
           layout = "master";
           resize_corner = 2;
           resize_on_border = true;
+        };
+
+        cursor = {
+          # Cursor
+          inactive_timeout = 60;
+          hide_on_key_press = true;
         };
 
         master = {
