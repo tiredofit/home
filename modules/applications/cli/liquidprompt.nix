@@ -89,6 +89,7 @@ in
       # corresponding marks. Set to 0 to only print the colored marks.
       # Defaults to 1 (display percentages)
       LP_PERCENTS_ALWAYS=1
+      LP_DISPLAY_VALUES_AS_PERCENTS=1
 
       # Use the permissions feature and display a red ':' before the prompt to show
       # when you don't have write permission to the current directory.
