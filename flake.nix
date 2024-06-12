@@ -23,6 +23,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     comma.url = "github:nix-community/comma";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
@@ -74,7 +75,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       gn = "dave";
@@ -91,18 +92,37 @@
         inherit system;
       };
 
+      stable = system: import nixpkgs-stable {
+        overlays = [
+          inputs.comma.overlays.default
+          inputs.nur.overlay
+          inputs.nix-vscode-extensions.overlays.default
+          inputs.nixpkgs-wayland.overlay
+        ];
+        inherit system;
+      };
+
       HomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
         modules = [
           (import ./home)
           (import ./modules)
         ];
-        extraSpecialArgs = { };
+        extraSpecialArgs = {
+          inherit stable;
+        };
         pkgs = pkgsForSystem (args.system or "x86_64-linux");
       } // { inherit (args) extraSpecialArgs; });
     in
-      flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ] (system: rec {
-        legacyPackages = pkgsForSystem system;
-      }) //
+      flake-utils.lib.eachSystem [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin" ]
+        (
+          system: rec {
+          legacyPackages = pkgsForSystem system;
+          }
+        ) //
       {
         homeConfigurations = {
           "beef.${gn}" = HomeConfiguration {
