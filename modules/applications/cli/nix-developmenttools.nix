@@ -27,8 +27,8 @@ in
             nix-output-monitor      # get additional information while building packages
             nix-tree                # interactively browse dependency graphs of Nix derivations
             nix-update              # swiss-knife for updating nix packages
-            nixfmt                  # nix code formatter
-            nixpkgs-fmt             # nix code formatter for nispkgs
+            nixfmt-classic          # nix code formatter
+            nixpkgs-fmt             # nix code formatter for nixpkgs
             nixpkgs-lint            # check nixpkgs for common errors
             nurl                    # generate Nix fetcher calls from repository URLs
             nvd                     # nix package version diffs (e.x. nvd diff /run/current-system result)
