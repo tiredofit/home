@@ -28,7 +28,11 @@ in
         initExtra = ''
           # Only load Liquidprompt in interactive shells, not from a script or from scp
           if [[ $- = *i* ]] ; then
-             source /home/$USER/.nix-profile/bin/liquidprompt
+             if [ -f /home/$USER/.nix-profile/bin/liquidprompt ]; then
+                source /home/$USER/.nix-profile/bin/liquidprompt
+             elif [ -f /home/$USER/.local/state/nix/profile/bin/liquidprompt ]; then
+                source /home/$USER/.local/state/nix/profile/bin/liquidprompt
+             fi
           fi
         '';
       };
