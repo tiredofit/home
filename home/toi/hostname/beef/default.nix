@@ -49,6 +49,7 @@ with lib;
           windowManager = "hyprland";
         };
       };
+      service.decrypt_encfs_workspace.enable = true;
       user = {
         dave = {
           secrets = {

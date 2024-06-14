@@ -48,7 +48,7 @@ with lib;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
         remmina = {
-          enable = mkDefault false;
+          enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
         seahorse.enable = mkDefault true;
