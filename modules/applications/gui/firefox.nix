@@ -1134,7 +1134,7 @@ in with lib; {
                 }
 
               /* CUSTOM: App Button Popup Icons Colorized */
-                                /* blue */
+                /* blue */
                 #appMenu-fxa-label2::before,
                 #fxa-manage-account-button::before,
                 :is(#appMenu-new-window-button2,#appMenu-downloads-button,#appMenu-save-file-button2,#appMenu-zoomEnlarge-button2,#PanelUI-fxa-menu-sync-prefs-button,#appMenu_aboutName) > .toolbarbutton-icon {
@@ -2818,11 +2818,11 @@ in with lib; {
                     }
                 }
             /* CUSTOM: URL Bar disable breakout */
-                #urlbar[breakout][breakout-extend] {
-                top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
-                left: 0px !important;
-                width: calc(100% - 0px) !important;
-                }
+                /*#urlbar[breakout][breakout-extend] {
+                /*top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+                /*left: 0px !important;
+                /*width: calc(100% - 0px) !important;
+                /*}
 
                 #urlbar[breakout][breakout-extend] > #urlbar-background {
                 animation-name: unset !important;
