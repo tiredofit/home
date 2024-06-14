@@ -92,25 +92,16 @@
         inherit system;
       };
 
-      stable = system: import nixpkgs-stable {
-        overlays = [
-          inputs.comma.overlays.default
-          inputs.nur.overlay
-          inputs.nix-vscode-extensions.overlays.default
-          inputs.nixpkgs-wayland.overlay
-        ];
-        inherit system;
-      };
-
       HomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
         modules = [
           (import ./home)
           (import ./modules)
         ];
         extraSpecialArgs = {
-          inherit stable;
+
         };
         pkgs = pkgsForSystem (args.system or "x86_64-linux");
+
       } // { inherit (args) extraSpecialArgs; });
     in
       flake-utils.lib.eachSystem [
