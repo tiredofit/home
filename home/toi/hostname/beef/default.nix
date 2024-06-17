@@ -11,7 +11,7 @@ with lib;
         cura.enable = true;
         electrum.enable = false;
         encfs.enable = true;
-        floorp.enable = true;
+        floorp.enable = false;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
         gnome-software.enable = true;

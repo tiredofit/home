@@ -1,10 +1,11 @@
-{ config, lib, pkgs, specialArgs, ... }:
+{ config, inputs, lib, pkgs, specialArgs, ... }:
 let
   inherit (specialArgs) display_center;
   cfg = config.host.home.applications.hyprlock;
 in
   with lib;
 {
+
   options = {
     host.home.applications.hyprlock = {
       enable = mkOption {
@@ -19,6 +20,7 @@ in
     programs = {
       hyprlock = {
         enable = true;
+        package = inputs.hyprland.packages."${pkgs.system}".hyprland;
         settings = {
           "$text_color" = "rgba(E2E2E2FF)";
           "$entry_background_color" = "rgba(43434341)";
