@@ -9,35 +9,44 @@ with lib;
       applications = {
         avidemux.enable = true;
         cura.enable = true;
-        electrum.enable = false;
+        czkawka.enable = mkDefault true;
         encfs.enable = true;
-        floorp.enable = false;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
         hugo.enable = false;
         lazygit.enable = true;
+        mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
+        nmap.enable = mkDefault true;
         obsidian.enable = true;
         opensnitch-ui.enable = true;
-        python.enable = true;
-        rs-tftpd.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         smartgit.enable = false;
         ssh = {
           enable = true;
           ignore = {
-            "192.168.1.0/24" = true;
-            "192.168.4.0/24" = true;
+            "192.168.0.0/21" = true;
           };
         };
         szyszka.enable = true;
+        thunderbird.enable = mkDefault true;
         veracrypt.enable = true;
+        virt-manager.enable = mkDefault true;
+        visual-studio-code = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         xmlstarlet.enable = true;
         yq.enable = true;
-        zoom.enable = mkForce false;
+        xdg-ninja.enable = mkDefault true;
+        yt-dlp.enable = mkDefault true;
+        zathura = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
       };
       feature = {
         emulation = {
