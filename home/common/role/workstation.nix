@@ -14,6 +14,10 @@ with lib;
         };
         bleachbit.enable = mkDefault true;
         blueman.enable = mkDefault true;
+        calibre = {
+          enable = mkDefault true;
+          defaultApplication.enable = mkDefault true;
+        };
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
         diffuse = {
@@ -37,11 +41,11 @@ with lib;
         gnome-system-monitor.enable = mkDefault true;
         gparted.enable = mkDefault true;
         kitty.enable = mkDefault true;
+        lazygit.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
         nemo.enable = mkDefault true;
-        nextcloud-client.enable = mkDefault true;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
         remmina = {
@@ -49,6 +53,7 @@ with lib;
           defaultApplication.enable = mkDefault true;
         };
         seahorse.enable = mkDefault true;
+        tea.enable = mkDefault true;
         vlc = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
@@ -61,6 +66,8 @@ with lib;
         theming.enable = mkDefault true;
       };
       service = {
+        decrypt_encfs_workspace.enable = mkDefault true;
+        vscode-server.enable = mkDefault true;
       };
     };
   };

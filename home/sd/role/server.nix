@@ -10,11 +10,9 @@ with lib;
         docker-compose.enable = mkDefault true;
         git.enable = mkDefault true;
         lazygit.enable = mkDefault true;
-        neovim.enable = mkDefault true;
         tea.enable = mkDefault true;
       };
       feature = {
-
       };
       service = {
         vscode-server.enable = mkDefault true;
