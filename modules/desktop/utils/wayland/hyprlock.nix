@@ -5,7 +5,6 @@ let
 in
   with lib;
 {
-
   options = {
     host.home.applications.hyprlock = {
       enable = mkOption {
@@ -20,7 +19,7 @@ in
     programs = {
       hyprlock = {
         enable = true;
-        package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+        package = pkgs.hyprlock;
         settings = {
           "$text_color" = "rgba(E2E2E2FF)";
           "$entry_background_color" = "rgba(43434341)";
