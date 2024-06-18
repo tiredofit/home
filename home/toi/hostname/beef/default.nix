@@ -7,6 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
+        act.enable = mkDefault true;
         avidemux.enable = true;
         cura.enable = true;
         czkawka.enable = mkDefault true;
@@ -28,7 +29,8 @@ with lib;
         ssh = {
           enable = true;
           ignore = {
-            "192.168.0.0/21" = true;
+            "192.168.1.0/24" = true;
+            "192.168.4.0/24" = true;
           };
         };
         szyszka.enable = true;
