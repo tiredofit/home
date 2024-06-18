@@ -34,7 +34,7 @@ with lib;
           inherit_fullscreen = true;
           mfact = 0.55;
           new_on_top = true;
-          new_status = master;
+          new_status = "master";
           orientation = "center";
           smart_resizing = true;
         };
