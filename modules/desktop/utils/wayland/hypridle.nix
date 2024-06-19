@@ -28,9 +28,9 @@ let
 
     _hypridle_log() {
         if [ "''${HYPRIDLE_DEBUG,,}" = "true" ]; then
-            echo "$@"
+            echo "$@"  >> "$_hypridle_logfile"
         else
-            echo "$@" >> "$_hypridle_logfile"
+            echo "$@"
         fi
     }
 

@@ -21,20 +21,20 @@ in
         enable = true;
         package = pkgs.hyprlock;
         settings = {
-          "$text_color" = "rgba(E2E2E2FF)";
           "$entry_background_color" = "rgba(43434341)";
           "$entry_border_color" = "rgba(21212125)";
           "$entry_color" = "rgba(C6C6C6FF)";
           "$font_family" = "Noto Sans NF";
           "$font_family_clock" = "Noto Sans NF";
           "$font_symbols" = "Noto Sans NF";
+          "$text_color" = "rgba(E2E2E2FF)";
 
           background = [
             {
+              blur_passes = 4;
+              blur_size = 5;
               color = "rgba(3131377)";
               path = "screenshot";
-              blur_size = 5;
-              blur_passes = 4;
             }
           ];
 
