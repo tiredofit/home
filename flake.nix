@@ -205,11 +205,11 @@
             };
           };
 
-          "workspace.${gn}" = HomeConfiguration {
+          "expedition.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
-              hostname = "workspace" ;
+              hostname = "expedition" ;
               username = gn;
               networkInterface = "br0";
               inherit inputs outputs;
