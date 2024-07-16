@@ -3112,6 +3112,8 @@ in with lib; {
             "network.captive-portal-service.enabled" = false; # Disable check for captive portal. By default, Firefox checks for the presence of a captive portal on every startup.  This involves traffic to Akamai. (https://support.mozilla.org/questions/1169302).
             "browser.urlbar.groupLabels.enabled" = false; # Disable Firefox Suggest(https://support.mozilla.org/en-US/kb/navigate-web-faster-firefox-suggest) feature allows Mozilla to provide search suggestions in the US, which uses your city location and search keywords to send suggestions. This is also used to serve advertisements.
             "browser.urlbar.quicksuggest.enabled" = false; # Disable Firefox Suggest(https://support.mozilla.org/en-US/kb/navigate-web-faster-firefox-suggest) feature allows Mozilla to provide search suggestions in the US, which uses your city location and search keywords to send suggestions. This is also used to serve advertisements.
+            "dom.private-attribution.submission.enabled" = false; # Disable Adverttiser Attribution
+
 
             ## Security
             "app.update.auto" = true; # Disable automatic updates.
@@ -3188,6 +3190,7 @@ in with lib; {
             "privacy.cpd.offlineApps" = true; # Privacy
             "privacy.cpd.sessions" = false; # Privacy
             "privacy.donottrackheader.enabled" = true; # Privacy
+            "privacy.globalprivacycontrol.enabled" = true; # Privacy - Tell websites not to sell of share my data
             "privacy.history.custom" = true; # Privacy
             "privacy.partition.network_state.ocsp_cache" = true; # Privacy
             "privacy.trackingprotection.enabled" = true; # Privacy
