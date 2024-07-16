@@ -55,7 +55,7 @@ in
     home = {
       packages = with pkgs;
         [
-          gnome.eog
+          gnome.eog # 24.11 - Remove the gnome. prefix
         ];
     };
 
