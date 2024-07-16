@@ -34,7 +34,7 @@ in
 with lib;
 {
   imports = [
-    inputs.hyprland.homeManagerModules.default
+    #inputs.hyprland.homeManagerModules.default
     ./binds.nix
     ./decorations.nix
     ./displays.nix
