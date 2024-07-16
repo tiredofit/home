@@ -33,7 +33,7 @@ in
             {
               blur_passes = 4;
               blur_size = 5;
-              color = "rgba(3131377)";
+              color = "rgba(25, 20, 20, 1.0)";
               path = "screenshot";
             }
           ];
