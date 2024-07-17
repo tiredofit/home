@@ -21,7 +21,7 @@ in
 
       packages = with pkgs;
       [
-        nano
+        unstable.nano
       ];
     };
   };

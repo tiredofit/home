@@ -48,7 +48,7 @@ in with lib; {
 
     programs.firefox = {
       enable = true;
-      package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
+      package = if pkgs.stdenv.isLinux then pkgs.unstable.firefox else pkgs.unstable.firefox-bin;
       nativeMessagingHosts = with pkgs; mkIf (username == "dave") [
         pkgs.firefoxpwa
       ];

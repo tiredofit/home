@@ -19,6 +19,7 @@ in
     programs = {
       kitty = {
         enable = true;
+        package = pkgs.unstable.kitty;
         font = {
           name = "Hack";
           size = 11.0;

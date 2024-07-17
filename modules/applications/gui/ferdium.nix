@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          ferdium
+          unstable.ferdium
         ];
     };
 
