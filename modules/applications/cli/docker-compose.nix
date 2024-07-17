@@ -15,7 +15,11 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    home = { packages = with pkgs; [ docker-compose ]; };
+    home = {
+      packages = with pkgs; [
+        unstable.docker-compose
+      ];
+    };
 
     programs = {
       bash = {

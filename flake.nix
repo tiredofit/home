@@ -22,8 +22,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     comma.url = "github:nix-community/comma";
     flake-utils.url = "github:numtide/flake-utils";
@@ -76,19 +75,22 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       gn = "dave";
       gnsn = "daveconroy";
       handle = "tiredofit";
 
-      pkgsForSystem = system: import nixpkgs-stable {
+      pkgsForSystem = system: import nixpkgs {
         overlays = [
           inputs.comma.overlays.default
           inputs.nur.overlay
           inputs.nix-vscode-extensions.overlays.default
           inputs.nixpkgs-wayland.overlay
+          outputs.overlays.additions
+          outputs.overlays.modifications
+          outputs.overlays.unstable-packages
         ];
         inherit system;
       };
@@ -116,6 +118,7 @@
           }
         ) //
       {
+        overlays = import ./overlays {inherit inputs;};
         homeConfigurations = {
           "beef.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
