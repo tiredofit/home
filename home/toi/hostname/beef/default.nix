@@ -36,18 +36,18 @@ with lib;
         };
         szyszka.enable = true;
         thunderbird.enable = mkDefault true;
-        veracrypt.enable = true;
+        veracrypt.enable = false;
         virt-manager.enable = mkDefault true;
         visual-studio-code = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        xmlstarlet.enable = true;
+        xmlstarlet.enable = false;
         yq.enable = true;
         xdg-ninja.enable = mkDefault true;
         yt-dlp.enable = mkDefault true;
         zathura = {
-          enable = mkDefault true;
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
       };
