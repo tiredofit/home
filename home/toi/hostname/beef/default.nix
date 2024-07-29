@@ -23,6 +23,7 @@ with lib;
         nmap.enable = mkDefault true;
         obsidian.enable = true;
         opensnitch-ui.enable = true;
+        python.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         smartgit.enable = false;
