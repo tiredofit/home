@@ -146,12 +146,12 @@ in with lib; {
             localcdn
             reddit-enhancement-suite
             sidebery
-            sponsorblock
+            #sponsorblock
             torrent-control
             ublock-origin
             undoclosetabbutton
             user-agent-string-switcher
-            video-downloadhelper
+            #video-downloadhelper
 
             ### Missing:
             ## Canadian English Dictionary dictionary 3.1.3 true en-CA@dictionaries.addons.mozilla.org
