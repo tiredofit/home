@@ -28,6 +28,15 @@ with lib;
   news.display = mkDefault "show";
 
   programs = {
+    bash = {
+      initExtra = ''
+        if [ -d "~/src/nixos" ]; then
+          alias nixos="cd ~/src/nixos"
+          alias nixosupdate="sudo nix flake update $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+          alias nixswitch="sudo nixos-rebuild switch --flake $HOME/src/nixos/#$HOSTNAME $@"
+        fi
+      '';
+    };
     home-manager = {
       enable = mkForce true;
     };
