@@ -86,15 +86,6 @@ in
 
           if [ -f "/home/$USER/src/scripts/changelog/changelogger.sh" ] ; then
               alias changelog="/home/$USER/src/scripts/changelog/changelogger.sh"
-          fi
-
-          if [ -d "/home/$USER/src/home" ] ; then
-              alias hm="cd ~/src/home"
-              alias hmupdate="nix flake update $HOME/src/home --extra-experimental-features 'nix-command flakes'"
-              alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER --extra-experimental-features 'nix-command flakes' $@"
-          fi
-
-          if [ -d "/home/$USER/src/nixos" ] ; then
               alias nixos="cd ~/src/nixos"
               alias nixosupdate="sudo nix flake update $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
               alias nixswitch="sudo nixos-rebuild switch --flake $HOME/src/nixos/#$HOSTNAME $@"
@@ -200,7 +191,8 @@ in
                     nixos_tmp=$(mktemp -d)
                     ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
                     cd $nixos_tmp
-                    sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME -b backup.$(date +"%Y%m%d%H%M%S")
+                    #sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME -b backup.$(date +"%Y%m%d%H%M%S")
+                    sudo nixos-rebuild switch --flake $nixos_tmp#$HOSTNAME
                     cd $original_dir
                     rm -rf $nixos_tmp
                     if [ "$SSH_CONNECTION" = "" ]; then
