@@ -1,6 +1,18 @@
 { inputs, config, lib, pkgs, ... }:
 with lib;
 {
+  programs = {
+    bash = {
+      initExtra = ''
+        if [ -d "~/src/home" ] ; then
+              alias hm="cd ~/src/home"
+              alias hmupdate="nix flake update ~/src/home --extra-experimental-features 'nix-command flakes'"
+              alias hmswitch="home-manager switch --flake ~/src/home/#$HOSTNAME.$USER --extra-experimental-features 'nix-command flakes' $@"
+          fi
+      '';
+    };
+  };
+
   home = {
     activation = {
       report-changes = ''
