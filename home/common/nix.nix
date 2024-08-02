@@ -65,18 +65,13 @@ with lib;
   programs = {
     bash = {
       initExtra = ''
-        if [ -d "~/src/home" ] ; then
-              alias hm="cd ~/src/home"
-              alias hmupdate="nix flake update ~/src/home --extra-experimental-features 'nix-command flakes'"
-              alias hmswitch="home-manager switch --flake ~/src/home/#$HOSTNAME.$USER --extra-experimental-features 'nix-command flakes' $@"
+          if [ -d "/home/$USER/src/nixos" ] ; then
+              alias nixos="cd ~/src/nixos"
+              alias nixosupdate="sudo nix flake update $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+              alias nixswitch="sudo nixos-rebuild switch --flake $HOME/src/nixos/#$HOSTNAME $@"
           fi
-
-        if [ -f "$XDG_RUNTIME_DIR"/secrets/gh_token ] ; then
-            export NIX_CONFIG="access-tokens = github.com=$(cat $XDG_RUNTIME_DIR/secrets/gh_token)"
-        fi
       '';
     };
-
     nix-index = {
       enable = mkDefault true;
       enableBashIntegration = mkDefault true;
