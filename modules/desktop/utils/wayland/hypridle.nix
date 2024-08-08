@@ -68,6 +68,8 @@ let
                 ;;
                 after )
                     _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [suspend] [resume]"
+                    #systemctl --user restart pipewire.service
+                    #systemctl --user restart xdg-desktop-portal.service
                 ;;
             esac
         ;;
