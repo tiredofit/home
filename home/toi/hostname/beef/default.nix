@@ -21,6 +21,7 @@ with lib;
         mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
+        msteams.enable = true;
         obsidian.enable = true;
         opensnitch-ui.enable = true;
         python.enable = true;
