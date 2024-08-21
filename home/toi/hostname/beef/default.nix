@@ -21,7 +21,7 @@ with lib;
         mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
-        msteams.enable = true;
+        msteams.enable = false;
         obsidian.enable = true;
         opensnitch-ui.enable = true;
         python.enable = true;
@@ -45,7 +45,7 @@ with lib;
         };
         xmlstarlet.enable = false;
         yq.enable = true;
-        xdg-ninja.enable = mkDefault true;
+        xdg-ninja.enable = mkDefault false;
         yt-dlp.enable = mkDefault true;
         zathura = {
           enable = mkDefault false;

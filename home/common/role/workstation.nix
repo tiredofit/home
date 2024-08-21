@@ -29,7 +29,7 @@ with lib;
           defaultApplication.enable = mkDefault true;
         };
         eog = {
-          enable = mkDefault true;
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
         ferdium.enable = mkDefault true;
@@ -37,7 +37,7 @@ with lib;
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        geeqie.enable = mkDefault true;
+        geeqie.enable = mkDefault false;
         gnome-system-monitor.enable = mkDefault true;
         gparted.enable = mkDefault true;
         kitty.enable = mkDefault true;
@@ -48,6 +48,10 @@ with lib;
         nemo.enable = mkDefault true;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
+        qview = {
+          enable = mkDefault false;
+          defaultApplication.enable = mkDefault true;
+        };
         remmina = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
