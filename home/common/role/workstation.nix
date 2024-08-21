@@ -49,7 +49,7 @@ with lib;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
         qview = {
-          enable = mkDefault false;
+          enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
         remmina = {
