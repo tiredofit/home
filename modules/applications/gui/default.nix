@@ -37,6 +37,7 @@ with lib;
     ./opensnitch-ui.nix
     ./pinta.nix
     ./pulsemixer.nix
+    ./qview.nix
     ./remmina.nix
     ./rofi.nix
     ./seahorse.nix
