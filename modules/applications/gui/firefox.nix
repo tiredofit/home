@@ -256,6 +256,7 @@ in with lib; {
             "browser.urlbar.speculativeConnect.enabled" = false; # Disable speculative website loading.
             "dom.event.clipboardevents.enabled" = true; # Disable the clipboardevents.
             "dom.indexedDB.enabled" = true; # Enable IndexedDB (disabling breaks things)
+            "dom.private-attribution.submission.enabled" = false; # Disable Advertiser Attribution
             "dom.storage.enabled" = true; # Disable DOM storage
             "keyword.enabled" = true; # Disable Search Keyword
             "media.peerconnection.enabled" = true; # Disable WebRTC
