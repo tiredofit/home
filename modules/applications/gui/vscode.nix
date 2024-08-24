@@ -70,8 +70,6 @@ in
         ]) ++ (with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
           # Bleeding Edge versions
           # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
-          ## Bundles
-            lizebang.bash-extension-pack              # Bash shell
 
           ## CI
             github.vscode-github-actions              # Github actions helper
