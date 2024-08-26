@@ -1,4 +1,4 @@
-{inputs, config, lib, pkgs, ...}:
+{inputs, config, lib, ...}:
 
 let
   cfg = config.host.home.service.vscode-server;
