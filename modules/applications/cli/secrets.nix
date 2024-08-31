@@ -29,7 +29,7 @@ in
         fi
 
         if $_systemctl --user list-unit-files sops-nix.service &>/dev/null ; then
-            $_systemctl restart --user sops-nix
+            $_systemctl start --user sops-nix
         fi
       '';
 
