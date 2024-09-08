@@ -53,6 +53,7 @@ with lib;
     ./vlc.nix
     ./vscode.nix
     ./wpsoffice.nix
+    ./zenbrowser.nix
     ./zoom.nix
   ];
 }
