@@ -51,6 +51,7 @@ with lib;
           enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
+        zenbrowser.enable = true;
       };
       feature = {
         emulation = {
