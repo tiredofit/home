@@ -31,10 +31,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #hyprland = {
-    #  url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #  #url = "github:hyprwm/Hyprland/v0.39.1";
+    ##url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #  type = "git";
+    #  submodules = true;
+    #  url = "https://github.com/hyprwm/Hyprland";
+    #  ref = "refs/tags/v0.43.0";
+    #  inputs.aquamarine.follows = "aquamarine";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
+#
+    #aquamarine = {
+    #  type = "git";
+    #  url = "https://github.com/hyprwm/aquamarine";
+    #  ref = "refs/tags/v0.4.0";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
+
     #hyprland-contrib = {
     #  url = "github:hyprwm/contrib";
     #  inputs.nixpkgs.follows = "nixpkgs";
