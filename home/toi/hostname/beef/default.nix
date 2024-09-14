@@ -9,7 +9,7 @@ with lib;
       applications = {
         act.enable = mkDefault true;
         avidemux.enable = true;
-        cura.enable = false;
+        cura.enable = true;
         czkawka.enable = mkDefault true;
         encfs.enable = true;
         github-client.enable = true;
