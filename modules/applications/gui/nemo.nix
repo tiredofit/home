@@ -33,8 +33,8 @@ in
     home = {
       packages = with pkgs;
         [
-          cinnamon.nemo-with-extensions
           ffmpegthumbnailer
+          nemo-with-extensions
         ];
     };
 
