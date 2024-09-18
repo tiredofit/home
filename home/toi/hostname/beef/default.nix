@@ -19,6 +19,7 @@ with lib;
         hugo.enable = false;
         lazygit.enable = true;
         mp3gain.enable = mkDefault true;
+        mqtt-explorer.enable = true;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
         msteams.enable = false;
@@ -51,6 +52,7 @@ with lib;
           enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
+        zoom.enable = true;
         zenbrowser.enable = true;
       };
       feature = {

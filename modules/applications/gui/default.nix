@@ -30,6 +30,7 @@ with lib;
     ./libreoffice.nix
     ./masterpdfeditor.nix
     ./mate-calc.nix
+    ./mqtt-explorer.nix
     ./msteams.nix
     ./nemo.nix
     ./nextcloudclient.nix
