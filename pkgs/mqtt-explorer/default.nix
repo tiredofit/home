@@ -11,7 +11,7 @@ appimageTools.wrapType2 rec {
   version = "0.4.0-beta.6";
 
   src = fetchurl {
-    url = "https://github.com/thomasnordquist/MQTT-Explorer/releases/download/v0.4.0-beta.6/MQTT-Explorer-0.4.0-beta.6.AppImage";
+    url = "https://github.com/thomasnordquist/MQTT-Explorer/releases/download/v${version}/MQTT-Explorer-${version}.AppImage";
     hash = "sha256-zEosMda2vtq+U+Lrvl6DExvT5cGPbDz0eJo7GRlVzVA=";
   };
 
