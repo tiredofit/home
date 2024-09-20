@@ -104,7 +104,6 @@ in
           select_by_word_characters = ":@-./_~?&=%+#" ; # Characters considered a word when double clicking
         };
         shellIntegration.enableBashIntegration = true;
-        #theme = " ";
       };
 
       bash = {
