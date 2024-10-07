@@ -59,8 +59,45 @@ in
         ];
     };
 
-    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
-      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "qview.desktop")
-    );
+    xdg = {
+      desktopEntries = {
+        qview = {
+          name = "Qview";
+          genericName = "Image Viewer";
+          exec = "qview %U";
+          terminal = false;
+          categories = [ "Application" "Graphics" ];
+          mimeType = [
+            "image/bmp"
+            "image/gif"
+            "image/jpeg"
+            "image/jpg"
+            "image/pjpeg"
+            "image/png"
+            "image/svg+xml"
+            "image/svg+xml-compressed"
+            "image/tiff"
+            "image/vnd.wap.wbmp;image/x-icns"
+            "image/webp"
+            "image/x-bmp"
+            "image/x-gray"
+            "image/x-icb"
+            "image/x-ico"
+            "image/x-pcx"
+            "image/x-png"
+            "image/x-portable-anymap"
+            "image/x-portable-bitmap"
+            "image/x-portable-graymap"
+            "image/x-portable-pixmap"
+            "image/x-xbitmap"
+            "image/x-xpixmap"
+          ];
+        };
+      };
+
+      mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
+        lib.genAttrs cfg.defaultApplication.mimeTypes (_: "qview.desktop")
+      );
+    };
   };
 }
