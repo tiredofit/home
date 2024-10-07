@@ -21,9 +21,9 @@ with lib;
     ./flameshot.nix
     ./floorp.nix
     ./geeqie.nix
-    ./gnomeencfsmanager.nix
-    ./gnomesoftware.nix
-    ./gnomesystemmonitor.nix
+    ./gnome-encfsmanager.nix
+    ./gnome-software.nix
+    ./gnome-systemmonitor.nix
     ./gparted.nix
     ./greenclip.nix
     ./kitty.nix
@@ -31,9 +31,8 @@ with lib;
     ./masterpdfeditor.nix
     ./mate-calc.nix
     ./mqtt-explorer.nix
-    ./msteams.nix
     ./nemo.nix
-    ./nextcloudclient.nix
+    ./nextcloud-client.nix
     ./obsidian.nix
     ./opensnitch-ui.nix
     ./pinta.nix

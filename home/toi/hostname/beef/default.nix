@@ -22,7 +22,6 @@ with lib;
         mqtt-explorer.enable = true;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
-        msteams.enable = false;
         obsidian.enable = true;
         opensnitch-ui.enable = true;
         python.enable = true;
