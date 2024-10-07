@@ -2,6 +2,32 @@
 
 let
   cfg = config.host.home.applications.qview;
+  mimeTypes = [
+    "image/bmp"
+    "image/gif"
+    "image/jpeg"
+    "image/jpg"
+    "image/pjpeg"
+    "image/png"
+    "image/svg+xml"
+    "image/svg+xml-compressed"
+    "image/tiff"
+    "image/vnd"
+    "image/x-icns"
+    "image/webp"
+    "image/x-bmp"
+    "image/x-gray"
+    "image/x-icb"
+    "image/x-ico"
+    "image/x-pcx"
+    "image/x-png"
+    "image/x-portable-anymap"
+    "image/x-portable-bitmap"
+    "image/x-portable-graymap"
+    "image/x-portable-pixmap"
+    "image/x-xbitmap"
+    "image/x-xpixmap"
+  ];
 in
   with lib;
 {
@@ -21,31 +47,7 @@ in
         mimeTypes = mkOption {
           description = "MIME types to be the default application for";
           type = types.listOf types.str;
-          default = [
-            "image/bmp"
-            "image/gif"
-            "image/jpeg"
-            "image/jpg"
-            "image/pjpeg"
-            "image/png"
-            "image/svg+xml"
-            "image/svg+xml-compressed"
-            "image/tiff"
-            "image/vnd.wap.wbmp;image/x-icns"
-            "image/webp"
-            "image/x-bmp"
-            "image/x-gray"
-            "image/x-icb"
-            "image/x-ico"
-            "image/x-pcx"
-            "image/x-png"
-            "image/x-portable-anymap"
-            "image/x-portable-bitmap"
-            "image/x-portable-graymap"
-            "image/x-portable-pixmap"
-            "image/x-xbitmap"
-            "image/x-xpixmap"
-          ];
+          default = mimeTypes;
         };
       };
     };
@@ -63,35 +65,14 @@ in
       desktopEntries = {
         qview = {
           name = "Qview";
-          genericName = "Image Viewer";
+          genericName = "QT Image Viewer";
+          categories = [
+            "Application"
+            "Graphics"
+          ];
           exec = "qview %U";
           terminal = false;
-          categories = [ "Application" "Graphics" ];
-          mimeType = [
-            "image/bmp"
-            "image/gif"
-            "image/jpeg"
-            "image/jpg"
-            "image/pjpeg"
-            "image/png"
-            "image/svg+xml"
-            "image/svg+xml-compressed"
-            "image/tiff"
-            "image/vnd.wap.wbmp;image/x-icns"
-            "image/webp"
-            "image/x-bmp"
-            "image/x-gray"
-            "image/x-icb"
-            "image/x-ico"
-            "image/x-pcx"
-            "image/x-png"
-            "image/x-portable-anymap"
-            "image/x-portable-bitmap"
-            "image/x-portable-graymap"
-            "image/x-portable-pixmap"
-            "image/x-xbitmap"
-            "image/x-xpixmap"
-          ];
+          mimeType = mimeTypes;
         };
       };
 
