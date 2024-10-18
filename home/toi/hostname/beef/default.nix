@@ -9,6 +9,7 @@ with lib;
       applications = {
         act.enable = mkDefault true;
         avidemux.enable = true;
+        calibre.enable = false;
         cura.enable = true;
         czkawka.enable = mkDefault true;
         encfs.enable = true;
