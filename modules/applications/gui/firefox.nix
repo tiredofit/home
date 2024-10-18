@@ -131,34 +131,29 @@ in with lib; {
 
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             bitwarden
-            #bypass-paywalls-clean
             clearurls
             copy-selected-links
             copy-selection-as-markdown
-            decentraleyes
+            #decentraleyes
             enhanced-github
-            #enhancer-for-youtube
             facebook-container
             floccus
             hover-zoom-plus
             multi-account-containers
             image-search-options
-            localcdn
+            #localcdn
             reddit-enhancement-suite
             sidebery
-            #sponsorblock
-            torrent-control
             ublock-origin
             undoclosetabbutton
             user-agent-string-switcher
-            #video-downloadhelper
 
             ### Missing:
             ## Canadian English Dictionary dictionary 3.1.3 true en-CA@dictionaries.addons.mozilla.org
             ## Download Manager (S3) extension 5.12 true s3download@statusbar
             ## F.B Purity - Cleans up Facebook extension 36.8.0.0 true fbpElectroWebExt@fbpurity.com
             ## Hard Refresh Button extension 1.0.0 true {b6da57d3-9727-4bc0-b974-d13e7c004af0}
-            ## Open With extension 7.2.6 true openwith@darktrojan.net
+            ## Open With extension 7.2.6 true openggwith@darktrojan.net
             ## PasswordMaker X extension 0.2.2 true passwordmaker@emersion.fr
             ## Rakuten Canada Button extension 7.8.1 true ebatesca@ebates.com
             ## StockTrack.ca plugin extension 0.2.4 true {50b98f8c-707d-4dd8-86e4-7c0e15745027}
