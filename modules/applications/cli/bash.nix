@@ -87,7 +87,7 @@ in
           if [ -f "/home/$USER/src/scripts/changelog/changelogger.sh" ] ; then
               alias changelog="/home/$USER/src/scripts/changelog/changelogger.sh"
               alias nixos="cd ~/src/nixos"
-              alias nixosupdate="sudo nix flake update $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+              alias nixosupdate="sudo nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
               alias nixswitch="sudo nixos-rebuild switch --flake $HOME/src/nixos/#$HOSTNAME $@"
           fi
 
