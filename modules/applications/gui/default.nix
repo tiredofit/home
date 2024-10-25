@@ -44,6 +44,7 @@ with lib;
     ./smartgit.nix
     ./smplayer.nix
     ./sqlitebrowser.nix
+    ./strawberry.nix
     ./szyszka.nix
     ./thunar.nix
     ./thunderbird.nix
