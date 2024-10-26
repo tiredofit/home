@@ -26,6 +26,7 @@ with lib;
         nmap.enable = mkDefault true;
         obsidian.enable = true;
         opensnitch-ui.enable = false;
+        peazip.enable = true;
         python.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
