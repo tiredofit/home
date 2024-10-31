@@ -30,7 +30,7 @@ with lib;
         python.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
-        smartgit.enable = false;
+        smartgit.enable = true;
         ssh = {
           enable = true;
           ignore = {
