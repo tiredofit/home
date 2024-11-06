@@ -73,6 +73,22 @@ with lib;
 
     wayland.windowManager.hyprland = {
       enable = true;
+      settings = {
+        env = [
+          "XDG_CURRENT_DESKTOP,Hyprland"
+          "XDG_SESSION_TYPE,wayland"
+          "XDG_SESSION_DEKSTOP,Hyprland"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_QPA_PLATFORMTHEME,qt5ct"
+          "MOZ_ENABLE_WAYLAND,1"
+          "GDK_BACKEND,wayland,x11,*"
+          "SDL_VIDEODRIVER,wayland"
+          "CLUTTER_BACKEND,wayland"
+          "XDG_SESSION_TYPE,wayland"
+        ];
+      };
       xwayland.enable = mkDefault true;
     };
 
@@ -96,20 +112,7 @@ with lib;
     xsession = {
       enable = true;
       scriptPath = ".hm-xsession";
-        #export NIXOS_OZONE_WL=1
-        #export QT_QPA_PLATFORM=wayland;xcb
       windowManager.command = ''
-        export CLUTTER_BACKEND=gdk
-        export MOZ_ENABLE_WAYLAND=1
-        export QT_AUTO_SCREEN_SCALE_FACTOR=1
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-        export SDL_VIDEODRIVER=wayland
-        export WLR_RENDERER=vulkan
-        export XDG_CURRENT_DESKTOP=Hyprland
-        export XDG_SESSION_DESKTOP=Hyprland
-        export XDG_SESSION_TYPE=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
         Hyprland
       '';
     };
