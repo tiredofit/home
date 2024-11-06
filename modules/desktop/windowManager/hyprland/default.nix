@@ -87,6 +87,7 @@ with lib;
           "SDL_VIDEODRIVER,wayland"
           "CLUTTER_BACKEND,wayland"
           "XDG_SESSION_TYPE,wayland"
+          "ELECTRON_OZONE_PLATFORM_HINT=auto"
         ];
       };
       xwayland.enable = mkDefault true;
