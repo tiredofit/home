@@ -13,6 +13,7 @@ with lib;
     ./hyprpaper.nix
     ./hyprpicker.nix
     ./hyprshot.nix
+    ./hyprsunset.nix
     ./nwg-displays.nix
     ./satty.nix
     ./slurp.nix
