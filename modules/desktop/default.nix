@@ -39,7 +39,7 @@ with lib;
       packages = with pkgs;
         [
           polkit        # Allows unprivileged processes to speak to privileged processes
-          polkit_gnome  # Used to bring up authentication dialogs
+          #polkit_gnome  # Used to bring up authentication dialogs
           xdg-utils     # Desktop integration
         ];
     };
