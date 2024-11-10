@@ -13,6 +13,7 @@ with lib;
         cura.enable = true;
         czkawka.enable = mkDefault true;
         encfs.enable = true;
+        flameshot.enable = true;
         floorp.enable = true;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
