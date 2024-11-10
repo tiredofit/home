@@ -31,6 +31,7 @@ in
     home = {
       packages = with pkgs;
         [
+          libnotify
           qt5.qtwayland
           qt6.qtwayland
         ];
