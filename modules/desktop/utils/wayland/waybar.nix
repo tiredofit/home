@@ -178,6 +178,7 @@ in
                   ];
                 };
                 "on-click" = "pavucontrol";
+                "on-click-right" = "sound-tool output cycle";
             };
           }
           {
