@@ -34,6 +34,7 @@ with lib;
     ./nemo.nix
     ./nextcloud-client.nix
     ./obsidian.nix
+    ./obs-studio.nix
     ./opensnitch-ui.nix
     ./peazip.nix
     ./pinta.nix
