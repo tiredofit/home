@@ -26,6 +26,7 @@ with lib;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
         obsidian.enable = true;
+        obs-studio.enable = true;
         opensnitch-ui.enable = false;
         peazip.enable = true;
         python.enable = true;
