@@ -2,6 +2,8 @@
 
 let
   cfg = config.host.home.applications.kitty;
+  displayServer = config.host.home.feature.gui.displayServer ;
+  windowManager = config.host.home.feature.gui.windowManager ;
 in
   with lib;
 {
@@ -146,6 +148,14 @@ in
               alias sssh="/run/current-system/sw/bin/ssh"
           fi
         '';
+      };
+    };
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
+      settings = {
+        ## See more in modules/applications/* and modules/desktop/utils/*
+        bind = [
+          "SUPER, Return, exec, ${pkgs.kitty}/bin/kitty"
+        ];
       };
     };
   };

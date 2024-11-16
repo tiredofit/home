@@ -63,6 +63,7 @@ in
           "SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi  -show drun -modi drun -show-icons"
           #"SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons"
           "SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy"
+          "SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c ${config.programs.rofi.package}/bin/rofi -dmenu -p terminal)"
         ];
         windowrulev2 = [
           #"stayfocused,class:(Rofi)"
