@@ -12,7 +12,7 @@ with lib;
         bind = [
           "SUPER, F, fullscreen"
           "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
-          "SUPER, Return, exec, ${pkgs.kitty}/bin/kitty"
+          # See Terminal for the bind for SUPER, RETURN
           "SUPER, V, togglefloating,"
           "SUPER, mouse:274, killactive" # Middle Mouse
           "SUPER, space, pseudo,"
