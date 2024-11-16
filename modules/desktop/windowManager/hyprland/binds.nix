@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
@@ -12,7 +12,7 @@ with lib;
         bind = [
           "SUPER, F, fullscreen"
           "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
-          "SUPER, Return, exec, kitty"
+          "SUPER, Return, exec, ${pkgs.kitty}/bin/kitty"
           "SUPER, V, togglefloating,"
           "SUPER, mouse:274, killactive" # Middle Mouse
           "SUPER, space, pseudo,"
