@@ -57,10 +57,13 @@ with lib;
           #col.shadow = "rgba(1a1a1aee)";
           dim_inactive = false;
           dim_strength = 0.2;
-          drop_shadow = true;
           rounding = 5;
-          shadow_range = 4;
-          shadow_render_power = 3;
+
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 4;
+          };
         };
 
         animations = {
