@@ -21,8 +21,8 @@ with lib;
           resize_on_border = true;
         };
 
+        # Cursor
         cursor = {
-          # Cursor
           inactive_timeout = 60;
           hide_on_key_press = true;
         };

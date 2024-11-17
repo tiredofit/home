@@ -2,6 +2,9 @@
 
 let
   cfg = config.host.home.applications.hyprcursor;
+cursor = "HyprBibataModernClassicSVG";
+  cursorPackage = pkgs.pkg-bibata-hyprcursor;
+  cursorSize = 24;
 in
   with lib;
 {
@@ -21,13 +24,30 @@ in
         [
           hyprcursor
         ];
+
+      pointerCursor = {
+        #package = pkgs.bibata-cursors;
+        #name = "Bibata-Modern-Classic";
+        size = cursorSize;
+        gtk.enable = true;
+        #x11.enable = true;
+      };
     };
+
+    home.file.".icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
+    xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
 
     wayland.windowManager.hyprland = {
       settings = {
         env = [
-          "HYPRCURSOR_SIZE,24"
+          "HYPRCURSOR_THEME,${cursor}"
+          "HYPRCURSOR_SIZE,${toString cursorSize}"
         ];
+
+        exec-once = [
+          "hyprctl setcursor ${cursor} ${toString cursorSize}"
+        ];
+
       };
     };
   };
