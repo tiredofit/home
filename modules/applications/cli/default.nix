@@ -25,6 +25,7 @@ with lib;
     ./htop.nix
     ./jq.nix
     ./lazygit.nix
+    ./lazydocker.nix
     ./less.nix
     ./liquidprompt.nix
     ./lsd.nix
