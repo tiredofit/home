@@ -50,6 +50,7 @@ with lib;
      sops.secrets = {
        "encfs/workspace" = {
          sopsFile =  ../../home/toi/secrets/encfs_workspace.yaml ;
+         path = "%r/secrets/encfs/workspace";
        };
      };
   };
