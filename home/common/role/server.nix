@@ -8,6 +8,7 @@ with lib;
     home = {
       applications = {
         docker-compose.enable = mkDefault true;
+        lazydocker.enable = mkDefault true;
       };
       feature = {
       };

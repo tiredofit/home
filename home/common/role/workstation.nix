@@ -8,14 +8,9 @@ with lib;
     home = {
       applications = {
         android-tools.enable = mkDefault true;
-        ark = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
-        bleachbit.enable = mkDefault true;
         blueman.enable = mkDefault true;
         calibre = {
-          enable = mkDefault true;
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
         chromium.enable = mkDefault true;
@@ -28,20 +23,14 @@ with lib;
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        eog = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
         ferdium.enable = mkDefault true;
         firefox = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        geeqie.enable = mkDefault false;
         gnome-system-monitor.enable = mkDefault true;
         gparted.enable = mkDefault true;
         kitty.enable = mkDefault true;
-        lazygit.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
