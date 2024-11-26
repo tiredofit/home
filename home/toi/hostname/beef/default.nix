@@ -9,25 +9,20 @@ with lib;
       applications = {
         act.enable = mkDefault true;
         avidemux.enable = true;
-        calibre.enable = false;
-        cura.enable = true;
+        calibre.enable = true;
         czkawka.enable = mkDefault true;
         encfs.enable = true;
-        flameshot.enable = true;
-        floorp.enable = true;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
         hugo.enable = false;
+        lazydocker.enable = true;
         lazygit.enable = true;
         mp3gain.enable = mkDefault true;
-        mqtt-explorer.enable = false;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
         obsidian.enable = true;
-        obs-studio.enable = true;
-        opensnitch-ui.enable = false;
         peazip.enable = true;
         python.enable = true;
         shellcheck.enable = true;
@@ -42,27 +37,17 @@ with lib;
         };
         szyszka.enable = true;
         thunderbird.enable = mkDefault true;
-        veracrypt.enable = false;
         virt-manager.enable = mkDefault true;
         visual-studio-code = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        xmlstarlet.enable = false;
         yq.enable = true;
-        xdg-ninja.enable = mkDefault false;
         yt-dlp.enable = mkDefault true;
-        zathura = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
         zoom.enable = true;
         zenbrowser.enable = true;
       };
       feature = {
-        emulation = {
-          windows.enable = true;
-        };
         gui = {
           enable = true;
           displayServer = "wayland";
@@ -88,6 +73,10 @@ with lib;
         };
       };
     };
+  };
+
+  wayland.windowManager.hyprland = {
+    xwayland.enable = false;
   };
 
   #  ------   -----   -------
