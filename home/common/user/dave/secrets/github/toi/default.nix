@@ -26,10 +26,16 @@ in
       '';
     };
 
+    nix.extraOptions = ''
+      !include ${config.sops.secrets.toi-github.path}
+    '';
+
     sops.secrets.toi-github = {
       sopsFile = ../../../../../../toi/user/dave/secrets/github/toi-github.env ;
       format = "dotenv";
       path = "%r/github/toi-github.env" ;
     };
   };
+
+
 }

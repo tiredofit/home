@@ -76,7 +76,7 @@ with lib;
   };
 
   wayland.windowManager.hyprland = {
-    xwayland.enable = false;
+    xwayland.enable = true;
   };
 
   #  ------   -----   -------
