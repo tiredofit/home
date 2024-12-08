@@ -60,7 +60,7 @@
         overlays = [
           inputs.comma.overlays.default
           inputs.nix-vscode-extensions.overlays.default
-          inputs.nur.overlay
+          inputs.nur.overlays.default
           outputs.overlays.additions
           outputs.overlays.modifications
           outputs.overlays.unstable-packages
