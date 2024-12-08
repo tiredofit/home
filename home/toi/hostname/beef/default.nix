@@ -44,7 +44,7 @@ with lib;
         };
         yq.enable = true;
         yt-dlp.enable = mkDefault true;
-        zoom.enable = true;
+        zoom.enable = false;
         zenbrowser.enable = true;
       };
       feature = {
