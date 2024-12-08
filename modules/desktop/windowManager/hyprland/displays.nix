@@ -57,9 +57,9 @@ with lib;
         })
         (mkIf (hostname == "beef") {
           monitor = [
-            "$monitor_left,2560x1440@119.998001,0x0,1.0"
-            "$monitor_middle,2560x1440@119.998001,2560x0,1.0"
-            "$monitor_right,2560x1440@59.950,5120x0,1.0"
+            #"$monitor_left,2560x1440@164.056000,0x0,1.0"
+            #"$monitor_middle,2560x1440@164.056000,2560x0,1.0"
+            #"$monitor_right,2560x1440@119,998001,5120x0,1.0"
           ];
         })
       ];
