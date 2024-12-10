@@ -48,8 +48,13 @@ in
         ];
     };
 
-    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
-      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "chromium-browser.desktop")
-    );
+    xdg  = {
+      desktopEntries = {
+        chromium-browser = {
+          name = "chromium";
+          noDisplay = true;
+        };
+      };
+    };
   };
 }
