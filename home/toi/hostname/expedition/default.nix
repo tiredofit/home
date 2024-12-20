@@ -7,7 +7,8 @@ with lib;
   host = {
     home = {
       applications = {
-        act.enable = mkDefault true;
+        act.enable = true;
+        github-client.enable = true;
         hadolint.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
