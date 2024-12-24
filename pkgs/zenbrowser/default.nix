@@ -14,7 +14,7 @@
 
 let
   rev = "1.0.2-b.5";
-  linux_x86_64-hash = "K3zTCLdvg/VYQNsfeohw65Ghk8FAjhOl8hXU6REO4/s";
+  linux_x86_64-hash = "1yz31q8ykm0myaji73j0q69s34gbf247l7yv81cgb0vgnw4d6z1b";
   darwin_aarch64-hash = "0xdc7g6ksirmrq4vmdrvk4l09sk63psdqr9dqqc9dx51gyf47g0a";
   domain = "github.com";
   owner = "zen-browser";
