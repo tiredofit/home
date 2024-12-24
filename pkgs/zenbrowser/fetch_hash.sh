@@ -16,5 +16,5 @@ for file in "${files[@]}" ; do
     # Update aarch64 MacOS version
     [[ "$file" == "zen.macos-aarch64.dmg" ]] && sed -Ei "s/darwin_aarch64-hash = \"(.*)\"/darwin_aarch64-hash = \"${rev}\"/g" default.nix
     # Update x86_64 Linux version
-    [[ "$file" == "zen.linux-generic.tar.bz2" ]] && sed -Ei "s/linux_x86_64-hash = \"(.*)\"/linux_x86_64-hash = \"${rev}\"/g" default.nix
+    [[ "$file" == "zen.linux-x86_64.tar.bz2" ]] && sed -Ei "s/linux_x86_64-hash = \"(.*)\"/linux_x86_64-hash = \"${rev}\"/g" default.nix
 done

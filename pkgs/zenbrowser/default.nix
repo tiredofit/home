@@ -14,7 +14,7 @@
 
 let
   rev = "1.0.2-b.5";
-  linux_x86_64-hash = "";
+  linux_x86_64-hash = "K3zTCLdvg/VYQNsfeohw65Ghk8FAjhOl8hXU6REO4/s";
   darwin_aarch64-hash = "0xdc7g6ksirmrq4vmdrvk4l09sk63psdqr9dqqc9dx51gyf47g0a";
   domain = "github.com";
   owner = "zen-browser";
@@ -26,7 +26,7 @@ let
       sha256 = darwin_aarch64-hash;
     };
     x86_64-linux = fetchurl {
-      url = "${repo_git}/releases/download/${rev}/zen.linux-generic.tar.bz2";
+      url = "${repo_git}/releases/download/${rev}/zen.linux-x86_64.tar.bz2";
       sha256 = linux_x86_64-hash;
     };
   };
