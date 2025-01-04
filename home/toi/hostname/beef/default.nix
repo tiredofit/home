@@ -25,6 +25,8 @@ with lib;
         obsidian.enable = true;
         peazip.enable = true;
         python.enable = true;
+        pwvucontrol.enable = true;
+        sonusmix.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         smartgit.enable = true;

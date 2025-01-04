@@ -177,7 +177,7 @@ in
                      ""
                   ];
                 };
-                "on-click" = "pavucontrol";
+                "on-click" = "pwvucontrol";
                 "on-click-right" = "sound-tool output cycle";
             };
           }

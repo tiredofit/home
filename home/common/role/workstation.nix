@@ -37,6 +37,7 @@ with lib;
         nemo.enable = mkDefault true;
         pinta.enable = mkDefault true;
         pulsemixer.enable = mkDefault true;
+        pwvucontrol.enable = mkDefault true;
         qview = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;

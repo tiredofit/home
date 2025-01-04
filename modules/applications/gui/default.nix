@@ -39,9 +39,11 @@ with lib;
     ./peazip.nix
     ./pinta.nix
     ./pulsemixer.nix
+    ./pwvucontrol.nix
     ./qview.nix
     ./remmina.nix
     ./rofi.nix
+    ./sonusmix.nix
     ./seahorse.nix
     ./smartgit.nix
     ./smplayer.nix

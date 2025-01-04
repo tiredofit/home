@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.pulsemixer;
+  cfg = config.host.home.applications.pwvucontrol;
 in
   with lib;
 {
   options = {
-    host.home.applications.pulsemixer = {
+    host.home.applications.pwvucontrol = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Pulseaudio Sound Control";
+        description = "Pipewire Graphical Sound Control";
       };
     };
   };
@@ -19,15 +19,14 @@ in
     home = {
       packages = with pkgs;
         [
-          pulsemixer
-          pavucontrol
+          pwvucontrol
         ];
     };
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         windowrulev2 = [
-          "float,title: ^(pavucontrol)$"
+          "float,title: ^(pwvucontrol)$"
         ];
       };
     };
