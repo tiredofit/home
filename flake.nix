@@ -159,6 +159,19 @@
             };
           };
 
+          "nomad.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              hostname = "nomad";
+              username = gn;
+              displays = 1;
+              display_center = "null";
+              networkInterface = "wlp2s0";
+              inherit inputs outputs;
+            };
+          };
+
           "seed.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
