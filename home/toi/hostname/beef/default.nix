@@ -17,6 +17,7 @@ with lib;
         gnome-software.enable = true;
         hadolint.enable = true;
         hugo.enable = false;
+        kanshi.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
         mp3gain.enable = mkDefault true;

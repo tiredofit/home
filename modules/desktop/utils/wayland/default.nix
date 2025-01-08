@@ -15,6 +15,7 @@ with lib;
     ./hyprpolkitagent.nix
     ./hyprshot.nix
     ./hyprsunset.nix
+    ./kanshi.nix
     ./nwg-displays.nix
     ./satty.nix
     ./slurp.nix
