@@ -166,7 +166,7 @@
               hostname = "nomad";
               username = gn;
               displays = 1;
-              display_center = "null";
+              display_center = "eDP-1";
               networkInterface = "wlp2s0";
               inherit inputs outputs;
             };
