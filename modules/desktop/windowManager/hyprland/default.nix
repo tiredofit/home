@@ -29,6 +29,58 @@ let
     fi
     hyprctl reload
   '';
+
+  script_displayhelper_hyprland = pkgs.writeShellScriptBin "displayhelper_hyprland" ''
+
+_get_display_name() {
+    ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name'
+}
+if [ -z "''${1}" ]; then exit 1; fi
+
+case "''${#}" in
+    1)
+        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+workspace=1,,default:true,persistent:true
+workspace=2,persistent:true
+workspace=3,persistent:true
+workspace=4,persistent:true
+workspace=5,persistent:true
+workspace=6,persistent:true
+workspace=7,persistent:true
+workspace=8,persistent:true
+workspace=9,persistent:true
+EOF
+    ;;
+    2)
+        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+\$_monitor1=$(_get_display_name "''${1}")
+\$_monitor2=$(_get_display_name "''${2}")
+workspace=2,monitor:\$_monitor1,,default:true,persistent:true
+workspace=5,monitor:\$_monitor1,persistent:true
+workspace=8,monitor:\$_monitor1,persistent:true
+workspace=3,monitor:\$_monitor2,,default:true,persistent:true
+workspace=6,monitor:\$_monitor2,persistent:true
+workspace=9,monitor:\$_monitor2,persistent:true
+EOF
+    ;;
+    3 | *)
+        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+\$_monitor1=$(_get_display_name "''${1}")
+\$_monitor2=$(_get_display_name "''${2}")
+\$_monitor3=$(_get_display_name "''${3}")
+workspace=2,monitor:\$_monitor1,,default:true,persistent:true
+workspace=5,monitor:\$_monitor1,persistent:true
+workspace=8,monitor:\$_monitor1,persistent:true
+workspace=3,monitor:\$_monitor2,,default:true,persistent:true
+workspace=6,monitor:\$_monitor2,persistent:true
+workspace=9,monitor:\$_monitor2,persistent:true
+workspace=1,monitor:\$_monitor3,,default:true,persistent:true
+workspace=4,monitor:\$_monitor3,persistent:true
+workspace=7,monitor:\$_monitor3,persistent:true
+EOF
+    ;;
+esac
+  '';
 in
 
 with lib;
@@ -50,6 +102,7 @@ with lib;
         [
           gameMode
           #hyprland-share-picker     # If this works outside of Hyprland modularize
+          script_displayhelper_hyprland
         ];
     };
 

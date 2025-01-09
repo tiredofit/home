@@ -1,7 +1,89 @@
-{config, lib, pkgs, ...}:
-
+{ config, inputs, lib, pkgs, specialArgs, ... }:
 let
+  inherit (specialArgs) displays display_center role;
   cfg = config.host.home.applications.waybar;
+
+  script_displayhelper_waybar = pkgs.writeShellScriptBin "displayhelper_waybar" ''
+    _get_display_name() {
+        ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name'
+    }
+
+    if [ -z "''${1}" ]; then exit 1; fi
+
+    _tmp_waybar_config=$(mktemp)
+    case "''${1}" in
+        * )
+            display_name=$(wlr-randr --json | jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name')
+            jq -n \
+                --arg output "''${display_name}" \
+                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
+                    '
+                      [
+                          {
+                              "output": $output,
+                              "include": ($xdg_config_home + "/waybar/bar-primary.json")
+                          }
+                      ]
+                    ' \
+                    > ''${_tmp_waybar_config}
+            shift
+        ;;
+    esac
+
+    for display in "''${@}" ; do
+        display_counter=''${display_counter:-"2"}
+
+        case "''${display_counter}" in
+            2 )
+                _bar_name="secondary"
+            ;;
+            3 )
+                _bar_name="tertiary"
+            ;;
+            * )
+                _bar_name="wildcard"
+            ;;
+        esac
+
+        display_name=$(_get_display_name "''${display}")
+
+        if [ "''${display_counter}" -le 3 ] ; then
+            if [ -z "''${display_name}" ] ; then break; fi
+            jq \
+                --arg bar_name "''${_bar_name}" \
+                --arg output "''${display_name}" \
+                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
+                    ' . +
+                        [
+                            {
+                                "output": $output,
+                                "include": ($xdg_config_home + "/waybar/bar-" + $bar_name + ".json")
+                            }
+                        ]
+                    ' \
+                        ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
+
+            (( display_counter+=1 ))
+        else
+            jq \
+                '. +
+                    [
+                        {
+                            "output": (map("!" + .output) | join(", ")),
+                            "include": "/home/dave/.config/waybar/bar-wildcard.json"
+                        }
+                    ]
+                ' \
+                        ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
+        fi
+    done
+
+    cp -aR "''${_tmp_waybar_config}" "''${XDG_CONFIG_HOME}"/waybar/config
+    rm -rf \
+        "''${_tmp_waybar_config}" \
+        "''${_tmp_waybar_config}"-temp
+    systemctl --user restart waybar.service
+  '';
 in
   with lib;
 {
@@ -19,308 +101,642 @@ in
     home = {
       packages = with pkgs;
         [
-          wttrbar
+          script_displayhelper_waybar
         ];
     };
+
+    xdg.configFile."waybar/modules.d/custom.json".text = ''
+      {
+        "custom/cryptotrackingBTC": {
+          "exec": "${pkgs.curl}/bin/curl -sSL https://cryptoprices.cc/BTC",
+          "format": "{}",
+          "restart-interval": 3600
+        },
+        "custom/cryptotrackingTRX": {
+          "exec": "${pkgs.curl}/bin/curl -sSL https://cryptoprices.cc/TRX",
+          "format": "{}",
+          "restart-interval": 3600
+        },
+        "custom/notification": {
+          "escape": true,
+          "exec": "swaync-client -swb",
+          "exec-if": "which swaync-client",
+          "format": "{} {icon}",
+          "format-icons": {
+              "dnd-inhibited-none": "",
+              "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+              "dnd-none": "",
+              "dnd-notification": "<span foreground='red'><sup></sup></span>",
+              "inhibited-none": "",
+              "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+              "none": "",
+              "notification": "<span foreground='red'><sup></sup></span>"
+          },
+          "on-click": "swaync-client -t -sw",
+          "on-click-right": "swaync-client -d -sw",
+          "return-type": "json",
+          "tooltip": false
+        },
+        "custom/wl-gammarelay-temperature": {
+          "exec": "wl-gammarelay-rs watch {t}",
+          "format": "{} ",
+          "on-click": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000",
+          "on-click-middle": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 5000",
+          "on-click-right": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500",
+          "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -500",
+          "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +500"
+        },
+        "custom/weather": {
+          "exec": "${pkgs.wttrbar}/bin/wttrbar",
+          "format": "{} °",
+          "interval": 3600,
+          "return-type": "json",
+          "tooltip": true
+        }
+      }
+    '';
+
+    xdg.configFile."waybar/modules.d/hardware.json".text = ''
+      {
+        "bluetooth": {
+          "format": " {status}",
+          "format-connected": " {num_connections} connected",
+          "format-disabled": "Bluetooth Disabled",
+          "on-click": "blueman-manager",
+          "tooltip-format": "{controller_alias}\t{controller_address}",
+          "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+          "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+        },
+        "cpu": {
+          "format": "{load} {usage} {avg_frequency} ",
+          "interval": 10,
+          "on-click": "gnome-system-monitor --show-resources-tab"
+        },
+        "disk": {
+          "format": "{used}/{total}",
+          "interval": 30,
+          "on-click": "kitty ncdu ~",
+          "on-click-right": "gnome-system-monitor --show-file-systems-tab",
+          "path": "/"
+        },
+        "keyboard-state": {
+          "capslock": true,
+          "device-path": "event3",
+          "format": {
+            "capslock": "C {icon}",
+            "numlock": "N {icon}",
+            "scrolllock": "S {icon}"
+          },
+          "format-icons": {
+            "locked": "",
+            "unlocked": ""
+          },
+          "numlock": true,
+          "scrollock": true
+        },
+        "memory": {
+          "format": "{used:0.1f}G/{total:0.1f}G ",
+          "interval": 10,
+          "on-click": "gnome-system-monitor --show-processes-tab"
+        },
+        "network": {
+          "format-alt": "{ifname}: {ipaddr}/{cidr}",
+          "format-disconnected": "Disconnected ⚠",
+          "format-ethernet": "{ipaddr}/{cidr} ",
+          "format-linked": "{ifname} (No IP) ",
+          "format-wifi": "{essid} ({signalStrength}%)  ",
+          "on-click-right": "nmcli device wifi rescan && kitty sudo nmtui",
+          "tooltip-format": "{ifname} via {gwaddr} "
+        },
+        "pulseaudio": {
+          "format": "{volume}%  {icon}  {format_source}",
+          "format-bluetooth": "{volume}% {icon} {format_source}",
+          "format-bluetooth-muted": " {icon} {format_source}",
+          "format-icons": {
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ],
+            "hands-free": "",
+            "headphone": "",
+            "headset": "",
+            "phone": "",
+            "portable": ""
+          },
+          "format-muted": " {format_source}",
+          "format-source": " {volume}% ",
+          "format-source-muted": "",
+          "on-click": "pwvucontrol",
+          "on-click-right": "sound-tool output cycle"
+        },
+        "temperature": {
+          "critical-threshold": 80,
+          "format": "{temperatureC}°C {icon}",
+          "format-icons": [
+              "",
+              "",
+              ""
+          ]
+        }
+      }
+    '' ;
+
+    xdg.configFile."waybar/modules.d/hyprland.json".text = ''
+      {
+        "hyprland/submap": {},
+        "hyprland/window": {
+            "max-length": 200,
+            "separate-outputs": true
+        },
+        "hyprland/workspaces": {
+            "active-only": "false",
+            "on-click": "activate",
+            "sort-by-number": true
+        },
+      }
+    '' ;
+
+    xdg.configFile."waybar/modules.d/user.json".text = ''
+      {
+        "user": {
+          "format": "uptime {work_H} {work_M} {work_S} ↑)",
+          "height": 30,
+          "icon": true,
+          "interval": 60,
+          "width": 30
+        }
+      }
+    '';
+
+    xdg.configFile."waybar/modules.d/utils.json".text = ''
+      {
+        "clock": {
+          "actions": {
+            "on-click-backward": "tz_down",
+            "on-click-forward": "tz_up",
+            "on-click-right": "mode",
+            "on-scroll-down": "shift_down",
+            "on-scroll-up": "shift_up"
+          },
+        "calendar": {
+          "format": {
+            "days": "<span color='#ecc6d9'><b>{}</b></span>",
+            "months": "<span color='#ffead3'><b>{}</b></span>",
+            "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+            "weeks": "<span color='#99ffdd'><b>W{}</b></span>"
+          },
+          "mode": "month",
+          "mode-mon-col": 2,
+          "on-click-right": "mode",
+          "on-scroll": 1,
+          "weeks-pos": ""
+        },
+          "format": "{:%H:%M:%S}",
+          "format-alt": "{:%Y-%m-%d}",
+          "interval": 1,
+          "tooltip-format": "<tt><small>{calendar}</small></tt>"
+        },
+        "idle_inhibitor": {
+          "format": "{icon}",
+          "format-icons": {
+            "activated": "",
+            "deactivated": ""
+          }
+        },
+        "tray": {
+          "icon-size": 22,
+          "spacing": 10
+        }
+      }
+    '';
+
+    xdg.configFile."waybar/modules.d/wlr.json".text = ''
+      {
+        "wlr/taskbar": {
+          "app_ids-mapping": {
+              "firefoxdeveloperedition": "firefox-developer-edition"
+          },
+          "format": "{icon} {title}",
+          "icon-size": 28,
+          "icon-theme": "Numix-Circle",
+          "ignore-list": [
+              "Alacritty"
+          ],
+          "on-click": "activate",
+          "on-click-middle": "close",
+          "on-click-right": "minimize",
+          "tooltip-format": "{title}"
+        }
+      }
+    '' ;
+
+    xdg.configFile."waybar/bar-primary.json".text = ''
+      {
+        "include": [
+           "~/.config/waybar/modules.d/custom.json",
+           "~/.config/waybar/modules.d/hardware.json",
+           "~/.config/waybar/modules.d/hyprland.json",
+           "~/.config/waybar/modules.d/utils.json",
+           "~/.config/waybar/modules.d/wlr.json",
+        ],
+        "height": 30,
+        "layer": "top",
+        "spacing": 4,
+        "modules-center": [
+          "hyprland/window"
+        ],
+        "modules-left": [
+          "hyprland/workspaces"
+        ],
+        "modules-right": [
+          "custom/wl-gammarelay-temperature",
+          "idle_inhibitor",
+          "keyboard-state",
+          "pulseaudio",
+          "custom/notification",
+          "clock",
+          "tray"
+        ],
+      }
+    '';
+
+    xdg.configFile."waybar/bar-secondary.json".text = ''
+      {
+        "include": [
+           "~/.config/waybar/modules.d/custom.json",
+           "~/.config/waybar/modules.d/hardware.json",
+           "~/.config/waybar/modules.d/hyprland.json",
+           "~/.config/waybar/modules.d/utils.json",
+           "~/.config/waybar/modules.d/wlr.json",
+        ],
+        "layer": "top",
+        "height": 36,
+        "spacing": 4,
+        "modules-center": [
+          "hyprland/window"
+        ],
+        "modules-left": [
+          "hyprland/workspaces"
+        ],
+        "modules-right": [
+          "temperature",
+          "cpu",
+          "disk",
+          "memory",
+          "bluetooth",
+          "network"
+        ],
+      }
+    '';
+
+    xdg.configFile."waybar/bar-tertiary.json".text = ''
+      {
+        "include": [
+           "~/.config/waybar/modules.d/custom.json",
+           "~/.config/waybar/modules.d/hyprland.json",
+           "~/.config/waybar/modules.d/user.json",
+           "~/.config/waybar/modules.d/wlr.json",
+        ],
+        "height": 30,
+        "layer": "top",
+        "spacing": 8,
+        "modules-center": [],
+        "modules-left": [
+          "hyprland/workspaces"
+        ],
+        "modules-right": [
+          "custom/weather",
+          "custom/cryptotrackingBTC",
+          "custom/cryptotrackingTRX",
+          "user"
+        ],
+        "include": "~/.config/waybar/modules.d/custom.json",
+        "include": "~/.config/waybar/modules.d/hyprland.json",
+        "include": "~/.config/waybar/modules.d/user.json",
+      }
+    '';
+
+    xdg.configFile."waybar/bar-wildcard.json".text = ''
+      {
+        "include": [
+           "~/.config/waybar/modules.d/custom.json",
+           "~/.config/waybar/modules.d/hyprland.json",
+           "~/.config/waybar/modules.d/user.json",
+           "~/.config/waybar/modules.d/wlr.json",
+        ],
+        "height": 30,
+        "layer": "top",
+        "spacing": 8,
+        "modules-center": [],
+        "modules-left": [
+          "hyprland/workspaces"
+        ],
+        "modules-right": [
+        ],
+      }
+    '';
 
     programs = {
       waybar = {
         enable = true;
-        settings = [
-          {
-            # CENTER
-            "layer" = "top";
-            "output" = [ "DP-2" ];
-            "height" = 30;
-            "width" = null;
-            "spacing"= 4;
-            "modules-left" = [
-               "hyprland/workspaces"
-            ];
-            "modules-center" = [
-                "hyprland/window"
-            ];
-            "modules-right" = [
-               "custom/wl-gammarelay-temperature"
-               "idle_inhibitor"
-               "keyboard-state"
-               "pulseaudio"
-               "custom/notification"
-               "clock"
-               "tray"
-            ];
-            "hyprland/workspaces" = {
-               "on-click" = "activate";
-               "active-only" = "false";
-               "sort-by-number" = true;
-            };
-            "hyprland/window" = {
-               "max-length" = 200;
-               "separate-outputs" = true;
-            };
-            "wlr/taskbar" = {
-                "format" = "{icon} {title}";
-                "icon-size" = 28;
-                "icon-theme" = "Numix-Circle";
-                "tooltip-format" = "{title}";
-                "on-click" = "activate";
-                "on-click-middle" = "close";
-                "on-click-right" = "minimize";
-                "ignore-list" = [
-                   "Alacritty"
-                ];
-                "app_ids-mapping" = {
-                   "firefoxdeveloperedition" = "firefox-developer-edition";
-                };
-            };
-            "custom/wl-gammarelay-temperature" = {
-               "format" = "{} ";
-               "exec" = "wl-gammarelay-rs watch {t}";
-               "on-click" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000";
-               "on-click-middle" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 5000";
-               "on-click-right" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500";
-               "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +500";
-               "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -500";
-            };
-            "custom/notification" = {
-                "tooltip" = false;
-                #"icon-size" = "14";
-                "format" = "{} {icon}";
-                "format-icons" = {
-                   "notification" = "<span foreground='red'><sup></sup></span>";
-                   "none" = "";
-                   "dnd-notification" = "<span foreground='red'><sup></sup></span>";
-                   "dnd-none" = "";
-                   "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
-                   "inhibited-none" = "";
-                   "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
-                   "dnd-inhibited-none" = "";
-                };
-                "return-type" = "json";
-                "exec-if" = "which swaync-client";
-                "exec" = "swaync-client -swb";
-                "on-click" = "swaync-client -t -sw";
-                "on-click-right" = "swaync-client -d -sw";
-                "escape" = true ;
-            };
-            "hyprland/submap" = {};
-            "keyboard-state" = {
-               "numlock" = true;
-               "capslock" = true;
-               "scrollock" = true;
-               "format" = {
-                  "numlock" = "N {icon}";
-                  "capslock" = "C {icon}";
-                  "scrolllock" = "S {icon}";
-               };
-               "format-icons" = {
-                  "locked" = "";
-                  "unlocked" = "";
-               };
-               "device-path" = "event3";
-            };
-            "idle_inhibitor" = {
-                "format" = "{icon}";
-                "format-icons" = {
-                   "activated" = "";
-                   "deactivated" = "";
-                };
-            };
-            "tray" = {
-                "icon-size" = 22;
-                "spacing" = 10;
-            };
-            "clock" = {
-                "interval" = 1;
-                "format" = "{:%H:%M:%S}";
-                "format-alt" = "{:%Y-%m-%d}";
-                "tooltip-format" = "<tt><small>{calendar}</small></tt>";
-                "calendar" = {
-                    "mode" = "month";
-                    "mode-mon-col" = 2;
-                    "weeks-pos" = "";
-                    "on-scroll" = 1;
-                    "on-click-right" = "mode";
-                    "format" = {
-                       "months" = "<span color='#ffead3'><b>{}</b></span>";
-                       "days" = "<span color='#ecc6d9'><b>{}</b></span>";
-                       "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
-                       "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
-                       "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
-                    };
-                };
-                "actions" = {
-                   "on-click-right" = "mode";
-                   "on-click-forward" = "tz_up";
-                   "on-click-backward" = "tz_down";
-                   "on-scroll-up" = "shift_up";
-                   "on-scroll-down" = "shift_down";
-                };
-            };
-            "pulseaudio" = {
-                "format" = "{volume}%  {icon}  {format_source}";
-                "format-bluetooth" = "{volume}% {icon} {format_source}";
-                "format-bluetooth-muted" = " {icon} {format_source}";
-                "format-muted" = " {format_source}";
-                "format-source" = " {volume}% ";
-                "format-source-muted" = "";
-                "format-icons" = {
-                  "headphone" = "";
-                  "hands-free" = "";
-                  "headset" = "";
-                  "phone" = "";
-                  "portable" = "";
-                  "car" = "";
-                  "default" = [
-                     ""
-                     ""
-                     ""
-                  ];
-                };
-                "on-click" = "pwvucontrol";
-                "on-click-right" = "sound-tool output cycle";
-            };
-          }
-          {
-            # RIGHT
-            "layer" = "top";
-            "output" = "HDMI-A-1";
-            "height" = 36;
-            "spacing" = 4;
-            "modules-left" = [
-              "hyprland/workspaces"
-            ];
-            "modules-center" = [
-              "hyprland/window"
-            ];
-            "modules-right" = [
-              "temperature"
-              "cpu"
-              "disk"
-              "memory"
-              "bluetooth"
-              "network"
-            ];
-            "hyprland/workspaces" = {
-              "on-click" = "activate";
-              "active-only" = "true";
-            };
-            "hyprland/window" = {
-               "max-length" = 200;
-               "separate-outputs" = true;
-            };
-            "wlr/taskbar" = {
-                "format" = "{icon} {title}";
-                "icon-size" = 28;
-                "icon-theme" = "Numix-Circle";
-                "tooltip-format" = "{title}";
-                "on-click" = "activate";
-                "on-click-middle" = "close";
-                "on-click-right" = "minimize";
-                "ignore-list" = [
-                   "Alacritty"
-                ];
-                "app_ids-mapping" = {
-                   "firefoxdeveloperedition" = "firefox-developer-edition";
-                };
-            };
-            "cpu" = {
-              "interval" = 10;
-              "format" = "{load} {usage} {avg_frequency} ";
-              "on-click" = "gnome-system-monitor --show-resources-tab";
-            };
-            "disk" = {
-              "interval" = 30;
-              "format" = "{used}/{total}";
-              "path" = "/";
-              "on-click" = "kitty ncdu ~";
-              "on-click-right" = "gnome-system-monitor --show-file-systems-tab";
-            };
-            "memory" = {
-              "interval" = 10;
-              "format" = "{used:0.1f}G/{total:0.1f}G ";
-              "on-click" = "gnome-system-monitor --show-processes-tab";
-            };
-            "temperature" = {
-              # "thermal-zone" = 2,
-              # "hwmon-path" = "/sys/class/hwmon/hwmon2/temp1_input",
-              "critical-threshold" = 80;
-              # "format-critical" = "{temperatureC}°C {icon}";
-              "format" = "{temperatureC}°C {icon}";
-              "format-icons" = [
-                  ""
-                  ""
-                  ""
-              ];
-            };
-            "bluetooth" = {
-               # "controller" = "controller1" # specify the alias of the controller if there are more than 1 on the system
-               "format" = " {status}";
-               "format-disabled" = "Bluetooth Disabled"; # an empty format will hide the module
-               "format-connected" = " {num_connections} connected";
-               "tooltip-format" = "{controller_alias}\t{controller_address}";
-               "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-               "tooltip-format-enumerate-connected" = "{device_alias}\t{device_address}";
-               "on-click" = "blueman-manager";
-            };
-            "network" = {
-               # "interface" = "wlp2*"; # (Optional) To force the use of this interface
-               "format-wifi" = "{essid} ({signalStrength}%)  ";
-               "format-ethernet" = "{ipaddr}/{cidr} ";
-               "tooltip-format" = "{ifname} via {gwaddr} ";
-               "format-linked" = "{ifname} (No IP) ";
-               "format-disconnected" = "Disconnected ⚠";
-               "format-alt" = "{ifname}: {ipaddr}/{cidr}";
-               "on-click-right" = "nmcli device wifi rescan && kitty sudo nmtui";
-            };
-          }
-          {
-            # LEFT
-            "layer" = "top";
-            "output" = "DP-3";
-            "spacing" = 8;
-            "modules-left" = [
-              "hyprland/workspaces"
-            ];
-            "modules-center" = [
-            ];
-            "modules-right" = [
-              "custom/weather"
-              "custom/cryptotrackingBTC"
-              "custom/cryptotrackingTRX"
-              "user"
-            ];
-            "height" = 30;
-            "hyprland/workspaces" = {
-               "on-click" = "activate";
-               "active-only" = "true";
-            };
-            "custom/weather" = {
-               "format" = "{} °";
-               "tooltip" = true;
-               "interval" = 3600;
-               "exec" = "wttrbar";
-               "return-type" = "json";
-            };
-            "custom/cryptotrackingBTC" = {
-               "format" = "{}";
-               "exec" = "curl -sSL https://cryptoprices.cc/BTC";
-               "restart-interval" = 3600;
-            };
-            "custom/cryptotrackingTRX" = {
-               "format" = "{}";
-               "exec" = "curl -sSL https://cryptoprices.cc/TRX";
-               "restart-interval" = 3600;
-            };
-            "user" = {
-               "format" = "uptime {work_H} {work_M} {work_S} ↑)";
-               "interval" = 60;
-               "height" = 30;
-               "width" = 30;
-               "icon" = true;
-            };
-          }
-        ];
+        #settings = [
+        #  {
+        #    # CENTER
+        #    "layer" = "top";
+        #    "output" = [ "${display_center}" ];
+        #    "height" = 30;
+        #    "width" = null;
+        #    "spacing"= 4;
+        #    "modules-left" = [
+        #       "hyprland/workspaces"
+        #    ];
+        #    "modules-center" = [
+        #        "hyprland/window"
+        #    ];
+        #    "modules-right" = [
+        #       "custom/wl-gammarelay-temperature"
+        #       "idle_inhibitor"
+        #       "keyboard-state"
+        #       "pulseaudio"
+        #       "custom/notification"
+        #       "clock"
+        #       "tray"
+        #    ];
+        #    "hyprland/workspaces" = {
+        #       "on-click" = "activate";
+        #       "active-only" = "false";
+        #       "sort-by-number" = true;
+        #    };
+        #    "hyprland/window" = {
+        #       "max-length" = 200;
+        #       "separate-outputs" = true;
+        #    };
+        #    "wlr/taskbar" = {
+        #        "format" = "{icon} {title}";
+        #        "icon-size" = 28;
+        #        "icon-theme" = "Numix-Circle";
+        #        "tooltip-format" = "{title}";
+        #        "on-click" = "activate";
+        #        "on-click-middle" = "close";
+        #        "on-click-right" = "minimize";
+        #        "ignore-list" = [
+        #           "Alacritty"
+        #        ];
+        #        "app_ids-mapping" = {
+        #           "firefoxdeveloperedition" = "firefox-developer-edition";
+        #        };
+        #    };
+        #    "custom/wl-gammarelay-temperature" = {
+        #       "format" = "{} ";
+        #       "exec" = "wl-gammarelay-rs watch {t}";
+        #       "on-click" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000";
+        #       "on-click-middle" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 5000";
+        #       "on-click-right" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500";
+        #       "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +500";
+        #       "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -500";
+        #    };
+        #    "custom/notification" = {
+        #        "tooltip" = false;
+        #        #"icon-size" = "14";
+        #        "format" = "{} {icon}";
+        #        "format-icons" = {
+        #           "notification" = "<span foreground='red'><sup></sup></span>";
+        #           "none" = "";
+        #           "dnd-notification" = "<span foreground='red'><sup></sup></span>";
+        #           "dnd-none" = "";
+        #           "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        #           "inhibited-none" = "";
+        #           "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        #           "dnd-inhibited-none" = "";
+        #        };
+        #        "return-type" = "json";
+        #        "exec-if" = "which swaync-client";
+        #        "exec" = "swaync-client -swb";
+        #        "on-click" = "swaync-client -t -sw";
+        #        "on-click-right" = "swaync-client -d -sw";
+        #        "escape" = true ;
+        #    };
+        #    "hyprland/submap" = {};
+        #    "keyboard-state" = {
+        #       "numlock" = true;
+        #       "capslock" = true;
+        #       "scrollock" = true;
+        #       "format" = {
+        #          "numlock" = "N {icon}";
+        #          "capslock" = "C {icon}";
+        #          "scrolllock" = "S {icon}";
+        #       };
+        #       "format-icons" = {
+        #          "locked" = "";
+        #          "unlocked" = "";
+        #       };
+        #       "device-path" = "event3";
+        #    };
+        #    "idle_inhibitor" = {
+        #        "format" = "{icon}";
+        #        "format-icons" = {
+        #           "activated" = "";
+        #           "deactivated" = "";
+        #        };
+        #    };
+        #    "tray" = {
+        #        "icon-size" = 22;
+        #        "spacing" = 10;
+        #    };
+        #    "clock" = {
+        #        "interval" = 1;
+        #        "format" = "{:%H:%M:%S}";
+        #        "format-alt" = "{:%Y-%m-%d}";
+        #        "tooltip-format" = "<tt><small>{calendar}</small></tt>";
+        #        "calendar" = {
+        #            "mode" = "month";
+        #            "mode-mon-col" = 2;
+        #            "weeks-pos" = "";
+        #            "on-scroll" = 1;
+        #            "on-click-right" = "mode";
+        #            "format" = {
+        #               "months" = "<span color='#ffead3'><b>{}</b></span>";
+        #               "days" = "<span color='#ecc6d9'><b>{}</b></span>";
+        #               "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
+        #               "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
+        #               "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
+        #            };
+        #        };
+        #        "actions" = {
+        #           "on-click-right" = "mode";
+        #           "on-click-forward" = "tz_up";
+        #           "on-click-backward" = "tz_down";
+        #           "on-scroll-up" = "shift_up";
+        #           "on-scroll-down" = "shift_down";
+        #        };
+        #    };
+        #    "pulseaudio" = {
+        #        "format" = "{volume}%  {icon}  {format_source}";
+        #        "format-bluetooth" = "{volume}% {icon} {format_source}";
+        #        "format-bluetooth-muted" = " {icon} {format_source}";
+        #        "format-muted" = " {format_source}";
+        #        "format-source" = " {volume}% ";
+        #        "format-source-muted" = "";
+        #        "format-icons" = {
+        #          "headphone" = "";
+        #          "hands-free" = "";
+        #          "headset" = "";
+        #          "phone" = "";
+        #          "portable" = "";
+        #          "car" = "";
+        #          "default" = [
+        #             ""
+        #             ""
+        #             ""
+        #          ];
+        #        };
+        #        "on-click" = "pwvucontrol";
+        #        "on-click-right" = "sound-tool output cycle";
+        #    };
+        #  }
+        #  {
+        #    # RIGHT
+        #    "layer" = "top";
+        #    "output" = "HDMI-A-1";
+        #    "height" = 36;
+        #    "spacing" = 4;
+        #    "modules-left" = [
+        #      "hyprland/workspaces"
+        #    ];
+        #    "modules-center" = [
+        #      "hyprland/window"
+        #    ];
+        #    "modules-right" = [
+        #      "temperature"
+        #      "cpu"
+        #      "disk"
+        #      "memory"
+        #      "bluetooth"
+        #      "network"
+        #    ];
+        #    "hyprland/workspaces" = {
+        #      "on-click" = "activate";
+        #      "active-only" = "true";
+        #    };
+        #    "hyprland/window" = {
+        #       "max-length" = 200;
+        #       "separate-outputs" = true;
+        #    };
+        #    "wlr/taskbar" = {
+        #        "format" = "{icon} {title}";
+        #        "icon-size" = 28;
+        #        "icon-theme" = "Numix-Circle";
+        #        "tooltip-format" = "{title}";
+        #        "on-click" = "activate";
+        #        "on-click-middle" = "close";
+        #        "on-click-right" = "minimize";
+        #        "ignore-list" = [
+        #           "Alacritty"
+        #        ];
+        #        "app_ids-mapping" = {
+        #           "firefoxdeveloperedition" = "firefox-developer-edition";
+        #        };
+        #    };
+        #    "cpu" = {
+        #      "interval" = 10;
+        #      "format" = "{load} {usage} {avg_frequency} ";
+        #      "on-click" = "gnome-system-monitor --show-resources-tab";
+        #    };
+        #    "disk" = {
+        #      "interval" = 30;
+        #      "format" = "{used}/{total}";
+        #      "path" = "/";
+        #      "on-click" = "kitty ncdu ~";
+        #      "on-click-right" = "gnome-system-monitor --show-file-systems-tab";
+        #    };
+        #    "memory" = {
+        #      "interval" = 10;
+        #      "format" = "{used:0.1f}G/{total:0.1f}G ";
+        #      "on-click" = "gnome-system-monitor --show-processes-tab";
+        #    };
+        #    "temperature" = {
+        #      # "thermal-zone" = 2,
+        #      # "hwmon-path" = "/sys/class/hwmon/hwmon2/temp1_input",
+        #      "critical-threshold" = 80;
+        #      # "format-critical" = "{temperatureC}°C {icon}";
+        #      "format" = "{temperatureC}°C {icon}";
+        #      "format-icons" = [
+        #          ""
+        #          ""
+        #          ""
+        #      ];
+        #    };
+        #    "bluetooth" = {
+        #       # "controller" = "controller1" # specify the alias of the controller if there are more than 1 on the system
+        #       "format" = " {status}";
+        #       "format-disabled" = "Bluetooth Disabled"; # an empty format will hide the module
+        #       "format-connected" = " {num_connections} connected";
+        #       "tooltip-format" = "{controller_alias}\t{controller_address}";
+        #       "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+        #       "tooltip-format-enumerate-connected" = "{device_alias}\t{device_address}";
+        #       "on-click" = "blueman-manager";
+        #    };
+        #    "network" = {
+        #       # "interface" = "wlp2*"; # (Optional) To force the use of this interface
+        #       "format-wifi" = "{essid} ({signalStrength}%)  ";
+        #       "format-ethernet" = "{ipaddr}/{cidr} ";
+        #       "tooltip-format" = "{ifname} via {gwaddr} ";
+        #       "format-linked" = "{ifname} (No IP) ";
+        #       "format-disconnected" = "Disconnected ⚠";
+        #       "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+        #       "on-click-right" = "nmcli device wifi rescan && kitty sudo nmtui";
+        #    };
+        #  }
+        #  {
+        #    # LEFT
+        #    "layer" = "top";
+        #    "output" = "DP-2";
+        #    "spacing" = 8;
+        #    "modules-left" = [
+        #      "hyprland/workspaces"
+        #    ];
+        #    "modules-center" = [
+        #    ];
+        #    "modules-right" = [
+        #      "custom/weather"
+        #      "custom/cryptotrackingBTC"
+        #      "custom/cryptotrackingTRX"
+        #      "user"
+        #    ];
+        #    "height" = 30;
+        #    "hyprland/workspaces" = {
+        #       "on-click" = "activate";
+        #       "active-only" = "true";
+        #    };
+        #    "custom/weather" = {
+        #       "format" = "{} °";
+        #       "tooltip" = true;
+        #       "interval" = 3600;
+        #       "exec" = "wttrbar";
+        #       "return-type" = "json";
+        #    };
+        #    "custom/cryptotrackingBTC" = {
+        #       "format" = "{}";
+        #       "exec" = "curl -sSL https://cryptoprices.cc/BTC";
+        #       "restart-interval" = 3600;
+        #    };
+        #    "custom/cryptotrackingTRX" = {
+        #       "format" = "{}";
+        #       "exec" = "curl -sSL https://cryptoprices.cc/TRX";
+        #       "restart-interval" = 3600;
+        #    };
+        #    "user" = {
+        #       "format" = "uptime {work_H} {work_M} {work_S} ↑)";
+        #       "interval" = 60;
+        #       "height" = 30;
+        #       "width" = 30;
+        #       "icon" = true;
+        #    };
+        #  }
+        #];
         style = ''
           * {
               font-family: Noto Sans NF, Helvetica, Arial, sans-serif;
@@ -588,10 +1004,10 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec-once = [
-          "waybar"
+          "systemctl --user restart waybar.service"
         ];
         bind = [
-          "SUPER_SHIFT, W, exec, pkill waybar || waybar"
+          "SUPER_SHIFT, W, exec, systemctl --user restart waybar.service"
         ];
       };
     };

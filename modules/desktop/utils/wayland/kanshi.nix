@@ -16,11 +16,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs;
-        [
-          kanshi
+    services.kanshi = {
+      enable = true;
+    };
+
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      settings = {
+        exec-once = [
+          "systemctl --user restart kanshi.service"
         ];
+      };
     };
   };
 }
