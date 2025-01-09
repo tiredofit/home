@@ -19,6 +19,7 @@ with lib;
         hugo.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
+        kanshi.enable = true;
         mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
         nmap.enable = mkDefault true;
