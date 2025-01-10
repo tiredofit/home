@@ -22,6 +22,10 @@ with lib;
         kanshi.enable = true;
         mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
+        networkmanager = {
+          enable = true;
+          systemtray.enable = true;
+        };
         nmap.enable = mkDefault true;
         obsidian.enable = true;
         peazip.enable = true;
