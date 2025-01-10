@@ -10,6 +10,10 @@ with lib;
         docker-compose.enable = mkDefault true;
         git.enable = mkDefault true;
         nextcloud-client.enable = mkDefault true;
+        networkmanager = {
+          enable = mkDefault true;
+          systemtray.enable = mkDefault false;
+        };
       };
       feature = {
       };
