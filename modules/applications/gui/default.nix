@@ -32,6 +32,7 @@ with lib;
     ./mate-calc.nix
     ./mqtt-explorer.nix
     ./nemo.nix
+    ./networkmanager.nix
     ./nextcloud-client.nix
     ./obsidian.nix
     ./obs-studio.nix
