@@ -124,6 +124,9 @@ with lib;
         };
       };
     };
+    services.kanshi = mkIf (config.host.home.applications.kanshi.enable) {
+      systemdTarget = "hyprland-session.target";
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -145,6 +148,7 @@ with lib;
           "NIXOS_OZONE_WL,1"
         ];
       };
+      systemd.enable = mkDefault true;
       xwayland.enable = mkDefault true;
     };
 
