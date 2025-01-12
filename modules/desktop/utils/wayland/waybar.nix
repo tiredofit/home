@@ -159,14 +159,17 @@ in
     xdg.configFile."waybar/modules.d/hardware.json".text = ''
       {
         "battery": {
+          "format": "{icon}",
+          "format-icons": ["", "", "", "", ""],
+          "format-time": "{H}h{M}m",
+          "format-charging": "  {capacity}% - {time}",
+          "format-full": " {icon} Charged",
           "interval": 60,
           "states": {
-            "warning": 30,
-            "critical": 15
+            "warning": 25,
+            "critical": 10
           },
-          "format": "{capacity}% {icon}",
-          "format-icons": ["", "", "", "", ""],
-          "max-length": 25
+          "tooltip": false
         },
         "bluetooth": {
           "format": " {status}",
