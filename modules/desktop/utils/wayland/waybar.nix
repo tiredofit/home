@@ -158,6 +158,16 @@ in
 
     xdg.configFile."waybar/modules.d/hardware.json".text = ''
       {
+        "battery": {
+          "interval": 60,
+          "states": {
+            "warning": 30,
+            "critical": 15
+          },
+          "format": "{capacity}% {icon}",
+          "format-icons": ["", "", "", "", ""],
+          "max-length": 25
+        },
         "bluetooth": {
           "format": " {status}",
           "format-connected": " {num_connections} connected",
@@ -354,6 +364,7 @@ in
         "modules-right": [
           "custom/wl-gammarelay-temperature",
           "idle_inhibitor",
+          "battery",
           "keyboard-state",
           "pulseaudio",
           "custom/notification",

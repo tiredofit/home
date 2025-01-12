@@ -10,7 +10,8 @@ with lib;
         act.enable = mkDefault true;
         avidemux.enable = true;
         calibre.enable = true;
-        czkawka.enable = mkDefault true;
+        chromium.enable = true;
+        czkawka.enable = true;
         encfs.enable = true;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
@@ -31,7 +32,7 @@ with lib;
         peazip.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
-        sonusmix.enable = true;
+        sonusmix.enable = false;
         shellcheck.enable = true;
         shfmt.enable = true;
         smartgit.enable = true;
@@ -43,14 +44,14 @@ with lib;
           };
         };
         szyszka.enable = true;
-        thunderbird.enable = mkDefault true;
-        virt-manager.enable = mkDefault true;
+        thunderbird.enable = true;
+        virt-manager.enable = true;
         visual-studio-code = {
           enable = mkDefault true;
-          defaultApplication.enable = mkDefault true;
+          defaultApplication.enable = true;
         };
         yq.enable = true;
-        yt-dlp.enable = mkDefault true;
+        yt-dlp.enable = true;
         zoom.enable = false;
         zenbrowser.enable = true;
       };
@@ -386,8 +387,4 @@ with lib;
       ];
     }
   ];
-
-  wayland.windowManager.hyprland = {
-    xwayland.enable = true;
-  };
 }
