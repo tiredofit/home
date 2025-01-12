@@ -39,7 +39,7 @@ if [ -z "''${1}" ]; then exit 1; fi
 
 case "''${#}" in
     1)
-        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+        cat <<EOF > ''${HOME}/.config/hypr/display.conf
 workspace=1,,default:true,persistent:true
 workspace=2,persistent:true
 workspace=3,persistent:true
@@ -52,7 +52,7 @@ workspace=9,persistent:true
 EOF
     ;;
     2)
-        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+        cat <<EOF > ''${HOME}/.config/hypr/display.conf
 \$_monitor1=$(_get_display_name "''${1}")
 \$_monitor2=$(_get_display_name "''${2}")
 workspace=2,monitor:\$_monitor1,,default:true,persistent:true
@@ -64,7 +64,7 @@ workspace=9,monitor:\$_monitor2,persistent:true
 EOF
     ;;
     3 | *)
-        cat <<EOF > ''${XDG_CONFIG_HOME}/hypr/display.conf
+        cat <<EOF > ''${HOME}/.config/hypr/display.conf
 \$_monitor1=$(_get_display_name "''${1}")
 \$_monitor2=$(_get_display_name "''${2}")
 \$_monitor3=$(_get_display_name "''${3}")

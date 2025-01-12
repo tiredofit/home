@@ -9,19 +9,18 @@ let
     }
 
     if [ -z "''${1}" ]; then exit 1; fi
-
     _tmp_waybar_config=$(mktemp)
     case "''${1}" in
         * )
             display_name=$(wlr-randr --json | jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name')
             jq -n \
                 --arg output "''${display_name}" \
-                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
+                --arg home "''${HOME}" \
                     '
                       [
                           {
                               "output": $output,
-                              "include": ($xdg_config_home + "/waybar/bar-primary.json")
+                              "include": ($home + "/.config/waybar/bar-primary.json")
                           }
                       ]
                     ' \
@@ -52,12 +51,12 @@ let
             jq \
                 --arg bar_name "''${_bar_name}" \
                 --arg output "''${display_name}" \
-                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
+                --arg home "''${HOME}" \
                     ' . +
                         [
                             {
                                 "output": $output,
-                                "include": ($xdg_config_home + "/waybar/bar-" + $bar_name + ".json")
+                                "include": ($home + "/.config/waybar/bar-" + $bar_name + ".json")
                             }
                         ]
                     ' \
@@ -66,19 +65,22 @@ let
             (( display_counter+=1 ))
         else
             jq \
-                '. +
-                    [
-                        {
-                            "output": (map("!" + .output) | join(", ")),
-                            "include": "/home/dave/.config/waybar/bar-wildcard.json"
-                        }
-                    ]
-                ' \
-                        ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
+                --arg bar_name "''${_bar_name}" \
+                --arg output "''${display_name}" \
+                --arg home "''${HOME}" \
+                    '. +
+                        [
+                            {
+                                "output": (map("!" + .output) | join(", ")),
+                                "include": ($home + "/.config/waybar/bar-wildcard.json"
+                            }
+                        ]
+                    ' \
+                            ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
         fi
     done
 
-    cp -aR "''${_tmp_waybar_config}" "''${XDG_CONFIG_HOME}"/waybar/config
+    cp -aR "''${_tmp_waybar_config}" "''${HOME}"/.config/waybar/config
     rm -rf \
         "''${_tmp_waybar_config}" \
         "''${_tmp_waybar_config}"-temp
