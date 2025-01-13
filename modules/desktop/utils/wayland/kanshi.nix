@@ -22,8 +22,14 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        exec-once = [
+        exec = [
           "systemctl --user restart kanshi.service"
+        ];
+        #exec-once = [
+        #  "systemctl --user start kanshi.service"
+        #];
+        exec-once = [
+          "kanshi"
         ];
       };
     };
