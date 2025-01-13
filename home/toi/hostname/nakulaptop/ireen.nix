@@ -22,7 +22,7 @@
         };
       };
       service = {
-        decrypt_encfs_workspace.enable = false;
+        decrypt_cryfs_workspace.enable = false;
         vscode-server.enable = false;
       };
     };

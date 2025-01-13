@@ -60,7 +60,6 @@ with lib;
         theming.enable = mkDefault true;
       };
       service = {
-        decrypt_encfs_workspace.enable = mkDefault true;
         vscode-server.enable = mkDefault true;
       };
     };

@@ -12,9 +12,7 @@ with lib;
         calibre.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
-        encfs.enable = true;
         github-client.enable = true;
-        gnome-encfs-manager.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
         hugo.enable = false;
@@ -48,7 +46,7 @@ with lib;
         };
         yq.enable = true;
         yt-dlp.enable = true;
-        zoom.enable = false;
+        zoom.enable = true;
         zenbrowser.enable = true;
       };
       feature = {
@@ -58,7 +56,7 @@ with lib;
           windowManager = "hyprland";
         };
       };
-      service.decrypt_encfs_workspace.enable = true;
+      service.decrypt_cryfs_workspace.enable = true;
       user = {
         dave = {
           secrets = {

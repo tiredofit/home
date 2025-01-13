@@ -9,7 +9,7 @@ with lib;
     wayland.windowManager.hyprland = {
       settings = {
         source = [
-                  "../../src/home/dotfiles/hypr/hyprland.conf"
+          "../../src/home/dotfiles/hypr/hyprland.conf"
         ];
         misc = {
           disable_hyprland_logo = true;

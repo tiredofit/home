@@ -6,7 +6,6 @@
         act.enable = true;
         android-tools.enable = true;
         calibre.enable = true;
-        encfs.enable = true;
         git.enable = true;
         github-client.enable = true;
         hugo.enable = true;
@@ -22,7 +21,7 @@
         };
       };
       service = {
-        decrypt_encfs_workspace.enable = true;
+        decrypt_cryfs_workspace.enable = true;
         vscode-server.enable = true;
       };
     };
