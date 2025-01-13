@@ -9,6 +9,7 @@ with lib;
     ./bash.nix
     ./btop.nix
     ./comma.nix
+    ./cryfs.nix
     ./diceware.nix
     ./direnv.nix
     ./docker-compose.nix
