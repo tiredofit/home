@@ -724,9 +724,13 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        exec = [
-          "systemctl --user restart waybar.service"
-        ];
+        #exec = [
+        #  "systemctl --user restart waybar.service"
+        #];
+        #exec-once = [
+        #  #"systemctl --user start waybar.service"
+        #  "waybar"
+        #];
         bind = [
           "SUPER_SHIFT, W, exec, systemctl --user restart waybar.service"
         ];
