@@ -7,10 +7,11 @@ with lib;
   host = {
     home = {
       applications = {
-        act.enable = mkDefault true;
+        act.enable = true;
         avidemux.enable = true;
         calibre.enable = true;
-        czkawka.enable = mkDefault true;
+        cryfs.enable = true;
+        czkawka.enable = true;
         encfs.enable = true;
         github-client.enable = true;
         gnome-encfs-manager.enable = true;
@@ -20,9 +21,9 @@ with lib;
         kanshi.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
-        mp3gain.enable = mkDefault true;
+        mp3gain.enable = true;
         nix-development_tools.enable = true;
-        nmap.enable = mkDefault true;
+        nmap.enable = true;
         obsidian.enable = true;
         peazip.enable = true;
         python.enable = true;
@@ -39,14 +40,14 @@ with lib;
           };
         };
         szyszka.enable = true;
-        thunderbird.enable = mkDefault true;
-        virt-manager.enable = mkDefault true;
+        thunderbird.enable = true;
+        virt-manager.enable = true;
         visual-studio-code = {
-          enable = mkDefault true;
-          defaultApplication.enable = mkDefault true;
+          enable = true;
+          defaultApplication.enable = true;
         };
         yq.enable = true;
-        yt-dlp.enable = mkDefault true;
+        yt-dlp.enable = true;
         zoom.enable = false;
         zenbrowser.enable = true;
       };

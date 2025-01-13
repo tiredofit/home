@@ -11,6 +11,7 @@ with lib;
         avidemux.enable = true;
         calibre.enable = true;
         chromium.enable = true;
+        cryfs.enable = true;
         czkawka.enable = true;
         encfs.enable = true;
         github-client.enable = true;
@@ -25,7 +26,7 @@ with lib;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
-          systemtray.enable = true;
+          systemtray.enable = false;
         };
         nmap.enable = mkDefault true;
         obsidian.enable = true;

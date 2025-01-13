@@ -7,6 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
+        cryfs.enable = mkDefault true;
         docker-compose.enable = mkDefault true;
         git.enable = mkDefault true;
         nextcloud-client.enable = mkDefault true;
