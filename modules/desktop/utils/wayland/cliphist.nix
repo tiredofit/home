@@ -12,6 +12,11 @@ in
         type = with types; bool;
         description = "Wayland clipboard history";
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -23,12 +28,9 @@ in
         ];
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
-      settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}wl-paste --type text --watch cliphist store"  # Stores only text data
-          "${config.host.home.feature.uwsm.prefix}wl-paste --type image --watch cliphist store" # Stores only image data
-        ];
+    services = {
+      cliphist = {
+        enable = cfg.service.enable;
       };
     };
   };
