@@ -62,7 +62,7 @@ with lib;
         };
         yq.enable = true;
         yt-dlp.enable = true;
-        zoom.enable = false;
+        zoom.enable = true;
         zenbrowser.enable = true;
       };
       feature = {
