@@ -111,7 +111,10 @@ with lib;
         applications = {
           hyprcursor.enable = mkDefault true;
           hyprdim.enable = mkDefault true;
-          hypridle.enable = mkDefault true;
+          hypridle = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
           hyprlock.enable = true;
           hyprpaper.enable = mkDefault true;
           hyprpicker.enable = mkDefault true;
