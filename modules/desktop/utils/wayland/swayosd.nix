@@ -2,6 +2,10 @@
 
 let
   cfg = config.host.home.applications.swayosd;
+  prefixUWSM =
+    if config.host.network.firewall.fail2ban.enable
+    then "VERBOSE"
+    else "INFO";
 in
   with lib;
 {
@@ -27,14 +31,14 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         bindl = [
-          ",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+          ",XF86AudioMute, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume mute-toggle"
         ];
         bindle = [
-          ",XF86AudioRaiseVolume, exec, swayosd-client --output-volume +1 --max-volume=100"
-          ",XF86AudioLowerVolume, exec, swayosd-client --output-volume -1"
+          ",XF86AudioRaiseVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume +1 --max-volume=100"
+          ",XF86AudioLowerVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume -1"
         ];
         exec-once = [
-          "swayosd-server --display=HDMI-A-1"
+          "${config.host.home.feature.uwsm.prefix}swayosd-server --display=HDMI-A-1"
         ];
       };
     };
