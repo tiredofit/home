@@ -39,7 +39,7 @@ in
       settings = {
         exec = [
           #"systemctl --user restart swaync.service"
-          "swaync"
+          "${config.host.home.feature.uwsm.prefix}swaync"
         ];
         bind = [
           "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
