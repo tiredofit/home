@@ -125,6 +125,10 @@ with lib;
             service.enable = mkDefault true;
           };
           rofi.enable = mkDefault true;
+          waybar = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
         };
         feature = {
           uwsm.enable = mkDefault true;
