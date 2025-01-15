@@ -26,7 +26,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec-once = [
-          "ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations"
+          "${config.host.home.feature.uwsm.prefix}ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations"
         ];
         windowrulev2 = [
           "workspace 3,class:(^Ferdium)$"
