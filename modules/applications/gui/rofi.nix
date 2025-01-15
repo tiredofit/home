@@ -48,6 +48,7 @@ in
         icon-theme = "Papirus";
         lines = 6;
         modi = "window,drun,run,combi";
+        run-command "${config.host.home.feature.uwsm.prefix}{cmd}";
         show-icons = true;
         sidebar-mode = true;
         sort = true;
@@ -59,11 +60,11 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         bind = [
-          "SUPER, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -run-shell-command '${pkgs.kitty}/bin/kitty' -drun -show run"
-          "SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi  -show drun -modi drun -show-icons"
+          "SUPER, R, exec, pkill rofi || ${config.host.home.feature.uwsm.prefix}${config.programs.rofi.package}/bin/rofi -run-shell-command '${pkgs.kitty}/bin/kitty' -drun -show run"
+          "SUPER, D, exec, pkill rofi || ${config.host.home.feature.uwsm.prefix}${config.programs.rofi.package}/bin/rofi  -show drun -modi drun -show-icons"
           #"SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi window,drun,ssh,run -show combi -show-icons"
-          "SUPER, V, exec, cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy"
-          "SUPER_SHIFT, R, exec, pkill rofi || kitty bash -c ${config.programs.rofi.package}/bin/rofi -dmenu -p terminal)"
+          "SUPER, V, exec, cliphist list | ${config.host.home.feature.uwsm.prefix}${config.programs.rofi.package}/bin/rofi -dmenu | cliphist decode | wl-copy"
+          "SUPER_SHIFT, R, exec, pkill rofi || ${config.host.home.feature.uwsm.prefix}kitty bash -c ${config.programs.rofi.package}/bin/rofi -dmenu -p terminal)"
         ];
         windowrulev2 = [
           #"stayfocused,class:(Rofi)"
