@@ -116,12 +116,15 @@ with lib;
             service.enable = mkDefault true;
           };
           hyprlock.enable = true;
-          hyprpaper.enable = {
+          hyprpaper = {
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
           hyprpicker.enable = mkDefault true;
-          hyprpolkitagent.enable = mkDefault true;
+          hyprpolkitagent = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
           hyprsunset.enable = mkDefault true;
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
