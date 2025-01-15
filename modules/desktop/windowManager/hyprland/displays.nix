@@ -13,9 +13,9 @@ with lib;
         source = [
           "display.conf"
         ];
-        monitor = [
-          ",preferred,auto,1.0"
-        ];
+        #monitor = [
+        #  ",preferred,auto,1.0"
+        #];
       };
     };
   };

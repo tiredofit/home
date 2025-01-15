@@ -33,7 +33,7 @@ let
   script_displayhelper_hyprland = pkgs.writeShellScriptBin "displayhelper_hyprland" ''
 
 _get_display_name() {
-    ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name'
+    ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "$(echo "''${1}" | sed "s|^d/||g")" '.[] | select(.description | test("^(d/)?\($desc)")) | .name'
 }
 if [ -z "''${1}" ]; then exit 1; fi
 
@@ -124,9 +124,6 @@ with lib;
         };
       };
     };
-    services.kanshi = mkIf (config.host.home.applications.kanshi.enable) {
-      systemdTarget = "graphical-session.target";
-    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -148,7 +145,6 @@ with lib;
           "NIXOS_OZONE_WL,1"
         ];
       };
-      systemd.enable = mkDefault false;
       xwayland.enable = mkDefault true;
     };
 
