@@ -1,16 +1,17 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
   inherit (specialArgs) displays display_center role;
-  dock_left="Dell Inc. DELL S3220DGF 63BQF43";
-  dock_left_mode="2560x1440@164.05600";
+  dock_left="d/Dell Inc. DELL S3220DGF 63BQF43";
+  dock_left_mode="2560x1440@120.00";
   dock_left_position="0,0";
-  dock_middle="Dell Inc. DELL S3220DGF 9H4VF43";
-  dock_middle_mode="2560x1440@164.05600";
+  dock_middle="d/Dell Inc. DELL S3220DGF 9H4VF43";
+  dock_middle_mode="2560x1440@120.00";
   dock_middle_position="2560,0";
-  dock_right="Dell Inc. DELL S3220DGF GSDTF43";
+  dock_right="d/Dell Inc. DELL S3220DGF GSDTF43";
   dock_right_mode="2560x1440@119.99800";
   dock_right_position="5120,0";
-  laptop_display="California Institute of Technology 0x1413";
+  laptop_display="d/California Institute of Technology 0x1413";
+  laptop_display_mode="1920x1200@60.00";
   laptop_external="HDMI-A-1";
 in
 with lib;
@@ -30,7 +31,6 @@ with lib;
         hugo.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
-        kanshi.enable = true;
         mp3gain.enable = mkDefault true;
         nix-development_tools.enable = true;
         networkmanager = {
@@ -93,333 +93,412 @@ with lib;
     };
   };
 
-  services.kanshi.settings = [
-    {
-      profile.name = "'laptop (+embedded, -hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\""
-        "displayhelper_waybar   \"${laptop_display}\""
-      ];
-    }
+  host.home.applications.shikane.settings = {
+    profile = [
+      {
+        name = "laptop (+embedded, -hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\""
+          "displayhelper_waybar \"${laptop_display}\""
+          ];
+      }
+      {
+        name = "laptop (+embedded, +hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\""
+          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\""
+        ];
+      }
+      {
+        name = "laptop (-embedded, +hdmi)";
+        output = [
+          {
+            enable = false;
+            search = "${laptop_display}";
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            mode = "${laptop_display_mode}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"HDMI-A-1\""
+          "displayhelper_waybar \"HDMI-A-1\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, -hdmi) + dock (-dp2, -dp1, +hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\""
+          "displayhelper_waybar \"${laptop_display}\" \"${dock_right}\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+        ];
+      }
+      {
+        name = "laptop (-embedded, -hdmi) + dock (-dp2, -dp1, +hdmi)";
+        output = [
+          {
+            enable = false;
+            search = "${laptop_display}";
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${dock_right}\""
+          "displayhelper_waybar \"${dock_right}\""
+        ];
+      }
+      {
+        name = "laptop (-embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)";
+        output = [
+          {
+            enable = false;
+            search = "${laptop_display}";
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_waybar \"HDMI-A-1\" \"${dock_right}\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, -hdmi) + dock (-dp2, +dp1, -hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_middle}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_waybar \"${laptop_display}\" \"${dock_middle}\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, +hdmi) + dock (-dp2, +dp1, -hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_middle}";
+            mode = "${dock_middle_mode}";
+            position = "${dock_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
+          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, +hdmi) + dock (+dp2, -dp1, -hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_left}";
+            mode = "${dock_left_mode}";
+            position = "${dock_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+        ];
+      }
+      {
+        name = "laptop (+embedded, +hdmi) + dock (+dp2, +dp1, +hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "HDMI-A-1";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_left}";
+            mode = "${dock_left_mode}";
+            position = "${dock_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_middle}";
+            mode = "${dock_middle_mode}";
+            position = "${dock_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+        ];
+      }
 
-    {
-      profile.name = "'laptop (+embedded, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\""
-      ];
-    }
+      {
+        name = "laptop (-embedded, -hdmi) + dock (+dp2, +dp1, +hdmi)";
+        output = [
+          {
+            enable = false;
+            search = "${laptop_display}";
+          }
+          {
+            enable = true;
+            search = "${dock_left}";
+            mode = "${dock_left_mode}";
+            position = "${dock_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_middle}";
+            mode = "${dock_middle_mode}";
+            position = "${dock_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_waybar \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+        ];
+      }
 
-    {
-      profile.name = "'laptop (-embedded, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-           status = "disable";
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"HDMI-A-1\""
-        "displayhelper_waybar   \"HDMI-A-1\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, -hdmi) + dock (-dp2, -dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"${dock_right}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (-embedded, -hdmi) + dock (-dp2, -dp1, +hdmi )'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-           status = "disable";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${dock_right}\""
-        "displayhelper_waybar   \"${dock_right}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (-embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-           status = "disable";
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"HDMI-A-1\" \"${dock_right}\""
-        "displayhelper_waybar   \"HDMI-A-1\" \"${dock_right}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, -hdmi) + dock (-dp2, +dp1, -hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "${dock_middle}";
-          status = "enable";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (-dp2, +dp1, -hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_middle}";
-          status = "enable";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (+dp2, -dp1, -hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_left}";
-          status = "enable";
-          mode = "${dock_left_mode}";
-          position = "${dock_left_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (-dp2, +dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_middle}";
-          status = "enable";
-          mode = "${dock_middle_mode}";
-          position = "${dock_middle_position}";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (+dp2, -dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_left}";
-          status = "enable";
-          mode = "${dock_left_mode}";
-          position = "${dock_left_position}";
-        }
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-      ];
-    }
-
-    {
-      profile.name = "'laptop (+embedded, +hdmi) + dock (+dp2, +dp1, +hdmi)'";
-      profile.outputs = [
-        {
-          criteria = "${laptop_display}";
-          status = "enable";
-          scale = 1.0;
-        }
-        {
-          criteria = "HDMI-A-1";
-          status = "enable";
-        }
-        {
-          criteria = "${dock_left}";
-          status = "enable";
-          mode = "${dock_left_mode}";
-          position = "${dock_left_position}";
-        }
-        {
-          criteria = "${dock_middle}";
-          status = "enable";
-          mode = "${dock_middle_mode}";
-          position = "${dock_middle_position}";
-        }
-        {
-          criteria = "${dock_right}";
-          status = "enable";
-          mode = "${dock_right_mode}";
-          position = "${dock_right_position}";
-        }
-
-      ];
-      profile.exec = [
-        "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
-        "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
-      ];
-    }
-  ];
+      {
+        name = "laptop (+embedded, -hdmi) + dock (+dp2, +dp1, +hdmi)";
+        output = [
+          {
+            enable = true;
+            search = "${laptop_display}";
+            mode = "${laptop_display_mode}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_left}";
+            mode = "${dock_left_mode}";
+            position = "${dock_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_middle}";
+            mode = "${dock_middle_mode}";
+            position = "${dock_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${dock_right}";
+            mode = "${dock_right_mode}";
+            position = "${dock_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_waybar \"${laptop_display}\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+        ];
+      }
+    ];
+  };
 }
