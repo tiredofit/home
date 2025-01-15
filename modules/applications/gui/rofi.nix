@@ -20,12 +20,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs;
-        [
-        ];
-    };
-
     programs.rofi = {
       enable = true;
       plugins = with pkgs; [
@@ -48,7 +42,7 @@ in
         icon-theme = "Papirus";
         lines = 6;
         modi = "window,drun,run,combi";
-        run-command "${config.host.home.feature.uwsm.prefix}{cmd}";
+        run-command = "${config.host.home.feature.uwsm.prefix}{cmd}";
         show-icons = true;
         sidebar-mode = true;
         sort = true;
