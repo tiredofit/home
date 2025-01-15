@@ -154,7 +154,7 @@ in
       settings = {
         ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          "SUPER, Return, exec, ${pkgs.kitty}/bin/kitty"
+          "SUPER, Return, exec, ${config.host.home.feature.uwsm.prefix}${pkgs.kitty}/bin/kitty"
         ];
       };
     };
