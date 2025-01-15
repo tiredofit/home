@@ -12,6 +12,11 @@ in
         type = with types; bool;
         description = "Wayland Wallpaper Manager";
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -20,11 +25,15 @@ in
       file = {
         ".config/hypr/background".source = ../../../../dotfiles/hypr/background;
       };
+      packages = with pkgs;
+        [
+          hyprpaper
+        ];
     };
 
-    services = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    services = {
       hyprpaper = {
-        enable = true;
+        enable = cfg.service.enable;
         settings = {
           splash = false;
 
