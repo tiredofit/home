@@ -110,7 +110,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\""
-          "displayhelper_waybar \"${laptop_display}\""
+          "displayhelper_waybar   \"${laptop_display}\""
           ];
       }
       {
@@ -135,7 +135,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\""
-          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\""
+          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\""
         ];
       }
       {
@@ -156,7 +156,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"HDMI-A-1\""
-          "displayhelper_waybar \"HDMI-A-1\""
+          "displayhelper_waybar   \"HDMI-A-1\""
         ];
       }
       {
@@ -183,7 +183,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\""
-          "displayhelper_waybar \"${laptop_display}\" \"${dock_right}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"${dock_right}\""
         ];
       }
       {
@@ -217,7 +217,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
         ];
       }
       {
@@ -239,7 +239,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${dock_right}\""
-          "displayhelper_waybar \"${dock_right}\""
+          "displayhelper_waybar   \"${dock_right}\""
         ];
       }
       {
@@ -268,7 +268,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"HDMI-A-1\" \"${dock_right}\""
-          "displayhelper_waybar \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_waybar   \"HDMI-A-1\" \"${dock_right}\""
         ];
       }
       {
@@ -292,7 +292,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\""
-          "displayhelper_waybar \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\""
         ];
       }
       {
@@ -326,7 +326,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
         ];
       }
       {
@@ -359,7 +359,7 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
         ];
       }
       {
@@ -409,10 +409,16 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
-          "displayhelper_waybar \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
+
+        #   .-------.       .-------.       .-------.
+        #   |  LEFT |       |MIDDLE |       | RIGHT |
+        #   |       |       |       |       |       |
+        #   |       |       |       |       |       |
+        #   '-------'       '-------'       '-------'
 
       {
         name = "laptop (-embedded, -hdmi) + dock (+dp2, +dp1, +hdmi)";
@@ -450,8 +456,9 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
-          "displayhelper_waybar \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_hyprland \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+
+          "displayhelper_waybar   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
 
@@ -495,8 +502,8 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
-          "displayhelper_waybar \"${laptop_display}\" \"${dock_right}\" \"${dock_middle}\" \"${dock_left}\""
+          "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
     ];
