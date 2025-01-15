@@ -24,6 +24,11 @@ in
         type = with types; bool;
         description = "Notification Center for Wayland";
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -35,17 +40,39 @@ in
         ];
     };
 
+    systemd.user.services.swaync = mkIf cfg.service.enable {
+      Unit = {
+        Description = "Swaync notification daemon";
+        Documentation = "https://github.com/ErikReider/SwayNotificationCenter";
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+      };
+
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.Notifications"
+        ExecStart = "${pkgs.sway-notification-center-custom}/bin/swaync";
+        ExecReload = "${pkgs.sway-notification-center-custom}/bin/swaync-client --reload-config ; ${pkgs.sway-notification-center-custom}/bin/swaync-client --reload-css"
+        Restart = "on-failure";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec = [
-          "${config.host.home.feature.uwsm.prefix}systemctl --user restart swaync.service"
+          "systemctl --user restart swaync.service"
           #"${config.host.home.feature.uwsm.prefix}swaync"
         ];
         bind = [
           "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
         ];
       };
-            };
+    };
 
     xdg.configFile."swaync/config.json".text = ''
       {
