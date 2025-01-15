@@ -5,22 +5,23 @@ let
 
   script_displayhelper_waybar = pkgs.writeShellScriptBin "displayhelper_waybar" ''
     _get_display_name() {
-        ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name'
+        ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "$(echo "''${1}" | sed "s|^d/||g")" '.[] | select(.description | test("^(d/)?\($desc)")) | .name'
     }
 
     if [ -z "''${1}" ]; then exit 1; fi
+
     _tmp_waybar_config=$(mktemp)
     case "''${1}" in
         * )
-            display_name=$(wlr-randr --json | jq -r --arg desc "''${1}" '.[] | select(.description | contains($desc)) | .name')
+            display_name=$(_get_display_name "''${1}")
             jq -n \
                 --arg output "''${display_name}" \
-                --arg home "''${HOME}" \
+                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
                     '
                       [
                           {
                               "output": $output,
-                              "include": ($home + "/.config/waybar/bar-primary.json")
+                              "include": ($xdg_config_home + "/waybar/bar-primary.json")
                           }
                       ]
                     ' \
@@ -51,12 +52,12 @@ let
             jq \
                 --arg bar_name "''${_bar_name}" \
                 --arg output "''${display_name}" \
-                --arg home "''${HOME}" \
+                --arg xdg_config_home "''${XDG_CONFIG_HOME}" \
                     ' . +
                         [
                             {
                                 "output": $output,
-                                "include": ($home + "/.config/waybar/bar-" + $bar_name + ".json")
+                                "include": ($xdg_config_home + "/waybar/bar-" + $bar_name + ".json")
                             }
                         ]
                     ' \
@@ -65,22 +66,19 @@ let
             (( display_counter+=1 ))
         else
             jq \
-                --arg bar_name "''${_bar_name}" \
-                --arg output "''${display_name}" \
-                --arg home "''${HOME}" \
-                    '. +
-                        [
-                            {
-                                "output": (map("!" + .output) | join(", ")),
-                                "include": ($home + "/.config/waybar/bar-wildcard.json"
-                            }
-                        ]
-                    ' \
-                            ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
+                '. +
+                    [
+                        {
+                            "output": (map("!" + .output) | join(", ")),
+                            "include": "/home/dave/.config/waybar/bar-wildcard.json"
+                        }
+                    ]
+                ' \
+                        ''${_tmp_waybar_config} > ''${_tmp_waybar_config}-temp && mv ''${_tmp_waybar_config}-temp ''${_tmp_waybar_config}
         fi
     done
 
-    cp -aR "''${_tmp_waybar_config}" "''${HOME}"/.config/waybar/config
+    cp -aR "''${_tmp_waybar_config}" "''${XDG_CONFIG_HOME}"/waybar/config
     rm -rf \
         "''${_tmp_waybar_config}" \
         "''${_tmp_waybar_config}"-temp
@@ -161,17 +159,14 @@ in
     xdg.configFile."waybar/modules.d/hardware.json".text = ''
       {
         "battery": {
-          "format": "{icon}",
-          "format-icons": ["", "", "", "", ""],
-          "format-time": "{H}h{M}m",
-          "format-charging": "  {capacity}% - {time}",
-          "format-full": " {icon} Charged",
           "interval": 60,
           "states": {
-            "warning": 25,
-            "critical": 10
+            "warning": 30,
+            "critical": 15
           },
-          "tooltip": false
+          "format": "{capacity}% {icon}",
+          "format-icons": ["", "", "", "", ""],
+          "max-length": 25
         },
         "bluetooth": {
           "format": " {status}",
@@ -590,7 +585,6 @@ in
               background-color: #eb4d4b;
           }
 
-
           #cpu {
               background-color: #2ecc71;
               color: #000000;
@@ -724,13 +718,9 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        #exec = [
-        #  "systemctl --user restart waybar.service"
-        #];
-        #exec-once = [
-        #  #"systemctl --user start waybar.service"
-        #  "waybar"
-        #];
+        exec = [
+          "systemctl --user restart waybar.service"
+        ];
         bind = [
           "SUPER_SHIFT, W, exec, systemctl --user restart waybar.service"
         ];
