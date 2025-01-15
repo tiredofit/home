@@ -99,6 +99,11 @@ in
         type = with types; bool;
         description = "Hyprland Idle Monitor";
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -110,28 +115,28 @@ in
         ];
     };
 
-    services = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    services = mkIf (cfg.service.enable) {
       hypridle = {
         enable = true;
         settings = {
           general = {
-            lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";        # avoid starting multiple hyprlock instances.
+            lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";                                           # avoid starting multiple hyprlock instances.
             before_sleep_cmd = "$HOME/.local/state/nix/profile/bin/hypridle-companion sleep before";                # lock before suspend.
             after_sleep_cmd = "$HOME/.local/state/nix/profile/bin/hypridle-companion sleep  after";                 # to avoid having to press a key twice to turn on the display.
           };
          listener = [
             {
-              timeout = 600;                                                       # 10min
+              timeout = 600;                                                                                          # 10min
               on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion lock before";                       # lock screen when timeout has passed
               on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion lock after";                         # reset gamma
             }
             {
-              timeout = 660;                                                       # 11min
+              timeout = 660;                                                                                          # 11min
               on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion blank before";                      # screen off when timeout has passed
               on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion blank after";                        # screen on when activity is detected after timeout has fired.
             }
             {
-              timeout = 900;                                                       # 15min
+              timeout = 900;                                                                                          # 15min
               on-timeout = "$HOME/.local/state/nix/profile/bin/hypridle-companion suspend before";                    # suspend pc
               on-resume = "$HOME/.local/state/nix/profile/bin/hypridle-companion suspend after";                      # reset gamma
             }

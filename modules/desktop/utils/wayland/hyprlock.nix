@@ -20,6 +20,7 @@ in
       hyprlock = {
         enable = true;
         package = pkgs.hyprlock;
+
         settings = {
           "$entry_background_color" = "rgba(43434341)";
           "$entry_border_color" = "rgba(21212125)";
