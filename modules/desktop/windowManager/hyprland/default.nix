@@ -120,6 +120,10 @@ with lib;
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
           satty.enable = mkDefault true;
+          shikane = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
           rofi.enable = mkDefault true;
         };
         feature = {
@@ -131,7 +135,7 @@ with lib;
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        env = [
+        env = mkIf (! config.host.home.feature.uwsm.enable) [
           "XDG_CURRENT_DESKTOP,Hyprland"
           "XDG_SESSION_TYPE,wayland"
           "XDG_SESSION_DEKSTOP,Hyprland"
@@ -151,18 +155,33 @@ with lib;
       xwayland.enable = mkDefault true;
     };
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      config.common = {
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-        #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];
+    xdg = {
+      configFile."uwsm/env".text = mkIf config.host.home.feature.uwsm.enable
+        ''
+          export CLUTTER_BACKEND="wayland"
+          export ELECTRON_OZONE_PLATFORM_HINT="auto"
+          export GDK_BACKEND="wayland,x11,*"
+          export MOZ_ENABLE_WAYLAND=1
+          export NIXOS_OZONE_WL=1
+          export QT_AUTO_SCREEN_SCALE_FACTOR=1
+          export QT_QPA_PLATFORM="wayland;xcb"
+          export QT_QPA_PLATFORMTHEME=qt6ct
+          export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+          export SDL_VIDEODRIVER="wayland"
+        '';
+      portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        config.common = {
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+          #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];
+        };
+        extraPortals = [
+          #pkgs.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-wlr
+        ];
       };
-      extraPortals = [
-        #pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-wlr
-      ];
     };
   };
 }
