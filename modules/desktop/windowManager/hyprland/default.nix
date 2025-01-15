@@ -122,6 +122,9 @@ with lib;
           satty.enable = mkDefault true;
           rofi.enable = mkDefault true;
         };
+        feature = {
+          uwsm.enable = mkDefault true;
+        };
       };
     };
 
