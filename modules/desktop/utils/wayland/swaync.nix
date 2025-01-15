@@ -11,7 +11,7 @@ let
       sha256 = "0c8989zx9pgmjqysg6nphzi013x1ai118j871w8xnc41n7r6kf2g";
     };
     buildInputs = oldAttrs.buildInputs ++ [
-     pkgs.wayland-scanner
+      pkgs.wayland-scanner
     ];
   });
 in
@@ -64,10 +64,6 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        exec = [
-          "systemctl --user restart swaync.service"
-          #"${config.host.home.feature.uwsm.prefix}swaync"
-        ];
         bind = [
           "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
         ];
