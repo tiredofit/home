@@ -16,6 +16,11 @@ in
         type = with types; bool;
         description = "Sway On Screen Display";
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -25,6 +30,27 @@ in
         [
           swayosd
         ];
+    };
+
+    systemd.user.services.swayosd = mkIf cfg.service.enable {
+      Unit = {
+        Description = "A GTK based on screen display for keyboard shortcuts like caps-lock and volume ";
+        Documentation = "https://github.com/ErikReider/SwayOSD";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+      };
+
+      Service = {
+        Type = "dbus";
+
+        ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+        Restart = "on-failure";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
 
     ## TODO Make this work for dynamic Display (monitor_primary)
@@ -37,9 +63,9 @@ in
           ",XF86AudioRaiseVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume +1 --max-volume=100"
           ",XF86AudioLowerVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume -1"
         ];
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}swayosd-server --display=HDMI-A-1"
-        ];
+        #exec-once = [
+        #  "${config.host.home.feature.uwsm.prefix}swayosd-server"
+        #];
       };
     };
 
