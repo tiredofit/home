@@ -42,7 +42,7 @@ in
           "swaync"
         ];
         bind = [
-          "SUPER, N, exec, swaync-client -t"
+          "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
         ];
       };
             };
