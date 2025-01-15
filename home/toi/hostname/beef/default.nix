@@ -19,7 +19,6 @@ with lib;
         gnome-software.enable = true;
         hadolint.enable = true;
         hugo.enable = false;
-        kanshi.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
         mp3gain.enable = true;
@@ -78,10 +77,6 @@ with lib;
         };
       };
     };
-  };
-
-  wayland.windowManager.hyprland = {
-    xwayland.enable = true;
   };
 
   services.kanshi = {
