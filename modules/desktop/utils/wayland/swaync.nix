@@ -38,8 +38,8 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec = [
-          #"systemctl --user restart swaync.service"
-          "${config.host.home.feature.uwsm.prefix}swaync"
+          "${config.host.home.feature.uwsm.prefix}systemctl --user restart swaync.service"
+          #"${config.host.home.feature.uwsm.prefix}swaync"
         ];
         bind = [
           "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
