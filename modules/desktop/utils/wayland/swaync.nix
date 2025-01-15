@@ -51,7 +51,7 @@ in
 
       Service = {
         Type = "dbus";
-        BusName = "org.freedesktop.Notifications"
+        BusName = "org.freedesktop.Notifications";
         ExecStart = "${pkgs.sway-notification-center-custom}/bin/swaync";
         ExecReload = "${pkgs.sway-notification-center-custom}/bin/swaync-client --reload-config ; ${pkgs.sway-notification-center-custom}/bin/swaync-client --reload-css"
         Restart = "on-failure";
