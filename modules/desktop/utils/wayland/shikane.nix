@@ -17,6 +17,11 @@ in
         type = tomlFormat.type;
         default = { };
       };
+      service.enable = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
@@ -28,26 +33,30 @@ in
         ];
     };
 
-    systemd.user.services.shikane = {
+    systemd.user.services.shikane = mkIf cfg.service.enable {
       Unit = {
         Description = "Dynamic output configuration tool";
         Documentation = "man:shikane(1)";
         After = [ "graphical-session-pre.target" ];
         PartOf = [ "graphical-session.target" ];
+        Requisite = [ "graphical-session.target" ];
       };
 
       Service = {
-        ExecStart = "${pkgs.shikane}/bin/shikane -c ${tomlFormat.generate "shikane-config" cfg.settings}";
+        ExecStart = "${pkgs.shikane}/bin/shikane -c" + config.xdg.configFile."shikane/config.toml".target;
+        ExecReload = "${pkgs.shikane}/bin/shikanectl reload";
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
-      settings = {
-        exec = [
-          "${config.host.home.feature.uwsm.prefix}systemctl --user restart shikane.service"
-        ];
+    xdg = {
+      configFile = {
+        "shikane/config.toml" = {
+          source = "${tomlFormat.generate "skikane" cfg.settings}";
+        };
       };
     };
   };
