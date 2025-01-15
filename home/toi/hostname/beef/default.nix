@@ -1,6 +1,9 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
   inherit (specialArgs) displays display_center display_left display_right role;
+  display_left="Dell Inc. DELL S3220DGF 9H4VF43";
+  display_middle="Dell Inc. DELL S3220DGF 9H4VF43";
+  display_right="Dell Inc. DELL S3220DGF GSDTF43";
 in
 with lib;
 {
@@ -87,24 +90,24 @@ with lib;
         profile.name = "'beef (+left, +center, +right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             mode = "2560x1440@164.05600";
             position = "2560,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             mode = "2560x1440@119.99800";
             position = "5120,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF GSDTF43\" \"Dell Inc. DELL S3220DGF 63BQF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF GSDTF43\" \"Dell Inc. DELL S3220DGF 63BQF43\""
+          "displayhelper_hyprland \"${display_middle}\" \"${display_right}\" \"${display_left}\""
+          "displayhelper_waybar   \"${display_middle}\" \"${display_right}\" \"${display_left}\""
         ];
       }
 
@@ -112,22 +115,22 @@ with lib;
         profile.name = "'beef (-left, +center, -right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             status = "disable";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 9H4VF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 9H4VF43\""
+          "displayhelper_hyprland \"${display_middle}\""
+          "displayhelper_waybar   \"${display_middle}\""
         ];
       }
 
@@ -135,22 +138,22 @@ with lib;
         profile.name = "'beef (+left, -center, -right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 63BQF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 63BQF43\""
+          "displayhelper_hyprland \"${display_left}\""
+          "displayhelper_waybar   \"${display_left}\""
         ];
       }
 
@@ -158,22 +161,22 @@ with lib;
         profile.name = "'beef (-left, -center, +right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             status = "disable";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF GSDTF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF GSDTF43\""
+          "displayhelper_hyprland \"${display_right}\""
+          "displayhelper_waybar   \"${display_right}\""
         ];
       }
 
@@ -181,23 +184,23 @@ with lib;
         profile.name = "'beef (+left, +center, -right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             mode = "2560x1440@164.05600";
             position = "2560,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF 63BQF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF 63BQF43\""
+          "displayhelper_hyprland \"${display_middle}\" \"${display_left}\""
+          "displayhelper_waybar   \"${display_middle}\" \"${display_left}\""
         ];
       }
 
@@ -205,23 +208,23 @@ with lib;
         profile.name = "'beef (-left, +center, +right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             mode = "2560x1440@119.99800";
             position = "2560,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             status = "disable";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF GSDTF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 9H4VF43\" \"Dell Inc. DELL S3220DGF GSDTF43\""
+          "displayhelper_hyprland \"${display_middle}\" \"${display_right}\""
+          "displayhelper_waybar   \"${display_middle}\" \"${display_right}\""
         ];
       }
 
@@ -229,23 +232,23 @@ with lib;
         profile.name = "'beef (+left, -center, +right)'";
         profile.outputs = [
           {
-            criteria = "Dell Inc. DELL S3220DGF 9H4VF43";
+            criteria = "${display_middle}";
             status = "disable";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF GSDTF43";
+            criteria = "${display_right}";
             mode = "2560x1440@119.99800";
             position = "2560,0";
           }
           {
-            criteria = "Dell Inc. DELL S3220DGF 63BQF43";
+            criteria = "${display_left}";
             mode = "2560x1440@164.05600";
             position = "0,0";
           }
         ];
         profile.exec = [
-          "displayhelper_hyprland \"Dell Inc. DELL S3220DGF 63BQF43\" \"Dell Inc. DELL S3220DGF GSDTF43\""
-          "displayhelper_waybar   \"Dell Inc. DELL S3220DGF 63BQF43\" \"Dell Inc. DELL S3220DGF GSDTF43\""
+          "displayhelper_hyprland \"${display_left}\" \"${display_right}\""
+          "displayhelper_waybar   \"${display_left}\" \"${display_right}\""
         ];
       }
     ];

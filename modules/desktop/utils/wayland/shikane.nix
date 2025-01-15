@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.kanshi;
+  cfg = config.host.home.applications.shikane;
 in
   with lib;
 {
   options = {
-    host.home.applications.kanshi = {
+    host.home.applications.shikane = {
       enable = mkOption {
         default = false;
         type = with types; bool;
@@ -16,20 +16,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.kanshi = {
-      enable = true;
+    home = {
+      packages = with pkgs;
+        [
+          shikane
+        ];
     };
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec = [
-          "systemctl --user restart kanshi.service"
+          "systemctl --user restart shikane.service"
         ];
         #exec-once = [
-        #  "systemctl --user start kanshi.service"
+        #  "systemctl --user start shikane.service"
         #];
         exec-once = [
-          "kanshi"
+          "shikane"
         ];
       };
     };
