@@ -10,13 +10,15 @@ in
     host = {
       home = {
         applications = {
-          cliphist.enable = true;
+          cliphist = {
+            enable = true;
+            service.enable = true;
+          };
           grim.enable = true;
           nwg-displays.enable = true;
           slurp.enable = true;
           sway-notification-center.enable = true;
           swayosd.enable = true;
-          waybar.enable = true;
           wayprompt.enable = true;
           wdisplays.enable = true;
           wev.enable = true;
