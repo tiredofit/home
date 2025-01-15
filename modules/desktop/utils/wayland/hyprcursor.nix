@@ -45,7 +45,7 @@ in
         ];
 
         exec-once = [
-          "hyprctl setcursor ${cursor} ${toString cursorSize}"
+          "${config.host.home.feature.uwsm.prefix}hyprctl setcursor ${cursor} ${toString cursorSize}"
         ];
 
       };
