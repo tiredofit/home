@@ -26,7 +26,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         exec-once = [
-          "wl-gammarelay-rs ; sleep 1; busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000"
+          "${config.host.home.feature.uwsm.prefix}wl-gammarelay-rs ; ${config.host.home.feature.uwsm.prefix}sleep 1; ${config.host.home.feature.uwsm.prefix}busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000"
         ];
       };
     };
