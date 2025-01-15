@@ -134,6 +134,14 @@ with lib;
             service.enable = mkDefault true;
           };
           rofi.enable = mkDefault true;
+          sway-notification-center = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
+          swayosd = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
           waybar = {
             enable = mkDefault true;
             service.enable = mkDefault true;
