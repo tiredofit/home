@@ -31,7 +31,7 @@ in
     wayland.windowManager.hyprland = mkIf ((cfg.systemtray.enable) && (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable)) {
       settings = {
         exec-once = [
-          "nm-applet"
+          "${config.host.home.feature.uwsm.prefix}nm-applet"
         ];
       };
     };
