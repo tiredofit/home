@@ -1,6 +1,5 @@
-{ config, inputs, lib, pkgs, specialArgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
-  inherit (specialArgs) display_center;
   cfg = config.host.home.applications.hyprlock;
 
  script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprlock" ''
