@@ -39,18 +39,37 @@ in
 
     wayland.windowManager.hyprland = {
       settings = {
+        windowrule = [
+          "float, ^(Zoom Workplace)$"
+          "float, ^(zoom)$"
+        ];
+
         windowrulev2 = [
           "size 360 690,title:^Zoom - Licensed Account$,class:(^Zoom)$"
           "float,title:^Zoom - Licensed Account$"
           "noanim,class:(^Zoom)$"
           "nodim,class:(^Zoom)$"
           "noblur,class:(^Zoom)$"
-
-          ## ### Zoom Screen Sharing
           "float,title:^as_toolbar$,class:(^Zoom)$"
           "noborder,title:^as_toolbar$,class:(^Zoom)$"
           "noshadow,title:^as_toolbar$,class:(^Zoom)$"
           "noblur,title:^as_toolbar$,class:(^Zoom)$"
+          "minsize 1 1, title:^(Zoom Workplace.*)$, class:^(Zoom Workplace)$"
+          "minsize 1 1, title:^(menu window)$, class:^(Zoom Workplace)$"
+          "minsize 1 1, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
+          "minsize 1 1, title:^(Zoom Workplace.*)$, class:^(zoom)$"
+          "minsize 1 1, title:^(menu window)$, class:^(zoom)$"
+          "minsize 1 1, title:^(meeting bottombar popup)$, class:^(zoom)$"
+          "move onscreen cursor, title:^(Zoom Workplace)$, class:^(zoom)$"
+          "move onscreen cursor, title:^(menu window)$, class:^(zoom)$"
+          "move onscreen cursor, title:^(meeting bottombar popup)$, class:^(zoom)$"
+          "move onscreen cursor, title:^(Zoom Workplace)$, class:^(Zoom Workplace)$"
+          "move onscreen cursor, title:^(menu window)$, class:^(Zoom Workplace)$"
+          "move onscreen cursor, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
+          "stayfocused, title:^(menu window)$, class:^(Zoom Workplace)$"
+          "stayfocused, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
+          "stayfocused, title:^(menu window)$, class:^(zoom)$"
+          "stayfocused, title:^(meeting bottombar popup)$, class:^(zoom)$"
         ];
       };
     };
