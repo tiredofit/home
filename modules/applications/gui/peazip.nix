@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          peazip
+          unstable.peazip
         ];
     };
   };
