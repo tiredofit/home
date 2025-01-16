@@ -61,7 +61,7 @@ in
       Unit = {
         Description = "Wallpaper Daemon";
         Documentation = "https://github.com/hyprwm/hyprpaper";
-        After = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
         ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
         X-Restart-Triggers= [ "~/.config/hypr/hyprpaper.conf" ];

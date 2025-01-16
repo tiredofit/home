@@ -32,7 +32,7 @@ in
       Unit = {
         Description = "Hyprland Polkit Authentication Agent";
         Documentation = "https://github.com/hyprwm/hyprpolkitagent";
-        After = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
         ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
       };
