@@ -8,7 +8,7 @@ in
   options = {
     host.home.applications.hyprpaper = {
       enable = mkOption {
-        default = false;
+        default = falseq;
         type = with types; bool;
         description = "Wayland Wallpaper Manager";
       };

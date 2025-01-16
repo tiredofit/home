@@ -680,7 +680,7 @@ in
                  "~/.config/waybar/modules.d/wlr.json",
               ],
               "layer": "top",
-              "height": 36,
+              "height": 30,
               "spacing": 4,
               "modules-center": [
                 "hyprland/window"
