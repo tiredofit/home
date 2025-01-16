@@ -99,10 +99,6 @@
               role = "workstation";
               hostname = "beef";
               username = gn;
-              displays = 3;
-              display_center = "DP-2";
-              display_left = "DP-3";
-              display_right = "HDMI-A-1";
               networkInterface = "wlp10s0";
               inherit inputs outputs;
             };
@@ -165,8 +161,6 @@
               role = "workstation";
               hostname = "nomad";
               username = gn;
-              displays = 1;
-              display_center = "eDP-1";
               networkInterface = "wlp2s0";
               inherit inputs outputs;
             };
