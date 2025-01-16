@@ -2,10 +2,10 @@
 let
   inherit (specialArgs) displays display_center role;
   dock_left="d/Dell Inc. DELL S3220DGF 63BQF43";
-  dock_left_mode="2560x1440@119.998";
+  dock_left_mode="2560x1440@60.0";
   dock_left_position="0,0";
   dock_middle="d/Dell Inc. DELL S3220DGF 9H4VF43";
-  dock_middle_mode="2560x1440@120.00";
+  dock_middle_mode="2560x1440@119.998";
   dock_middle_position="2560,0";
   dock_right="d/Dell Inc. DELL S3220DGF GSDTF43";
   dock_right_mode="2560x1440@119.99800";
@@ -109,9 +109,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\""
-          "displayhelper_waybar   \"${laptop_display}\""
-          "displayhelper_hyprlock \"${laptop_display}\""
+          "displayhelper_hyprland   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\""
+          "displayhelper_waybar     \"${laptop_display}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
           ];
       }
       {
@@ -135,9 +136,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\""
-          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\""
           "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\""
+          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\""
         ];
       }
       {
@@ -157,9 +159,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"HDMI-A-1\""
-          "displayhelper_waybar   \"HDMI-A-1\""
-          "displayhelper_hyprlock \"HDMI-A-1\""
+          "displayhelper_hyprland   \"HDMI-A-1\""
+          "displayhelper_hyprpaper  \"HDMI-A-1\""
+          "displayhelper_hyprlock   \"HDMI-A-1\""
+          "displayhelper_waybar     \"HDMI-A-1\""
         ];
       }
       {
@@ -185,9 +188,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"${dock_right}\""
-          "displayhelper_hyprlock \"${laptop_display}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_right}\""
+          "displayhelper_hyprpaper   \"${laptop_display}\" \"${dock_right}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"${dock_right}\""
         ];
       }
       {
@@ -220,9 +224,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_hyprpaper   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
           "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
         ];
       }
       {
@@ -243,9 +248,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${dock_right}\""
-          "displayhelper_waybar   \"${dock_right}\""
-          "displayhelper_hyprlock \"${dock_right}\""
+          "displayhelper_hyprland   \"${dock_right}\""
+          "displayhelper_hyprpaper  \"${dock_right}\""
+          "displayhelper_hyprlock   \"${dock_right}\""
+          "displayhelper_waybar     \"${dock_right}\""
         ];
       }
       {
@@ -273,9 +279,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"HDMI-A-1\" \"${dock_right}\""
-          "displayhelper_waybar   \"HDMI-A-1\" \"${dock_right}\""
-          "displayhelper_hyprlock \"HDMI-A-1\""
+          "displayhelper_hyprland   \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_hyprlock   \"HDMI-A-1\""
+          "displayhelper_hyprpaper  \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_waybar     \"HDMI-A-1\" \"${dock_right}\""
         ];
       }
       {
@@ -298,9 +305,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_middle}\""
           "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"${dock_middle}\""
         ];
       }
       {
@@ -333,9 +341,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
           "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
         ];
       }
       {
@@ -367,9 +376,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-          "displayhelper_hyprlock \"${laptop_display}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
         ];
       }
       {
@@ -419,9 +429,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_hyprlock \"${laptop_display}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
 
@@ -467,9 +478,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_waybar   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_hyprlock \"${dock_middle}\""
+          "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock   \"${dock_middle}\""
+          "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
 
@@ -513,9 +525,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_hyprlock \"${laptop_display}\""
+          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
+          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_waybar     \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }
     ];
