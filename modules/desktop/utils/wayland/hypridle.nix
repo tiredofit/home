@@ -144,5 +144,27 @@ in
         };
       };
     };
+
+    systemd.user.services.hypridle = mkIf cfg.service.enable {
+      Unit = mkForce {
+        Description = "Idle Daemon";
+        Documentation = "https://github.com/hyprwm/hypridle";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+      };
+
+      Service = mkForce {
+        ExecStart = "${pkgs.hypridle}/bin/hypridle";
+        Restart = "always";
+        RestartSec = 10;
+        X-Restart-Triggers = mkIf (config.services.hypridle.settings != { })
+          [ "${config.xdg.configFile."hypr/hypridle.conf".source}" ];
+      };
+
+      Install = mkForce {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }
