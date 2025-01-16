@@ -1,6 +1,6 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
-  inherit (specialArgs) displays display_center role;
+  inherit (specialArgs) role;
   dock_left="d/Dell Inc. DELL S3220DGF 63BQF43";
   dock_left_mode="2560x1440@60.0";
   dock_left_position="0,0";
