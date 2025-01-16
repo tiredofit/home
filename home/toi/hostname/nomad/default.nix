@@ -31,15 +31,15 @@ with lib;
         hugo.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
-        mp3gain.enable = mkDefault true;
+        mp3gain.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
           systemtray.enable = false;
         };
-        nmap.enable = mkDefault true;
+        nmap.enable = true;
         obsidian.enable = true;
-        peazip.enable = true;
+        peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
         sonusmix.enable = false;
@@ -111,6 +111,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\""
           "displayhelper_waybar   \"${laptop_display}\""
+          "displayhelper_hyprlock \"${laptop_display}\""
           ];
       }
       {
@@ -136,6 +137,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\""
           "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
         ];
       }
       {
@@ -157,6 +159,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"HDMI-A-1\""
           "displayhelper_waybar   \"HDMI-A-1\""
+          "displayhelper_hyprlock \"HDMI-A-1\""
         ];
       }
       {
@@ -184,6 +187,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"${dock_right}\""
           "displayhelper_waybar   \"${laptop_display}\" \"${dock_right}\""
+          "displayhelper_hyprlock \"${laptop_display}\""
         ];
       }
       {
@@ -218,6 +222,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
           "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
         ];
       }
       {
@@ -240,6 +245,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${dock_right}\""
           "displayhelper_waybar   \"${dock_right}\""
+          "displayhelper_hyprlock \"${dock_right}\""
         ];
       }
       {
@@ -269,6 +275,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"HDMI-A-1\" \"${dock_right}\""
           "displayhelper_waybar   \"HDMI-A-1\" \"${dock_right}\""
+          "displayhelper_hyprlock \"HDMI-A-1\""
         ];
       }
       {
@@ -293,6 +300,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\""
           "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
         ];
       }
       {
@@ -327,6 +335,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
           "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
+          "displayhelper_hyprlock   \"${laptop_display}\""
         ];
       }
       {
@@ -360,6 +369,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
           "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
+          "displayhelper_hyprlock \"${laptop_display}\""
         ];
       }
       {
@@ -411,6 +421,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
           "displayhelper_waybar   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock \"${laptop_display}\""
         ];
       }
 
@@ -458,6 +469,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
           "displayhelper_waybar   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock \"${dock_middle}\""
         ];
       }
 
@@ -503,6 +515,7 @@ with lib;
         exec = [
           "displayhelper_hyprland \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
           "displayhelper_waybar   \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          "displayhelper_hyprlock \"${laptop_display}\""
         ];
       }
     ];
