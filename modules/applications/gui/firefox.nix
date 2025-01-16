@@ -1,6 +1,32 @@
 { config, lib, pkgs, specialArgs, ... }:
 
 let
+
+  firefoxHelper_bitwarden = pkgs.writeShellScriptBin "firefoxHelper_bitwarden" ''
+    windowtitlev2() {
+      IFS=',' read -r -a args <<< "$1"
+      args[0]="''${args[0]#*>>}"
+
+      if [[ ''${args[1]} == "Extension: (Bitwarden Password Manager) - — Mozilla Firefox" ]]; then
+        hyprctl --batch "\
+          dispatch setfloating address:0x''${args[0]}; \
+          dispatch resizewindowpixel exact 20% 50%, address:0x''${args[0]}; \
+          dispatch centerwindow; \
+        "
+      fi
+    }
+
+    handle() {
+      case $1 in
+        windowtitlev2\>*) windowtitlev2 "$1" ;;
+      esac
+    }
+
+    ${pkgs.socat}/bin/socat -U - UNIX-CONNECT:"/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" \
+      | while read -r line; do
+          handle "$line"
+        done
+      '';
   inherit (specialArgs) username;
   cfg = config.host.home.applications.firefox;
 in with lib; {
@@ -43,6 +69,7 @@ in with lib; {
     home = {
       packages = with pkgs; [
         pkgs.nur.repos.rycee.mozilla-addons-to-nix
+        firefoxHelper_bitwarden
       ];
     };
 
@@ -3226,6 +3253,24 @@ in with lib; {
 
           userContent = "\n";
         };
+      };
+    };
+
+    systemd.user.services.hyperlandHelper_firefox_bitwarden = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      Unit = {
+        Description = "Help float Firefox Extension Windows in Hyprland";
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        Type = "exec";
+        ExecStart = "${firefoxHelper_bitwarden}/bin/firefoxHelper_bitwarden";
+        ExecReload = "kill -SIGUSR2 $MAINPID";
+        Restart = "always";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
       };
     };
 
