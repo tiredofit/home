@@ -127,8 +127,9 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${display_middle}\" \"${display_right}\" \"${display_left}\""
-          "displayhelper_waybar   \"${display_middle}\" \"${display_right}\" \"${display_left}\""
           "displayhelper_hyprlock \"${display_middle}\""
+          "displayhelper_hyprpaper \"${display_middle}\" \"${display_right}\" \"${display_left}\""
+          "displayhelper_waybar   \"${display_middle}\" \"${display_right}\" \"${display_left}\""
         ];
       }
 
@@ -171,8 +172,9 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland   \"${display_middle}\""
-          "displayhelper_waybar     \"${display_middle}\""
           "displayhelper_hyprlock   \"${display_middle}\""
+          "displayhelper_hyprpaper  \"${display_middle}\""
+          "displayhelper_waybar     \"${display_middle}\""
         ];
       }
       {
@@ -197,9 +199,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland   \"${display_left}\"",
-          "displayhelper_waybar     \"${display_left}\""
+          "displayhelper_hyprland   \"${display_left}\""
           "displayhelper_hyprlock   \"${display_left}\""
+          "displayhelper_hyprpaper  \"${display_left}\""
+          "displayhelper_waybar     \"${display_left}\""
         ];
       }
 
@@ -225,9 +228,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland   \"${display_right}\"",
-          "displayhelper_waybar     \"${display_right}\""
+          "displayhelper_hyprland   \"${display_right}\""
           "displayhelper_hyprlock   \"${display_right}\""
+          "displayhelper_hyprpaper  \"${display_right}\""
+          "displayhelper_waybar     \"${display_right}\""
         ];
       }
 
@@ -258,9 +262,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland   \"${display_middle}\" \"${display_left}\"",
-          "displayhelper_waybar     \"${display_middle}\" \"${display_left}\""
+          "displayhelper_hyprland   \"${display_middle}\" \"${display_left}\""
           "displayhelper_hyprlock   \"${display_middle}\""
+          "displayhelper_hyprpaper  \"${display_middle}\" \"${display_left}\""
+          "displayhelper_waybar     \"${display_middle}\" \"${display_left}\""
         ];
       }
 
@@ -291,9 +296,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland   \"${display_middle}\" \"${display_right}\"",
-          "displayhelper_waybar     \"${display_middle}\" \"${display_right}\""
+          "displayhelper_hyprland   \"${display_middle}\" \"${display_right}\""
           "displayhelper_hyprlock   \"${display_middle}\""
+          "displayhelper_hyprpaper  \"${display_middle}\" \"${display_right}\""
+          "displayhelper_waybar     \"${display_middle}\" \"${display_right}\""
         ];
 
       }
@@ -326,9 +332,10 @@ with lib;
           }
         ];
         exec = [
-          "displayhelper_hyprland   \"${display_left}\" \"${display_right}\"",
-          "displayhelper_waybar     \"${display_left}\" \"${display_right}\""
+          "displayhelper_hyprland   \"${display_left}\" \"${display_right}\""
           "displayhelper_hyprlock   \"${display_left}\""
+          "displayhelper_hyprpaper  \"${display_left}\" \"${display_right}\""
+          "displayhelper_waybar     \"${display_left}\" \"${display_right}\""
         ];
       }
     ];
