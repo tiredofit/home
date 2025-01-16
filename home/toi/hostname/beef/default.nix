@@ -1,9 +1,15 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
   inherit (specialArgs) displays display_center display_left display_right role;
-  display_left="Dell Inc. DELL S3220DGF 9H4VF43";
-  display_middle="Dell Inc. DELL S3220DGF 9H4VF43";
-  display_right="Dell Inc. DELL S3220DGF GSDTF43";
+  display_left="d/Dell Inc. DELL S3220DGF 63BQF43";
+  display_left_mode="2560x1440@120.00";
+  display_left_position="0,0";
+  display_middle="d/Dell Inc. DELL S3220DGF 9H4VF43";
+  display_middle_mode="2560x1440@120.00";
+  display_middle_position="2560,0";
+  display_right="d/Dell Inc. DELL S3220DGF GSDTF43";
+  display_right_mode="2560x1440@119.99800";
+  display_right_position="5120,0";
 in
 with lib;
 {
@@ -79,171 +85,241 @@ with lib;
     };
   };
 
-  services.kanshi = {
-    settings = [
+  host.home.applications.shikane.settings = {
+    profile = [
+        #   .-------.       .-------.       .-------.
+        #   |  LEFT |       |MIDDLE |       | RIGHT |
+        #   |       |       |       |       |       |
+        #   |       |       |       |       |       |
+        #   '-------'       '-------'       '-------'
+
       {
-        profile.name = "'beef (+left, +center, +right)'";
-        profile.outputs = [
+        name = "beef (+dp2, +dp1, +hdmi)'";
+        output = [
+
           {
-            criteria = "${display_middle}";
-            mode = "2560x1440@164.05600";
-            position = "2560,0";
+            enable = true;
+            search = "${display_left}";
+            mode = "${display_left_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_right}";
-            mode = "2560x1440@119.99800";
-            position = "5120,0";
+            enable = true;
+            search = "${display_middle}";
+            mode = "${display_middle_mode}";
+            position = "${display_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_left}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = true;
+            search = "${display_right}";
+            mode = "${display_right_mode}";
+            position = "${display_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
         ];
-        profile.exec = [
+        exec = [
           "displayhelper_hyprland \"${display_middle}\" \"${display_right}\" \"${display_left}\""
           "displayhelper_waybar   \"${display_middle}\" \"${display_right}\" \"${display_left}\""
         ];
       }
 
+        #   .-------.       .-------.       .-------.
+        #   |  N/A  |       |MIDDLE |       | N/A   |
+        #   |       |       |       |       |       |
+        #   |       |       |       |       |       |
+        #   '-------'       '-------'       '-------'
+
       {
-        profile.name = "'beef (-left, +center, -right)'";
-        profile.outputs = [
+        name = "beef (-dp2, +dp1, -hdmi)'";
+        output = [
           {
-            criteria = "${display_middle}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = false;
+            search = "${display_left}";
+            mode = "${display_left_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_right}";
-            status = "disable";
+            enable = true;
+            search = "${display_middle}";
+            mode = "${display_middle_mode}";
+            position = "${display_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_left}";
-            status = "disable";
+            enable = false;
+            search = "${display_right}";
+            mode = "${display_right_mode}";
+            position = "${display_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
         ];
-        profile.exec = [
+        exec = [
           "displayhelper_hyprland \"${display_middle}\""
           "displayhelper_waybar   \"${display_middle}\""
         ];
       }
-
       {
-        profile.name = "'beef (+left, -center, -right)'";
-        profile.outputs = [
+        name = "beef (+left, -center, -right)";
+        output = [
           {
-            criteria = "${display_middle}";
-            status = "disable";
+            enable = false;
+            search = "${display_middle}";
           }
           {
-            criteria = "${display_right}";
-            status = "disable";
+            enable = false;
+            search = "${display_right}";
           }
           {
-            criteria = "${display_left}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = true;
+            search = "${display_left}";
+            mode = "${display_left_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
         ];
-        profile.exec = [
-          "displayhelper_hyprland \"${display_left}\""
-          "displayhelper_waybar   \"${display_left}\""
+        exec = [
+          "displayhelper_hyprland \"${display_left}\"",
+          "displayhelper_waybar \"${display_left}\""
         ];
       }
 
       {
-        profile.name = "'beef (-left, -center, +right)'";
-        profile.outputs = [
+        name = "beef (-left, -center, +right)";
+        output = [
           {
-            criteria = "${display_middle}";
-            status = "disable";
+            enable = false;
+            search = "${display_middle}";
           }
           {
-            criteria = "${display_right}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = true;
+            search = "${display_right}";
+            mode = "${display_right_mode}";
+            position = "${display_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_left}";
-            status = "disable";
-          }
-        ];
-        profile.exec = [
-          "displayhelper_hyprland \"${display_right}\""
-          "displayhelper_waybar   \"${display_right}\""
-        ];
-      }
-
-      {
-        profile.name = "'beef (+left, +center, -right)'";
-        profile.outputs = [
-          {
-            criteria = "${display_middle}";
-            mode = "2560x1440@164.05600";
-            position = "2560,0";
-          }
-          {
-            criteria = "${display_right}";
-            status = "disable";
-          }
-          {
-            criteria = "${display_left}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = false;
+            search = "${display_left}";
           }
         ];
-        profile.exec = [
-          "displayhelper_hyprland \"${display_middle}\" \"${display_left}\""
-          "displayhelper_waybar   \"${display_middle}\" \"${display_left}\""
+        exec = [
+          "displayhelper_hyprland \"${display_right}\"",
+          "displayhelper_waybar \"${display_right}\""
         ];
       }
 
       {
-        profile.name = "'beef (-left, +center, +right)'";
-        profile.outputs = [
+        name = "beef (+left, +center, -right)";
+        output = [
           {
-            criteria = "${display_middle}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = true;
+            search = "${display_middle}";
+            mode = "${display_middle_mode}";
+            position = "${display_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_right}";
-            mode = "2560x1440@119.99800";
-            position = "2560,0";
+            enable = false;
+            search = "${display_right}";
           }
           {
-            criteria = "${display_left}";
-            status = "disable";
+            enable = true;
+            search = "${display_left}";
+            mode = "${display_left_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
         ];
-        profile.exec = [
-          "displayhelper_hyprland \"${display_middle}\" \"${display_right}\""
-          "displayhelper_waybar   \"${display_middle}\" \"${display_right}\""
+        exec = [
+          "displayhelper_hyprland \"${display_middle}\" \"${display_left}\"",
+          "displayhelper_waybar \"${display_middle}\" \"${display_left}\""
         ];
       }
 
       {
-        profile.name = "'beef (+left, -center, +right)'";
-        profile.outputs = [
+        name = "beef (-left, +center, +right)";
+        output = [
           {
-            criteria = "${display_middle}";
-            status = "disable";
+            enable = true;
+            search = "${display_middle}";
+            mode = "${display_middle_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_right}";
-            mode = "2560x1440@119.99800";
-            position = "2560,0";
+            enable = true;
+            search = "${display_right}";
+            mode = "${display_right_mode}";
+            position = "${display_middle_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
           }
           {
-            criteria = "${display_left}";
-            mode = "2560x1440@164.05600";
-            position = "0,0";
+            enable = false;
+            search = "${display_left}";
           }
         ];
-        profile.exec = [
-          "displayhelper_hyprland \"${display_left}\" \"${display_right}\""
-          "displayhelper_waybar   \"${display_left}\" \"${display_right}\""
+        exec = [
+          "displayhelper_hyprland \"${display_middle}\" \"${display_right}\"",
+          "displayhelper_waybar \"${display_middle}\" \"${display_right}\""
+        ];
+      }
+
+      {
+        name = "beef (+left, -center, +right)";
+        output = [
+          {
+            enable = false;
+            search = "${display_middle}";
+          }
+          {
+            enable = true;
+            search = "${display_right}";
+            mode = "${display_right_mode}";
+            position = "${display_right_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+          {
+            enable = true;
+            search = "${display_left}";
+            mode = "${display_left_mode}";
+            position = "${display_left_position}";
+            scale = 1.0;
+            transform = "normal";
+            adaptive_sync = false;
+          }
+        ];
+        exec = [
+          "displayhelper_hyprland \"${display_left}\" \"${display_right}\"",
+          "displayhelper_waybar \"${display_left}\" \"${display_right}\""
         ];
       }
     ];
