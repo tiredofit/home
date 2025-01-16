@@ -37,6 +37,7 @@ with lib;
         sonusmix.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
+        sonixd.enable = true;
         smartgit.enable = true;
         ssh = {
           enable = true;
