@@ -2,7 +2,7 @@
 let
   inherit (specialArgs) displays display_center role;
   dock_left="d/Dell Inc. DELL S3220DGF 63BQF43";
-  dock_left_mode="2560x1440@120.00";
+  dock_left_mode="2560x1440@119.998";
   dock_left_position="0,0";
   dock_middle="d/Dell Inc. DELL S3220DGF 9H4VF43";
   dock_middle_mode="2560x1440@120.00";
@@ -457,7 +457,6 @@ with lib;
         ];
         exec = [
           "displayhelper_hyprland \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-
           "displayhelper_waybar   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
         ];
       }

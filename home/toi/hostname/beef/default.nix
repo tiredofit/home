@@ -2,7 +2,7 @@
 let
   inherit (specialArgs) displays display_center display_left display_right role;
   display_left="d/Dell Inc. DELL S3220DGF 63BQF43";
-  display_left_mode="2560x1440@120.00";
+  display_left_mode="2560x1440@119.998";
   display_left_position="0,0";
   display_middle="d/Dell Inc. DELL S3220DGF 9H4VF43";
   display_middle_mode="2560x1440@120.00";
