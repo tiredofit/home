@@ -77,12 +77,12 @@ in
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
-      settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}hyprpaper"
-        ];
-      };
-    };
+    #wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    #  settings = {
+    #    exec-once = [
+    #      "${config.host.home.feature.uwsm.prefix}hyprpaper"
+    #    ];
+    #  };
+    #};
   };
 }
