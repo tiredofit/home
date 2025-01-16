@@ -42,8 +42,7 @@ in
       };
 
       Service = {
-        Type = "dbus";
-
+        #Type = "dbus";
         ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
         Restart = "on-failure";
       };
