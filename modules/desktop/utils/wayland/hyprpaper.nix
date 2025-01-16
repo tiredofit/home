@@ -58,7 +58,7 @@ in
     };
 
     systemd.user.services.hyprpaper = mkIf cfg.service.enable {
-      Unit = {
+      Unit = mkForce {
         Description = "Wallpaper Daemon";
         Documentation = "https://github.com/hyprwm/hyprpaper";
         After = [ "graphical-session.target" ];
@@ -67,13 +67,13 @@ in
         X-Restart-Triggers= [ "~/.config/hypr/hyprpaper.conf" ];
       };
 
-      Service = {
+      Service = mkForce {
         ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
         Restart = "always";
         RestartSec = 10;
       };
 
-      Install = {
+      Install = mkForce {
         WantedBy = [ "graphical-session.target" ];
       };
     };
