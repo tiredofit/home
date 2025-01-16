@@ -26,7 +26,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         bind = [
-          "SUPER_SHIFT, E, exec, ${config.host.home.feature.uwsm.prefix}pkill wlogout || ${config.host.home.feature.uwsm.prefix}wlogout"
+          "SUPER_SHIFT, E, exec, pkill wlogout || ${config.host.home.feature.uwsm.prefix}wlogout"
         ];
       };
     };

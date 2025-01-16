@@ -41,7 +41,7 @@ in
     };
 
     systemd.user.services.swaync = mkIf cfg.service.enable {
-      Unit = {
+      Unit = mkForce {
         Description = "Swaync notification daemon";
         Documentation = "https://github.com/ErikReider/SwayNotificationCenter";
         After = [ "graphical-session.target" ];
@@ -49,7 +49,7 @@ in
         ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
       };
 
-      Service = {
+      Service = mkForce {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
         ExecStart = "${sway-notification-center-custom}/bin/swaync";
@@ -57,7 +57,7 @@ in
         Restart = "on-failure";
       };
 
-      Install = {
+      Install = mkForce {
         WantedBy = [ "graphical-session.target" ];
       };
     };
