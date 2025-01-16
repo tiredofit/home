@@ -1,7 +1,5 @@
-{ config, inputs, lib, pkgs, specialArgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
-  inherit (specialArgs) displays display_center display_left display_right role;
-
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
 
