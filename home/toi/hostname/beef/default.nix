@@ -1,6 +1,6 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
-  inherit (specialArgs) displays display_center display_left display_right role;
+  inherit (specialArgs) role;
   display_left="d/Dell Inc. DELL S3220DGF 63BQF43";
   display_left_mode="2560x1440@119.998";
   display_left_position="0,0";
