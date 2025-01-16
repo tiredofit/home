@@ -113,7 +113,7 @@ in
     programs = {
       waybar = {
         enable = true;
-        systemd.enable = cfg.service.enable;
+        systemd.enable = false;
         style = ''
           * {
               font-family: Noto Sans NF, Helvetica, Arial, sans-serif;
@@ -374,6 +374,26 @@ in
               color: #000000
             }
         '';
+      };
+    };
+
+    systemd.user.services.waybar = mkIf cfg.service.enable {
+      Unit = {
+        Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+        Documentation = "man:waybar(5)";
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        Type = "exec";
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+        ExecReload = "kill -SIGUSR2 $MAINPID";
+        Restart = "on-failure";
+        Slice = "app-graphical.slice";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
       };
     };
 
