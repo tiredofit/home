@@ -37,14 +37,14 @@ in
       Unit = {
         Description = "Dynamic output configuration tool";
         Documentation = "man:shikane(1)";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
-        Requisite = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
       };
 
       Service = {
         ExecStart = "${pkgs.shikane}/bin/shikane -c" + config.xdg.configFile."shikane/config.toml".target;
         ExecReload = "${pkgs.shikane}/bin/shikanectl reload";
+        Restart = "on-failure";
+        Slice = "background-graphical.slice";
       };
 
       Install = {
