@@ -12,10 +12,25 @@ in
         type = with types; bool;
         description = "Wayland clipboard history";
       };
+      max_items = mkOption {
+        default = "500";
+        type = with types; str;
+        description = "Maximum Items to Store";
+      };
+      max_dedupe_search = mkOption {
+        default = "10";
+        type = with types; str;
+        description = "Maximum Deduplication Search";
+      };
       service.enable = mkOption {
         default = false;
         type = with types; bool;
         description = "Auto start on user session start";
+      };
+      store_images = mkOption {
+        default = true;
+        type = with types; bool;
+        description = "Save images as well as text";
       };
     };
   };
@@ -28,10 +43,51 @@ in
         ];
     };
 
-    services = {
-      cliphist = {
-        enable = cfg.service.enable;
+    systemd = {
+      user = {
+        services = {
+          cliphist = mkIf cfg.service.enable {
+            Unit = {
+              Description = "Clipboard management daemon";
+              Documentation = "https://github.com/sentriz/cliphist";
+              After = [ "graphical-session.target" ];
+            };
+
+            Service = {
+              Type = "exec";
+              ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist -max-items" + cfg.max_items + "-max-dedupe-search " + cfg.max_dedupe_search + " store";
+              ExecReload = "kill -SIGUSR2 $MAINPID";
+              Restart = "on-failure";
+              Slice = "app-graphical.slice";
+            };
+
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+
+          cliphist-images = mkIf (cfg.service.enable && cfg.store_images) {
+            Unit = {
+              Description = "Clipboard management daemon";
+              Documentation = "https://github.com/sentriz/cliphist";
+              After = [ "graphical-session.target" ];
+            };
+
+            Service = {
+              Type = "exec";
+              ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist -max-items" + cfg.max_items + "-max-dedupe-search " + cfg.max_dedupe_search + " store";
+              ExecReload = "kill -SIGUSR2 $MAINPID";
+              Restart = "on-failure";
+              Slice = "app-graphical.slice";
+            };
+
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+        };
       };
     };
   };
 }
+
