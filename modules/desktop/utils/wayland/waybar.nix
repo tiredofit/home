@@ -1,6 +1,5 @@
-{ config, inputs, lib, pkgs, specialArgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
-  inherit (specialArgs) displays display_center role;
   cfg = config.host.home.applications.waybar;
 
   script_displayhelper_waybar = pkgs.writeShellScriptBin "displayhelper_waybar" ''
