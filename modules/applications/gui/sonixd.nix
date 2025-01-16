@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.file-roller;
+  cfg = config.host.home.applications.sonixd;
 in
   with lib;
 {
   options = {
-    host.home.applications.file-roller = {
+    host.home.applications.sonixd = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "Gnome File Manager";
+        description = "Full-featured Subsonic/Jellyfin compatible desktop music player";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          gnome.file-roller
+          sonixd
         ];
     };
   };
