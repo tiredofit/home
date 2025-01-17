@@ -12,6 +12,18 @@ in
         type = with types; bool;
         description = "File synchronization";
       };
+      service = {
+        enable = mkOption {
+          default = false;
+          type = with types; bool;
+          description = "Enable to start as service";
+        };
+        background = mkOption {
+          default = true;
+          type = with types; bool;
+          description = "Start in background";
+        };
+      };
     };
   };
 
@@ -23,11 +35,26 @@ in
         ];
     };
 
+    systemd.user.services.nextcloud-client = {
+      Unit = {
+        Description = "Nextcloud Client";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        Environment = [ "PATH=${config.home.profileDirectory}/bin" ];
+        ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud"
+          + (optionalString cfg.service.background " --background");
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}nextcloud --background"
-        ];
         windowrulev2 = [
           "float,class:(com.nextcloud.desktopclient.nextcloud)"
           "noborder,class:(com.nextcloud.desktopclient.nextcloud)"
