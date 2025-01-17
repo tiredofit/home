@@ -63,7 +63,6 @@ in
 
           input-field = [
             {
-              source = "~/.config/hypr/hyprlock_monitor.conf";
               size = "350, 50";
               outline_thickness = 4;
               dots_size = 0.1;
@@ -75,6 +74,7 @@ in
               position = "0, 20";
               halign = "center";
               valign = "center";
+              source = "~/.config/hypr/hyprlock_monitor.conf";
             }
           ];
 
