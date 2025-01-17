@@ -44,6 +44,7 @@ with lib;
     ./qview.nix
     ./remmina.nix
     ./rofi.nix
+    ./sonixd.nix
     ./sonusmix.nix
     ./seahorse.nix
     ./smartgit.nix
