@@ -5,7 +5,7 @@ let
 
   hypridle-companion-script = pkgs.writeShellScriptBin "hypridle-companion" ''
     _hypridle_logfile="$HOME/lock.log"
-    HYPRIDLE_DEBUG=''${HYPRIDLE_DEBUG:-"TRUE"}
+    HYPRIDLE_DEBUG=''${HYPRIDLE_DEBUG:-"FALSE"}
 
     _hypridle_gamma() {
         case "$1" in
