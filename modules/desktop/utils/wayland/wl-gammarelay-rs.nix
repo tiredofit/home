@@ -37,8 +37,7 @@ in
 
       Service = {
         Type = "exec";
-        ExecStart = "${pkgs.wl-gammarelay-rs}/bin/wlgammarelay-rs";
-        ExecReload = "kill -SIGUSR2 $MAINPID";
+        ExecStart = "${pkgs.wl-gammarelay-rs}/bin/wlgammarelay-rs run";
         Restart = "on-failure";
         Slice = "app-graphical.slice";
       };
