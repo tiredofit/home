@@ -483,13 +483,13 @@ in
                 "cpu": {
                   "format": "{load} {usage} {avg_frequency} ",
                   "interval": 10,
-                  "on-click": "gnome-system-monitor --show-resources-tab"
+                  "on-click": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-resources-tab"
                 },
                 "disk": {
                   "format": "{used}/{total}",
                   "interval": 30,
                   "on-click": "kitty ncdu ~",
-                  "on-click-right": "gnome-system-monitor --show-file-systems-tab",
+                  "on-click-right": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-file-systems-tab",
                   "path": "/"
                 },
                 "keyboard-state": {
@@ -510,7 +510,7 @@ in
                 "memory": {
                   "format": "{used:0.1f}G/{total:0.1f}G ",
                   "interval": 10,
-                  "on-click": "gnome-system-monitor --show-processes-tab"
+                  "on-click": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-processes-tab"
                 },
                 "network": {
                   "format-alt": "{ifname}: {ipaddr}/{cidr}",
