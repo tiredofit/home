@@ -3263,10 +3263,10 @@ in with lib; {
       };
 
       Service = {
-        Type = "exec";
+        #Type = "exec";
         ExecStart = "${firefoxHelper_bitwarden}/bin/firefoxHelper_bitwarden";
-        ExecReload = "kill -SIGUSR2 $MAINPID";
-        Restart = "always";
+        #ExecReload = "kill -SIGUSR2 $MAINPID";
+        #Restart = "always";
       };
 
       Install = {

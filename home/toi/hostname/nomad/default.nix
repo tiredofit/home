@@ -25,6 +25,8 @@ with lib;
         chromium.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
+        file-roller.enable = true;
+        floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
