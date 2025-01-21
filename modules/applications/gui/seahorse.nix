@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          seahorse # 24.11 - Remove the gnome. prefix
+          seahorse
         ];
     };
   };
