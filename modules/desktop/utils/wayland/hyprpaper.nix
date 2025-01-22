@@ -33,7 +33,7 @@ in
   options = {
     host.home.applications.hyprpaper = {
       enable = mkOption {
-        default = falseq;
+        default = false;
         type = with types; bool;
         description = "Wayland Wallpaper Manager";
       };
