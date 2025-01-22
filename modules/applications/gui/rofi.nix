@@ -95,7 +95,7 @@ in {
                 # Run a shell comamnd shortcut
                 "SUPER, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd} && read\"' -no-show-icons -no-drun-show-actions -no-cycle -combi-display run -no-sidebar-mode -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'"
                 # SSH
-                "SUPER, S, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show ssh -modi ssh -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
+                "SUPER, S, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show ssh -no-parse-known-hosts -modi ssh -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
                 # Open a new terminal and execute command
                 "SUPER_SHIFT, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd}\"' -no-history -no-auto-select -disable-history -no-show-icons -no-drun-show-actions -no-cycle -no-sidebar-mode -theme-str 'window{width:50%; height:8%;} listview{columns:1;}'"
                 # Open Calculator
