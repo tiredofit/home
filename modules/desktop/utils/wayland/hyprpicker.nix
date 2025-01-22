@@ -26,7 +26,7 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         bind = [
-          "SUPER_SHIFT, C, exec, ${config.host.home.feature.uwsm.prefix}pkill hyprpicker || ${config.host.home.feature.uwsm.prefix}hyprpicker --autocopy --no-fancy --format=hex"
+          "SUPER_SHIFT, P, exec, ${config.host.home.feature.uwsm.prefix}pkill hyprpicker || ${config.host.home.feature.uwsm.prefix}hyprpicker --autocopy --no-fancy --format=hex"
         ];
       };
     };
