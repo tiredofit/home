@@ -3,8 +3,37 @@ with lib;
 let
   cfg = config.host.home.applications.rofi;
   displayServer = config.host.home.feature.gui.displayServer;
-  rofiPackage =
-    if displayServer == "wayland" then pkgs.rofi-wayland else pkgs.rofi;
+  rofiPackage = if displayServer == "wayland" then pkgs.rofi-wayland else pkgs.rofi;
+  rofiCalculator = pkgs.writeShellScriptBin "rofi-calculator" ''
+    # rofi -show run -modi calc: rofi-calculator.sh
+    ROFI_CALC_HISTORY_FILE=$HOME/.local/share/rofi/rofi_calc_history
+    ROFI_CALC_HISTORY_MAXCOUNT=8
+
+    if [ ! -d $(dirname "''${ROFI_CALC_HISTORY_FILE}") ]; then
+      mkdir -p "$(dirname "''${ROFI_CALC_HISTORY_FILE}")"
+    fi
+
+    if [ -z ''${@} ]; then
+      cat "''${ROFI_CALC_HISTORY_FILE}"
+    else
+      _formula=''${@}
+
+      if [ -n "''${_formula}" ]; then
+        if [[ "''${_formula}" =~ "=" ]]; then
+          _output=''${_formula}
+        else
+          _result=$(echo "''${_formula}" | ${pkgs.bc}/bin/bc -l)
+          _output="''${_formula} = ''${_result}"
+        fi
+
+        echo -e "''${_output}\n$(cat "''${ROFI_CALC_HISTORY_FILE}")" > "''${ROFI_CALC_HISTORY_FILE}"
+        if [ $( wc -l < "''${ROFI_CALC_HISTORY_FILE}" ) -gt ''${ROFI_CALC_HISTORY_MAXCOUNT} ]; then
+          echo "$(head -n "''${ROFI_CALC_HISTORY_MAXCOUNT}" "''${ROFI_CALC_HISTORY_FILE}")" > "''${ROFI_CALC_HISTORY_FILE}"
+        fi
+            cat "''${ROFI_CALC_HISTORY_FILE}"
+        fi
+    fi
+  '';
 in {
   options = {
     host.home.applications.rofi = {
@@ -17,6 +46,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+          rofiCalculator
+        ];
+    };
     programs.rofi = {
       enable = true;
       plugins = with pkgs; [
@@ -63,9 +98,11 @@ in {
                 "SUPER, S, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show ssh -modi ssh -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
                 # Open a new terminal and execute command
                 "SUPER_SHIFT, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd}\"' -no-history -no-auto-select -disable-history -no-show-icons -no-drun-show-actions -no-cycle -no-sidebar-mode -theme-str 'window{width:50%; height:8%;} listview{columns:1;}'"
+                # Open Calculator
+                "SUPER_SHIFT, C, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show calc -modi calc:${rofiCalculator}/bin/rofi-calculator -theme-str 'window{width:50%; height:30%;} listview{columns:1;}'"
               ])
               (mkIf (config.host.home.applications.cliphist.enable) (mkAfter [
-                "CONTROLALT, V, exec, pkill rofi || cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu -columns 1 -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'| cliphist decode | wl-copy"
+                "CONTROLALT, V, exec, pkill rofi || ${pkgs.cliphist}/bin/cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu -columns 1 -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'| ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
               ]))
             ];
             windowrulev2 = [
