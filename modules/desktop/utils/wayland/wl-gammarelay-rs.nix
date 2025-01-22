@@ -36,8 +36,8 @@ in
       };
 
       Service = {
-        ExecStart = "${pkgs.wl-gammarelay-rs}/bin/wlgammarelay-rs run";
-        #Restart = "on-failure";
+        ExecStart = "${pkgs.wl-gammarelay-rs}/bin/wl-gammarelay-rs run";
+        Restart = "on-failure";
       };
 
       Install = {
