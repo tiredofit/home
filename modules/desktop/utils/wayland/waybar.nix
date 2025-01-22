@@ -741,9 +741,6 @@ in
                 "custom/cryptotrackingTRX",
                 "user"
               ],
-              "include": "~/.config/waybar/modules.d/custom.json",
-              "include": "~/.config/waybar/modules.d/hyprland.json",
-              "include": "~/.config/waybar/modules.d/user.json",
             }
           '';
         };
