@@ -9,7 +9,7 @@ in
   options = {
     host.home.applications.shikane = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = with types; bool;
         description = "Dynamic output configuration tool";
       };
