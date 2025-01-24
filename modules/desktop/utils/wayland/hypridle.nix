@@ -13,7 +13,7 @@ let
                 busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature "$(cat "$XDG_RUNTIME_DIR"/gamma.temp)"
             ;;
             set )
-                busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature > "$XDG_RUNTIME_DIR"/gamma.temmp
+                busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature > "$XDG_RUNTIME_DIR"/gamma.temp
             ;;
         esac
     }
