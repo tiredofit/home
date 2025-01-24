@@ -8,7 +8,7 @@
         hadolint.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
-        nmap.enable = mkDefault true;
+        nmap.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
       };
