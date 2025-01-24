@@ -13,11 +13,11 @@ with lib;
         lazydocker.enable = true;
         lazygit.enable = true;
         nix-development_tools.enable = true;
-        nmap.enable = mkDefault true;
+        nmap.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         yq.enable = true;
-        yt-dlp.enable = mkDefault true;
+        yt-dlp.enable = true;
       };
       user = {
         dave = {
