@@ -65,6 +65,7 @@ with lib;
         };
         yq.enable = true;
         yt-dlp.enable = true;
+        zeditor.enable = true;
         zoom.enable = true;
         zenbrowser.enable = true;
       };
