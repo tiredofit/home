@@ -12,7 +12,7 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url = "https://download.chatboxai.app/releases/Chatbox-${version}-x86_64.AppImage";
-    hash = "sha256-zEosMda2vtq+U+Lrvl6DExvT5cGPbDz0eJo7GRlVzVA=";
+    hash = "sha256-SDiad6IbIVMMMvKkI1QaymF4PN+nu07EeAynuiVaMrg=";
   };
 
   desktopItems = [
