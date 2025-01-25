@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.veracrypt;
+  cfg = config.host.home.applications.zeditor;
 in
   with lib;
 {
   options = {
-    host.home.applications.veracrypt = {
+    host.home.applications.zeditor = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "File / Block encryption tool";
+        description = "File Editor";
       };
     };
   };
@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          veracrypt
+          zeditor
         ];
     };
   };
