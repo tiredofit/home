@@ -7,6 +7,7 @@ with lib;
     ./bleachbit.nix
     ./blueman.nix
     ./calibre.nix
+    ./chatbox-ai.nix
     ./chromium.nix
     ./cura.nix
     ./czkawka.nix
