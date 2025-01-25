@@ -60,6 +60,7 @@ with lib;
     ./vlc.nix
     ./vscode.nix
     ./wpsoffice.nix
+    ./zeditor.nix
     ./zenbrowser.nix
     ./zoom.nix
   ];
