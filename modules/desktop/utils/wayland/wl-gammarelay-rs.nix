@@ -24,7 +24,7 @@ in
     home = {
       packages = with pkgs;
         [
-          wl-gammarelay-rs
+          unstable.wl-gammarelay-rs
         ];
     };
 

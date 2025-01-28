@@ -29,7 +29,7 @@ in
     home = {
       packages = with pkgs;
         [
-          shikane
+          unstable.shikane
         ];
     };
 

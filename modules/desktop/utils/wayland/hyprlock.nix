@@ -41,7 +41,7 @@ in
     programs = {
       hyprlock = {
         enable = true;
-        package = pkgs.hyprlock;
+        package = pkgs.unstable.hyprlock;
 
         settings = {
           "$entry_background_color" = "rgba(43434341)";

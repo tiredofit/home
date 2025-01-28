@@ -42,6 +42,7 @@ in with lib; {
   config = mkIf cfg.enable {
     programs.floorp = {
       enable = true;
+      package = pkgs.unstable.floorp;
       profiles = {
         dave = mkIf (username == "dave" || username == "media") {
           name = username;

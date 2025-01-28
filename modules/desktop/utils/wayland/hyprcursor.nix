@@ -26,7 +26,7 @@ in
 
       packages = with pkgs;
         [
-          hyprcursor
+          unstable.hyprcursor
         ];
 
       pointerCursor = {
