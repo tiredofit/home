@@ -10,7 +10,7 @@ let
     _hypridle_gamma() {
         case "$1" in
             get )
-                busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature "$(cat "$XDG_RUNTIME_DIR"/gamma.temp)"
+                busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature "$(cat "$XDG_RUNTIME_DIR"/gamma.temp)"
             ;;
             set )
                 busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature > "$XDG_RUNTIME_DIR"/gamma.temp
