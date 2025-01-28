@@ -22,6 +22,7 @@ with lib;
         act.enable = mkDefault true;
         avidemux.enable = true;
         calibre.enable = true;
+        chatbox-ai.enable = true;
         chromium.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
