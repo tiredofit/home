@@ -17,7 +17,7 @@ in
           grim.enable = true;
           nwg-displays.enable = true;
           slurp.enable = true;
-          wayprompt.enable = true;
+          wayprompt.enable = false;
           wdisplays.enable = true;
           wev.enable = true;
           wl-clipboard.enable = true;
