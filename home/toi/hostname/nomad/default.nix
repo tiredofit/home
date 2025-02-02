@@ -19,7 +19,7 @@ with lib;
   host = {
     home = {
       applications = {
-        act.enable = mkDefault true;
+        act.enable = true;
         avidemux.enable = true;
         calibre.enable = true;
         chatbox-ai.enable = true;
