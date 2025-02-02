@@ -153,7 +153,7 @@ with lib;
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.unstable.hyprland;
+      package = pkgs.hyprland;
       settings = {
         env = mkIf (! config.host.home.feature.uwsm.enable) [
           "XDG_CURRENT_DESKTOP,Hyprland"

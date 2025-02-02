@@ -170,7 +170,7 @@ in
     services = mkIf (cfg.service.enable) {
       hypridle = {
         enable = true;
-        package = pkgs.unstable.hypridle;
+        package = pkgs.hypridle;
         settings = {
           general = {
             lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";                                             # avoid starting multiple hyprlock instances.

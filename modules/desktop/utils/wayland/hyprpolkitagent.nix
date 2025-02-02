@@ -24,7 +24,7 @@ in
     home = {
       packages = with pkgs;
         [
-          unstable.hyprpolkitagent
+          hyprpolkitagent
         ];
     };
 

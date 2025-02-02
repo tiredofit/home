@@ -52,7 +52,7 @@ in
       };
       packages = with pkgs;
         [
-          unstable.hyprpaper
+          hyprpaper
           script_displayhelper_hyprlock
         ];
     };
