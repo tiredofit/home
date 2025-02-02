@@ -29,7 +29,6 @@ with lib;
 
         master = {
           allow_small_split = true;
-          always_center_master = false;
           drop_at_cursor = true;
           inherit_fullscreen = true;
           mfact = 0.55;
@@ -37,7 +36,9 @@ with lib;
           new_status = "master";
           orientation = "center";
           smart_resizing = true;
-        };
+        } // (lib.optionalAttrs (!lib.versionAtLeast lib.version "25.05pre") {
+          always_center_master = false;
+        });
 
         decoration = {
           blur = {
