@@ -16,8 +16,6 @@
   };
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     comma.url = "github:nix-community/comma";
@@ -57,33 +55,33 @@
       gnsn = "daveconroy";
       handle = "tiredofit";
 
-pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
-  overlays = [
-    inputs.comma.overlays.default
-    inputs.nix-vscode-extensions.overlays.default
-    inputs.nur.overlays.default
-    outputs.overlays.additions
-    outputs.overlays.modifications
-    outputs.overlays.stable-packages
-    outputs.overlays.unstable-packages
-  ];
-  inherit system;
-};
+      pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
+        overlays = [
+          inputs.comma.overlays.default
+          inputs.nix-vscode-extensions.overlays.default
+          inputs.nur.overlays.default
+          outputs.overlays.additions
+          outputs.overlays.modifications
+          outputs.overlays.stable-packages
+          outputs.overlays.unstable-packages
+        ];
+        inherit system;
+      };
 
-    HomeConfiguration = args:
-      let
-        nixpkgs = args.nixpkgs or nixpkgs-stable; # Default to stable
-      in
-        home-manager.lib.homeManagerConfiguration {
-      modules = [
-        (import ./home)
-        (import ./modules)
-      ];
-      extraSpecialArgs = {
-        inherit (args) nixpkgs;
-      } // args.extraSpecialArgs;
-      pkgs = pkgsForSystem (args.system or "x86_64-linux") nixpkgs;
-    };
+      HomeConfiguration = args:
+        let
+          nixpkgs = args.nixpkgs or nixpkgs-stable;
+        in
+          home-manager.lib.homeManagerConfiguration {
+            modules = [
+              (import ./home)
+              (import ./modules)
+            ];
+            extraSpecialArgs = {
+              inherit (args) nixpkgs;
+            } // args.extraSpecialArgs;
+            pkgs = pkgsForSystem (args.system or "x86_64-linux") nixpkgs;
+          };
 
     in flake-utils.lib.eachSystem [
       "x86_64-linux"
@@ -165,7 +163,7 @@ pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
               networkInterface = "wlp2s0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable; # Use unstable
+            nixpkgs = nixpkgs-unstable;
           };
 
           "seed.${gn}" = HomeConfiguration {
