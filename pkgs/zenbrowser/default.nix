@@ -15,7 +15,7 @@
 let
   rev = "1.7.4b";
   linux_x86_64-hash = "13sb7q6vnkwvbndhlzzqzhf38a1rq42x77g71iwa4snhij1i11d7";
-  darwin_aarch64-hash = "";
+  darwin_aarch64-hash = "01xg52wd1w6ci3km9ipm44hqmc0g6dhqxjnynhv7kyc2vk7hij2a";
   domain = "github.com";
   owner = "zen-browser";
   repo = "desktop";
