@@ -13,17 +13,17 @@
 }:
 
 let
-  rev = "1.7.2b";
-  linux_x86_64-hash = "0y908lnvcq8lbsbhkz755gmsqp7caj10vppcgm90cv4vk367b89w";
-  darwin_aarch64-hash = "01cn8gskwmzb10s5c6q1p96y5f0s5f9jxipldf0f1sp9496h070y";
+  rev = "1.7.4b";
+  linux_x86_64-hash = "13sb7q6vnkwvbndhlzzqzhf38a1rq42x77g71iwa4snhij1i11d7";
+  darwin_aarch64-hash = "";
   domain = "github.com";
   owner = "zen-browser";
   repo = "desktop";
   repo_git = "https://${domain}/${owner}/${repo}";
   sources = {
     aarch64-darwin = fetchurl {
-      url = "${repo_git}/releases/download/${rev}/zen.macos-aarch64.dmg";
-      sha256 = darwin_aarch64-hash;
+      url = "${repo_git}/releases/download/${rev}/zen.macos-universal.dmg";
+      sha256 = darwin_universal-hash;
     };
     x86_64-linux = fetchurl {
       url = "${repo_git}/releases/download/${rev}/zen.linux-x86_64.tar.bz2";
