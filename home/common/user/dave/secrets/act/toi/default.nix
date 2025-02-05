@@ -20,8 +20,8 @@ in
   config = mkIf cfg.enable {
     programs = {
       bash.initExtra = ''
-        if [ -f "$XDG_RUNTIME_DIR"/secrets/act/toi-act.env ] ; then
-            alias toiact="act --secret-file '$XDG_RUNTIME_DIR/secrets/toi-act.env'"
+        if [ -f "$XDG_RUNTIME_DIR/act/toi-act.env" ] ; then
+            alias toiact="act --secret-file \"$XDG_RUNTIME_DIR/act/toi-act.env\""
         fi
         '';
     };
