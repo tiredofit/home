@@ -13,9 +13,9 @@
 }:
 
 let
-  rev = "1.7.4b";
-  linux_x86_64-hash = "13sb7q6vnkwvbndhlzzqzhf38a1rq42x77g71iwa4snhij1i11d7";
-  darwin_universal-hash = "01xg52wd1w6ci3km9ipm44hqmc0g6dhqxjnynhv7kyc2vk7hij2a";
+  rev = "1.7.5b";
+  linux_x86_64-hash = "";
+  darwin_aarch64-hash = "1s5yln4q7bd4ssxwg2q68snm17by585l39sywckphy4ch2i4n7hw";
   domain = "github.com";
   owner = "zen-browser";
   repo = "desktop";
@@ -26,7 +26,7 @@ let
       sha256 = darwin_universal-hash;
     };
     x86_64-linux = fetchurl {
-      url = "${repo_git}/releases/download/${rev}/zen.linux-x86_64.tar.bz2";
+      url = "${repo_git}/releases/download/${rev}/zen.linux-x86_64.tar.xz";
       sha256 = linux_x86_64-hash;
     };
   };
