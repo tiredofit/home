@@ -14,7 +14,7 @@ for file in "${files[@]}" ; do
     echo "Updating hash for ${url}"
     rev=$(nix-prefetch-url --type sha256 ${url})
     # Update aarch64 MacOS version
-    [[ "$file" == "zen.macos-universal.dmg" ]] && sed -Ei "s/darwin_universal-hash = \"(.*)\"/darwin_aarch64-hash = \"${rev}\"/g" default.nix
+    [[ "$file" == "zen.macos-universal.dmg" ]] && sed -Ei "s/darwin_universal-hash = \"(.*)\"/darwin_universal-hash = \"${rev}\"/g" default.nix
     # Update x86_64 Linux version
     [[ "$file" == "zen.linux-x86_64.tar.bz2" ]] && sed -Ei "s/linux_x86_64-hash = \"(.*)\"/linux_x86_64-hash = \"${rev}\"/g" default.nix
 done
