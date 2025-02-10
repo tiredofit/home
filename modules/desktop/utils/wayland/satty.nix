@@ -27,7 +27,7 @@ in
       settings = {
         #"SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
         bind = [
-          "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications -f -"
+          "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications --initial-tool blur -f -"
         ];
         windowrulev2 = [
           "float,class:^(com.gabm.satty)$"
