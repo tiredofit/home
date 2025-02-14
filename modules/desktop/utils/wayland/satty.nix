@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          satty
+          stable.satty
         ];
     };
 
@@ -44,8 +44,6 @@ in
       copy-command = "wl-copy"
       output-filename = "/tmp/screenshot-%Y-%m-%d_%H:%M:%S.png"
       save-after-copy = false
-      corner-roundness = 0
-      annotation-size-factor = 1
 
       [font]
       family = "Roboto"
