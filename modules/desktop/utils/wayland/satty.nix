@@ -27,7 +27,7 @@ in
       settings = {
         #"SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
         bind = [
-          "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications --initial-tool blur -f -"
+          "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications -f -"
         ];
         windowrulev2 = [
           "float,class:^(com.gabm.satty)$"
@@ -40,10 +40,12 @@ in
       [general]
       fullscreen = false
       early-exit = true
-      initial-tool = "arrow" # [pointer, crop, line, arrow, rectangle, text, marker, blur, brush]
+      initial-tool = "blur" # [pointer, crop, line, arrow, rectangle, text, marker, blur, brush]
       copy-command = "wl-copy"
       output-filename = "/tmp/screenshot-%Y-%m-%d_%H:%M:%S.png"
       save-after-copy = false
+      corner-roundness = 0
+      annotation-size-factor = 1
 
       [font]
       family = "Roboto"
