@@ -14,8 +14,8 @@
 
 let
   rev = "1.7.6b";
-  linux_x86_64-hash = "";
-  darwin_universal-hash = "1s5yln4q7bd4ssxwg2q68snm17by585l39sywckphy4ch2i4n7hw";
+  linux_x86_64-hash = "0vk4sas4gsplxdrqi15wpbs58hs5fq0nm0nk1ybij2rb7a66ay12";
+  darwin_universal-hash = "0cf78spsz2mxgqgr0rz9ylmw1j45r9vl6cs3n9h71p2gh2575vxl";
   domain = "github.com";
   owner = "zen-browser";
   repo = "desktop";
@@ -40,7 +40,7 @@ in
     dontUnpack = stdenv.isDarwin;
     unpackPhase = ''
       mkdir -p $out
-      tar xjvf ${finalAttrs.src} -C $out
+      tar xJvf ${finalAttrs.src} -C $out
     '';
 
     nativeBuildInputs = lib.optionals stdenv.isLinux [
