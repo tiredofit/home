@@ -23,6 +23,7 @@ with lib;
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
+        easyeffects.enable = mkDefault true;
         ferdium.enable = mkDefault true;
         firefox = {
           enable = mkDefault true;

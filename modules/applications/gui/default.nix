@@ -13,6 +13,7 @@ with lib;
     ./czkawka.nix
     ./diffuse.nix
     ./drawio.nix
+    ./easyeffects.nix
     ./electrum.nix
     ./eog.nix
     ./feh.nix
