@@ -76,9 +76,9 @@ in with lib; {
     programs.firefox = {
       enable = true;
       package = if pkgs.stdenv.isLinux then pkgs.unstable.firefox else pkgs.unstable.firefox-bin;
-      #nativeMessagingHosts = with pkgs; mkIf (username == "dave") [
-      #  pkgs.unstable.firefoxpwa
-      #];
+      nativeMessagingHosts = with pkgs; mkIf (username == "dave") [
+        pkgs.unstable.firefoxpwa
+      ];
       profiles = {
         dave = mkIf (username == "dave" || username == "media") {
           name = username;

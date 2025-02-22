@@ -16,11 +16,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs;
+        [
+          unstable.firefoxpwa
+        ];
+    };
+
     programs = {
       librewolf = {
         enable = true;
         package = if pkgs.stdenv.isLinux then pkgs.unstable.librewolf else pkgs.unstable.firefox-bin;
-        nativeMessagingHosts = with pkgs; mkIf (username == "dave") [
+        nativeMessagingHosts = with pkgs; [
           pkgs.unstable.firefoxpwa
         ];
       };
