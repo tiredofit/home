@@ -172,6 +172,7 @@ with lib;
           "NIXOS_OZONE_WL,1"
         ];
       };
+      systemd.enable = mkDefault false;
       xwayland.enable = mkDefault true;
     };
 
@@ -197,7 +198,7 @@ with lib;
           #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];
         };
         extraPortals = [
-          #pkgs.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk
           pkgs.xdg-desktop-portal-wlr
         ];
