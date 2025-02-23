@@ -10,7 +10,8 @@ with lib;
       settings = {
         ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          "SUPER, F, fullscreen"
+          "SUPER, F, fullscreenstate, 1, 1"
+          "SUPER_SHIFT, F, fullscreen"
           "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
           # See Terminal for the bind for SUPER, RETURN
           "SUPER, V, togglefloating,"
@@ -71,7 +72,7 @@ with lib;
           "SUPER_SHIFT, down, movewindow,d"
 
            # Turn off animations / game mode
-          "WIN, F1, exec,  ~/.config/hypr/gamemode.sh"
+          "WIN, F1, exec,  hyprland_gamemode"
 
           # special workspace
           ## TODO Dynamic Configuration
