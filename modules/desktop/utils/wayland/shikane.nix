@@ -2,7 +2,33 @@
 
 let
   cfg = config.host.home.applications.shikane;
+
   tomlFormat = pkgs.formats.toml { };
+
+  shikane_display_helper_tool = pkgs.writeShellScriptBin "displayhelper_shikane" ''
+    if command -v "rofi" &>/dev/null ; then
+        choose_menu="rofi"
+        choose_menu_command="rofi -dmenu -i"
+    elif command -v "dmenu" &>/dev/null ; then
+        choose_menu="dmenu"
+        choose_menu_command='dmenu'
+    else
+        choose_menu="select"
+    fi
+
+    if [ "$choose_menu" = "select" ] ; then
+        PS3="Choose an display profile "
+        IFS=$'\n'
+        select profile in $(awk -F'"' '/name =/ {print $2}' ~/.config/shikane/config.toml) ; do
+            profile=profile
+            break
+        done
+    else
+        profile="$(awk -F'"' '/name =/ {print $2}' ~/.config/shikane/config.toml | $choose_menu_command -p 'Select a display profile')"
+    fi
+
+    ${pkgs.shikane}/bin/shikanectl switch "$profile"
+  '';
 in
   with lib;
 {
@@ -30,6 +56,7 @@ in
       packages = with pkgs;
         [
           shikane
+          shikane_display_helper_tool
         ];
     };
 
