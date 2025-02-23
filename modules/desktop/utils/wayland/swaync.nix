@@ -204,6 +204,20 @@ in
                       }
                     ]
                   },
+                  "menu#settings-buttons": {
+                    "label": "⚙️",
+                    "position": "right",
+                    "actions": [
+                      {
+                        "label": "Sound",
+                        "command": "sound-tool output choose"
+                      },
+                      {
+                        "label": "Display",
+                        "command": "displayhelper_shikane"
+                      }
+                    ]
+                  },
                   "menu#powermode-buttons": {
                     "label": "󰊚",
                     "position": "right",
