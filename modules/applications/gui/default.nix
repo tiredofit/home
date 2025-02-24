@@ -30,7 +30,6 @@ with lib;
     ./greenclip.nix
     ./kitty.nix
     ./libreoffice.nix
-    ./librewolf.nix
     ./masterpdfeditor.nix
     ./mate-calc.nix
     ./mqtt-explorer.nix
