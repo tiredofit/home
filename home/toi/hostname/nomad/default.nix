@@ -34,7 +34,6 @@ with lib;
         hugo.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
-        librewolf.enable = true;
         mp3gain.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
