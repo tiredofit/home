@@ -57,6 +57,7 @@ with lib;
             "192.168.4.0/24" = true;
           };
         };
+        steam-run.enable = true;
         szyszka.enable = true;
         thunderbird.enable = true;
         virt-manager.enable = true;

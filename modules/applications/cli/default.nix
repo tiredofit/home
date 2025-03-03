@@ -48,6 +48,7 @@ with lib;
     ./shfmt.nix
     ./shellcheck.nix
     ./ssh.nix
+    ./steam-run.nix
     ./tea.nix
     ./timewarrior.nix
     ./tmux.nix
