@@ -31,24 +31,21 @@ in
       package = pkgs.unstable.flameshot.override { enableWlrSupport = true; };
     };
 
-    #xdg.configFile."flameshot/flameshot.ini".text = ''
-    #  [General]
-    #  #buttons=@Variant(\0\0\0\x7f\0\0\0\vQList<int>\0\0\0\0\v\0\0\0\x2\0\0\0\x3\0\0\0\x4\0\0\0\x5\0\0\0\xf\0\0\0\x16\0\0\0\a\0\0\0\b\0\0\0\n\0\0\0\v\0\0\0\x17)
-    #  checkForUpdates=false
-    #  contrastOpacity=127
-    #  #copyAndCloseAfterUpload=false
-    #  disabledTrayIcon=true
-    #  drawThickness=12
-    #  historyConfirmationToDelete=false
-    #  showDesktopNotification=false
-    #  showHelp=false
-    #  showSidePanelButton=true
-    #  showStartupLaunchMessage=false
-    #  uiColor=#069ffc
-    #
-    #  [Shortcuts]
-    #  TYPE_ACCEPT=
-    #  TYPE_COPY=Return
-    #'';
+    xdg.configFile."flameshot/flameshot.ini".text = ''
+      [General]
+      buttons=@Variant(\0\0\0\x7f\0\0\0\vQList<int>\0\0\0\0\f\0\0\0\0\0\0\0\x1\0\0\0\x2\0\0\0\x3\0\0\0\x6\0\0\0\x12\0\0\0\xf\0\0\0\x13\0\0\0\b\0\0\0\t\0\0\0\x10\0\0\0\n)
+      contrastOpacity=153
+      copyOnDoubleClick=true
+      drawColor=#0000ff
+      drawThickness=13
+      jpegQuality=75
+      showDesktopNotification=false
+      showMagnifier=true
+      showSelectionGeometryHideTime=2996
+      showSidePanelButton=false
+      showStartupLaunchMessage=false
+      squareMagnifier=false
+      uiColor=#ff1a1e
+    '';
   };
 }
