@@ -13,11 +13,20 @@ in
         type = with types; bool;
         description = "Screenshot grabber";
       };
+      service.enable = mkOption {
+        default = true;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    services.flameshot = {
+    home.packages = [
+      (pkgs.unstable.flameshot.override { enableWlrSupport = true; })
+    ];
+
+    services.flameshot = mkIf cfg.service.enable {
       enable = true;
       package = pkgs.unstable.flameshot.override { enableWlrSupport = true; };
     };
@@ -36,7 +45,7 @@ in
     #  showSidePanelButton=true
     #  showStartupLaunchMessage=false
     #  uiColor=#069ffc
-#
+    #
     #  [Shortcuts]
     #  TYPE_ACCEPT=
     #  TYPE_COPY=Return
