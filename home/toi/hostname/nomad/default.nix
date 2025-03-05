@@ -27,6 +27,7 @@ with lib;
         cryfs.enable = true;
         czkawka.enable = true;
         file-roller.enable = true;
+        flameshot.enable = true;
         floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
