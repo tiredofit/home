@@ -46,12 +46,14 @@ in
   config = mkIf cfg.enable {
     programs.vscode =  {
       enable = true;
+
       extensions = (with pkgs.vscode-extensions; [
           # From NixPkgs
           # Older Stable versions
           ## CI
 
           ## Docker
+            ms-vscode-remote.remote-containers
 
           ## Editor Helpers
 
@@ -98,8 +100,8 @@ in
             shakram02.bash-beautify                   # Bash
 
           ## Remote
-            ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
-            ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
+            #ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
+            #ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
             ms-vscode.remote-explorer                 # View remote machines for SSH and Tunnels
 
           ## Syntax Highlighting | File Support | Linting
