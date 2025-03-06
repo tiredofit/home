@@ -62,6 +62,7 @@ in
 
           ## Remote
             ms-vscode-remote.remote-ssh               # Open any folder on remote system
+            ms-vscode-remote.remote-ssh-edit
 
           ## Syntax Highlighting | File Support | Linting
 
