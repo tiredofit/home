@@ -6,6 +6,10 @@ let
         ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "$(echo "''${1}" | sed "s|^d/||g")" '.[] | select(.description | test("^(d/)?\($desc)")) | .name'
     }
 
+    _restart_hyprpaper() {
+        systemctl --user restart hyprpaper.service
+    }
+
     if [ -z "''${1}" ]; then
         exit 1
     else
@@ -13,18 +17,21 @@ let
         echo "splash=false" > ''${HOME}/.config/hypr/hyprpaper.conf
         echo "preload=~/.config/hypr/background/middle.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
         echo "wallpaper=$_monitor1,~/.config/hypr/background/middle.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
+        _restart_hyprpaper
     fi
 
     if [ -n "''${2}" ]; then
         _monitor2=$(_get_display_name "''${2}")
         echo "preload=~/.config/hypr/background/right.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
         echo "wallpaper=$_monitor2,~/.config/hypr/background/right.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
+        _restart_hyprpaper
     fi
 
     if [ -n "''${3}" ]; then
         _monitor3=$(_get_display_name "''${3}")
         echo "preload=~/.config/hypr/background/left.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
         echo "wallpaper=$_monitor3,~/.config/hypr/background/left.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
+        _restart_hyprpaper
     fi
   '';
 in
