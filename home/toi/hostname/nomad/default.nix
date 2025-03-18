@@ -26,6 +26,8 @@ with lib;
         chromium.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
+        devenv.enable = true;
+        direnv.enable = true;
         file-roller.enable = true;
         flameshot.enable = true;
         floorp.enable = true;
