@@ -1,16 +1,16 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.host.home.applications.duf;
+  cfg = config.host.home.applications.devenv;
 in
   with lib;
 {
   options = {
-    host.home.applications.duf = {
+    host.home.applications.devenv = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "'du' command line replacement";
+        description = "Development environments made easier";
       };
     };
   };
@@ -19,15 +19,8 @@ in
     home = {
       packages = with pkgs;
         [
-          duf
+          devenv
         ];
-    };
-    programs = {
-      bash = {
-        shellAliases = {
-          df = "duf" ;    # disk free alternative
-        };
-      };
     };
   };
 }
