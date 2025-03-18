@@ -194,6 +194,11 @@ in
       # will be disabled
       LP_DISABLED_VCS_PATH=""
 
+      LP_ENABLE_ENV_VARS=1
+      LP_ENV_VARS=(
+        # Display "D" if DIRENV_ACTIVE set is set, nothing if it's unset.
+        "DIRENV_ACTIVE D"
+      )
     '';
 
   };
