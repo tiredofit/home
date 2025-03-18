@@ -10,6 +10,7 @@ with lib;
     ./btop.nix
     ./comma.nix
     ./cryfs.nix
+    ./devenv.nix
     ./diceware.nix
     ./direnv.nix
     ./docker-compose.nix
