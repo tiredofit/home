@@ -113,6 +113,9 @@ in
             foxundermoon.shell-format                 # Bash
             redhat.vscode-yaml                        # YAML
             timonwong.shellcheck                      # Bash TODO: Split and force shellcheck binary to be installed
+
+          ## Development
+            mkhl.direnv
       ]);
       keybindings = [
         ## Favorites
