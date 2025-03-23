@@ -17,9 +17,14 @@ in
 
   config = mkIf cfg.enable {
      programs = {
+       bash = {
+         bashrcExtra = ''
+           _ZO_DOCTOR=0
+         '';
+       };
        zoxide = {
          enable = true;
-         enableBashIntegration = true;
+         enableBashIntegration = mkDefault true;
        };
      };
   };
