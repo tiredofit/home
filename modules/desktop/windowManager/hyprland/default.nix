@@ -123,7 +123,10 @@ with lib;
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          hyprsunset.enable = mkDefault true;
+          hyprsunset = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
           satty.enable = mkDefault true;
