@@ -29,7 +29,7 @@ in
         bind = [
           "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications -f -"
         ];
-        windowrulev2 = [
+        windowrule = [
           "float,class:^(com.gabm.satty)$"
           "pin,class:^(com.gabm.satty)$"
         ];

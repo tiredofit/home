@@ -39,12 +39,13 @@ in
 
     wayland.windowManager.hyprland = {
       settings = {
-        windowrule = [
-          "float, ^(Zoom Workplace)$"
-          "float, ^(zoom)$"
-        ];
+        # old
+        #windowrule = [
+        #  "float, ^(Zoom Workplace)$"
+        #  "float, ^(zoom)$"
+        #];
 
-        windowrulev2 = [
+        windowrule = [
           #"size 360 690,title:^Zoom - Licensed Account$,class:(^Zoom)$"
           #"float,title:^Zoom - Licensed Account$"
           #"noanim,class:(^Zoom)$"

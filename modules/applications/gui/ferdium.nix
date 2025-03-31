@@ -28,7 +28,7 @@ in
         exec-once = [
           "${config.host.home.feature.uwsm.prefix}ferdium --ozone-platform=wayland --enable-features-WaylandWindowDecorations"
         ];
-        windowrulev2 = [
+        windowrule = [
           "workspace 3,class:(^Ferdium)$"
         ];
       };

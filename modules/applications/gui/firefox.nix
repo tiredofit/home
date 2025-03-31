@@ -3276,7 +3276,7 @@ in with lib; {
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        windowrulev2 = [
+        windowrule = [
            ### Make Firefox PiP window floating and sticky
            "float, title:^(Picture-in-Picture)$"
            "pin, title:^(Picture-in-Picture)$"

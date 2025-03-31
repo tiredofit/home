@@ -105,7 +105,7 @@ in {
                 "CONTROLALT, V, exec, pkill rofi || ${pkgs.cliphist}/bin/cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu -columns 1 -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'| ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
               ]))
             ];
-            windowrulev2 = [
+            windowrule = [
               #"stayfocused,class:(Rofi)"
               #"forceinput,class:(Rofi)"
             ];

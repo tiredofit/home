@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          unstable.thunderbird
+          unstable.thunderbird-128
         ];
     };
 
@@ -32,7 +32,7 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        windowrulev2 = [
+        windowrule = [
           "workspace 1,class:(thunderbird)$"
           "float,class:^(thunderbird)$,title:^(.*)(Reminder)(.*)$"
           "float,class:^(thunderbird)$,title:^About(.*)$"

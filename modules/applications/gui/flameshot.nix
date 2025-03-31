@@ -33,7 +33,7 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        windowrulev2 = [
+        windowrule = [
           "noanim, class:^(flameshot)$"
           "float, class:^(flameshot)$"
           "move 0 0, class:^(flameshot)$"

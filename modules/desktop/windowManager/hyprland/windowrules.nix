@@ -9,7 +9,7 @@ with lib;
     wayland.windowManager.hyprland = {
       settings = {
         ## See more in modules/applications/* and modules/desktop/utils/*
-        windowrulev2 = [
+        windowrule = [
           # IDLE inhibit while watching videos
           #"idleinhibit focus, class:^(mpv|.+exe)$"
           #"idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
