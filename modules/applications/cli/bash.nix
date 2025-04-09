@@ -147,11 +147,30 @@ in
             }
           fi
 
+          if command -v "rg" &>/dev/null; then
+              sir() {
+                  if [ -z $1 ] || [ -z $2 ] ; then echo "Search inside Replace: sir <find_string_named> <sring_replaced>" ; return 1 ; fi
+                       for file in $(rg -l $1) ; do
+                           sed -i "s|$1|$2|g" "$file"
+                       done
+                  fi
+              }
+          fi
+
           if [ -d "$XDG_RUNTIME_DIR/secrets/bashrc.d" ] ; then
             for script in $XDG_RUNTIME_DIR/secrets/bashrc.d/* ; do
                 source $script
             done
           fi
+
+
+
+          far() {
+                if [ -z $1 ] || [ -z $2 ] ; then echo "Rename files: far <find_file_named> <file_renamed>" ; return 1 ; fi
+                for file in $(find -name "$1") ; do
+                    mv "$file" $(dirname "$file")/$2
+                done
+          }
 
           man() {
               LESS_TERMCAP_md=$'\e[01;31m' \
