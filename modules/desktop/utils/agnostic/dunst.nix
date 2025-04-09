@@ -231,25 +231,25 @@ in
         urgency_low = {
             # IMPORTANT: colors have to be defined in quotation marks.
             # Otherwise the "#" and following would be interpreted as a comment.
-            background = "#${config.colorscheme.colors.base06}" ;
-            foreground = "#${config.colorscheme.colors.base02}" ;
+            background = "#${config.colorScheme.palette.base06}" ;
+            foreground = "#${config.colorScheme.palette.base02}" ;
             timeout = 10 ;
             # Icon for notifications with low urgency, uncomment to enable
             #icon = /path/to/icon
         };
 
         urgency_normal = {
-            background = "#${config.colorscheme.colors.base06}" ;
-            foreground = "#${config.colorscheme.colors.base02}" ;
+            background = "#${config.colorScheme.palette.base06}" ;
+            foreground = "#${config.colorScheme.palette.base02}" ;
             timeout = 10 ;
             # Icon for notifications with normal urgency, uncomment to enable
             #icon = /path/to/icon
         };
 
         urgency_critical = {
-            background = "#${config.colorscheme.colors.base00}" ;
-            foreground = "#${config.colorscheme.colors.base06}" ;
-            frame_color = "#${config.colorscheme.colors.base0F}" ;
+            background = "#${config.colorScheme.palette.base00}" ;
+            foreground = "#${config.colorScheme.palette.base06}" ;
+            frame_color = "#${config.colorScheme.palette.base0F}" ;
             timeout = 0 ;
             # Icon for notifications with critical urgency, uncomment to enable
             #icon = /path/to/icon

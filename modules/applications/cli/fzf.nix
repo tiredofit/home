@@ -21,18 +21,18 @@ in
         enable = true;
         enableBashIntegration = true;
         colors = {
-          "bg+" = "#${config.colorscheme.colors.base01}";
-          "fg+" = "#${config.colorscheme.colors.base06}";
-          "hl+" = "#${config.colorscheme.colors.base0D}";
-          bg = "#${config.colorscheme.colors.base00}";
-          fg = "#${config.colorscheme.colors.base04}";
-          header = "#${config.colorscheme.colors.base0D}";
-          hl = "#${config.colorscheme.colors.base0D}";
-          info = "#${config.colorscheme.colors.base0A}";
-          marker = "#${config.colorscheme.colors.base0C}";
-          pointer = "#${config.colorscheme.colors.base0C}";
-          prompt = "#${config.colorscheme.colors.base0A}";
-          spinner = "#${config.colorscheme.colors.base0C}";
+          "bg+" = "#${config.colorScheme.palette.base01}";
+          "fg+" = "#${config.colorScheme.palette.base06}";
+          "hl+" = "#${config.colorScheme.palette.base0D}";
+          bg = "#${config.colorScheme.palette.base00}";
+          fg = "#${config.colorScheme.palette.base04}";
+          header = "#${config.colorScheme.palette.base0D}";
+          hl = "#${config.colorScheme.palette.base0D}";
+          info = "#${config.colorScheme.palette.base0A}";
+          marker = "#${config.colorScheme.palette.base0C}";
+          pointer = "#${config.colorScheme.palette.base0C}";
+          prompt = "#${config.colorScheme.palette.base0A}";
+          spinner = "#${config.colorScheme.palette.base0C}";
         };
         defaultOptions = [
           "--height 40%"

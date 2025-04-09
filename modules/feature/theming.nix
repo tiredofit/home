@@ -21,7 +21,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    colorscheme = inputs.nix-colors.colorSchemes.dracula;
+    colorScheme = inputs.nix-colors.colorSchemes.dracula;
     gtk = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
       enable = true;
       iconTheme = {
