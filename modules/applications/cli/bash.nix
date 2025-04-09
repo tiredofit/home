@@ -150,10 +150,9 @@ in
           if command -v "rg" &>/dev/null; then
               sir() {
                   if [ -z $1 ] || [ -z $2 ] ; then echo "Search inside Replace: sir <find_string_named> <sring_replaced>" ; return 1 ; fi
-                       for file in $(rg -l $1) ; do
-                           sed -i "s|$1|$2|g" "$file"
-                       done
-                  fi
+                  for file in $(rg -l $1) ; do
+                      sed -i "s|$1|$2|g" "$file"
+                  done
               }
           fi
 
@@ -162,8 +161,6 @@ in
                 source $script
             done
           fi
-
-
 
           far() {
                 if [ -z $1 ] || [ -z $2 ] ; then echo "Rename files: far <find_file_named> <file_renamed>" ; return 1 ; fi
