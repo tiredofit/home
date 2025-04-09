@@ -8,12 +8,15 @@ with lib;
     home = {
       applications = {
         act.enable = true;
+        devenv.enable = true;
+        direnv.enable = true;
         github-client.enable = true;
         hadolint.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
         nix-development_tools.enable = true;
         nmap.enable = true;
+        python.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         yq.enable = true;
