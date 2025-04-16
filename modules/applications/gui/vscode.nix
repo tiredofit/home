@@ -1,6 +1,12 @@
-{ config, inputs, lib, nix-vscode-extensions, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
   cfg = config.host.home.applications.visual-studio-code;
+  pkgs-ext = import inputs.nixpkgs {
+    inherit (pkgs) system;
+    config.allowUnfree = true;
+    overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+  };
+  marketplace = pkgs-ext.vscode-marketplace;
 in
   with lib;
 {
@@ -46,6 +52,7 @@ in
   config = mkIf cfg.enable {
     programs.vscode =  {
       enable = true;
+  #programs.vscode.profiles.default.extensions = with marketplace; [ms-vscode-remote.remote-containers];
 
       extensions = (with pkgs.vscode-extensions; [
           # From NixPkgs
@@ -65,14 +72,14 @@ in
             ms-vscode-remote.remote-ssh-edit
 
           ## Syntax Highlighting | File Support | Linting
-
-        ]) ++ (with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace-release; [
-          # Release versions
-          # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
-
-        ]) ++ (with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
+        ]) ++ (with marketplace; [
           # Bleeding Edge versions
           # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
+
+          ## AI
+            github.copilot                          # AI pair programmer
+            github.copilot-chat                     # AI pair programmer chat
+            ms-vscode.copilot-mermaid-diagram
 
           ## CI
             github.vscode-github-actions              # Github actions helper
@@ -246,6 +253,9 @@ in
         "workbench.editor.showTabs" = "multiple";
         "workbench.startupEditor" = "none" ;
 
+        ## Copilot
+        "github.copilot.editor.enableCodeActions" = "true";
+        "github.copilot.chat.followUps" = "never";
 
         ## Formatting
         "[dockerfile]" = { "editor.defaultFormatter" = "foxundermoon.shell-format" ;};
@@ -276,6 +286,7 @@ in
           "typescript"
           "typescriptreact"
         ];
+
 
         ## Git
         "git.autofetch" = true;
@@ -328,6 +339,9 @@ in
           "uyiosa-enabulele.reopenclosedtab"
           "yzhang.markdown-all-in-one"
           "ziyasal.vscode-open-in-github"
+          "github.copilot"
+          "github.copilot-chat"
+          "ms-vscode.copilot-mermaid-diagram"
         ];
 
         ## Telemetry

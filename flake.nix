@@ -58,7 +58,6 @@
       pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
         overlays = [
           inputs.comma.overlays.default
-          inputs.nix-vscode-extensions.overlays.default
           inputs.nur.overlays.default
           outputs.overlays.additions
           outputs.overlays.modifications
