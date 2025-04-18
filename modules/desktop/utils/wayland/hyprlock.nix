@@ -14,6 +14,7 @@ let
             display_name=$(_get_display_name "''${1}")
             echo "# Automatically Generated" > ''${HOME}/.config/hypr/hyprlock_monitor.conf
             echo "monitor=''${display_name}" >> ''${HOME}/.config/hypr/hyprlock_monitor.conf
+            echo "" >> ''${HOME}/.config/hypr/hyprlock_monitor.conf
         ;;
     esac
   '';
