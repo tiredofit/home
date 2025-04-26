@@ -1,6 +1,32 @@
 { config, lib, pkgs, specialArgs, ... }:
 
 let
+  floorpHelper_bitwarden = pkgs.writeShellScriptBin "floorpHelper_bitwarden" ''
+    windowtitlev2() {
+      IFS=',' read -r -a args <<< "$1"
+      args[0]="''${args[0]#*>>}"
+
+      if [[ ''${args[1]} == "Extension: (Bitwarden Password Manager) - — Floorp" ]]; then
+        hyprctl --batch "\
+          dispatch setfloating address:0x''${args[0]}; \
+          dispatch resizewindowpixel exact 20% 50%, address:0x''${args[0]}; \
+          dispatch centerwindow; \
+        "
+      fi
+    }
+
+    handle() {
+      case $1 in
+        windowtitlev2\>*) windowtitlev2 "$1" ;;
+      esac
+    }
+
+    ${pkgs.socat}/bin/socat -U - UNIX-CONNECT:"/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" \
+      | while read -r line; do
+          handle "$line"
+        done
+  '';
+
   inherit (specialArgs) username;
   cfg = config.host.home.applications.floorp;
 in with lib; {
@@ -36,89 +62,63 @@ in with lib; {
           ];
         };
       };
+      defaultSettings = {
+        enable = mkOption {
+          description = "Apply default 'common' settings for downstream profiles";
+          type = with types; bool;
+          default = false;
+        };
+      };
     };
   };
 
   config = mkIf cfg.enable {
+    home = {
+      packages = with pkgs; [
+        pkgs.nur.repos.rycee.mozilla-addons-to-nix
+        floorpHelper_bitwarden
+      ];
+    };
+
     programs.floorp = {
       enable = true;
       package = pkgs.unstable.floorp;
       profiles = {
-        dave = mkIf (username == "dave" || username == "media") {
-          name = username;
-          #id = 777;
-          isDefault = true;
+        default = mkIf cfg.defaultSettings.enable {
+          name = mkDefault username;
+          isDefault = mkDefault true;
 
           search = {
-            force = true;
-            default = "DuckDuckGo";
-            engines = {
-              "Home Manager Options" = {
-                urls = [{
-                  template =
-                    "https://mipmip.github.io/home-manager-option-search/";
-                  params = [{
-                    name = "query";
-                    value = "{searchTerms}";
-                  }];
-                }];
-                icon =
-                  "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = [ "@hmo" ];
-              };
+            force = mkDefault true;
+            default = mkDefault "DuckDuckGo";
 
-              "Wikipedia (en)".metaData.alias = "@wiki";
-              "Google".metaData.hidden = true;
+            engines = {
+              "Bing".metaData.hidden = mkDefault true;
+              "Google".metaData.alias = mkDefault "@g";
+              "Wikipedia (en)".metaData.hidden = mkDefault true;
+              "eBay".metaData.hidden = mkDefault true;
+
+              "YouTube" = {
+                definedAliases = ["@youtube" "@yt"];
+                iconUpdateURL = "https://www.youtube.com/s/desktop/8b6c1f4c/img/favicon_144x144.png";
+                urls = [
+                  {
+                    template = "https://www.youtube.com/results";
+                    params = [
+                      {
+                        name = "search_query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+              };
             };
           };
 
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            bitwarden
-            clearurls
-            copy-selected-links
-            copy-selection-as-markdown
-            #decentraleyes
-            enhanced-github
-            facebook-container
-            floccus
-            hover-zoom-plus
-            multi-account-containers
-            image-search-options
-            #localcdn
-            reddit-enhancement-suite
-            sidebery
             ublock-origin
             undoclosetabbutton
-            user-agent-string-switcher
-
-            ### Missing:
-            ## Canadian English Dictionary dictionary 3.1.3 true en-CA@dictionaries.addons.mozilla.org
-            ## Download Manager (S3) extension 5.12 true s3download@statusbar
-            ## F.B Purity - Cleans up Facebook extension 36.8.0.0 true fbpElectroWebExt@fbpurity.com
-            ## Hard Refresh Button extension 1.0.0 true {b6da57d3-9727-4bc0-b974-d13e7c004af0}
-            ## Open With extension 7.2.6 true openggwith@darktrojan.net
-            ## PasswordMaker X extension 0.2.2 true passwordmaker@emersion.fr
-            ## Rakuten Canada Button extension 7.8.1 true ebatesca@ebates.com
-            ## StockTrack.ca plugin extension 0.2.4 true {50b98f8c-707d-4dd8-86e4-7c0e15745027}
-            ## The Camelizer extension 3.0.15 true izer@camelcamelcamel.com
-            ## Language: English (CA) locale 114.0.20230608.214645 false langpack-en-CA@firefox.mozilla.org
-
-            # firefox-addons.json | mozilla-addons-to-nix firefox-addons.json output.json
-            #[
-            #  { "slug": "en-CA@dictionaries.addons.mozilla.org" },
-            #  { "slug": "{b6da57d3-9727-4bc0-b974-d13e7c004af0}",
-            #    "pname": "Hard Refresh Button"
-            #  },
-            #  { "slug": "openwith@darktrojan.net" },
-            #  { "slug": "passwordmaker@emersion.fr" },
-            #  { "slug": "ebatesca@ebates.com" },
-            #  { "slug": "{50b98f8c-707d-4dd8-86e4-7c0e15745027}",
-            #    "pname": "StockTrack.ca"
-            #  },
-            #  { "slug": "izer@camelcamelcamel.com" },
-            #  { "slug": "langpack-en-CA@firefox.mozilla.org" },
-            #  { "slug": "s3download@statusbar" }
-            #]
           ];
 
           settings = {
@@ -132,6 +132,37 @@ in with lib; {
 
           userContent = "\n";
         };
+      };
+    };
+
+    systemd.user.services.hyperlandHelper_floorp_bitwarden = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      Unit = {
+        Description = "Help float Floorp Extension Windows in Hyprland";
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        #Type = "exec";
+        ExecStart = "${floorpHelper_bitwarden}/bin/floorpHelper_bitwarden";
+        #ExecReload = "kill -SIGUSR2 $MAINPID";
+        #Restart = "always";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      settings = {
+        windowrule = [
+           ### Make Floorp PiP window floating and sticky
+           "float, title:^(Picture-in-Picture)$"
+           "pin, title:^(Picture-in-Picture)$"
+           ### Throw sharing indicators away
+           "workspace special silent, title:^(Floorp — Sharing Indicator)$"
+           "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
+         ];
       };
     };
 

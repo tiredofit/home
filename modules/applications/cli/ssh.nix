@@ -47,6 +47,7 @@ in
             };
           };
         };
+        serverAliveInterval = mkDefault 60;
       };
     };
   };

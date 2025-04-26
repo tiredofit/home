@@ -52,8 +52,6 @@ in
   config = mkIf cfg.enable {
     programs.vscode =  {
       enable = true;
-  #programs.vscode.profiles.default.extensions = with marketplace; [ms-vscode-remote.remote-containers];
-
       extensions = (with pkgs.vscode-extensions; [
           # From NixPkgs
           # Older Stable versions
@@ -322,10 +320,13 @@ in
           "evgeniypeshkov.syntax-highlighter"
           "fabiospampinato.vscode-diff"
           "foxundermoon.shell-format"
+          "github.copilot"
+          "github.copilot-chat"
           "github.vscode-github-actions"
           "hilleer.yaml-plus-json"
           "jinhyuk.replace-curly-quotes"
           "ms-azuretools.vscode-docker"
+          "ms-vscode.copilot-mermaid-diagram"
           "nickdemayo.vscode-json-editor"
           "pinage404.bash-extension-pack"
           "redhat.vscode-yaml"
@@ -339,9 +340,6 @@ in
           "uyiosa-enabulele.reopenclosedtab"
           "yzhang.markdown-all-in-one"
           "ziyasal.vscode-open-in-github"
-          "github.copilot"
-          "github.copilot-chat"
-          "ms-vscode.copilot-mermaid-diagram"
         ];
 
         ## Telemetry
@@ -356,8 +354,11 @@ in
         mutableExtensionsDir = false;
       };
     };
-    xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
-      lib.genAttrs cfg.defaultApplication.mimeTypes (_: "code.desktop")
-    );
+
+    xdg = {
+      mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
+        lib.genAttrs cfg.defaultApplication.mimeTypes (_: "code.desktop")
+      );
+    };
   };
 }

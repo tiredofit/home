@@ -2,6 +2,7 @@
 with lib;
 {
   imports = [
-    ./settings
+    ./firefox.nix
+    ./git.nix
   ];
 }

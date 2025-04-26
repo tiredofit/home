@@ -183,15 +183,15 @@ with lib;
       configFile."uwsm/env".text = mkIf config.host.home.feature.uwsm.enable
         ''
           export CLUTTER_BACKEND="wayland"
-          export ELECTRON_OZONE_PLATFORM_HINT="auto"
           export GDK_BACKEND="wayland,x11,*"
           export MOZ_ENABLE_WAYLAND=1
-          export NIXOS_OZONE_WL=1
           export QT_AUTO_SCREEN_SCALE_FACTOR=1
           export QT_QPA_PLATFORM="wayland;xcb"
           export QT_QPA_PLATFORMTHEME=qt6ct
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
           export SDL_VIDEODRIVER="wayland"
+          export NIXOS_OZONE_WL=1
+          export ELECTRON_OZONE_PLATFORM_HINT="auto"
         '';
       portal = {
         enable = true;

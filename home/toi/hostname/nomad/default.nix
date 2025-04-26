@@ -16,25 +16,23 @@ let
 in
 with lib;
 {
+
   host = {
     home = {
       applications = {
         act.enable = true;
         avidemux.enable = true;
         calibre.enable = true;
-        chatbox-ai.enable = true;
         chromium.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
         devenv.enable = true;
         direnv.enable = true;
         file-roller.enable = true;
-        flameshot.enable = true;
         floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
-        hugo.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
         mp3gain.enable = true;
@@ -70,7 +68,6 @@ with lib;
         };
         yq.enable = true;
         yt-dlp.enable = true;
-        zeditor.enable = true;
         zoom.enable = true;
         zenbrowser.enable = true;
       };
