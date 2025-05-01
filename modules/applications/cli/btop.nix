@@ -26,7 +26,7 @@ in
       };
 
       bash.shellAliases = {
-        top = "btop" ; # Process viewer
+        top = "btop" ;
       };
     };
   };

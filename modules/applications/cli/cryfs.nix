@@ -17,10 +17,10 @@ in
 
   config = mkIf cfg.enable {
     home = {
-        packages = with pkgs;
-          [
-            cryfs
-          ];
+      packages = with pkgs;
+        [
+          cryfs
+        ];
     };
   };
 }

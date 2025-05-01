@@ -25,7 +25,7 @@ in
     programs = {
       bash = {
         shellAliases = {
-          du = "dust" ;    # disk usage alternative
+          du = "dust" ;
         };
       };
     };

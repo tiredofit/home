@@ -15,7 +15,7 @@ with lib;
           enable = mkDefault true;
           systemtray.enable = mkDefault false;
         };
-        shikane.enable = true;
+        shikane.enable = mkDefault true;
       };
       feature = {
       };

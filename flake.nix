@@ -51,6 +51,7 @@
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
+      displayName = "Dave Conroy";
       gn = "dave";
       gnsn = "daveconroy";
       handle = "tiredofit";

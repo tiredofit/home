@@ -19,7 +19,7 @@ in
     programs = {
       fzf = {
         enable = true;
-        enableBashIntegration = true;
+        enableBashIntegration = mkDefault true;
         colors = {
           "bg+" = "#${config.colorScheme.palette.base01}";
           "fg+" = "#${config.colorScheme.palette.base06}";

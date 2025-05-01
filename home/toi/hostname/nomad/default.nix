@@ -14,7 +14,7 @@ let
   laptop_display_mode="1920x1200@60.00";
   laptop_external="HDMI-A-1";
 in
-with lib;
+  with lib;
 {
 
   host = {

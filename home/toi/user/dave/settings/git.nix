@@ -1,6 +1,6 @@
 { config, lib, pkgs, specialArgs, ...}:
 let
-  inherit (specialArgs) username;
+  inherit (specialArgs) displayName username ;
 
   _a = "do";
   _p = "re";
@@ -25,6 +25,7 @@ in
 
   programs = {
     git = {
+      userName = displayName;
       userEmail = email;
     };
   };

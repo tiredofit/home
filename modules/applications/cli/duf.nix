@@ -25,7 +25,7 @@ in
     programs = {
       bash = {
         shellAliases = {
-          df = "duf" ;    # disk free alternative
+          df = "duf" ;
         };
       };
     };

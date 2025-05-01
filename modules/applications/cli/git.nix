@@ -19,7 +19,6 @@ in
     programs = {
       git = {
         enable = true;
-        userName = "Dave Conroy";
         ignores = [ "*~" ".direnv" ".env" ".rgignore" ];
         extraConfig = {
           init = { defaultBranch = "main"; };

@@ -5,7 +5,9 @@ let
 in
   with lib;
 {
-  imports = [ inputs.nix-index-database.hmModules.nix-index ];
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index
+  ];
 
   options = {
     host.home.applications.comma = {
@@ -19,10 +21,10 @@ in
 
   config = mkIf cfg.enable {
     home = {
-        packages = with pkgs;
-          [
-            comma
-          ];
+      packages = with pkgs;
+      [
+        comma
+      ];
     };
   };
 }
