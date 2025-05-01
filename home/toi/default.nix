@@ -15,10 +15,12 @@ in
     ./hostname/${hostname}
     ./hostname/${hostname}/${username}.nix
     ./hostname/${hostname}.nix
+    ./hostname/${hostname}/settings
     ./role/${role}
     ./role/${role}.nix
     ./user/${username}
     ./user/${username}.nix
+    ./user/${username}/settings
   ];
 
   home = {

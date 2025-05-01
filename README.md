@@ -23,7 +23,7 @@ If you would like to base your own configuration from this repository, you will 
 - `home`: Home Manager Configurations, accessible via `home-manager switch --flake `.
   - Split in between 'orgs' and common configuration this creates isolation. Based on 'roles' defaults are loaded
     and then each subfolder creates a different level of configuration specific to that host or role.
-    - `common`: Shared configurations consumed by all users.
+    - `shared`: Shared configurations consumed by all users.
       - `role`: Files related to what "role" is being selected as a template
       - `secrets`: Secrets that are available to all users
     - `generic`: The 'generic' org to allow for isolation of configurations, secrets and config from various clients

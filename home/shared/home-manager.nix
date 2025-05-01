@@ -31,9 +31,9 @@ with lib;
     bash = {
       initExtra = ''
         if [ -d "/home/$USER/src/home" ] ; then
-               alias hm="cd ~/src/home"
-              alias hmupdate="nix flake update --flake $HOME/src/home"
-              alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER $@"
+          alias hm="cd ~/src/home"
+          alias hmupdate="nix flake update --flake $HOME/src/home"
+          alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER $@"
         fi
       '';
     };

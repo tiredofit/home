@@ -6,7 +6,7 @@ let
 in
 {
   imports = [
-    ./common
+    ./shared
   ] ++ existing-imports [
     ./${org}
   ];

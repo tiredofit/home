@@ -64,7 +64,7 @@ in with lib; {
       };
       defaultSettings = {
         enable = mkOption {
-          description = "Apply default 'common' settings for downstream profiles";
+          description = "Apply default 'shared' settings for downstream profiles";
           type = with types; bool;
           default = false;
         };

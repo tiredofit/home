@@ -1,7 +1,1 @@
-{lib, ...}:
-with lib;
-{
-  imports = [
-    ./settings
-  ];
-}
+{}

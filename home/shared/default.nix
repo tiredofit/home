@@ -48,12 +48,9 @@ with lib;
           wget.enable = mkDefault true;
           zoxide.enable = mkDefault true;
         };
-
         feature = {
-
         };
         service = {
-
         };
       };
     };
