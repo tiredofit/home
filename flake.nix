@@ -50,11 +50,16 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
     let
+      capitalizeFirstLetter = str:
+        if str == "" then ""
+        else builtins.toUpper (builtins.substring 0 1 str) + builtins.substring 1 (builtins.stringLength str) str;
+
       inherit (self) outputs;
       displayName = "Dave Conroy";
       gn = "dave";
       gnsn = "daveconroy";
       handle = "tiredofit";
+      sn = "conroy";
 
       pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
         overlays = [
@@ -96,6 +101,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
+              displayName = "${capitalizeFirstLetter gn} ${capitalizeFirstLetter sn}";
               hostname = "beef";
               username = gn;
               networkInterface = "wlp10s0";
@@ -107,6 +113,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              displayName = displayName;
               hostname = "butcher";
               username = gn;
               networkInterface = "enp6s18";
@@ -118,6 +125,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              displayName = displayName;
               hostname = "cog" ;
               username = gn;
               networkInterface = "br0";
@@ -130,6 +138,7 @@
               extraSpecialArgs = {
                 org = "toi";
                 role = "workstation";
+                displayName = displayName;
                 hostname = "nakulaptop";
                 username = gn;
                 displays = 2;
@@ -143,6 +152,7 @@
               extraSpecialArgs = {
                 org = "toi";
                 role = "workstation";
+                displayName = displayName;
                 hostname = "nakulaptop";
                 username = "ireen";
                 displays = 1;
@@ -158,6 +168,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
+              displayName = displayName;
               hostname = "nomad";
               username = gn;
               networkInterface = "wlp2s0";
@@ -170,6 +181,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              displayName = displayName;
               hostname = "seed" ;
               username = gn;
               networkInterface = "enp1s0f0";
@@ -182,6 +194,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              displayName = displayName;
               hostname = "tentacle" ;
               username = gn;
               networkInterface = "enp6s18";
@@ -193,6 +206,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "server";
+              displayName = displayName;
               hostname = "expedition" ;
               username = gn;
               networkInterface = "br0";
@@ -205,6 +219,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "bell";
               username = gnsn;
               inherit inputs outputs;
@@ -215,6 +230,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "edge";
               username = gnsn;
               inherit inputs outputs;
@@ -226,6 +242,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "einstein";
               username = gnsn;
               inherit inputs outputs;
@@ -236,6 +253,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "sd20";
               username = gnsn;
               inherit inputs outputs;
@@ -246,6 +264,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "sd91";
               username = gnsn;
               inherit inputs outputs;
@@ -256,6 +275,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "sd102";
               username = gnsn;
               inherit inputs outputs;
@@ -266,6 +286,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "sd111";
               username = gnsn;
               inherit inputs outputs;
@@ -276,6 +297,7 @@
             extraSpecialArgs = {
               org = "sd";
               role = "server";
+              displayName = displayName;
               hostname = "tesla";
               username = gnsn;
               inherit inputs outputs;
@@ -288,6 +310,7 @@
             extraSpecialArgs = {
               org = "sr";
               role = "server";
+              displayName = displayName;
               hostname = "lamda-quad";
               username = handle;
               inherit inputs outputs;

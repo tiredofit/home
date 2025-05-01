@@ -1,6 +1,5 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p curl jq nix gnused
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/ae815cee91b417be55d43781eb4b73ae1ecc396c.tar.gz
 
 latest_version=$(curl -s https://api.github.com/repos/zen-browser/desktop/releases/latest | jq -r '.tag_name')
 base_url="https://github.com/zen-browser/desktop/releases/download/${latest_version}"

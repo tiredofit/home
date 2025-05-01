@@ -47,12 +47,11 @@ in
           chromium
         ];
     };
-
     xdg  = {
       desktopEntries = {
         chromium-browser = {
           name = "chromium";
-          noDisplay = true;
+          noDisplay = mkDefault true;
         };
       };
     };

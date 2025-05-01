@@ -22,10 +22,5 @@ in
           unstable.obsidian
         ];
     };
-
-    nixpkgs.config.permittedInsecurePackages = [
-        "electron-25.9.0" ## TODO - Added 2023-12-20 due to Electron being marked as Insecure
-    ];
-
   };
 }
