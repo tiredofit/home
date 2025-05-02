@@ -22,8 +22,8 @@ in
           wev.enable = true;
           wl-clipboard.enable = true;
           wl-gammarelay-rs = {
-            enable = true;
-            service.enable = true;
+            enable = false;
+            service.enable = false;
           };
           wlogout.enable = true;
           wlr-randr.enable = true;

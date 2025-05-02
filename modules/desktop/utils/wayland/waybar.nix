@@ -291,7 +291,7 @@ in
               min-width: 100px;
           }
 
-          #custom-wl-gammarelay-temperature {
+          #custom-hyprsunset {
               background: #264653;
               color: #ffffff;
               padding: 0 20px;
@@ -440,19 +440,21 @@ in
                 "return-type": "json",
                 "tooltip": false
               },
-              "custom/wl-gammarelay-temperature": {
-                "exec": "wl-gammarelay-rs watch {t}",
+              "custom/hyprsunset-temperature": {
+                "restart-interval": 3600,
+                "exec": "sleep 0.3; hyprctl hyprsunset temperature",
+                "exec-on-event": true,
                 "format": "{} ",
-                "on-click": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000",
-                "on-click-middle": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 5000",
-                "on-click-right": "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500",
-                "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -500",
-                "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +500"
+                "on-click": "hyprctl hyprsunset temperature 3000",
+                "on-click-middle": "hyprctl hyprsunset temperature 5000",
+                "on-click-right": "hyprctl hyprsunset temperature 6500",
+                "on-scroll-down": "hyprctl hyprsunset temperature -500",
+                "on-scroll-up": "hyprctl hyprsunset temperature +500"
               },
               "custom/weather": {
                 "exec": "${pkgs.wttrbar}/bin/wttrbar",
                 "format": "{} °",
-                "interval": 3600,
+                "restart-interval": 3600,
                 "return-type": "json",
                 "tooltip": true
               }
@@ -676,7 +678,7 @@ in
                 "hyprland/workspaces"
               ],
               "modules-right": [
-                "custom/wl-gammarelay-temperature",
+                "custom/hyprsunset-temperature",
                 "idle_inhibitor",
                 "battery",
                 "keyboard-state",
