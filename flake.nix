@@ -50,16 +50,13 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
     let
-      capitalizeFirstLetter = str:
-        if str == "" then ""
-        else builtins.toUpper (builtins.substring 0 1 str) + builtins.substring 1 (builtins.stringLength str) str;
-
       inherit (self) outputs;
       displayName = "Dave Conroy";
       gn = "dave";
       gnsn = "daveconroy";
       handle = "tiredofit";
       sn = "conroy";
+
 
       pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
         overlays = [
@@ -101,7 +98,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
-              displayName = "${capitalizeFirstLetter gn} ${capitalizeFirstLetter sn}";
+              displayName = displayName;
               hostname = "beef";
               username = gn;
               networkInterface = "wlp10s0";
@@ -168,7 +165,7 @@
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
-              displayName = displayName;
+              displayName =  displayName;
               hostname = "nomad";
               username = gn;
               networkInterface = "wlp2s0";

@@ -16,7 +16,6 @@ let
 in
   with lib;
 {
-
   host = {
     home = {
       applications = {
