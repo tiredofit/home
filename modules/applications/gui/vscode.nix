@@ -55,6 +55,9 @@ in
       extensions = (with pkgs.vscode-extensions; [
           # From NixPkgs
           # Older Stable versions
+          ## AI
+            github.copilot
+            github.copilot-chat
           ## CI
 
           ## Docker
@@ -75,9 +78,7 @@ in
           # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
 
           ## AI
-            github.copilot                          # AI pair programmer
-            github.copilot-chat                     # AI pair programmer chat
-            ms-vscode.copilot-mermaid-diagram
+            ms-vscode.copilot-mermaid-diagram         # Copilot Mermaid Diagram
 
           ## CI
             github.vscode-github-actions              # Github actions helper
