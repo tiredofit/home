@@ -211,6 +211,18 @@
             };
           };
 
+          "entropy.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "expedition" ;
+              username = gn;
+              networkInterface = "br0";
+              inherit inputs outputs;
+            };
+          };
+
       ##
           "bell.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
