@@ -22,6 +22,7 @@ with lib;
     ./gh.nix
     ./git.nix
     ./gnupg.nix
+    ./go.nix
     ./hadolint.nix
     ./hugo.nix
     ./htop.nix
