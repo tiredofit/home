@@ -31,6 +31,7 @@ in
         floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
+        go.enable = true;
         hadolint.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
