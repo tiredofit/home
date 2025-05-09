@@ -223,7 +223,7 @@ in
       ];
 
       profiles.default = {
-        extensions = extensions;
+        extensions.packages = extensions;
         search = {
           engines = searchEngines;
         };
@@ -4317,7 +4317,7 @@ in
     };
 
     programs.floorp.profiles.default = mkIf config.host.home.applications.floorp.enable {
-      extensions = extensions;
+      extensions.packages = extensions;
       search = {
         engines = searchEngines;
       };

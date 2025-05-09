@@ -196,6 +196,7 @@ with lib;
       portal = {
         enable = true;
         xdgOpenUsePortal = true;
+        configPackages = [ pkgs.xdg-desktop-portal-wlr ];
         config.common = {
           "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
           #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];

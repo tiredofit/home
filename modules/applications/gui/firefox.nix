@@ -91,17 +91,17 @@ in with lib; {
 
           search = {
             force = mkDefault true;
-            default = mkDefault "DuckDuckGo";
+            default = mkDefault "ddg";
 
             engines = {
-              "Bing".metaData.hidden = mkDefault true;
-              "Google".metaData.alias = mkDefault "@g";
-              "Wikipedia (en)".metaData.hidden = mkDefault true;
-              "eBay".metaData.hidden = mkDefault true;
+              "bing".metaData.hidden = mkDefault true;
+              "google".metaData.alias = mkDefault "@g";
+              "wikipedia".metaData.hidden = mkDefault true;
+              "ebay".metaData.hidden = mkDefault true;
 
-              "YouTube" = {
+              "youtube" = {
                 definedAliases = ["@youtube" "@yt"];
-                iconUpdateURL = "https://www.youtube.com/s/desktop/8b6c1f4c/img/favicon_144x144.png";
+                icon = "https://www.youtube.com/s/desktop/8b6c1f4c/img/favicon_144x144.png";
                 urls = [
                   {
                     template = "https://www.youtube.com/results";
@@ -117,7 +117,7 @@ in with lib; {
             };
           };
 
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
             undoclosetabbutton
           ];
