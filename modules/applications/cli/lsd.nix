@@ -26,7 +26,7 @@ in
         };
       };
 
-      bash.shellAliases = {
+      bash.shellAliases = mkForce {
         ls = "lsd --hyperlink=auto" ; # directory list alternative
       };
     };

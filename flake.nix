@@ -20,9 +20,13 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     comma.url = "github:nix-community/comma";
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager = {
+    home-manager-stable = {
       url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -48,7 +52,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager-stable, home-manager-unstable, ... }@inputs:
     let
       inherit (self) outputs;
       displayName = "Dave Conroy";
@@ -72,9 +76,10 @@
 
       HomeConfiguration = args:
         let
-          nixpkgs = args.nixpkgs or nixpkgs-stable;
+          nixpkgsInput = args.nixpkgs or nixpkgs-stable;
+          hmInput = if nixpkgsInput == nixpkgs-unstable then home-manager-unstable else home-manager-stable;
         in
-          home-manager.lib.homeManagerConfiguration {
+          hmInput.lib.homeManagerConfiguration {
             modules = [
               (import ./home)
               (import ./modules)
@@ -82,7 +87,7 @@
             extraSpecialArgs = {
               inherit (args) nixpkgs;
             } // args.extraSpecialArgs;
-            pkgs = pkgsForSystem (args.system or "x86_64-linux") nixpkgs;
+            pkgs = pkgsForSystem (args.system or "x86_64-linux") nixpkgsInput;
           };
 
     in flake-utils.lib.eachSystem [
@@ -327,7 +332,7 @@
           };
       };
 
-      inherit home-manager;
-      inherit (home-manager) packages;
+      inherit home-manager-stable home-manager-unstable;
+      inherit (home-manager-stable) packages;
     };
 }
