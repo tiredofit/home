@@ -40,7 +40,6 @@ in
         '';
       };
       packages = with pkgs; [
-        argc
         bashInteractive
       ];
     };
@@ -48,7 +47,7 @@ in
     programs = {
       bash = {
         enable = true;
-        enableCompletion = false; # enable word completion by <tab>
+        enableCompletion = true; # enable word completion by <tab>
         enableVteIntegration = true; # track working directory
         bashrcExtra = ''
           ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
@@ -248,21 +247,6 @@ in
                 ;;
               esac
           }
-
-          _argc_completer() {
-            local words=( ''${COMP_LINE:0:''${COMP_POINT}} )
-            local cur="''${COMP_WORDS[COMP_CWORD]}"
-            if [[ "$cur" == "" ]]; then
-              words+=( "" )
-            fi
-
-            export COMP_WORDBREAKS
-            while IFS=$'\n' read -r line; do
-              COMPREPLY+=( "$line" )
-            done < <(argc --argc-compgen bash "" "''${words[@]}" 2>/dev/null)
-          }
-
-          complete -F _argc_completer -o nospace -o nosort argc
         '';
 
         inherit shellAliases;
