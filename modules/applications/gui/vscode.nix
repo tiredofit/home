@@ -217,7 +217,6 @@ in with lib; {
             ## Default
             "explorer.confirmDelete" = false;
             "files.trimTrailingWhitespace" = true;
-            "files.useExperimentalFileWatcher" = true;
             "window.menuBarVisibility" = "compact";
             "window.titleBarStyle" = "native";
             "window.zoomLevel" = 1;
@@ -254,7 +253,7 @@ in with lib; {
             "workbench.startupEditor" = "none";
 
             ## Copilot
-            "github.copilot.editor.enableCodeActions" = "true";
+            "github.copilot.editor.enableCodeActions" = true;
             "github.copilot.chat.followUps" = "never";
 
             ## Formatting
@@ -313,10 +312,7 @@ in with lib; {
             "security.workspace.trust.untrustedFiles" = "open";
 
             ## SSH
-            "remote.downloadExtensionsLocally" = true;
             "remote.SSH.configFile" = "~/.ssh/vscode_remote_ssh_config";
-            "remote.SSH.enableRemoteCommand" = true;
-            "remote.SSH.allowLocalServerDownload" = "off";
             "remote.SSH.defaultExtensions" =
               [ # # TODO - Merge this, this is mostly duplicates with exception of remote plugins
                 "bbenoist.nix"
@@ -349,6 +345,10 @@ in with lib; {
                 "yzhang.markdown-all-in-one"
                 "ziyasal.vscode-open-in-github"
               ];
+            "remote.SSH.enableRemoteCommand" = true;
+            "remote.SSH.localServerDownload" = "off";
+            "remote.downloadExtensionsLocally" = true;
+
 
             ## Telemetry
             "redhat.telemetry.enabled" = false;
@@ -356,10 +356,18 @@ in with lib; {
             "update.mode" = "none";
 
             ## Terminal
-            "terminal.integrated.enableMultiLinePasteWarning" = false;
+            "terminal.integrated.enableMultiLinePasteWarning" = "never";
             "terminal.integrated.fontFamily" = "Hack Nerd Font";
 
-            mutableExtensionsDir = false;
+            "terminal.integrated.profiles.linux" = {
+               "bash" = {
+                 "path" = "/usr/bin/bash";
+                 "args" = ["--login"];
+                 "icon" = "terminal-bash";
+               };
+            };
+
+            #mutableExtensionsDir = false;
           };
         };
       };
