@@ -189,6 +189,7 @@
               networkInterface = "enp1s0f0";
               inherit inputs outputs;
             };
+            nixpkgs = nixpkgs-unstable;
           };
 
           "tentacle.${gn}" = HomeConfiguration {
@@ -214,6 +215,7 @@
               networkInterface = "br0";
               inherit inputs outputs;
             };
+            nixpkgs = nixpkgs-unstable;
           };
 
       ##
