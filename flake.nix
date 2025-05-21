@@ -123,14 +123,14 @@
             };
           };
 
-          "cog.${gn}" = HomeConfiguration {
+          "entropy.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
               displayName = displayName;
-              hostname = "cog" ;
+              hostname = "entropy" ;
               username = gn;
-              networkInterface = "br0";
+              networkInterface = "enp8s0f0np0";
               inherit inputs outputs;
             };
           };
