@@ -205,18 +205,6 @@
             };
           };
 
-          "entropy.${gn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "server";
-              displayName = displayName;
-              hostname = "expedition" ;
-              username = gn;
-              networkInterface = "br0";
-              inherit inputs outputs;
-            };
-            nixpkgs = nixpkgs-unstable;
-          };
 
       ##
           "bell.${gnsn}" = HomeConfiguration {
@@ -286,17 +274,6 @@
             };
           };
 
-          "sd111.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "sd111";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
           "tesla.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
@@ -308,18 +285,19 @@
             };
           };
 
-          ###
-
-          "lambda-quad.${handle}" = HomeConfiguration {
+          "turing.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
-              org = "sr";
+              org = "sd";
               role = "server";
               displayName = displayName;
-              hostname = "lamda-quad";
-              username = handle;
+              hostname = "turing";
+              username = gnsn;
               inherit inputs outputs;
             };
           };
+
+
+          ###
       };
 
       inherit home-manager-stable home-manager-unstable;
