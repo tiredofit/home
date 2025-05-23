@@ -33,7 +33,12 @@ in
         exec-once = [
           "${config.host.home.feature.uwsm.prefix}nm-applet"
         ];
+        windowrule = [
+          "float, class:^(nm-applet|nm-connection-editor)$"
+        ];
       };
     };
   };
+
+
 }

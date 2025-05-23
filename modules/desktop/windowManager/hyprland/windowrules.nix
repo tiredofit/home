@@ -20,11 +20,40 @@ with lib;
           "float,title:^Open Files$"
           "size 1290 800, title:^Open Files$"
 
-          # ZoomPWA
-          "workspace 3,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "size 1200 1155,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "float,title:^My Meeting$"
-          "float,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          # Generics
+          "float,class:^(xdg-desktop-portal-hyprland)$"
+          "float,class:^()$,title:^(File Operation Progress)$"
+          "suppressevent maximize, class:.*"
+
+          # Position
+          "float,class:^(Viewnior)$"
+          "float,class:^(confirm)$"
+          "float,class:^(confirmreset)$"
+          "float,class:^(dialog)$"
+          "float,class:^(download)$"
+          "float,class:^(error)$"
+          "float,class:^(file_progress)$"
+          "float,class:^(notification)$"
+          "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
+          "float,class:^(pavucontrol)$"
+          "float,title:^(Confirm to replace files)"
+          "float,title:^(DevTools)$"
+          "float,title:^(File Operation Progress)"
+          "float,title:^(Media viewer)$"
+          "float,title:^(Open File)$"
+          "float,title:^(Picture-in-Picture)$"
+          "float,title:^(Volume Control)$"
+          "float,title:^(branchdialog)$"
+
+          # Size
+          "size 800 600,class:^(download)$"
+          "size 800 600,title:^(Open File)$"
+          "size 800 600,title:^(Save File)$"
+          "size 800 600,title:^(Volume Control)$"
+
+          # Test
+          "float, initialTitle:^(Print)$"
+          "size 800 600,initialTitle:^(Print)$"
         ];
       };
     };

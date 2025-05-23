@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          stable.satty
+          unstable.satty
         ];
     };
 

@@ -41,6 +41,7 @@ in
       settings = {
         windowrule = [
           "tile,title:(^WPS Spreadsheets$)"
+          "size 500 500,class:^(et)$,title:^(et)$"
         ];
       };
     };

@@ -22,5 +22,13 @@ in
           blueman
         ];
     };
+
+    wayland.windowManager.hyprland = mkIf ((config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable)) {
+      settings = {
+        windowrule = [
+          "float, class:^(blueman-manager)$"
+        ];
+      };
+    };
   };
 }
