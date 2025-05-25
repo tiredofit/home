@@ -11,6 +11,7 @@ with lib;
     ./chromium.nix
     ./cura.nix
     ./czkawka.nix
+    ./darktable.nix
     ./diffuse.nix
     ./drawio.nix
     ./easyeffects.nix
@@ -32,6 +33,7 @@ with lib;
     ./libreoffice.nix
     ./masterpdfeditor.nix
     ./mate-calc.nix
+    ./meld.nix
     ./mqtt-explorer.nix
     ./nemo.nix
     ./networkmanager.nix
