@@ -12,6 +12,7 @@ with lib;
     ./cura.nix
     ./czkawka.nix
     ./darktable.nix
+    ./digikam.nix
     ./diffuse.nix
     ./drawio.nix
     ./easyeffects.nix
