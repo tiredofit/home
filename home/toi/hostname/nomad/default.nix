@@ -26,15 +26,16 @@ in
         cryfs.enable = true;
         czkawka.enable = true;
         devenv.enable = true;
+        digikam.enable = true;
         direnv.enable = true;
         file-roller.enable = true;
         floorp.enable = true;
         github-client.enable = true;
         gnome-software.enable = true;
-        go.enable = true;
         hadolint.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
+        meld.enable = true;
         mp3gain.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
