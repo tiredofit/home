@@ -7,6 +7,7 @@ with lib;
   host = {
     home = {
       applications = {
+        blanket.enable = mkDefault true;
         cryfs.enable = mkDefault true;
         docker-compose.enable = mkDefault true;
         git.enable = mkDefault true;
