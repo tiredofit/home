@@ -27,7 +27,7 @@ in
       settings = {
         windowrule = [
           "float,title:^(Blanket)$"
-          "size 854 620,title:^(Blanket)$"
+          "size 920 684,title:^(Blanket)$"
         ];
       };
     };
