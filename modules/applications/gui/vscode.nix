@@ -58,6 +58,7 @@ in with lib; {
             ## AI
             github.copilot
             github.copilot-chat
+
             ## CI
 
             ## Docker
@@ -68,7 +69,7 @@ in with lib; {
             ## Prettify / Formatting
 
             ## Remote
-            ms-vscode-remote.remote-ssh # Open any folder on remote system
+            ms-vscode-remote.remote-ssh                 # Open any folder on remote system
             ms-vscode-remote.remote-ssh-edit
 
             ## Syntax Highlighting | File Support | Linting
@@ -77,47 +78,51 @@ in with lib; {
             # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
 
             ## AI
-            ms-vscode.copilot-mermaid-diagram # Copilot Mermaid Diagram
+            ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
 
             ## CI
-            github.vscode-github-actions # Github actions helper
+            github.vscode-github-actions                # Github actions helper
+
+            ## Code
+            golang.go
+            ms-vscode.makefile-tools                    # Makefile Tools
 
             ## Docker
-            ms-azuretools.vscode-docker # Docker containers, images, and volumes
+            ms-azuretools.vscode-docker                 # Docker containers, images, and volumes
 
             ## Editor Helpers
-            tyriar.sort-lines # Sort Lines
-            shd101wyy.markdown-preview-enhanced # Better Markdown Preview
-            fabiospampinato.vscode-diff # Show differences between files
-            hilleer.yaml-plus-json # JSON <> YAML converter
-            jinhyuk.replace-curly-quotes # Replace all ` with '
-            nickdemayo.vscode-json-editor # JSON Editor
-            rpinski.shebang-snippets # Shebang helpers when typing #!
-            tombonnike.vscode-status-bar-format-toggle # Toggle formatting with a single click
-            uyiosa-enabulele.reopenclosedtab # Reopen last tab
-            ziyasal.vscode-open-in-github # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
+            tyriar.sort-lines                           # Sort Lines
+            shd101wyy.markdown-preview-enhanced         # Better Markdown Preview
+            fabiospampinato.vscode-diff                 # Show differences between files
+            hilleer.yaml-plus-json                      # JSON <> YAML converter
+            jinhyuk.replace-curly-quotes                # Replace all ` with '
+            nickdemayo.vscode-json-editor               # JSON Editor
+            rpinski.shebang-snippets                    # Shebang helpers when typing #!
+            tombonnike.vscode-status-bar-format-toggle  # Toggle formatting with a single click
+            uyiosa-enabulele.reopenclosedtab            # Reopen last tab
+            ziyasal.vscode-open-in-github               # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
 
             ## Prettify / Formatting
-            brettm12345.nixfmt-vscode # Nix TODO: Split and force programs to be installed
-            davidanson.vscode-markdownlint # Markdown
-            esbenp.prettier-vscode # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
-            yzhang.markdown-all-in-one # Markown
-            richie5um2.vscode-sort-json # JSON
-            shakram02.bash-beautify # Bash
+            brettm12345.nixfmt-vscode                   # Nix TODO: Split and force programs to be installed
+            davidanson.vscode-markdownlint              # Markdown
+            esbenp.prettier-vscode                      # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
+            yzhang.markdown-all-in-one                  # Markown
+            richie5um2.vscode-sort-json                 # JSON
+            shakram02.bash-beautify                     # Bash
 
             ## Remote
-            #ms-vscode-remote.remote-containers        # Access Docker Contaniers remotely
-            #ms-vscode-remote.remote-ssh-edit          # Edit SSH Configuration Files
+            #ms-vscode-remote.remote-containers          # Access Docker Contaniers remotely
+            #ms-vscode-remote.remote-ssh-edit            # Edit SSH Configuration Files
             ms-vscode.remote-explorer # View remote machines for SSH and Tunnels
 
             ## Syntax Highlighting | File Support | Linting
-            dunstontc.vscode-docker-syntax # DockerFile
-            evgeniypeshkov.syntax-highlighter # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
-            bbenoist.nix # Nix
-            bierner.markdown-mermaid # MermaidJS in MarkDown
-            foxundermoon.shell-format # Bash
-            redhat.vscode-yaml # YAML
-            timonwong.shellcheck # Bash TODO: Split and force shellcheck binary to be installed
+            dunstontc.vscode-docker-syntax              # DockerFile
+            evgeniypeshkov.syntax-highlighter           # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
+            bbenoist.nix                                # Nix
+            bierner.markdown-mermaid                    # MermaidJS in MarkDown
+            foxundermoon.shell-format                   # Bash
+            redhat.vscode-yaml                          # YAML
+            timonwong.shellcheck                        # Bash TODO: Split and force shellcheck binary to be installed
 
             ## Development
             mkhl.direnv
@@ -274,6 +279,7 @@ in with lib; {
             "[yaml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
             "markdown.extension.print.imgToBase64" = true;
             "markdown.extension.toc.levels" = "2..6";
+            "markdown.extension.toc.updateOnSave" = false;
             "shellcheck.enableQuickFix" = true;
             "shellcheck.exclude" = [ "SC1008" ];
             "syntax.highlightLanguages" = [
