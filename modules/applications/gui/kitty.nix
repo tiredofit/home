@@ -43,7 +43,7 @@ in
           ## Scrollback
           scrollback_lines = 10000;
           # Auto Select from Mouse Clipboard;
-          copy_on_select = "yes";
+          copy_on_select = "clipboard";
           strip_trailing_spaces = "smart"; # Strip Trailing spaces from Clipboard
           focus_follows_mouse = "yes";
           ## Bell;
