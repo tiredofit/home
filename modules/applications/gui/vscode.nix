@@ -102,7 +102,18 @@ in with lib; {
             uyiosa-enabulele.reopenclosedtab            # Reopen last tab
             ziyasal.vscode-open-in-github               # Jump to a source code line in Github, Bitbucket, Gitlab, VisualStudio.com
 
-            ## Prettify / Formatting
+            ## Language Support
+            ### PHP
+            laravel.vscode-laravel                      # Official Larvel
+            bmewburn.vscode-intelephense-client         # PHP Intelephense
+            ryannaddy.laravel-artisan                   # Run artisan commands
+            amiralizadeh9480.laravel-extra-intellisense # Extra Intellisense for Laravel
+            shufo.vscode-blade-formatter                # Format Blade Files
+            absszero.vscode-laravel-goto                # Go to Controllers
+            onecentlin.laravel-blade                    # Blade Snippets and Syntax Highlighting
+
+
+
             brettm12345.nixfmt-vscode                   # Nix TODO: Split and force programs to be installed
             davidanson.vscode-markdownlint              # Markdown
             esbenp.prettier-vscode                      # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
