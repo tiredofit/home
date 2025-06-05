@@ -384,6 +384,40 @@ in with lib; {
                };
             };
 
+            ## Disable File Operations
+            "files" = {
+              "exclude" = {
+                "**/.git" = true;
+                "**/.DS_Store" = true;
+                "**/.vscode" = true;
+                "**/__pycache__" = true;
+                "**/.pytest_cache" = true;
+                "**/node_modules" = true;
+                "node_modules" = true;
+                "venv" = true;
+                "*.sublime-*" = true;
+                "env*" = true;
+              };
+              "watcherExclude" = {
+                "**/.git/objects/**" = true;
+                "**/node_modules/**" = true;
+                "**/vendor/**" = true;
+                "**/build/**" = true;
+                "**/dist/**" = true;
+                "**/.output/**" = true;
+                "**/.nuxt/**" = true;
+                "**/.vscode/**" = true;
+                "**/.zip/**" =  true;
+              };
+            };
+
+            "search.exclude" = {
+              "**/node_modules" = true;
+              "**/bower_components" = true;
+              "**/env" = true;
+              "**/venv" = true;
+            };
+
             #mutableExtensionsDir = false;
           };
         };
