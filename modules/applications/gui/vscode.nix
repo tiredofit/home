@@ -111,7 +111,7 @@ in with lib; {
             shufo.vscode-blade-formatter                # Format Blade Files
             absszero.vscode-laravel-goto                # Go to Controllers
             onecentlin.laravel-blade                    # Blade Snippets and Syntax Highlighting
-
+            devsense.composer-php-vscode                # Composer Support
 
 
             brettm12345.nixfmt-vscode                   # Nix TODO: Split and force programs to be installed
