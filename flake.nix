@@ -259,6 +259,7 @@
               displayName = displayName;
               hostname = "pasteur";
               username = gnsn;
+              networkInterface = "enp1s0f0";
               inherit inputs outputs;
             };
           };
