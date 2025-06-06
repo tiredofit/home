@@ -218,17 +218,6 @@
             };
           };
 
-          "edge.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "edge";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
           "einstein.${gnsn}" = HomeConfiguration {
             system = "aarch64-linux";
             extraSpecialArgs = {
@@ -263,12 +252,12 @@
             };
           };
 
-          "sd102.${gnsn}" = HomeConfiguration {
+          "pasteur.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
               displayName = displayName;
-              hostname = "sd102";
+              hostname = "pasteur";
               username = gnsn;
               inherit inputs outputs;
             };
@@ -295,7 +284,6 @@
               inherit inputs outputs;
             };
           };
-
 
           ###
       };
