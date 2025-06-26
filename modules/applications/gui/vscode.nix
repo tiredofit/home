@@ -56,8 +56,8 @@ in with lib; {
             # From NixPkgs
             # Older Stable versions
             ## AI
-            github.copilot
-            github.copilot-chat
+            #github.copilot
+            #github.copilot-chat
 
             ## CI
 
@@ -79,6 +79,10 @@ in with lib; {
 
             ## AI
             ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
+            github.copilot
+            github.copilot-chat
+
+            google.geminicodeassist                     # Google Gemini Code Assistant
 
             ## CI
             github.vscode-github-actions                # Github actions helper
@@ -246,6 +250,7 @@ in with lib; {
             "docker.volumes.label" = "VolumeName";
 
             ## Editor
+            "editor.accessibilitySupport" = false;
             "editor.bracketPairColorization.enabled" = true;
             "editor.copyWithSyntaxHighlighting" = false;
             "editor.detectIndentation" = false;
@@ -344,6 +349,7 @@ in with lib; {
                 "github.copilot"
                 "github.copilot-chat"
                 "github.vscode-github-actions"
+                "google.geminicodeassist"
                 "hilleer.yaml-plus-json"
                 "jinhyuk.replace-curly-quotes"
                 "ms-azuretools.vscode-docker"
