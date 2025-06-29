@@ -250,7 +250,7 @@ in with lib; {
             "docker.volumes.label" = "VolumeName";
 
             ## Editor
-            "editor.accessibilitySupport" = false;
+            "editor.accessibilitySupport" = "off";
             "editor.bracketPairColorization.enabled" = true;
             "editor.copyWithSyntaxHighlighting" = false;
             "editor.detectIndentation" = false;
