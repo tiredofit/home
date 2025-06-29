@@ -248,6 +248,7 @@ in with lib; {
             "docker.containers.label" = "ContainerName";
             "docker.containers.sortBy" = "Label";
             "docker.volumes.label" = "VolumeName";
+            "docker.extension.enableComposeLanguageServer" = false;
 
             ## Editor
             "editor.accessibilitySupport" = "off";
@@ -384,7 +385,7 @@ in with lib; {
 
             "terminal.integrated.profiles.linux" = {
                "bash" = {
-                 "path" = "/usr/bin/bash";
+                 "path" = "/usr/bin/env bash";
                  "args" = ["--login"];
                  "icon" = "terminal-bash";
                };
