@@ -395,14 +395,15 @@ in
           }
 
           /* CUSTOM: Colours */
-          /* Colors inside  / *  ...   * /  are from the old  'custom_colors_for_squared_tabs.css' file.
-                          Example: replace 'linear-gradient(#f9f9fa,#f9f9fa)' with 'linear-gradient(to bottom,#FFCC99,#FFCC99)'
-
-                          Tab colors have to be set as gradients.
-                          Example: If the active tab has to be blue, the variable has to look like
-                          '--classic_squared_tabs_active_tab: linear-gradient(blue,blue) !important;'
-                          and not (!) just '--classic_squared_tabs_active_tab: blue !important;'
-                          */
+          /* Colors inside
+          /*  ...
+          /*  are from the old  'custom_colors_for_squared_tabs.css' file.
+              Example: replace 'linear-gradient(#f9f9fa,#f9f9fa)' with 'linear-gradient(to bottom,#FFCC99,#FFCC99)'
+              Tab colors have to be set as gradients.
+              Example: If the active tab has to be blue, the variable has to look like
+              '--classic_squared_tabs_active_tab: linear-gradient(blue,blue) !important;'
+              and not (!) just '--classic_squared_tabs_active_tab: blue !important;'
+        */
 
           /* default colors */
           :root {
