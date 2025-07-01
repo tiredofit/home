@@ -8,6 +8,7 @@ with lib;
     ./bat.nix
     ./bash.nix
     ./btop.nix
+    ./claude-code.nix
     ./comma.nix
     ./cryfs.nix
     ./devenv.nix
