@@ -23,9 +23,10 @@ in
         avidemux.enable = true;
         calibre.enable = true;
         chromium.enable = true;
+        claude-code.enable = true;
         cryfs.enable = true;
         czkawka.enable = true;
-        devenv.enable = true;
+        devenv.enable = false;
         digikam.enable = true;
         direnv.enable = true;
         file-roller.enable = true;
@@ -44,6 +45,7 @@ in
         };
         nmap.enable = true;
         obsidian.enable = true;
+        opensnitch-ui.enable = true;
         peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
@@ -91,7 +93,6 @@ in
             };
             ssh = {
               sd.enable = true;
-              sr.enable = true;
               toi.enable = true;
             };
           };

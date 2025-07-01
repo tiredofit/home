@@ -175,6 +175,7 @@ with lib;
           "NIXOS_OZONE_WL,1"
         ];
       };
+      #portalPackage = mkForce pkgs.xdg-desktop-portal-wlr;
       systemd.enable = mkDefault false;
       xwayland.enable = mkDefault true;
     };
@@ -200,9 +201,10 @@ with lib;
         config.common = {
           "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
           #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];
+          "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
         };
         extraPortals = [
-          #pkgs.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk
           pkgs.xdg-desktop-portal-wlr
         ];
