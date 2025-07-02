@@ -39,6 +39,7 @@ in
           "float,class:^(thunderbird)$,title:^About(.*)$"
           "size 525 335,class:^(thunderbird)$,title:^(Check Spelling)$"
           "workspace 1,class:(thunderbird)$"
+          "size 570 370,initialClass:(^thunderbird$),initialTitle:(^Check Spelling$)"
         ];
       };
     };
