@@ -205,77 +205,9 @@
             };
           };
 
-
       ##
-          "bell.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "bell";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
 
-          "einstein.${gnsn}" = HomeConfiguration {
-            system = "aarch64-linux";
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "einstein";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
-          "sd20.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "sd20";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
-          "sd91.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "sd91";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
-          "pasteur.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "pasteur";
-              username = gnsn;
-              networkInterface = "enp1s0f0";
-              inherit inputs outputs;
-            };
-          };
-
-          "tesla.${gnsn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "tesla";
-              username = gnsn;
-              inherit inputs outputs;
-            };
-          };
-
-          "turing.${gnsn}" = HomeConfiguration {
+          "sd.${gnsn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
