@@ -30,7 +30,7 @@ in
         digikam.enable = true;
         direnv.enable = true;
         file-roller.enable = true;
-        floorp.enable = true;
+        floorp.enable = false;
         github-client.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
@@ -72,7 +72,7 @@ in
         yq.enable = true;
         yt-dlp.enable = true;
         zoom.enable = true;
-        zenbrowser.enable = true;
+        zenbrowser.enable = false;
       };
       feature = {
         gui = {
