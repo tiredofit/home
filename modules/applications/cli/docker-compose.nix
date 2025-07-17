@@ -31,7 +31,7 @@ with lib;
             export DOCKER_CONFIG="$HOME/.config/docker"
           fi
 
-          export docker_bin_location="$(which docker)"
+          docker_bin_location="$(which docker)"
           export DOCKER_TIMEOUT=''${DOCKER_TIMEOUT:-"120"}
 
           # Figure out if we need to use sudo for docker commands
@@ -46,9 +46,9 @@ with lib;
           alias dki="$dsudo $docker_bin_location run -it -P"                                                         # Run interactive container, e.g., $dki base /bin/bash
           alias dpsa="$dsudo docker_ps -a"                                                                           # Get process included stop container
           db() { $dsudo $docker_bin_location build -t="$1" .; }                                                      # Build Docker Image from Current Directory
-          dri() { $dsudo $docker_bin_location rmi -f $($dsudo $docker_bin_location images -q); }                     # Forcefully Remove all images
-          drm() { $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q); }                          # Remove all containers
-          drmf() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -timeout $DOCKER_TIMEOUT && $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q) ; } # Stop and remove all containers
+          #dri() { $dsudo $docker_bin_location rmi -f $($dsudo $docker_bin_location images -q); }                     # Forcefully Remove all images
+          #drm() { $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q); }                          # Remove all containers
+          #drmf() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -timeout $DOCKER_TIMEOUT && $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q) ; } # Stop and remove all containers
           dstop() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -t $DOCKER_TIMEOUT; }   # Stop all containers
 
           # Get RAM Usage of a Container
