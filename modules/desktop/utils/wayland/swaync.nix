@@ -2,18 +2,7 @@
 
 let
   cfg = config.host.home.applications.sway-notification-center;
-  sway-notification-center-custom = pkgs.swaynotificationcenter.overrideAttrs (oldAttrs: {
-    version = "main-20240111";
-    src = pkgs.fetchFromGitHub {
-      owner = "ErikReider";
-      repo = "SwayNotificationCenter";
-      rev = "01eb2221a0c0c8d814604074c0181a0c8844f548";
-      sha256 = "0c8989zx9pgmjqysg6nphzi013x1ai118j871w8xnc41n7r6kf2g";
-    };
-    buildInputs = oldAttrs.buildInputs ++ [
-      pkgs.wayland-scanner
-    ];
-  });
+
 in
   with lib;
 {
@@ -36,7 +25,7 @@ in
     home = {
       packages = with pkgs;
         [
-          sway-notification-center-custom
+          swaynotificationcenter
         ];
     };
 
@@ -52,8 +41,8 @@ in
       Service = mkForce {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
-        ExecStart = "${sway-notification-center-custom}/bin/swaync";
-        ExecReload = "${sway-notification-center-custom}/bin/swaync-client --reload-config ; ${sway-notification-center-custom}/bin/swaync-client --reload-css";
+        ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
+        ExecReload = "${pkgs.swaynotificationcenter}/bin/swaync-client --reload-config ; ${pkgs.swaynotificationcenter}/bin/swaync-client --reload-css";
         Restart = "on-failure";
       };
 
