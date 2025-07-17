@@ -48,7 +48,7 @@ with lib;
           db() { $dsudo $docker_bin_location build -t="$1" .; }                                                      # Build Docker Image from Current Directory
           dri() { $dsudo $docker_bin_location rmi -f $($dsudo $docker_bin_location images -q); }                     # Forcefully Remove all images
           drm() { $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q); }                          # Remove all containers
-          drmf() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -timeout $DOCKER_COMPOSE_TIMEOUT && $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q) ; } # Stop and remove all containers
+          drmf() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -timeout $DOCKER_TIMEOUT && $dsudo $docker_bin_location rm $($dsudo $docker_bin_location ps -a -q) ; } # Stop and remove all containers
           dstop() { $dsudo $docker_bin_location stop $($dsudo $docker_bin_location ps -a -q) -t $DOCKER_TIMEOUT; }   # Stop all containers
 
           # Get RAM Usage of a Container
