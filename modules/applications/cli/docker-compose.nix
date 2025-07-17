@@ -1,4 +1,4 @@
-g{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let cfg = config.host.home.applications.docker-compose;
 in
