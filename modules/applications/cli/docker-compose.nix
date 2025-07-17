@@ -32,7 +32,7 @@ with lib;
           fi
 
           export docker_bin_location="$(which docker)"
-          export DOCKER_TIMEOUT=${toString cfg.daemon.shutdownTimeout}
+          export DOCKER_TIMEOUT=''${DOCKER_TIMEOUT:-"120"}
 
           # Figure out if we need to use sudo for docker commands
           if id -nG "$USER" | grep -qw "docker" || [ $(id -u) = "0" ]; then
