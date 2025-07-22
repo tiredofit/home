@@ -56,7 +56,7 @@ let
       updateInterval = 24 * 60 * 60 * 1000;
       urls = [
         {
-          template = "https://t.17track.net/en#nums={searchTerms}search";
+          template = "https://t.17track.net/en#nums={searchTerms}";
         }
       ];
     };
