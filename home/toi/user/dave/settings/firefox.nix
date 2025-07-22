@@ -6,10 +6,10 @@ let
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
     bitwarden
     clearurls
+    containerise
     copy-selected-links
     copy-selection-as-markdown
     decentraleyes
-    enhanced-github
     export-cookies-txt
     facebook-container
     floccus
@@ -17,8 +17,9 @@ let
     multi-account-containers
     image-search-options
     localcdn
-    pwas-for-firefox
+    #pwas-for-firefox
     reddit-enhancement-suite
+    refined-github
     sidebery
     ublock-origin
     user-agent-string-switcher
@@ -37,21 +38,28 @@ let
     # firefox-addons.json | mozilla-addons-to-nix firefox-addons.json output.json
     #[
     #  { "slug": "en-CA@dictionaries.addons.mozilla.org" },
-    #  { "slug": "{b6da57d3-9727-4bc0-b974-d13e7c004af0}",
-    #    "pname": "Hard Refresh Button"
-    #  },
+    #  { "slug": "{b6da57d3-9727-4bc0-b974-d13e7c004af0}", "pname": "Hard Refresh Button" }
     #  { "slug": "openwith@darktrojan.net" },
     #  { "slug": "passwordmaker@emersion.fr" },
     #  { "slug": "ebatesca@ebates.com" },
-    #  { "slug": "{50b98f8c-707d-4dd8-86e4-7c0e15745027}",
-    #    "pname": "StockTrack.ca"
-    #  },
+    #  { "slug": "{50b98f8c-707d-4dd8-86e4-7c0e15745027}", "pname": "StockTrack.ca" },
     #  { "slug": "izer@camelcamelcamel.com" },
     #  { "slug": "langpack-en-CA@firefox.mozilla.org" },
     #  { "slug": "s3download@statusbar" }
     #]
   ];
   searchEngines = {
+    "17Track" = {
+      definedAliases = [ "@17" ];
+      icon = "https://www.17track.net/favicon.ico";
+      name = "17track";
+      updateInterval = 24 * 60 * 60 * 1000;
+      urls = [
+        {
+          template = "https://t.17track.net/en#nums={searchTerms}search";
+        }
+      ];
+    };
     "Docker Hub" = {
       definedAliases = [ "@dh" ];
       icon = "https://hub.docker.com/favicon.ico";
@@ -218,9 +226,9 @@ in
     host.home.applications.floorp.defaultSettings.enable = mkDefault true;
 
     programs.firefox = mkIf config.host.home.applications.firefox.enable {
-      nativeMessagingHosts = with pkgs; [
-        pkgs.unstable.firefoxpwa
-      ];
+      #nativeMessagingHosts = with pkgs; [
+      #  pkgs.unstable.firefoxpwa
+      #];
 
       profiles.default = {
         extensions.packages = extensions;
