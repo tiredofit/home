@@ -247,6 +247,58 @@ in
                 ;;
               esac
           }
+
+          resetcow() {
+            process_path() {
+              local path="$1"
+              if [ -f "$path" ]; then
+                local perms owner group
+                perms=$(stat -c %a "$path")
+                owner=$(stat -c %u "$path")
+                group=$(stat -c %g "$path")
+                touch "$path.nocow"
+                chattr +c "$path.nocow"
+                dd if="$path" of="$path.nocow" bs=1M 2&>/dev/null
+                rm "$path"
+                mv "$path.nocow" "$path"
+                chmod "$perms" "$path"
+                chown "$owner:$group" "$path"
+                echo "Removed Copy on Write for file '$path'"
+              elif [ -d "$path" ]; then
+                local perms owner group
+                perms=$(stat -c %a "$path")
+                owner=$(stat -c %u "$path")
+                group=$(stat -c %g "$path")
+                mv "$path" "$path.nocowdir"
+                mkdir -p "$path"
+                chattr +C "$path"
+                cp -aR "$path.nocowdir/"* "$path"
+                cp -aR "$path.nocowdir/."* "$path" 2>/dev/null
+                rm -rf "$path.nocowdir"
+                chmod "$perms" "$path"
+                chown "$owner:$group" "$path"
+                echo "Removed Copy on Write for directory '$path'"
+              else
+                echo "Can't detect if '$path' is file or directory, skipping"
+              fi
+            }
+
+            local target_name="$1"
+            local search_dir="$2"
+
+            if [ -z "$target_name" ]; then
+              echo "Usage: resetcow <file_or_dir_name> [search_directory]"
+              return 1
+            fi
+
+            if [ -z "$search_dir" ]; then
+              process_path "$target_name"
+            else
+              find "$search_dir" -name "$target_name" | while read -r path; do
+                process_path "$path"
+              done
+            fi
+          }
         '';
 
         inherit shellAliases;
