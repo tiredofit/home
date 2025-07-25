@@ -123,6 +123,18 @@
             };
           };
 
+          "enigma.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "enigma";
+              username = gn;
+              networkInterface = "enp6s18";
+              inherit inputs outputs;
+            };
+          };
+
           "entropy.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
