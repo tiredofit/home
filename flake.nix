@@ -99,6 +99,19 @@
     }) // {
         overlays = import ./overlays {inherit inputs;};
         homeConfigurations = {
+          "atlas.${gn}" = HomeConfiguration {
+            system = "aarch64-linux";
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "atlas" ;
+              username = gn;
+              networkInterface = "enp6s18";
+              inherit inputs outputs;
+            };
+          };
+
           "beef.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
@@ -107,18 +120,6 @@
               hostname = "beef";
               username = gn;
               networkInterface = "wlp10s0";
-              inherit inputs outputs;
-            };
-          };
-
-          "butcher.${gn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "server";
-              displayName = displayName;
-              hostname = "butcher";
-              username = gn;
-              networkInterface = "enp6s18";
               inherit inputs outputs;
             };
           };
@@ -203,20 +204,6 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
-
-          "tentacle.${gn}" = HomeConfiguration {
-            system = "aarch64-linux";
-            extraSpecialArgs = {
-              org = "toi";
-              role = "server";
-              displayName = displayName;
-              hostname = "tentacle" ;
-              username = gn;
-              networkInterface = "enp6s18";
-              inherit inputs outputs;
-            };
-          };
-
       ##
 
           "sd.${gnsn}" = HomeConfiguration {
