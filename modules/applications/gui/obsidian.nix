@@ -17,6 +17,7 @@ in
 
   config = mkIf cfg.enable {
     home = {
+      ## TODO 25.11 - replace with programs.obsidian
       packages = with pkgs;
         [
           unstable.obsidian
