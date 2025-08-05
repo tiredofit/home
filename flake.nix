@@ -148,6 +148,19 @@
             };
           };
 
+          "mirage.${gn}" = HomeConfiguration {
+            system = "aarch64-linux";
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "mirage";
+              username = gn;
+              networkInterface = "end0";
+              inherit inputs outputs;
+            };
+          };
+
           "nakulaptop" = {
             "${gn}" = HomeConfiguration {
               extraSpecialArgs = {
