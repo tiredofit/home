@@ -67,7 +67,7 @@ alias hash_sha512="get_file_hash sha512 "$1""
 
 # Compress a series of files
 compress () {
-  if [ -f $1 ] ; then
+  if [ $# -ge 2 ] ; then
       arg1=$1
       shift
       arg2=$@
@@ -81,7 +81,7 @@ compress () {
           *.tar)       tar -cvf $arg1 $arg2 ;;
           *.bz2)       pbzip2 $arg1 ;;
           *.gz)        pigz $arg1 ;;
-          *.zip)       zip $arg1 $arg2 ;;
+          *.zip)       zip -r $arg1 $arg2 ;;
           *.Z)         compress $arg1 ;;
           *.7z)        7z a $arg1 $arg2 ;;
           *.zst*)      zstd $arg1 ;;
