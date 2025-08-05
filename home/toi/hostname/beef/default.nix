@@ -77,7 +77,6 @@ with lib;
             };
             ssh = {
               sd.enable = true;
-              sr.enable = true;
               toi.enable = true;
             };
           };

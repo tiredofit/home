@@ -94,6 +94,7 @@ in
             ssh = {
               sd.enable = true;
               toi.enable = true;
+              ghtoi.enable = true;
             };
           };
         };
