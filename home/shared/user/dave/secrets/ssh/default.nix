@@ -4,7 +4,7 @@ with lib;
 {
   imports = [
     ./sd
-    ./sr
+    ./ghtoi
     ./toi
   ];
 }
