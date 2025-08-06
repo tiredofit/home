@@ -68,8 +68,8 @@ with lib;
       initExtra = ''
           if [ -d "/home/$USER/src/nixos" ] ; then
               alias nixos="cd ~/src/nixos"
-              alias nixosupdate="sudo nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
-              alias nixswitch="sudo nixos-rebuild switch --flake $HOME/src/nixos/#$HOSTNAME $@"
+              alias nixosupdate="nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+              alias nixswitch="nixos-rebuild switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
           fi
       '';
     };
