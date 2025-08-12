@@ -94,10 +94,36 @@ let
       urls = lib.singleton {
         template = "https://github.com/search";
         params = lib.attrsToList {
-          "type" = "code"; "q" = "lang:nix NOT is:fork {searchTerms}";
+          "type" = "code";
+          "q" = "lang:nix NOT is:fork {searchTerms}";
         };
       };
     };
+    "Github NixPkgs Issues" = {
+      definedAliases = [ "@ghnpi" ];
+      icon = "https://github.com/favicon.ico";
+      name = "Github Nix Pkgs Issues";
+      updateInterval = 24 * 60 * 60 * 1000;
+      urls = lib.singleton {
+        template = "https://github.com/NixOS/nixpkgs/issues";
+        params = lib.attrsToList {
+          "q" = "sort:updated-desc {searchTerms}";
+        };
+      };
+    };
+    "Github NixPkgs Pull Requests" = {
+      definedAliases = [ "@ghnppr" ];
+      icon = "https://github.com/favicon.ico";
+      name = "Github Nix Pkgs Pull Requests";
+      updateInterval = 24 * 60 * 60 * 1000;
+      urls = lib.singleton {
+        template = "https://github.com/NixOS/nixpkgs/pulls";
+        params = lib.attrsToList {
+          "q" = "sort:updated-desc is:pr is:open {searchTerms}";
+        };
+      };
+    };
+
     "Home Manager Options" = {
       definedAliases = [ "@hmo" ];
       icon = nixicon;
