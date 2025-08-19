@@ -69,10 +69,11 @@ in
           enable = mkDefault true;
           defaultApplication.enable = true;
         };
+        wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
         zoom.enable = true;
-        zenbrowser.enable = false;
+        zenbrowser.enable = true;
       };
       feature = {
         gui = {
