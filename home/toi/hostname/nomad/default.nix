@@ -69,6 +69,7 @@ in
           enable = mkDefault true;
           defaultApplication.enable = true;
         };
+        walker.enable = true;
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;

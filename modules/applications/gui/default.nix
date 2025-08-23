@@ -64,6 +64,7 @@ with lib;
     ./vivaldi.nix
     ./vlc.nix
     ./vscode.nix
+    ./walker.nix
     ./wpsoffice.nix
     ./zeditor.nix
     ./zenbrowser.nix
