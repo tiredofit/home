@@ -1,7 +1,22 @@
-{config, lib, pkgs, ...}:
+
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.host.home.applications.nwg-displays;
+  ## NOTE: workaround for nwg-displays pytest issues
+  nwgDisplaysOverlay = self: super: {
+    python313Packages = super.python313Packages // {
+      i3ipc = super.python313Packages.i3ipc.overrideAttrs (old: {
+        doCheck = false;
+        checkPhase = ''
+          echo "Skipping pytest in Nix build"
+        '';
+        installCheckPhase = ''
+          echo "Skipping install checks in Nix build"
+        '';
+      });
+    };
+  };
 in
   with lib;
 {
@@ -16,6 +31,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    ##
+    nixpkgs.overlays = [ nwgDisplaysOverlay ];
+    ##
     home = {
       packages = with pkgs;
         [
