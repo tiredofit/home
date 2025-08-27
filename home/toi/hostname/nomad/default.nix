@@ -56,10 +56,10 @@ in
         smartgit.enable = true;
         ssh = {
           enable = true;
-          ignore = {
-            "192.168.1.0/24" = true;
-            "192.168.4.0/24" = true;
-          };
+          relaxedBlocks = [
+            "192.168.1.0/24"
+            "192.168.4.0/24"
+          ];
         };
         steam-run.enable = true;
         szyszka.enable = true;
