@@ -12,17 +12,10 @@ in
         type = with types; bool;
         description = "Secure Shell Client";
       };
-      ignore = {
-        "192.168.1.0/24" = mkOption {
-          default = false;
-          type = with types; bool;
-          description = "Ignore 192.168.1.0/24 Known Hosts and Strict HostKeyChecking";
-        };
-        "192.168.4.0/24" = mkOption {
-          default = false;
-          type = with types; bool;
-          description = "Ignore 192.168..0/24 Known Hosts and Strict HostKeyChecking";
-        };
+      relaxedBlocks = mkOption {
+        default = [];
+        type = with types; listOf str;
+        description = "List of hosts, IPs, or patterns for which to disable host key checking and known hosts.";
       };
     };
   };
@@ -31,23 +24,28 @@ in
     programs = {
       ssh = {
         enable = true;
-        matchBlocks =  {
-          "192.168.1.*" = mkIf (cfg.ignore."192.168.1.0/24") {
-            checkHostIP = false;
-            extraOptions = {
-              "UserKnownHostsFile" = "/dev/null";
-              "StrictHostKeyChecking" = "no";
+        enableDefaultConfig = mkDefault false;
+        matchBlocks =
+          let
+            relaxedBlocksAttrs = listToAttrs (map (pattern: {
+              name = pattern;
+              value = {
+                checkHostIP = false;
+                extraOptions = {
+                  "UserKnownHostsFile" = "/dev/null";
+                  "StrictHostKeyChecking" = "no";
+                };
+              };
+            }) (filter (p: p != "*") cfg.relaxedBlocks));
+            defaultBlock = {
+              "*" = {
+                checkHostIP = false;
+                serverAliveInterval = mkDefault 60;
+              };
             };
-          };
-          "192.168.4.*" = mkIf (cfg.ignore."192.168.4.0/24") {
-            checkHostIP = false;
-            extraOptions = {
-              "UserKnownHostsFile" = "/dev/null";
-              "StrictHostKeyChecking" = "no";
-            };
-          };
-        };
-        serverAliveInterval = mkDefault 60;
+          in
+            defaultBlock // relaxedBlocksAttrs;
+
       };
     };
   };
