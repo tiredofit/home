@@ -22,31 +22,34 @@ in
 
   config = mkIf cfg.enable {
     programs = {
-      ssh = {
-        enable = true;
-        enableDefaultConfig = mkDefault false;
-        matchBlocks =
-          let
-            relaxedBlocksAttrs = listToAttrs (map (pattern: {
-              name = pattern;
-              value = {
-                checkHostIP = false;
-                extraOptions = {
-                  "UserKnownHostsFile" = "/dev/null";
-                  "StrictHostKeyChecking" = "no";
+      ssh = lib.mkMerge [
+        {
+          enable = true;
+          matchBlocks =
+            let
+              relaxedBlocksAttrs = listToAttrs (map (pattern: {
+                name = pattern;
+                value = {
+                  checkHostIP = false;
+                  extraOptions = {
+                    "UserKnownHostsFile" = "/dev/null";
+                    "StrictHostKeyChecking" = "no";
+                  };
+                };
+              }) (filter (p: p != "*") cfg.relaxedBlocks));
+              defaultBlock = {
+                "*" = {
+                  checkHostIP = false;
+                  serverAliveInterval = mkDefault 60;
                 };
               };
-            }) (filter (p: p != "*") cfg.relaxedBlocks));
-            defaultBlock = {
-              "*" = {
-                checkHostIP = false;
-                serverAliveInterval = mkDefault 60;
-              };
-            };
-          in
-            defaultBlock // relaxedBlocksAttrs;
-
-      };
+            in
+              defaultBlock // relaxedBlocksAttrs;
+        }
+        (lib.optionalAttrs (lib.versionAtLeast (lib.version or "0") "25.11pre") {
+          enableDefaultConfig = mkDefault false;
+        })
+      ];
     };
   };
 }
