@@ -5,6 +5,10 @@ let
 in
   with lib;
 {
+  imports = lib.optionals (lib.versionOlder lib.version "25.11pre") [
+    (lib.mkAliasOptionModule ["programs" "less" "config"] ["programs" "less" "keys"])
+  ];
+
   options = {
     host.home.applications.less = {
       enable = mkOption {
@@ -18,15 +22,15 @@ in
   config = mkIf cfg.enable {
     programs = {
       less = {
-         enable = true;
-         keys = ''
-           s back-line
-           t forw-line
-         '';
-       };
+        enable = true;
+        config = ''
+          s back-line
+          t forw-line
+        '';
+      };
       bash = {
         sessionVariables = {
-          LESSHISTFILE="$XDG_CACHE_HOME/less/history";
+          LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
         };
         shellAliases = {
           "more" = "less"; # pager
