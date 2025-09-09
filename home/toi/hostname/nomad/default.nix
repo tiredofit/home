@@ -49,6 +49,7 @@ in
         peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
+        rofi.enable = false;
         sonusmix.enable = false;
         shellcheck.enable = true;
         shfmt.enable = true;
