@@ -61,8 +61,8 @@ in with lib; {
 
             ## CI
 
-            ## Docker
-            ms-vscode-remote.remote-containers
+            ### Docker
+            #ms-vscode-remote.remote-containers
 
             ## Editor Helpers
 
@@ -78,11 +78,9 @@ in with lib; {
             # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
 
             ## AI
-            ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
             github.copilot
             github.copilot-chat
-
-            google.geminicodeassist                     # Google Gemini Code Assistant
+            ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
 
             ## CI
             github.vscode-github-actions                # Github actions helper
@@ -93,6 +91,7 @@ in with lib; {
 
             ## Docker
             ms-azuretools.vscode-docker                 # Docker containers, images, and volumes
+            ms-azuretools.vscode-containers             # More containers
 
             ## Editor Helpers
             tyriar.sort-lines                           # Sort Lines
@@ -117,7 +116,6 @@ in with lib; {
             onecentlin.laravel-blade                    # Blade Snippets and Syntax Highlighting
             devsense.composer-php-vscode                # Composer Support
 
-
             brettm12345.nixfmt-vscode                   # Nix TODO: Split and force programs to be installed
             davidanson.vscode-markdownlint              # Markdown
             esbenp.prettier-vscode                      # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
@@ -128,7 +126,7 @@ in with lib; {
             ## Remote
             #ms-vscode-remote.remote-containers          # Access Docker Contaniers remotely
             #ms-vscode-remote.remote-ssh-edit            # Edit SSH Configuration Files
-            ms-vscode.remote-explorer # View remote machines for SSH and Tunnels
+            ms-vscode.remote-explorer                     # View remote machines for SSH and Tunnels
 
             ## Syntax Highlighting | File Support | Linting
             dunstontc.vscode-docker-syntax              # DockerFile
@@ -242,8 +240,7 @@ in with lib; {
             "window.zoomLevel" = 1;
 
             ## Docker
-            "docker.commands.attach" =
-              "$\${containerCommand} exec -it $\${containerId} $\${shellCommand}";
+            "docker.commands.attach" = "$\${containerCommand} exec -it $\${containerId} $\${shellCommand}";
             "docker.containers.description" = [ "ContainerName" "Status" ];
             "docker.containers.label" = "ContainerName";
             "docker.containers.sortBy" = "Label";
@@ -354,6 +351,7 @@ in with lib; {
                 "hilleer.yaml-plus-json"
                 "jinhyuk.replace-curly-quotes"
                 "ms-azuretools.vscode-docker"
+                "ms-azuretools.vscode-containers"
                 "ms-vscode.copilot-mermaid-diagram"
                 "nickdemayo.vscode-json-editor"
                 "pinage404.bash-extension-pack"
