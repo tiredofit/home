@@ -347,7 +347,7 @@ in with lib; {
                 "github.copilot"
                 "github.copilot-chat"
                 "github.vscode-github-actions"
-                "google.geminicodeassist"
+                #"google.geminicodeassist"
                 "hilleer.yaml-plus-json"
                 "jinhyuk.replace-curly-quotes"
                 "ms-azuretools.vscode-docker"
