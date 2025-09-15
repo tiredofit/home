@@ -21,10 +21,10 @@ in {
         ];
     };
 
-    #services.walker = {
-    #  enable = false;
-    #  package = pkgs.unstable.walker;
-    #  systemd.enable = true;
+    services.walker = {
+      enable = true;
+      package = pkgs.unstable.walker;
+      systemd.enable = true;
     #  settings = {
     #    app_launch_prefix = "";
     #    as_window = false;
@@ -42,13 +42,25 @@ in {
     #    layout = "default";
     #    style = "";
     #  };
-    #};
+    };
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        bind = [
-          "SUPER_SHIFT, Z, exec, walker"
-        ];
+        bind = mkMerge [
+              (mkAfter [
+                # Regular Launcher
+                "SUPER, D, exec, ${config.services.walker.package}/bin/walker"
+                # Run a shell comamnd shortcut
+                "SUPER, R, exec, ${config.services.walker.package}/bin/walker --modules runner"
+                # SSH
+                "SUPER, S, exec, ${config.services.walker.package}/bin/walker --modules ssh"
+                # Open Calculator
+                "SUPER_SHIFT, C, exec, ${config.services.walker.package}/bin/walker --modules calculator"
+              ])
+              (mkIf (config.host.home.applications.cliphist.enable) (mkAfter [
+                "CONTROLALT, V, exec, ${config.services.walker.package}/bin/walker --modules clipboard"
+              ]))
+            ];
         windowrule = [
         ];
       };
