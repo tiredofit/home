@@ -5,14 +5,21 @@ let
   shellAliases = {
     ".." = "cd ..";
     "..." = "cd ...";
-    dotfiles = "cd ~/.config/home-manager/dotfiles";
     fuck = "sudo $(history -p !!)"; # run last command as root
     home = "cd ~";
-    mkdir = "mkdir -p"; # no error, create parents
-    scstart = "systemctl start $@"; # systemd service start
-    scstop = "systemctl stop $@"; # systemd service stop
-    scenable = "systemctl disable $@"; # systemd service enable
-    scdisable = "systemctl disable $@"; # systemd service disable
+    mkdir = "mkdir -p";
+    s = "sudo systemctl";
+    scdisable = "sudo systemctl disable $@";
+    scenable = "sudo systemctl  disable $@";
+    scstart = "sudo systemctl start $@";
+    scstop = "sudo systemctl stop $@";
+    sj = "sudo journalctl";
+    u = "systemctl --user";
+    uj = "journalctl --user";
+    uscdisable = "systemctl --user disable $@";
+    uscenable = "systemctl --user disable $@";
+    uscstart = "systemctl --user start $@";
+    uscstop = "systemctl --user stop $@";
   };
 in
   with lib;
@@ -47,33 +54,18 @@ in
     programs = {
       bash = {
         enable = true;
-        enableCompletion = true; # enable word completion by <tab>
-        enableVteIntegration = true; # track working directory
+        enableCompletion = true;
+        enableVteIntegration = true;
         bashrcExtra = ''
-          ## History - Needs to be at the top in the event that running a shell command rewriter such as Liquidprompt
+          # History
           export HISTFILE=$HOME/.local/state/bash/history
-          ## Configure bash to append (rather than overwrite history)
           shopt -s histappend
-
-          # Attempt to save all lines of a multiple-line command in the same entry
           shopt -s cmdhist
-
-          ## After each command, append to the history file and reread it
           PROMPT_COMMAND="''${PROMPT_COMMAND:+$PROMPT_COMMAND$"\n"}history -a; history -c; history -r"
-
-          ## Print the timestamp of each command
           HISTTIMEFORMAT="%Y%m%d.%H%M%S%z "
-
-          ## Set History File Size
           HISTFILESIZE=2000000
-
-          ## Set History Size in memory
           HISTSIZE=3000
-
-          ## Don't save ls,ps, history commands
           export HISTIGNORE="ls:ll:ls -alh:pwd:clear:history:ps"
-
-          ## Do not store a duplicate of the last entered command and any commands prefixed with a space
           HISTCONTROL=ignoreboth
         '';
 
@@ -84,15 +76,15 @@ in
           if [ -d "/home/$USER/src/sd" ]; then alias srcsd="cd $HOME/src/sd" ; fi
 
           if [ -f "/home/$USER/src/scripts/changelog/changelogger.sh" ] ; then
-              alias changelog="/home/$USER/src/scripts/changelog/changelogger.sh"
+            alias changelog="/home/$USER/src/scripts/changelog/changelogger.sh"
           fi
 
           if [ -d "/var/local/data" ] ; then
-              alias vld='cd /var/local/data'
+            alias vld='cd /var/local/data'
           fi
 
           if [ -d "/var/local/db" ] ; then
-              alias vldb='cd /var/local/db'
+            alias vldb='cd /var/local/db'
           fi
 
           if [ -d "/var/local/data/_system" ] ; then
@@ -104,29 +96,29 @@ in
           fi
 
           if command -v "curl" &>/dev/null; then
-              alias derp="curl https://cht.sh/$1"                       # short and sweet command lookup
-              alias weather="curl -sSL https://wttr.in?F"               # Terminal Weather
+            alias derp="curl https://cht.sh/$1"                       # short and sweet command lookup
+            alias weather="curl -sSL https://wttr.in?F"               # Terminal Weather
           fi
 
           if command -v "grep" &>/dev/null; then
-              alias grep="grep --color=auto"                            # Colorize grep
+            alias grep="grep --color=auto"                            # Colorize grep
           fi
 
           if command -v "netstat" &>/dev/null; then
-              alias ports="netstat -tulanp"                             # Show Open Ports
+            alias ports="netstat -tulanp"                             # Show Open Ports
           fi
 
           if command -v "tree" &>/dev/null; then
-              alias tree="tree -Cs"
+            alias tree="tree -Cs"
           fi
 
           if command -v "rsync" &>/dev/null; then
-              alias rsync="rsync -aXxtv"                                # Better copying with Rsync
+            alias rsync="rsync -aXxtv"                                # Better copying with Rsync
           fi
 
           if [ -d "$HOME/.bashrc.d" ] ; then
             for script in $HOME/.bashrc.d/* ; do
-                source $script
+              source $script
             done
           fi
 
@@ -141,7 +133,7 @@ in
               file="''${result%%:*}"
               linenumber=$(echo "''${result}" | cut -d: -f2)
               if [ ! -z "$file" ]; then
-                      $EDITOR +"''${linenumber}" "$file"
+                $EDITOR +"''${linenumber}" "$file"
               fi
             }
           fi
@@ -150,49 +142,114 @@ in
               sir() {
                   if [ -z $1 ] || [ -z $2 ] ; then echo "Search inside Replace: sir <find_string_named> <sring_replaced>" ; return 1 ; fi
                   for file in $(rg -l $1) ; do
-                      sed -i "s|$1|$2|g" "$file"
+                    sed -i "s|$1|$2|g" "$file"
                   done
               }
           fi
 
+          if command -v "fzf" &>/dev/null; then
+            _sysls() {
+              # $1: --system or --user
+              # $2: states, see also "systemctl list-units --state=help"
+              WIDE=$1
+              [ -n $2 ] && STATE="--state=$2"
+              cat \
+                  <(echo 'UNIT/FILE LOAD/STATE ACTIVE/PRESET SUB DESCRIPTION') \
+                  <(systemctl $WIDE list-units --legend=false $STATE) \
+                  <(systemctl $WIDE list-unit-files --legend=false $STATE) \
+              | sed 's/●/ /' \
+              | grep . \
+              | column --table --table-columns-limit=5 \
+              | fzf --header-lines=1 \
+                    --accept-nth=1 \
+                    --no-hscroll \
+                    --preview="SYSTEMD_COLORS=1 systemctl $WIDE status {1}" \
+                    --preview-window=down
+            }
+
+            # Aliases for unit selector.
+            alias sls='_sysls --system'
+            alias uls='_sysls --user'
+            alias sjf='sj --unit $(uls) --all --follow'
+            alias ujf='uj --unit $(uls) --all --follow'
+
+            _SYS_ALIASES=(
+              sstart sstop sre
+              ustart ustop ure
+            )
+
+            _SYS_CMDS=(
+              's start $(sls static,disabled,failed)'
+              's stop $(sls running,failed)'
+              's restart $(sls)'
+              'u start $(uls static,disabled,failed)'
+              'u stop $(uls running,failed)'
+              'u restart $(uls)'
+            )
+
+            _sysexec() {
+                for ((j=0; j < ''${#_SYS_ALIASES[@]}; j++)); do
+                  if [ "$1" == "''${_SYS_ALIASES[$j]}" ]; then
+                    cmd=$(eval echo "''${_SYS_CMDS[$j]}") # expand service name
+                    wide=''${cmd:0:1}
+                    cmd="$cmd && ''${wide} status \$_ || ''${wide}j -xeu \$_"
+                    eval $cmd
+
+                    # Push to history.
+                    [ -n "$BASH_VERSION" ] && history -s $cmd
+                    #[ -n "$ZSH_VERSION" ] && print -s $cmd
+                    return
+                  fi
+               done
+            }
+
+           for i in ''${_SYS_ALIASES[@]}; do
+             source /dev/stdin <<EOF
+           $i() {
+             _sysexec $i
+           }
+EOF
+           done
+
+          fi
+
           if [ -d "$XDG_RUNTIME_DIR/secrets/bashrc.d" ] ; then
             for script in $XDG_RUNTIME_DIR/secrets/bashrc.d/* ; do
-                source $script
+              source $script
             done
           fi
 
           far() {
-                if [ -z $1 ] || [ -z $2 ] ; then echo "Rename files: far <find_file_named> <file_renamed>" ; return 1 ; fi
-                for file in $(find -name "$1") ; do
-                    mv "$file" $(dirname "$file")/$2
-                done
+            if [ -z $1 ] || [ -z $2 ] ; then echo "Rename files: far <find_file_named> <file_renamed>" ; return 1 ; fi
+            for file in $(find -name "$1") ; do
+                mv "$file" $(dirname "$file")/$2
+            done
           }
 
           man() {
-              LESS_TERMCAP_md=$'\e[01;31m' \
-              LESS_TERMCAP_me=$'\e[0m' \
-              LESS_TERMCAP_se=$'\e[0m' \
-              LESS_TERMCAP_so=$'\e[01;44;33m' \
-              LESS_TERMCAP_ue=$'\e[0m' \
-              LESS_TERMCAP_us=$'\e[01;32m' \
-              command man "$@"
+            LESS_TERMCAP_md=$'\e[01;31m' \
+            LESS_TERMCAP_me=$'\e[0m' \
+            LESS_TERMCAP_se=$'\e[0m' \
+            LESS_TERMCAP_so=$'\e[01;44;33m' \
+            LESS_TERMCAP_ue=$'\e[0m' \
+            LESS_TERMCAP_us=$'\e[01;32m' \
+            command man "$@"
           }
 
           # Quickly run a pkg run nixpkgs - Add a second argument to it otherwise it will simply run the command - Can also use ',' which is a nix-community project.
           pkgrun () {
-              if [ -n $1 ] ; then
-                 local pkg
-                 pkg=$1
-                 if [ "$2" != "" ] ; then
-                     shift
-                     local args
-                     args="$@"
-                 else
-                     args=$pkg
-                 fi
-
-                 nix-shell -p $pkg.out --run "$args"
-              fi
+            if [ -n $1 ] ; then
+               local pkg
+               pkg=$1
+               if [ "$2" != "" ] ; then
+                 shift
+                 local args
+                 args="$@"
+               else
+                 args=$pkg
+               fi
+               nix-shell -p $pkg.out --run "$args"
+            fi
           }
 
           system_update() {
@@ -207,42 +264,42 @@ in
                     cd $original_dir
                     rm -rf $nixos_tmp
                     if [ "$SSH_CONNECTION" = "" ]; then
-                        ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
+                      ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - SYSTEM UPGRADE COMPLETE"
                     fi
                   fi
               }
 
               update_home() {
-                  if command -v "home-manager" &>/dev/null; then
-                    original_dir=$(pwd)
-                    echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING HOME"
-                    nixhome_tmp=$(mktemp -d)
-                    ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" > /dev/null 2>&1
-                    cd $nixhome_tmp
-                    home-manager switch --flake $nixhome_tmp#$HOSTNAME.$USER -b backup.$(date +%Y%m%d%H%M%S)
-                    cd $original_dir
-                    rm -rf $nixhome_tmp
-                    echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
-                    if [ "$SSH_CONNECTION" = "" ]; then
-                        ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
-                    fi
+                if command -v "home-manager" &>/dev/null; then
+                  original_dir=$(pwd)
+                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - UPDATING HOME"
+                  nixhome_tmp=$(mktemp -d)
+                  ${pkgs.git}/bin/git clone https://github.com/tiredofit/home "$nixhome_tmp" > /dev/null 2>&1
+                  cd $nixhome_tmp
+                  home-manager switch --flake $nixhome_tmp#$HOSTNAME.$USER -b backup.$(date +%Y%m%d%H%M%S)
+                  cd $original_dir
+                  rm -rf $nixhome_tmp
+                  echo "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
+                  if [ "$SSH_CONNECTION" = "" ]; then
+                    ${pkgs.libnotify}/bin/notify-send "*** $(date +"%Y-%m-%d %H:%M:%S") - HOME UPGRADE COMPLETE"
                   fi
+                fi
               }
 
               case $1 in
                 home )
-                    update_home
+                  update_home
                 ;;
                 system )
-                    update_system
+                  update_system
                 ;;
                 all )
-                    update_system
-                    update_home
+                  update_system
+                  update_home
                 ;;
                 * )
-                    update_system
-                    update_home
+                  update_system
+                  update_home
                 ;;
               esac
           }
