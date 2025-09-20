@@ -24,7 +24,7 @@ in {
     services.walker = {
       enable = true;
       package = pkgs.unstable.walker;
-      systemd.enable = true;
+      systemd.enable = mkDefault true;
     #  settings = {
     #    app_launch_prefix = "";
     #    as_window = false;
@@ -49,22 +49,21 @@ in {
         bind = mkMerge [
               (mkAfter [
                 # Regular Launcher
-                "SUPER, D, exec, ${config.services.walker.package}/bin/walker"
+                "SUPER, D, exec, ${config.host.home.feature.uwsm.prefix}${config.services.walker.package}/bin/walker"
                 # Run a shell comamnd shortcut
-                "SUPER, R, exec, ${config.services.walker.package}/bin/walker --modules runner"
+                "SUPER, R, exec, ${config.host.home.feature.uwsm.prefix}${config.services.walker.package}/bin/walker --modules runner"
                 # SSH
-                "SUPER, S, exec, ${config.services.walker.package}/bin/walker --modules ssh"
+                "SUPER, S, exec, ${config.host.home.feature.uwsm.prefix}${config.services.walker.package}/bin/walker --modules ssh"
                 # Open Calculator
-                "SUPER_SHIFT, C, exec, ${config.services.walker.package}/bin/walker --modules calculator"
+                "SUPER_SHIFT, C, exec, ${config.host.home.feature.uwsm.prefix}${config.services.walker.package}/bin/walker --modules calculator"
               ])
               (mkIf (config.host.home.applications.cliphist.enable) (mkAfter [
-                "CONTROLALT, V, exec, ${config.services.walker.package}/bin/walker --modules clipboard"
+                "CONTROLALT, V, exec, ${config.host.home.feature.uwsm.prefix}${config.services.walker.package}/bin/walker --modules clipboard"
               ]))
             ];
         windowrule = [
         ];
       };
     };
-
   };
 }
