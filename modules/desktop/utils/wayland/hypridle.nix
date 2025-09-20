@@ -255,8 +255,10 @@ in
         ExecStart = "${pkgs.hypridle}/bin/hypridle";
         Restart = "always";
         RestartSec = 10;
-        X-Restart-Triggers = mkIf (config.services.hypridle.settings != { })
-          [ "${config.xdg.configFile."hypr/hypridle.conf".source}" ];
+        X-Restart-Triggers =
+          if config.services.hypridle.settings != { }
+          then [ "${config.xdg.configFile."hypr/hypridle.conf".source}" ]
+          else [];
       };
 
       Install = mkForce {
