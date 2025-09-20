@@ -23,10 +23,6 @@ with lib;
             natural_scroll = false;
           };
         };
-
-        gestures = {
-          workspace_swipe = false;
-        };
       };
     };
   };
