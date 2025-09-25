@@ -32,6 +32,7 @@ with lib;
     ./lazydocker.nix
     ./less.nix
     ./liquidprompt.nix
+    ./lnav.nix
     ./lsd.nix
     ./mp3gain.nix
     ./mtr.nix
