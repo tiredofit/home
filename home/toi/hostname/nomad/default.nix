@@ -21,31 +21,33 @@ in
       applications = {
         act.enable = true;
         avidemux.enable = true;
-        calibre.enable = true;
+        calibre.enable = false;
         chromium.enable = true;
-        claude-code.enable = true;
+        claude-code.enable = false;
         cryfs.enable = true;
         czkawka.enable = true;
         devenv.enable = false;
-        digikam.enable = true;
+        digikam.enable = false;
         direnv.enable = true;
         file-roller.enable = true;
         floorp.enable = false;
         github-client.enable = true;
+        ghostty.enable = true ;
         gnome-software.enable = true;
         hadolint.enable = true;
+        kitty.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
         meld.enable = true;
-        mp3gain.enable = true;
+        mp3gain.enable = false;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
           systemtray.enable = false;
         };
-        nmap.enable = true;
-        obsidian.enable = true;
-        opensnitch-ui.enable = true;
+        nmap.enable = false;
+        obsidian.enable = false;
+        opensnitch-ui.enable = false;
         peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
@@ -62,7 +64,7 @@ in
             "192.168.4.0/24"
           ];
         };
-        steam-run.enable = true;
+        steam-run.enable = false;
         szyszka.enable = true;
         thunderbird.enable = true;
         virt-manager.enable = true;
