@@ -12,7 +12,7 @@ with lib;
         general = {
           #col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
           #col.inactive_border = "rgba(595959aa)";
-          allow_tearing = false;
+          allow_tearing = true;
           border_size = 2;
           gaps_in = 2;
           gaps_out = 5;
@@ -23,7 +23,7 @@ with lib;
 
         # Cursor
         cursor = {
-          inactive_timeout = 60;
+          inactive_timeout = 10;
           hide_on_key_press = true;
         };
 

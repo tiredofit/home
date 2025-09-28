@@ -184,7 +184,7 @@ with lib;
       configFile."uwsm/env".text = mkIf config.host.home.feature.uwsm.enable
         ''
           export CLUTTER_BACKEND="wayland"
-          export GDK_BACKEND="wayland,x11,*"
+          export GDK_BACKEND="wayland,x11"
           export MOZ_ENABLE_WAYLAND=1
           export QT_AUTO_SCREEN_SCALE_FACTOR=1
           export QT_QPA_PLATFORM="wayland;xcb"
@@ -195,19 +195,29 @@ with lib;
           export ELECTRON_OZONE_PLATFORM_HINT="auto"
         '';
       portal = {
-        enable = true;
-        xdgOpenUsePortal = true;
-        configPackages = [ pkgs.xdg-desktop-portal-wlr ];
-        config.common = {
-          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-          #"org.freedesktop.portal.FileChooser" = [ "xdg-desktop-portal-gtk" ];
-          "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
-        };
-        extraPortals = [
-          pkgs.xdg-desktop-portal-hyprland
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal-wlr
+        enable = mkForce true;
+        configPackages = with pkgs; [
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-gtk
         ];
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-gtk
+        ];
+        xdgOpenUsePortal = mkDefault true;
+        config = {
+          common = {
+            #"org.freedesktop.impl.portal.Screenshot" = "hyprland";
+            #"org.freedesktop.impl.portal.Screencast" = "hyprland";
+            "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+            #"org.freedesktop.portal.Screencast" = "hyprland";
+            default = [ "wlr" ];
+          };
+          hyprland.default = [
+            "wlr"
+            "gtk"
+          ];
+        };
       };
     };
   };

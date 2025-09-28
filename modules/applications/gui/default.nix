@@ -25,6 +25,7 @@ with lib;
     ./flameshot.nix
     ./floorp.nix
     ./geeqie.nix
+    ./ghostty.nix
     ./gnome-encfsmanager.nix
     ./gnome-software.nix
     ./gnome-systemmonitor.nix
