@@ -240,12 +240,22 @@ in with lib; {
             "window.zoomLevel" = 1;
 
             ## Docker
-            "docker.commands.attach" = "$\${containerCommand} exec -it $\${containerId} $\${shellCommand}";
-            "docker.containers.description" = [ "ContainerName" "Status" ];
-            "docker.containers.label" = "ContainerName";
-            "docker.containers.sortBy" = "Label";
-            "docker.volumes.label" = "VolumeName";
-            "docker.extension.enableComposeLanguageServer" = false;
+            docker = {
+              commands = {
+                "attach" = "$\${containerCommand} exec -it $\${containerId} $\${shellCommand}";
+              };
+              containers = {
+              "description" = [ "ContainerName" "Status" ];
+              "label" = "ContainerName";
+              "sortBy" = "Label";
+              };
+              exteision = {
+                "enableComposeLanguageServer" = false;
+              };
+              volumes = {
+                "label" = "VolumeName";
+              };
+            };
 
             ## Editor
             "editor.accessibilitySupport" = "off";
@@ -279,23 +289,46 @@ in with lib; {
             "[dockerfile]" = {
               "editor.defaultFormatter" = "foxundermoon.shell-format";
             };
-            "[html]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+
+            "[dockercompose]" = {
+              editor = {
+                "defaultFormatter" = "redhat.vscode-yaml";
+                "autoIndent" = "advanced";
+                "insertSpaces" = true;
+                "quickSuggestions" = {
+                    "other" = true;
+                    "comments" = false;
+                    "strings" = true;
+                };
+                "tabSize" = 2;
+              };
+            };
+
+            "[html]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
             "[json]" = {
               "editor.defaultFormatter" = "vscode.json-language-features";
             };
-            "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+            "[jsonc]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
             "[markdown]" = {
               "editor.defaultFormatter" = "yzhang.markdown-all-in-one";
             };
             "[shellscript]" = {
               "editor.defaultFormatter" = "foxundermoon.shell-format";
             };
-            "[yaml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+            "[yaml]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
             "markdown.extension.print.imgToBase64" = true;
             "markdown.extension.toc.levels" = "2..6";
             "markdown.extension.toc.updateOnSave" = false;
-            "shellcheck.enableQuickFix" = true;
-            "shellcheck.exclude" = [ "SC1008" ];
+            shellcheck = {
+              "enableQuickFix" = true;
+              "exclude" = [ "SC1008" ];
+            };
             "syntax.highlightLanguages" = [
               "c"
               "cpp"
@@ -313,64 +346,72 @@ in with lib; {
             ];
 
             ## Git
-            "git.autofetch" = true;
-            "git.ignoreLegacyWarning" = true;
-            "git.ignoreMissingGitWarning" = true;
-            "git.openRepositoryInParentFolders" = "never";
-            "git.showPushSuccessNotification" = true;
-            "git.suggestSmartCommit" = false;
+            git = {
+              "autofetch" = true;
+              "ignoreLegacyWarning" = true;
+              "ignoreMissingGitWarning" = true;
+              "openRepositoryInParentFolders" = "never";
+              "showPushSuccessNotification" = true;
+              "suggestSmartCommit" = false;
+            };
 
             ## MiniMap
-            "editor.minimap.enabled" = true;
-            "editor.minimap.side" = "right";
-            "editor.minimap.showSlider" = "always";
-            "editor.minimap.renderCharacters" = false;
-            "editor.minimap.maxColumn" = 80;
+            editor.minimap = {
+              "enabled" = true;
+              "side" = "right";
+              "showSlider" = "always";
+              "renderCharacters" = false;
+              "maxColumn" = 80;
+            };
 
             ## Security
-            "security.workspace.trust.enabled" = false;
-            "security.workspace.trust.untrustedFiles" = "open";
+            security.workspace = {
+              trust = {
+                "enabled" = false;
+                "untrustedFiles" = "open";
+              };
+            };
 
             ## SSH
-            "remote.SSH.configFile" = "~/.ssh/vscode_remote_ssh_config";
-            "remote.SSH.defaultExtensions" =
-              [ # # TODO - Merge this, this is mostly duplicates with exception of remote plugins
-                "bbenoist.nix"
-                "bierner.markdown-mermaid"
-                "brettm12345.nixfmt-vscode"
-                "davidanson.vscode-markdownlint"
-                "dunstontc.vscode-docker-syntax"
-                "esbenp.prettier-vscode"
-                "evgeniypeshkov.syntax-highlighter"
-                "fabiospampinato.vscode-diff"
-                "foxundermoon.shell-format"
-                "github.copilot"
-                "github.copilot-chat"
-                "github.vscode-github-actions"
-                #"google.geminicodeassist"
-                "hilleer.yaml-plus-json"
-                "jinhyuk.replace-curly-quotes"
-                "ms-azuretools.vscode-docker"
-                "ms-azuretools.vscode-containers"
-                "ms-vscode.copilot-mermaid-diagram"
-                "nickdemayo.vscode-json-editor"
-                "pinage404.bash-extension-pack"
-                "redhat.vscode-yaml"
-                "richie5um2.vscode-sort-json"
-                "rpinski.shebang-snippets"
-                "shakram02.bash-beautify"
-                "shd101wyy.markdown-preview-enhanced"
-                "timonwong.shellcheck"
-                "tombonnike.vscode-status-bar-format-toggle"
-                "tyriar.sort-lines"
-                "uyiosa-enabulele.reopenclosedtab"
-                "yzhang.markdown-all-in-one"
-                "ziyasal.vscode-open-in-github"
-              ];
-            "remote.SSH.enableRemoteCommand" = true;
-            "remote.SSH.localServerDownload" = "off";
-            "remote.downloadExtensionsLocally" = true;
-
+            remote = {
+              "downloadExtensionsLocally" = true;
+              SSH = {
+                "configFile" = "~/.ssh/vscode_remote_ssh_config";
+                "defaultExtensions" =
+                  [ # # TODO - Merge this, this is mostly duplicates with exception of remote plugins
+                    "bbenoist.nix"
+                    "bierner.markdown-mermaid"
+                    "brettm12345.nixfmt-vscode"
+                    "davidanson.vscode-markdownlint"
+                    "dunstontc.vscode-docker-syntax"
+                    "esbenp.prettier-vscode"
+                    "evgeniypeshkov.syntax-highlighter"
+                    "fabiospampinato.vscode-diff"
+                    "foxundermoon.shell-format"
+                    "github.copilot"
+                    "github.copilot-chat"
+                    "github.vscode-github-actions"
+                    "hilleer.yaml-plus-json"
+                    "jinhyuk.replace-curly-quotes"
+                    "ms-azuretools.vscode-docker"
+                    "ms-azuretools.vscode-containers"
+                    "nickdemayo.vscode-json-editor"
+                    "pinage404.bash-extension-pack"
+                    "redhat.vscode-yaml"
+                    "richie5um2.vscode-sort-json"
+                    "rpinski.shebang-snippets"
+                    "shakram02.bash-beautify"
+                    "shd101wyy.markdown-preview-enhanced"
+                    "timonwong.shellcheck"
+                    "tombonnike.vscode-status-bar-format-toggle"
+                    "tyriar.sort-lines"
+                    "uyiosa-enabulele.reopenclosedtab"
+                    "yzhang.markdown-all-in-one"
+                  ];
+                "enableRemoteCommand" = true;
+                "localServerDownload" = "off";
+              };
+            };
 
             ## Telemetry
             "redhat.telemetry.enabled" = false;
@@ -378,15 +419,20 @@ in with lib; {
             "update.mode" = "none";
 
             ## Terminal
-            "terminal.integrated.enableMultiLinePasteWarning" = "never";
-            "terminal.integrated.fontFamily" = "Hack Nerd Font";
-
-            "terminal.integrated.profiles.linux" = {
-               "bash" = {
-                 "path" = "/usr/bin/env bash";
-                 "args" = ["--login"];
-                 "icon" = "terminal-bash";
-               };
+            terminal = {
+              integrated = {
+                "enableMultiLinePasteWarning" = "never";
+                "fontFamily" = "Hack Nerd Font";
+                profiles = {
+                  "linux" = {
+                    "bash" = {
+                      "path" = "/usr/bin/env bash";
+                      "args" = ["--login"];
+                      "icon" = "terminal-bash";
+                    };
+                  };
+                };
+              };
             };
 
             ## Disable File Operations
