@@ -51,7 +51,7 @@ in
         peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
-        rofi.enable = false;
+        rofi.enable = true;
         sonusmix.enable = false;
         shellcheck.enable = true;
         shfmt.enable = true;
@@ -72,7 +72,7 @@ in
           enable = mkDefault true;
           defaultApplication.enable = true;
         };
-        walker.enable = true;
+        walker.enable = false;
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
