@@ -2,8 +2,9 @@
 with lib;
 let
   cfg = config.host.home.applications.rofi;
-  displayServer = config.host.home.feature.gui.displayServer;
-  rofiPackage = if displayServer == "wayland" then pkgs.unstable.rofi-wayland else pkgs.unstable.rofi;
+  #displayServer = config.host.home.feature.gui.displayServer;
+  #rofiPackage = if displayServer == "wayland" then pkgs.unstable.rofi-wayland else pkgs.unstable.rofi;
+  rofiPackage = pkgs.unstable.rofi;
   rofiCalculator = pkgs.writeShellScriptBin "rofi-calculator" ''
     # rofi -show run -modi calc: rofi-calculator.sh
     ROFI_CALC_HISTORY_FILE=$HOME/.local/share/rofi/rofi_calc_history
