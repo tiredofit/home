@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          unstable.thunderbird-128
+          thunderbird
         ];
     };
 
