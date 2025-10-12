@@ -31,7 +31,6 @@ with lib;
         nix-development_tools.enable = true;
         nmap.enable = true;
         obsidian.enable = true;
-        peazip.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
         sonusmix.enable = true;
