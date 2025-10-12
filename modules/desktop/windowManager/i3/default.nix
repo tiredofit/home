@@ -93,7 +93,6 @@ with lib;
           autotiling.enable = true;
           betterlockscreen.enable = true;
           dunst.enable = true;
-          greenclip.enable = true;
           i3status-rust.enable = true;
           nitrogen.enable = true;
           numlockx.enable = true;
