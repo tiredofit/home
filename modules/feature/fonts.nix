@@ -16,12 +16,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    fonts = {
-      fontconfig = {
-        enable = true ;
-      };
-    };
-
     home.packages = with pkgs; [
       dejavu_fonts
       liberation_ttf
@@ -38,6 +32,7 @@ in
 
     fonts = {
       fontconfig = {
+        enable = true;
         defaultFonts = {
           serif = [
             "Noto Serif NF"
