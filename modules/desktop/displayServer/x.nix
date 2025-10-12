@@ -9,16 +9,16 @@ in
     host = {
       home = {
         applications = {
-          arandr.enable = true;
-          autokey.enable = mkDefault true;
-          redshift.enable = true;
-          sysstat.enable = true;
-          xbindkeys.enable = true;
-          xdotool.enable = true;
-          xbacklight.enable = true;
-          xdpyinfo.enable = true;
-          xev.enable = true;
-          xprop.enable = true;
+          arandr.enable = mkDefault true;
+          autokey.enable = mkDefault false;
+          redshift.enable = mkDefault true;
+          sysstat.enable = mkDefault true;
+          xbindkeys.enable = mkDefault true;
+          xdotool.enable = mkDefault true;
+          xbacklight.enable = mkDefault true;
+          xdpyinfo.enable = mkDefault true;
+          xev.enable = mkDefault true;
+          xprop.enable = mkDefault true;
         };
       };
     };

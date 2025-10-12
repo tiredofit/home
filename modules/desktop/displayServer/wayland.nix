@@ -11,22 +11,22 @@ in
       home = {
         applications = {
           cliphist = {
-            enable = true;
-            service.enable = true;
+            enable = mkDefault true;
+            service.enable = mkDefault true;
           };
-          grim.enable = true;
-          nwg-displays.enable = true;
-          slurp.enable = true;
-          wayprompt.enable = false;
-          wdisplays.enable = true;
-          wev.enable = true;
-          wl-clipboard.enable = true;
+          grim.enable = mkDefault true;
+          nwg-displays.enable = mkDefault true;
+          slurp.enable = mkDefault true;
+          wayprompt.enable = mkDefault false;
+          wdisplays.enable = mkDefault true;
+          wev.enable = mkDefault true;
+          wl-clipboard.enable = mkDefault true;
           wl-gammarelay-rs = {
-            enable = false;
-            service.enable = false;
+            enable = mkDefault false;
+            service.enable = mkDefault false;
           };
-          wlogout.enable = true;
-          wlr-randr.enable = true;
+          wlogout.enable = mkDefault true;
+          wlr-randr.enable = mkDefault true;
         };
       };
     };
