@@ -6,6 +6,5 @@ with lib;
     ./cinnamon
     ./hyprland
     ./i3
-    ./sway
   ];
 }

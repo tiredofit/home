@@ -1,35 +1,26 @@
-{lib, ...}:
+{ lib, ... }:
 
-with lib;
-{
-  imports = [
-    ./cliphist.nix
-    ./grim.nix
-    ./hyprcursor.nix
-    ./hyprdim.nix
-    ./hypridle.nix
-    ./hyprkeys.nix
-    ./hyprlock.nix
-    ./hyprpaper.nix
-    ./hyprpicker.nix
-    ./hyprpolkitagent.nix
-    ./hyprshot.nix
-    ./hyprsunset.nix
-    ./nwg-displays.nix
-    ./satty.nix
-    ./shikane.nix
-    ./slurp.nix
-    ./swayidle.nix
-    ./swaylock.nix
-    ./swaync.nix
-    ./swayosd.nix
-    ./waybar.nix
-    ./wayprompt.nix
-    ./wdisplays.nix
-    ./wev.nix
-    ./wl-clipboard.nix
-    ./wl-gammarelay-rs.nix
-    ./wlr-randr.nix
-    ./wlogout.nix
+let
+  dir = ./.;
+  files = builtins.readDir dir;
+  ignoreList = [
+
   ];
+  importable = lib.filterAttrs (name: type:
+    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
+    || (
+      type == "directory"
+      && name != "default.nix"
+      && !(lib.elem name ignoreList)
+      && builtins.pathExists (dir + "/${name}/default.nix")
+    )
+  ) files;
+  imports = lib.mapAttrsToList (name: type:
+    if type == "regular"
+    then ./${name}
+    else ./${name}/default.nix
+  ) importable;
+in
+{
+  imports = imports;
 }

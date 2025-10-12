@@ -27,7 +27,7 @@ with lib;
       };
 
       windowManager = mkOption {
-        type = types.enum ["cinnamon" "hyprland" "i3" "sway" ];
+        type = types.enum ["cinnamon" "hyprland" ];
         default = null;
         description = "Type of window manager (yes, I know some are desktop environments)";
       };

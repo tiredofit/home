@@ -27,7 +27,6 @@ in
         cryfs.enable = true;
         czkawka.enable = true;
         devenv.enable = false;
-        digikam.enable = false;
         direnv.enable = true;
         file-roller.enable = true;
         floorp.enable = false;
@@ -48,7 +47,6 @@ in
         nmap.enable = false;
         obsidian.enable = false;
         opensnitch-ui.enable = false;
-        peazip.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
         rofi.enable = true;
