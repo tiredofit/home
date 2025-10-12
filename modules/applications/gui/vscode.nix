@@ -292,7 +292,7 @@ in with lib; {
 
             "[dockercompose]" = {
               editor = {
-                "defaultFormatter" = "redhat.vscode-yaml";
+                #"defaultFormatter" = "redhat.vscode-yaml";
                 "autoIndent" = "advanced";
                 "insertSpaces" = true;
                 "quickSuggestions" = {

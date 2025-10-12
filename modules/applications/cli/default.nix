@@ -1,68 +1,26 @@
-{lib, ...}:
+{ lib, ... }:
 
-with lib;
-{
-  imports = [
-    ./act.nix
-    ./android-tools.nix
-    ./bat.nix
-    ./bash.nix
-    ./btop.nix
-    ./claude-code.nix
-    ./comma.nix
-    ./cryfs.nix
-    ./devenv.nix
-    ./diceware.nix
-    ./direnv.nix
-    ./docker-compose.nix
-    ./duf.nix
-    ./dust.nix
-    ./encfs.nix
-    ./file-compression.nix
-    ./fzf.nix
-    ./gh.nix
-    ./git.nix
-    ./gnupg.nix
-    ./go.nix
-    ./hadolint.nix
-    ./hugo.nix
-    ./htop.nix
-    ./jq.nix
-    ./lazygit.nix
-    ./lazydocker.nix
-    ./less.nix
-    ./liquidprompt.nix
-    ./lnav.nix
-    ./lsd.nix
-    ./mp3gain.nix
-    ./mtr.nix
-    ./nano.nix
-    ./ncdu.nix
-    ./neofetch.nix
-    #./neovim
-    ./nix-developmenttools.nix
-    ./nmap.nix
-    ./python.nix
-    ./ranger.nix
-    ./rclone.nix
-    ./ripgrep.nix
-    ./rs-tftpd.nix
-    ./s3ql.nix
-    ./secrets.nix
-    ./shfmt.nix
-    ./shellcheck.nix
-    ./ssh.nix
-    ./steam-run.nix
-    ./tea.nix
-    ./timewarrior.nix
-    ./tmux.nix
-    ./wget.nix
-    ./xdg-ninja.nix
-    ./xmlstarlet.nix
-    ./yq.nix
-    ./yt-dlp.nix
-    ./zathura.nix
-    ./zenity.nix
-    ./zoxide.nix
+let
+  dir = ./.;
+  files = builtins.readDir dir;
+  ignoreList = [
+    "neovim"
   ];
+  importable = lib.filterAttrs (name: type:
+    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
+    || (
+      type == "directory"
+      && name != "default.nix"
+      && !(lib.elem name ignoreList)
+      && builtins.pathExists (dir + "/${name}/default.nix")
+    )
+  ) files;
+  imports = lib.mapAttrsToList (name: type:
+    if type == "regular"
+    then ./${name}
+    else ./${name}/default.nix
+  ) importable;
+in
+{
+  imports = imports;
 }
