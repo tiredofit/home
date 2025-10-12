@@ -23,39 +23,48 @@ in
     };
 
     home.packages = with pkgs; [
-        caladea
-        cantarell-fonts
-        carlito
-        courier-prime
-        dejavu_fonts
-        font-awesome
-        gelasio
-        liberation_ttf
-        material-design-icons
-        merriweather
-        noto-fonts
-        noto-fonts-emoji
-        open-sans
-        roboto
-        ubuntu_font_family
-        weather-icons
-      ] ++ (
-        if (lib.versionAtLeast lib.version "25.05pre") then [
-          nerd-fonts.droid-sans-mono
-          nerd-fonts.hack
-          nerd-fonts.jetbrains-mono
-          nerd-fonts.noto
-          nerd-fonts.zed-mono
-        ] else [
-          (nerdfonts.override {
-            fonts = [
-              "DroidSansMono"
-              "Hack"
-              "JetBrainsMono"
-              "Noto"
-            ];
-          })
-        ]
-      );
+      dejavu_fonts
+      liberation_ttf
+      #material-design-icons
+      nerd-fonts.hack
+      nerd-fonts.noto
+      nerd-fonts.ubuntu
+      noto-fonts
+      noto-fonts-color-emoji
+      open-sans
+      roboto
+      ubuntu_font_family
+    ];
+
+    fonts = {
+      fontconfig = {
+        defaultFonts = {
+          serif = [
+            "Noto Serif NF"
+            "Noto Serif"
+            "Liberation Serif"
+            "DejaVu Serif"
+          ];
+          sansSerif = [
+            "Noto Sans NF"
+            "Noto Sans"
+            "Roboto"
+            "Open Sans"
+            "Liberation Sans"
+            "DejaVu Sans"
+          ];
+          monospace = [
+            "Hack Nerd Font"
+            "NotoSansM Nerd Font Mono"
+            "Noto Sans Mono"
+            "DejaVu Sans Mono"
+            "Liberation Mono"
+          ];
+          emoji = [
+            "Noto Color Emoji"
+          ];
+        };
+      };
+    };
   };
 }
