@@ -54,8 +54,8 @@ in
     programs = {
       bash = {
         enable = true;
-        enableCompletion = true;
-        enableVteIntegration = true;
+        enableCompletion = mkDefault true;
+        enableVteIntegration = mkDefault true;
         bashrcExtra = ''
           # History
           export HISTFILE=$HOME/.local/state/bash/history
@@ -236,22 +236,6 @@ EOF
             command man "$@"
           }
 
-          # Quickly run a pkg run nixpkgs - Add a second argument to it otherwise it will simply run the command - Can also use ',' which is a nix-community project.
-          pkgrun () {
-            if [ -n $1 ] ; then
-               local pkg
-               pkg=$1
-               if [ "$2" != "" ] ; then
-                 shift
-                 local args
-                 args="$@"
-               else
-                 args=$pkg
-               fi
-               nix-shell -p $pkg.out --run "$args"
-            fi
-          }
-
           system_update() {
               update_system() {
                   if command -v "nixos-rebuild" &>/dev/null; then
@@ -354,6 +338,26 @@ EOF
                 process_path "$path"
               done
             fi
+          }
+
+          days_from_epoch() {
+            ## days_from_epoch YYYYMDD
+            local input_date="$1"
+            if [[ "$input_date" =~ ^[0-9]{8}$ ]]; then
+              input_date="''${input_date:0:4}-''${input_date:4:2}-''${input_date:6:2}"
+            fi
+            echo $(( $(date -d "$input_date" +%s) / 86400 ))
+          }
+
+          timestamp() {
+            case "''${1,,}" in
+              date )
+                ## timestamp filename YYYYMMDD
+                local f="$2"
+                local d="$3"
+                touch -t "$(date -d "$d" +%Y%m%d)$(date -r "$f" +%H%M.%S)" "$f"
+              ;;
+            esac
           }
         '';
 
