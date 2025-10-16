@@ -28,10 +28,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-colors = {
       url = "github:misterio77/nix-colors";
     };
@@ -60,7 +56,6 @@
       gnsn = "daveconroy";
       handle = "tiredofit";
       sn = "conroy";
-
 
       pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
         overlays = [
