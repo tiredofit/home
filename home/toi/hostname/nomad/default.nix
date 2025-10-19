@@ -29,7 +29,7 @@ in
         devenv.enable = false;
         direnv.enable = true;
         file-roller.enable = true;
-        floorp.enable = false;
+        floorp.enable = true;
         github-client.enable = true;
         ghostty.enable = true ;
         gnome-software.enable = true;
@@ -59,7 +59,6 @@ in
           enable = true;
           relaxedBlocks = [
             "192.168.1.0/24"
-            "192.168.4.0/24"
           ];
         };
         steam-run.enable = false;
@@ -84,7 +83,10 @@ in
           windowManager = "hyprland";
         };
       };
-      service.decrypt_cryfs_workspace.enable = true;
+      service = {
+        decrypt_cryfs_workspace.enable = true;
+        vscode-server.enable = mkForce false;
+      };
       user = {
         dave = {
           secrets = {
