@@ -1,4 +1,4 @@
-{ config, inputs, lib, nix-vscode-extensions, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
   cfg = config.host.home.applications.obs-studio;
 in
