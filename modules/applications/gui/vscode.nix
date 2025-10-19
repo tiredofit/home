@@ -244,7 +244,10 @@ in with lib; {
             "containers.containers.description" = [ "ContainerName" "Status" ];
             "containers.containers.label" = "ContainerName";
             "containers.containers.sortBy" = "Label";
+            "containers.images.sortBy" = "Label";
+            "containers.networks.sortBy" = "Label";
             "containers.volumes.label" = "VolumeName";
+            "containers.volumes.sortBy" = "Label";
             "containers.enableComposeLanguageService" = false;
 
             ## Editor
@@ -273,7 +276,6 @@ in with lib; {
 
             ## Copilot
             "github.copilot.editor.enableCodeActions" = true;
-            "github.copilot.chat.followUps" = "never";
 
             ## Formatting
             "[dockerfile]" = {
