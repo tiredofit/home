@@ -82,7 +82,7 @@ in with lib; {
 
     programs.floorp = {
       enable = true;
-      package = pkgs.unstable.floorp;
+      package = pkgs.unstable.floorp-bin;
       profiles = {
         default = mkIf cfg.defaultSettings.enable {
           name = mkDefault username;
