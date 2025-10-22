@@ -234,7 +234,7 @@ let
       ];
     };
     "Perplexity" = {
-      name = "Perplexity";
+      name = "Perplexity "; # This eats the firefox internal one and allows the alias to work
       definedAliases = [ "@pp" ];
       icon = "https://www.perplexity.ai/favicon.ico";
       updateInterval = 24 * 60 * 60 * 1000;
