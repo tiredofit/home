@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          smartgithg
+          (if lib.versionAtLeast lib.version "25.11pre" then smartgit else smartgithg)
         ];
     };
   };
