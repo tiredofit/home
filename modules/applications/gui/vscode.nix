@@ -428,6 +428,7 @@ in with lib; {
             "chat.tools.terminal.autoApprove" = {
               "git commit" = false;
               ".*/" = true;
+              "nix" = true;
               "rm" = false;
             };
             #mutableExtensionsDir = false;
