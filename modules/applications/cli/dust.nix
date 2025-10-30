@@ -19,7 +19,7 @@ in
     home = {
       packages = with pkgs;
         [
-          du-dust
+          (if lib.versionAtLeast lib.version "25.11pre" then dust else du-dust)
         ];
     };
     programs = {
