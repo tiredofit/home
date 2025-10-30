@@ -37,7 +37,7 @@ in
         [
           age
           gnupg
-          pinentry.out
+          pinentry-curses
           ssh-to-age
           ssh-to-pgp
           sops
