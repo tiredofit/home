@@ -105,18 +105,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
-          };
-
-          "beef.${gn}" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "workstation";
-              displayName = displayName;
-              hostname = "beef";
-              username = gn;
-              networkInterface = "wlp10s0";
-              inherit inputs outputs;
-            };
+            nixpkgs = nixpkgs-unstable;
           };
 
           "enigma.${gn}" = HomeConfiguration {
@@ -129,6 +118,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
+            nixpkgs = nixpkgs-unstable;
           };
 
           "entropy.${gn}" = HomeConfiguration {
@@ -141,6 +131,7 @@
               networkInterface = "enp8s0f0np0";
               inherit inputs outputs;
             };
+            nixpkgs = nixpkgs-unstable;
           };
 
           "mirage.${gn}" = HomeConfiguration {
@@ -154,6 +145,7 @@
               networkInterface = "end0";
               inherit inputs outputs;
             };
+            nixpkgs = nixpkgs-unstable;
           };
 
           "nakulaptop" = {
@@ -170,6 +162,7 @@
                 networkInterface = "wlo1";
                 inherit inputs outputs;
               };
+              nixpkgs = nixpkgs-unstable;
             };
             "ireen" = HomeConfiguration {
               extraSpecialArgs = {
@@ -184,6 +177,7 @@
                 networkInterface = "wlo1";
                 inherit inputs outputs;
               };
+              nixpkgs = nixpkgs-unstable;
             };
           };
 
@@ -195,6 +189,19 @@
               hostname = "nomad";
               username = gn;
               networkInterface = "wlp2s0";
+              inherit inputs outputs;
+            };
+            nixpkgs = nixpkgs-unstable;
+          };
+
+          "nucleus.${gn}" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "nucleus";
+              username = gn;
+              networkInterface = "null";
               inherit inputs outputs;
             };
             nixpkgs = nixpkgs-unstable;
@@ -219,7 +226,7 @@
               org = "sd";
               role = "server";
               displayName = displayName;
-              hostname = "turing";
+              hostname = "server";
               username = gnsn;
               inherit inputs outputs;
             };
