@@ -1,3 +1,0 @@
-command_exist timew 'alias ts="timew summary :ids"'                                                  # Timewarrior
-
-export NEWFILE_TEMPLATE_REPOUSERNAME=tiredofit
