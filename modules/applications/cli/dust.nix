@@ -25,7 +25,7 @@ in
     programs = {
       bash = {
         initExtra = ''
-          alias du=dust";
+          alias du=dust
         '';
       };
     };
