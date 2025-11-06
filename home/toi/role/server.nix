@@ -8,7 +8,6 @@ with lib;
     home = {
       applications = {
         docker-compose.enable = mkDefault true;
-        git.enable = mkDefault true;
         lazygit.enable = mkDefault true;
         tea.enable = mkDefault true;
       };

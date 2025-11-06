@@ -29,6 +29,9 @@ in
         '';
       };
       bash = {
+        initExtra = ''
+          alias more=less
+        '';
         sessionVariables = {
           LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
         };

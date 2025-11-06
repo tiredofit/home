@@ -25,8 +25,12 @@ in
 
   programs = {
     git = {
-      userName = displayName;
-      userEmail = email;
+      settings = {
+        user = {
+          name = displayName;
+          email = email;
+        };
+      };
     };
   };
 }

@@ -17,16 +17,17 @@ in
 
   config = mkIf cfg.enable {
     programs = {
+      bash = {
+        initExtra = ''
+          alias top=btop"
+        '';
+      };
       btop = {
         enable = true;
         settings = {
           color_theme = "Default";
           theme_background = false;
         };
-      };
-
-      bash.shellAliases = {
-        top = "btop" ;
       };
     };
   };

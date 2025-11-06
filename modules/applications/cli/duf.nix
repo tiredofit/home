@@ -22,11 +22,12 @@ in
           duf
         ];
     };
+
     programs = {
       bash = {
-        shellAliases = {
-          df = "duf" ;
-        };
+        initExtra = ''
+          alias df=duf;
+        '';
       };
     };
   };

@@ -36,10 +36,10 @@ in
       };
 
       bash = {
-        shellAliases = {
-          youtube-dl = "yt-dlp" ;                            # YoutubeDL
-          ytaudio= "yt-dlp -f 'ba' -x --audio-format mp3" ;  # download youtube videos as mp3
-        };
+        initExtra = ''
+          alias youtube-dl="yt-dlp"
+          alias ytaudio="yt-dlp -f 'ba' -x --audio-format mp3"
+        '';
       };
     };
   };

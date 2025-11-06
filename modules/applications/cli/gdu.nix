@@ -25,11 +25,12 @@ in
 
     programs = {
       bash = {
-        {
-          ncdu = "gdu --config-file ~/.config/gdu/config.yaml";
-          gdu = "gdu --config-file ~/.config/gdu/config.yaml";
-        };
+        initExtra = ''
+          alias ncdu="gdu --config-file ~/.config/gdu/config.yaml";
+          alias gdu="gdu --config-file ~/.config/gdu/config.yaml";
+        '';
       };
+    };
 
     xdg.configFile."gdu/config.yaml".text = ''
       ignore-dirs:

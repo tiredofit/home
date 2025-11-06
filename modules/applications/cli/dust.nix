@@ -24,9 +24,9 @@ in
     };
     programs = {
       bash = {
-        shellAliases = {
-          du = "dust" ;
-        };
+        initExtra = ''
+          alias du=dust";
+        '';
       };
     };
   };
