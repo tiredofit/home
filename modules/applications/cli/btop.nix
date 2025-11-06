@@ -19,7 +19,7 @@ in
     programs = {
       bash = {
         initExtra = ''
-          alias top=btop"
+          alias top=btop
         '';
       };
       btop = {
