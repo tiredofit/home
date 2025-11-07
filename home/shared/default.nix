@@ -40,7 +40,6 @@ with lib;
           liquidprompt.enable = mkDefault true;
           mtr.enable = mkDefault true;
           nano.enable = mkDefault true;
-          neofetch.enable = mkDefault false;
           ranger.enable = mkDefault true;
           ripgrep.enable = mkDefault true;
           secrets.enable = mkDefault true;
