@@ -280,6 +280,25 @@ in
           "browser.urlbar.quicksuggest.enabled" = false; # Disable Firefox Suggest(https://support.mozilla.org/en-US/kb/navigate-web-faster-firefox-suggest) feature allows Mozilla to provide search suggestions in the US, which uses your city location and search keywords to send suggestions. This is also used to serve advertisements.
           "pdfjs.enableScripting" = true; # Disable Javascript in PDF viewer - It is possible that some PDFs are not rendered correctly due to missing functions.
 
+          ## AI
+          "browser.ml.chat.enabled" = false;
+          "browser.ml.chat.menu" = false;
+          "browser.ml.chat.page" = false;
+          "browser.ml.chat.page.footerBadge" = false;
+          "browser.ml.chat.page.menuBadge" = false;
+          "browser.ml.chat.shortcuts" = false;
+          "browser.ml.chat.sidebar" = false;
+          "browser.ml.enable" = false;
+          "browser.ml.linkPreview.enabled" = false;
+          "browser.tabs.groups.enabled" = false;
+          "browser.tabs.groups.smart.enabled" = false;
+          "browser.tabs.groups.smart.userEnabled" = false;
+          "extensions.ml.enabled" = false;
+          "pdfjs.enableAltTextModelDownload" = false;
+          "pdfjs.enableGuessAltText" = false;
+          "sidebar.notification.badge.aichat" = false;
+          "sidebar.revamp" = false;
+
           ## Privacy
           "browser.cache.offline.enable" = false; # Disable the Offline Cache.
           "browser.fixup.alternate.enabled" = false; # Disable Fixup URLs
