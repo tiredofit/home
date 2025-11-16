@@ -206,7 +206,6 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
-
           "seed.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
