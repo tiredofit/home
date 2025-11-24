@@ -70,7 +70,7 @@ in {
         display-run = "   Run ";
         display-window = " █  Window";
         drun-display-format = "{icon} {name}";
-        font = "Noto Sans 12 NF";
+        font = "Noto Sans NF 12";
         hide-scrollbar = true;
         icon-theme = "Papirus";
         lines = 6;
@@ -143,7 +143,7 @@ in {
               padding:                         0.30% 0.75% 0% -0.5%;
               background-color:                @background-alt;
               text-color:                      @foreground;
-              font:                            "Noto Sans 10";
+              font:                            "Noto Sans NF 10";
             }
 
             entry {
