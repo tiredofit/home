@@ -272,8 +272,9 @@ in with lib; {
             "workbench.editor.empty.hint" = "hidden";
             "workbench.editor.highlightModifiedTabs" = true;
             "workbench.editor.showTabs" = "multiple";
-            "workbench.startupEditor" = "none";
-
+            #"workbench.startupEditor" = "none";
+            "docker.extension.enableComposeLanguageServer" = false;
+            
             ## Copilot
             "github.copilot.editor.enableCodeActions" = true;
 

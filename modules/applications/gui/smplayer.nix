@@ -671,7 +671,7 @@ in
 #center_window_if_outside=false
 #close_on_finish=false
 #compact_mode=false
-#default_font="Noto Sans,11,-1,5,50,0,0,0,0,0,Regular"
+#default_font="Noto Sans NF,11,-1,5,50,0,0,0,0,0,Regular"
 #default_size=@Size(683 509)
 #delay_left_click=false
 #dockable_playlist=true

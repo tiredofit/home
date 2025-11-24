@@ -274,7 +274,7 @@ in
             * {
                all: unset;
                font-size: 14px;
-               font-family: "Noto Sans";
+               font-family: "Noto Sans NF";
                transition: 200ms;
              }
 

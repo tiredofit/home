@@ -116,7 +116,7 @@ in
         systemd.enable = false;
         style = ''
           * {
-              font-family: Noto Sans NF, Helvetica, Arial, sans-serif;
+              font-family: Noto Sans NF;
               font-size: 13px;
               color: #ffffff;
           }
@@ -275,7 +275,6 @@ in
               background-color: #90b1b1;
           }
 
-
           #scratchpad {
               background: rgba(0, 0, 0, 0.2);
           }
@@ -335,7 +334,7 @@ in
           }
 
           #custom-notification {
-              font-family: "NotoSansMono NF";
+              font-family: "NotoSansM NF";
               background: #98bb6c;
               color: #ffffff;
               padding: 0 20px;
@@ -518,16 +517,16 @@ in
                 "network": {
                   "format-alt": "{ifname}: {ipaddr}/{cidr}",
                   "format-disconnected": "Disconnected ⚠",
-                  "format-ethernet": "{ipaddr}/{cidr} ",
-                  "format-linked": "{ifname} (No IP) ",
+                  "format-ethernet": "{ipaddr}/{cidr} ",
+                  "format-linked": "{ifname} (No IP) 󰈀",
                   "format-wifi": "{essid} ({signalStrength}%)  ",
                   "on-click-right": "nmcli device wifi rescan && kitty sudo nmtui",
-                  "tooltip-format": "{ifname} via {gwaddr} "
+                  "tooltip-format": "{ifname} via {gwaddr}"
                 },
                 "pulseaudio": {
                   "format": "{volume}%  {icon}  {format_source}",
                   "format-bluetooth": "{volume}% {icon} {format_source}",
-                  "format-bluetooth-muted": " {icon} {format_source}",
+                  "format-bluetooth-muted": "󰝟 {icon} {format_source}",
                   "format-icons": {
                     "car": "",
                     "default": [
@@ -535,13 +534,13 @@ in
                         "",
                         ""
                     ],
-                    "hands-free": "",
+                    "hands-free": "󰽟",
                     "headphone": "",
-                    "headset": "",
+                    "headset": "󰋎",
                     "phone": "",
                     "portable": ""
                   },
-                  "format-muted": " {format_source}",
+                  "format-muted": "󰝟 {format_source}",
                   "format-source": " {volume}% ",
                   "format-source-muted": "",
                   "on-click": "pwvucontrol",
@@ -551,9 +550,9 @@ in
                   "critical-threshold": 80,
                   "format": "{temperatureC}°C {icon}",
                   "format-icons": [
-                      "",
+                      "",
                       "",
-                      ""
+                      ""
                   ]
                 }
               }

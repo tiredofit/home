@@ -203,8 +203,8 @@ in with lib; {
             "devtools.everOpened" = mkDefault true;
             "font.internaluseonly.changed" = mkDefault false; # Fonts
             "font.name.monospace.x-western" = mkDefault "Droid Sans Mono"; # Fonts
-            "font.name.sans-serif.x-western" = mkDefault "Noto Sans"; # Fonts
-            "font.name.serif.x-western" = mkDefault "Noto Sans"; # Fonts
+            "font.name.sans-serif.x-western" = mkDefault "Noto Sans NF"; # Fonts
+            "font.name.serif.x-western" = mkDefault "Noto Sans NF"; # Fonts
             "font.size.fixed.x-western" = mkDefault "11"; # Fonts
             "font.size.variable.x-western" = mkDefault "15"; # Fonts
             "general.smoothScroll" = mkDefault true; # enable smooth scrolling
