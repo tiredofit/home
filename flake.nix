@@ -16,12 +16,12 @@
   };
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     comma.url = "github:nix-community/comma";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     home-manager-unstable = {
@@ -105,7 +105,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
 
           "enigma.${gn}" = HomeConfiguration {
@@ -118,7 +118,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
 
           "entropy.${gn}" = HomeConfiguration {
@@ -131,7 +131,7 @@
               networkInterface = "enp8s0f0np0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
 
           "mirage.${gn}" = HomeConfiguration {
@@ -145,7 +145,7 @@
               networkInterface = "end0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
 
           "nakulaptop" = {
@@ -162,7 +162,7 @@
                 networkInterface = "wlo1";
                 inherit inputs outputs;
               };
-              nixpkgs = nixpkgs-unstable;
+              nixpkgs = nixpkgs-stable;
             };
             "ireen" = HomeConfiguration {
               extraSpecialArgs = {
@@ -177,7 +177,7 @@
                 networkInterface = "wlo1";
                 inherit inputs outputs;
               };
-              nixpkgs = nixpkgs-unstable;
+              nixpkgs = nixpkgs-stable;
             };
           };
 
@@ -191,7 +191,7 @@
               networkInterface = "wlp2s0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
 
           "nucleus.${gn}" = HomeConfiguration {
@@ -204,7 +204,7 @@
               networkInterface = "null";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
           "seed.${gn}" = HomeConfiguration {
             extraSpecialArgs = {
@@ -216,7 +216,7 @@
               networkInterface = "enp1s0f0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-unstable;
+            nixpkgs = nixpkgs-stable;
           };
       ##
 
