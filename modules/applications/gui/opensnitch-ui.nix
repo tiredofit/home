@@ -16,11 +16,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs;
-        [
-          opensnitch-ui
-        ];
+    services = {
+      opensnitch-ui = {
+        enable = mkDefault true;
+        package = mkDefault pkgs.opensnitch-ui;
+      };
     };
 
     wayland.windowManager.hyprland = {
