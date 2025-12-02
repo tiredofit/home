@@ -46,9 +46,9 @@ in
             in
               defaultBlock // relaxedBlocksAttrs;
         }
-        (lib.optionalAttrs (lib.versionAtLeast (lib.version or "0") "25.11pre") {
+        {
           enableDefaultConfig = mkDefault false;
-        })
+        }
       ];
     };
   };
