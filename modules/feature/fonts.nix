@@ -26,13 +26,8 @@ in
       noto-fonts-color-emoji
       open-sans
       roboto
-    ] ++ (
-      if (lib.versionAtLeast lib.version "25.11pre") then [
-        ubuntu-classic
-      ] else [
-        ubuntu_font_family
-      ]
-    );
+      ubuntu-classic
+    ];
 
     fonts = {
       fontconfig = {
