@@ -35,23 +35,20 @@ in
         ];
     };
 
-    systemd.user.services.nextcloud-client = {
-      Unit = {
-        Description = "Nextcloud Client";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        Environment = [ "PATH=${config.home.profileDirectory}/bin" ];
-        ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud"
-          + (optionalString cfg.service.background " --background");
-      };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
+    services = {
+      nextcloud-client = {
+        enable = mkDefault cfg.service.enable;
+        package = mkDefault pkgs.nextcloud-client;
+        startInBackground = mkDefault cfg.service.background;
       };
     };
+
+
+
+
+
+
+
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
