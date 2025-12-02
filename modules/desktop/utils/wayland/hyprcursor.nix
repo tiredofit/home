@@ -1,19 +1,32 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.host.home.applications.hyprcursor;
-  cursor = "HyprBibataModernClassicSVG";
-  cursorPackage = pkgs.pkg-bibata-hyprcursor;
-  cursorSize = 24;
 in
-  with lib;
-{
+  with lib; {
   options = {
     host.home.applications.hyprcursor = {
       enable = mkOption {
         default = false;
         type = with types; bool;
-        description = "hyprcursor is a new cursor theme format that has many advantages over the widely used xcursor.";
+        description = "Hyprcursor is a new cursor theme format that has many advantages over the widely used xcursor.";
+      };
+      cursor = {
+        name = mkOption {
+          type = types.str;
+          default = "HyprBibataModernClassicSVG";
+          description = "Cursor theme name.";
+        };
+        package = mkOption {
+          type = types.package;
+          default = pkgs.pkg-bibata-hyprcursor;
+          description = "Cursor package.";
+        };
+        size = mkOption {
+          type = types.int;
+          default = 24;
+          description = "Cursor size.";
+        };
       };
     };
   };
@@ -21,45 +34,36 @@ in
   config = mkIf cfg.enable {
     home = {
       file = {
-        ".icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
+        ".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
       };
 
-      packages = with pkgs;
-        [
-          hyprcursor
-        ];
+      packages = with pkgs; [
+        hyprcursor
+      ];
 
       pointerCursor = {
-        #package = pkgs.bibata-cursors;
-        #name = "Bibata-Modern-Classic";
-        size = cursorSize;
-        gtk.enable = true;
-        #x11.enable = true;
+        package = mkDefault cfg.cursor.package;
+        name = mkDefault cfg.cursor.name;
+        size = mkDefault cfg.cursor.size;
+        hyprcursor = {
+          enable = mkDefault true;
+        };
+        gtk.enable = mkDefault true;
       };
     };
 
     xdg = {
-      configFile =
-        { "uwsm/env".text = mkIf config.host.home.feature.uwsm.enable
-            ''
-              export HYPRCURSOR_THEME="${cursor}"
-              export HYPRCURSOR_SIZE="${toString cursorSize}"
-            '';
-        };
-        dataFile = {
-          "icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
-        };
+      configFile = {
+      };
+      dataFile = {
+        "icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+      };
     };
 
     wayland.windowManager.hyprland = {
       settings = {
-        env = mkIf (! config.host.home.feature.uwsm.enable) [
-          "HYPRCURSOR_THEME,${cursor}"
-          "HYPRCURSOR_SIZE,${toString cursorSize}"
-        ];
-
         exec-once = [
-          "${config.host.home.feature.uwsm.prefix}hyprctl setcursor ${cursor} ${toString cursorSize}"
+          "${config.host.home.feature.uwsm.prefix}hyprctl setcursor ${cfg.cursor.name} ${toString cfg.cursor.size}"
         ];
       };
     };
