@@ -20,7 +20,7 @@ in
       bat = {
         enable = true;
         config = {
-          map-syntax = [ "*.jenkinsfile:Groovy" "*.props:Java Properties" ];
+          map-syntax = [ ];
           pager = "less -FR";
           theme = "TwoDark";
         };
