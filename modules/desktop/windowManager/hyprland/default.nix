@@ -2,7 +2,6 @@
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
-
   gameMode = pkgs.writeShellScriptBin "hyprland_gamemode" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then

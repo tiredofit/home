@@ -35,13 +35,11 @@ in
         defaultFonts = {
           serif = [
             "Noto Serif NF"
-            #"Noto Serif"
             "Liberation Serif"
             "DejaVu Serif"
           ];
           sansSerif = [
             "Noto Sans NF"
-            #"Noto Sans"
             "Roboto"
             "Open Sans"
             "Liberation Sans"
@@ -50,7 +48,6 @@ in
           monospace = [
             "Hack Nerd Font"
             "NotoSansM Nerd Font Mono"
-            #"Noto Sans Mono"
             "DejaVu Sans Mono"
             "Liberation Mono"
           ];
