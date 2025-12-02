@@ -5,9 +5,9 @@ let
 in
   with lib;
 {
-  imports = lib.optionals (lib.versionOlder lib.version "25.11pre") [
-    (lib.mkAliasOptionModule ["programs" "less" "config"] ["programs" "less" "keys"])
-  ];
+  #imports = lib.optionals (lib.versionOlder lib.version "25.11pre") [
+  #  (lib.mkAliasOptionModule ["programs" "less" "config"] ["programs" "less" "keys"])
+  #];
 
   options = {
     host.home.applications.less = {
