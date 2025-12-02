@@ -16,12 +16,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      programs = {
-        obsidian = {
-          enable = true;
-          package = pkgs.unstable.obsidian;
-        };
+    programs = {
+      obsidian = {
+        enable = true;
+        package = pkgs.unstable.obsidian;
       };
     };
   };
