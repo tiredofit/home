@@ -1,5 +1,5 @@
 {config, lib, pkgs, ...}:
-
+## PERSONALIZE
 let
   cfg = config.host.home.feature.fonts;
 in
@@ -31,7 +31,7 @@ in
 
     fonts = {
       fontconfig = {
-        enable = true;
+        enable = mkDefault true;
         defaultFonts = {
           serif = [
             "Noto Serif NF"

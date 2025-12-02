@@ -18,6 +18,10 @@ in
 {
   host = {
     home = {
+
+        applications = {
+
+        };
       applications = {
         act.enable = true;
         avidemux.enable = true;
@@ -70,6 +74,8 @@ in
           defaultApplication.enable = true;
         };
         walker.enable = false;
+        wayprompt.enable = false;
+        wdisplays.enable = false;
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;

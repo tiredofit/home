@@ -1,5 +1,5 @@
 {config, lib, pkgs, ...}:
-
+## PERSONALIZE
 let
   cfg = config.host.home.applications.sway-notification-center;
 

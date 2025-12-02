@@ -1,4 +1,5 @@
 { config, inputs, lib, pkgs, specialArgs, ... }:
+## PERSONALIZE
 let
   cfg = config.host.home.applications.hyprpaper;
    script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprpaper" ''

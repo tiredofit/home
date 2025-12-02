@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+## PERSONALIZE
 with lib;
 let
   cfg = config.host.home.applications.walker;

@@ -1,5 +1,5 @@
 {config, lib, nix-colours, pkgs, ...}:
-
+## PERSONALIZE
 let
   cfg = config.host.home.applications.kitty;
   displayServer = config.host.home.feature.gui.displayServer ;

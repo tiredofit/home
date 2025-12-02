@@ -1,7 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 let
   cfg = config.host.home.applications.hyprlock;
-
+## PERSONALIZE
  script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprlock" ''
     _get_display_name() {
         ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "$(echo "''${1}" | sed "s|^d/||g")" '.[] | select(.description | test("^(d/)?\($desc)")) | .name'

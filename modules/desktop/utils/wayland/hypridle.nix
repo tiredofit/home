@@ -1,4 +1,5 @@
 { config, inputs, lib, pkgs, specialArgs, ... }:
+## PERSONALIZE
 let
   inherit (specialArgs) role;
   cfg = config.host.home.applications.hypridle;

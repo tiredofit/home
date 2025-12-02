@@ -1,5 +1,6 @@
 { config, inputs, lib, pkgs, ... }:
 let
+## PERSONALIZE
   cfg = config.host.home.applications.visual-studio-code;
   pkgs-ext = import inputs.nixpkgs {
     inherit (pkgs) system;
@@ -433,6 +434,7 @@ in with lib; {
               "rm" = false;
             };
             #mutableExtensionsDir = false;
+            chat.agent.maxRequests = 50;
           };
         };
       };

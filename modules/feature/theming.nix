@@ -1,5 +1,5 @@
 {config, inputs, lib, pkgs, specialArgs, ...}:
-
+## PERSONALIZE
 let
   inherit (specialArgs) role username;
   cfg = config.host.home.feature.theming;
@@ -23,7 +23,7 @@ in
   config = mkIf cfg.enable {
     colorScheme = inputs.nix-colors.colorSchemes.dracula;
     gtk = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
-      enable = true;
+      enable = mkDefault true;
       iconTheme = {
         name = "Papirus";
         package = pkgs.papirus-icon-theme;

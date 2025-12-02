@@ -10,7 +10,10 @@ with lib;
         blanket.enable = mkDefault true;
         cryfs.enable = mkDefault true;
         docker-compose.enable = mkDefault true;
-        nextcloud-client.enable = mkDefault true;
+        nextcloud-client = {
+          enable = mkDefault true;
+          service.enable = mkDefault true;
+        };
         networkmanager = {
           enable = mkDefault true;
           systemtray.enable = mkDefault false;

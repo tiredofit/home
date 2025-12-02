@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    prgorams = {
+    programs = {
       zed-editor = {
         enable = mkDefault true;
         package = mkDefault pkgs.zed-editor;
