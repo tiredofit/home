@@ -5,5 +5,7 @@ with lib;
     ./firefox.nix
     ./git.nix
     ./hugo.nix
+    ./hyprland
+    ./waybar.nix
   ];
 }
