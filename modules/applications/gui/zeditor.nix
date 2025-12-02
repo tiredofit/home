@@ -16,11 +16,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs;
-        [
-          zed-editor
-        ];
+    prgorams = {
+      zed-editor = {
+        enable = mkDefault true;
+        package = mkDefault pkgs.zed-editor;
+      };
     };
   };
 }
