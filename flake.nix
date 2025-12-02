@@ -193,14 +193,13 @@
             };
             nixpkgs = nixpkgs-stable;
           };
-
-          "nucleus.${gn}" = HomeConfiguration {
+          "nucleus.tttttt" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
               displayName = displayName;
               hostname = "nucleus";
-              username = gn;
+              username = "tttttt";
               networkInterface = "null";
               inherit inputs outputs;
             };
