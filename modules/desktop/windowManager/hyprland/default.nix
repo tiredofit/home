@@ -120,7 +120,6 @@ with lib;
           hyprpicker.enable = mkDefault true;
           hyprpolkitagent = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
           };
           hyprsunset = {
             enable = mkDefault true;
