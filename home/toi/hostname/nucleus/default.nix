@@ -9,11 +9,19 @@ in
       applications = {
         kitty.enable = true;
         lazygit.enable = true;
-        #networkmanager = {
-        #  enable = true;
-        #  systemtray.enable = false;
-        #};
+        satty.enable = false;
+        shikane.enable = false;
         rofi.enable = true;
+        swayosd.enable = false;
+        rofi.enable = true;
+        grim.enable = false;
+        nwg-displays.enable = false;
+        slurp.enable = false;
+        wayprompt.enable = false;
+        waybar = {
+          enable = true;
+          service.enable = true;
+        };
         ssh = {
           enable = true;
         };
@@ -23,11 +31,15 @@ in
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = "hyprland";
+          windowManager = "sway";
         };
+      };
+      service = {
+        vscode-server.enable = false;
       };
       user = {
       };
     };
   };
 }
+
