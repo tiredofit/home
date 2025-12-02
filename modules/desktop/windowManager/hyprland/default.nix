@@ -118,13 +118,8 @@ with lib;
             service.enable = mkDefault true;
           };
           hyprpicker.enable = mkDefault true;
-          hyprpolkitagent = {
-            enable = mkDefault true;
-          };
-          hyprsunset = {
-            enable = mkDefault true;
-            service.enable = mkDefault true;
-          };
+          hyprpolkitagent.enable = mkDefault true;
+          hyprsunset.enable = mkDefault true;
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
           satty.enable = mkDefault true;
