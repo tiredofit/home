@@ -8,79 +8,26 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     wayland.windowManager.hyprland = {
       settings = {
-        # UI
         general = {
-          #col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          #col.inactive_border = "rgba(595959aa)";
-          allow_tearing = true;
-          border_size = 2;
-          gaps_in = 2;
-          gaps_out = 5;
-          layout = "master";
-          resize_corner = 2;
-          resize_on_border = true;
         };
 
-        # Cursor
         cursor = {
-          inactive_timeout = 10;
-          hide_on_key_press = true;
+          inactive_timeout = mkDefault 10;
+          hide_on_key_press = mkDefault true;
         };
-
-        master = {
-          allow_small_split = true;
-          drop_at_cursor = true;
-          inherit_fullscreen = true;
-          mfact = 0.55;
-          new_on_top = true;
-          new_status = "master";
-          orientation = "center";
-          smart_resizing = true;
-        } // (lib.optionalAttrs (!lib.versionAtLeast lib.version "25.05pre") {
-          always_center_master = false;
-        });
 
         decoration = {
           blur = {
-            enabled = true;
-            brightness = 1;
-            contrast = 1.0;
-            ignore_opacity = true;
-            new_optimizations = true;
-            passes = 3;
-            popups = true;
-            size = 4;
-            vibrancy = 0.50;
-            vibrancy_darkness = 0.50;
-            xray = false;
           };
 
-          #col.shadow = "rgba(1a1a1aee)";
-          dim_inactive = false;
-          dim_strength = 0.2;
-          rounding = 5;
-
           shadow = {
-            enabled = true;
-            range = 4;
-            render_power = 4;
           };
         };
 
         animations = {
-          enabled = true;
-          animation = [
-            "border, 1, 10, default"
-            "fade, 1, 7, default"
-            "windows, 1, 5, myBezier"
-            "windowsMove, 1, 5, myBezier"
-            "windowsOut, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 20%"
-            "workspaces, 1, 10, overshot , slidevert"
+          animation = mkDefault [
           ];
-          bezier = [
-            "myBezier, 0.05, 0.9, 0.1, 1.1"
-            "overshot, 0.05, 0.9, 0.1, 1.1"
+          bezier = mkDefault [
           ];
         };
       };

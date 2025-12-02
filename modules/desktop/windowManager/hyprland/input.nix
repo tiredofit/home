@@ -9,20 +9,20 @@ with lib;
     wayland.windowManager.hyprland = {
       settings = {
         input = {
-          follow_mouse = 1; # 0=disabled 1=autofocus 2=sloppy 3=seperated
-          kb_layout = "us";
-          kb_model = "";
-          kb_options = "";
-          kb_rules = "";
-          kb_variant = "";
-          mouse_refocus= false;
-          numlock_by_default = true;
-          repeat_delay = 200;
-          repeat_rate = 40;
-          sensitivity = 0;
+          follow_mouse = mkDefault 1; # 0=disabled 1=autofocus 2=sloppy 3=seperated
+          kb_layout = mkDefault "us";
+          kb_model = mkDefault "";
+          kb_options = mkDefault "";
+          kb_rules = mkDefault "";
+          kb_variant = mkDefault "";
+          mouse_refocus= mkDefault false;
+          numlock_by_default = mkDefault true;
+          repeat_delay = mkDefault 200;
+          repeat_rate = mkDefault 40;
+          sensitivity = mkDefault 0;
           touchpad = {
-            natural_scroll = false;
-            disable_while_typing = true;
+            natural_scroll = mkDefault false;
+            disable_while_typing = mkDefault true;
           };
         };
       };

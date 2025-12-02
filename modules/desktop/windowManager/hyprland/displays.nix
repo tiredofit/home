@@ -8,9 +8,6 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     wayland.windowManager.hyprland = {
       settings = {
-        source = [
-          "display.conf"
-        ];
         monitor = [
           ",preferred,auto,1.0"
         ];

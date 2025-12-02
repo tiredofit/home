@@ -10,11 +10,6 @@ with lib;
       settings = {
         ## See more in modules/applications/* and modules/desktop/utils/*
         windowrule = [
-          # IDLE inhibit while watching videos
-          #"idleinhibit focus, class:^(mpv|.+exe)$"
-          #"idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
-          #"idleinhibit fullscreen, class:^(firefox)$"
-
           # XDG-Portal-GTK File Picker annoyances
           "dimaround,title:^Open Files$"
           "float,title:^Open Files$"

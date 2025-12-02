@@ -85,20 +85,20 @@ with lib;
           "SUPER_SHIFT, 5, movetoworkspace, 5"
           "SUPER_SHIFT, 6, movetoworkspace, 6"
           "SUPER_SHIFT, 7, movetoworkspace, 7"
-          "SUPER_SHIFT, 8,  movetoworkspace, 8"
+          "SUPER_SHIFT, 8, movetoworkspace, 8"
           "SUPER_SHIFT, 9, movetoworkspace, 9"
           #"SUPER_SHIFT, KP_Insert, movetoworkspace, 10"
 
           # moving windows to other workspaces (silent)
-          "SUPER_ALT, 1,   movetoworkspacesilent,1"
+          "SUPER_ALT, 1,  movetoworkspacesilent,1"
           "SUPER_ALT, 2,  movetoworkspacesilent,2"
           "SUPER_ALT, 3,  movetoworkspacesilent,3"
           "SUPER_ALT, 4,  movetoworkspacesilent,4"
-          "SUPER_ALT, 5, movetoworkspacesilent,5"
-          "SUPER_ALT, 6, movetoworkspacesilent,6"
+          "SUPER_ALT, 5,  movetoworkspacesilent,5"
+          "SUPER_ALT, 6,  movetoworkspacesilent,6"
           "SUPER_ALT, 7,  movetoworkspacesilent,7"
-          "SUPER_ALT, 8,    movetoworkspacesilent,8"
-          "SUPER_ALT, 9, movetoworkspacesilent,9"
+          "SUPER_ALT, 8,  movetoworkspacesilent,8"
+          "SUPER_ALT, 9,  movetoworkspacesilent,9"
           #"SUPER_ALT, KP_Insert, movetoworkspacesilent,0"
 
 
@@ -110,11 +110,6 @@ with lib;
 
            # Turn off animations / game mode
           "WIN, F1, exec,  hyprland_gamemode"
-
-          # special workspace
-          ## TODO Dynamic Configuration
-          "SUPER_SHIFT, grave, movetoworkspace, special"
-          "SUPER, grave, togglespecialworkspace, DP-2"
 
           # Scroll through existing workspaces with mainMod + scroll
           "SUPER, mouse_down, workspace, e+1"
