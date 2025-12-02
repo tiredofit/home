@@ -34,9 +34,7 @@ with lib;
           new_status = mkDefault "master";
           orientation = mkDefault "center";
           smart_resizing = mkDefault true;
-        } // (lib.optionalAttrs (!lib.versionAtLeast lib.version "25.05pre") {
-          always_center_master = mkDefault false;
-        });
+        };
 
         decoration = {
           blur = {
