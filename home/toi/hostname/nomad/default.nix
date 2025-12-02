@@ -29,7 +29,7 @@ in
         devenv.enable = false;
         direnv.enable = true;
         file-roller.enable = true;
-        floorp.enable = true;
+        floorp.enable = false;
         github-client.enable = true;
         ghostty.enable = true ;
         gnome-software.enable = true;
