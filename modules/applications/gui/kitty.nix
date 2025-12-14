@@ -23,7 +23,7 @@ in
         enable = true;
         package = pkgs.unstable.kitty;
         font = {
-          name = "Hack";
+          name = "Hack Nerd Font Mono";
           size = 11.0;
         };
         keybindings = {
