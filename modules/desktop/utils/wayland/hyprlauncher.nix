@@ -19,7 +19,6 @@ in
       hyprlauncher = {
         enable = true;
         package = pkgs.hyprlauncher;
-
         settings = {
         };
       };
