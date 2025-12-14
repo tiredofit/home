@@ -203,7 +203,7 @@
               networkInterface = "null";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-unstable;
           };
           "seed.${gn}" = HomeConfiguration {
             extraSpecialArgs = {

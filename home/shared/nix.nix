@@ -69,7 +69,12 @@ with lib;
           if [ -d "/home/$USER/src/nixos" ] ; then
               alias nixos="cd ~/src/nixos"
               alias nixosupdate="nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
-              alias nixswitch="nixos-rebuild switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
+              if command -v nixos-rebuild-ng > /dev/null 2>&1 ; then
+                  NIXOS_REBUILD_CMD="nixos-rebuild-ng"
+              else
+                  NIXOS_REBUILD_CMD="nixos-rebuild"
+              fi  
+              alias nixswitch="$NIXOS_REBUILD_CMD switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
           fi
       '';
     };

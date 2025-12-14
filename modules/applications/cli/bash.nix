@@ -244,7 +244,12 @@ EOF
                     nixos_tmp=$(mktemp -d)
                     ${pkgs.git}/bin/git clone --depth 1 https://github.com/tiredofit/nixos-config "$nixos_tmp" > /dev/null 2>&1
                     cd $nixos_tmp
-                    nixos-rebuild switch --sudo --flake $nixos_tmp#$HOSTNAME
+                    if command -v nixos-rebuild-ng > /dev/null 2>&1 ; then
+                        NIXOS_REBUILD_CMD="nixos-rebuild-ng"
+                    else
+                        NIXOS_REBUILD_CMD="nixos-rebuild"
+                    fi
+                    $NIXOS_REBUILD_CMD switch --sudo --flake $nixos_tmp#$HOSTNAME
                     cd $original_dir
                     rm -rf $nixos_tmp
                     if [ "$SSH_CONNECTION" = "" ]; then
