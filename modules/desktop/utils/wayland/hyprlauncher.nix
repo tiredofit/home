@@ -15,7 +15,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs = {
+    services = {
       hyprlauncher = {
         enable = true;
         package = pkgs.hyprlauncher;
