@@ -43,20 +43,20 @@ in
           "opaque,  class:(Zoom Workplace)"
           "float,   class:(Zoom Workplace)"
 
-          "windowrule = stayfocused,class:(Zoom Workplace),initialTitle:(menu window)"
+          "stayfocused,class:(Zoom Workplace),initialTitle:(menu window)"
           # Zoom Workplace Screen Sharing
 
           # Sharing Toolbar
-          "windowrule = unset,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
-          "windowrule = float,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
-          "windowrule = noborder,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
-          "windowrule = noshadow,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
-          #windowrule = move 930 85,class:^(Zoom Workplace)$,title:^(as_toolbar)$
-          "windowrule = pin,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "unset,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "float,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "noborder,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "noshadow,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          #"move 930 85,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "pin,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
           # Zoom Workplace Screen Sharing
           # Green Border Selection
-          #windowrule = float,title:^(cpt_frame_xcb_window)$
-          #windowrule = noborder,title:^(cpt_frame_xcb_window)$
+          #"float,title:^(cpt_frame_xcb_window)$"
+          #"noborder,title:^(cpt_frame_xcb_window)$"
 
           # Zoom Workplace
           # Main Zoom Landing Window
@@ -65,7 +65,7 @@ in
           "center,class:^(Zoom Workplace)$,title:^(Zoom Workplace - Licensed account)$"
 
           # Zoom Workplace Settings
-          "windowrule = float,class:^(Zoom Workplace)$,title:^(Settings)$"
+          "float,class:^(Zoom Workplace)$,title:^(Settings)$"
 
           # Zoom Workplace Menu Windows
           # Audio Settings, Video Settings, Gallery View etc..

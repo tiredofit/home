@@ -51,10 +51,10 @@ in
       settings = {
         windowrule = [
           # Chrome PWA Zoom
-          "windowrule = workspace 3,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "windowrule = size 1200 1155,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "windowrule = float,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
-          #"windowrule = pin,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+          "workspace 3,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          "size 1200 1155,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          "float,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+          #"pin,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
         ];
       };
     };
