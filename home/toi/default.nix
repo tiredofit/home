@@ -14,6 +14,8 @@ in
   ] ++ existing-imports [
     ./hostname/${hostname}
     ./hostname/${hostname}/${username}.nix
+    ./hostname/${hostname}/${username}
+    ./hostname/${hostname}/${username}/settings
     ./hostname/${hostname}.nix
     ./hostname/${hostname}/settings
     ./role/${role}
