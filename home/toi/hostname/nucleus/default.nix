@@ -4,42 +4,28 @@ let
 in
   with lib;
 {
+
   host = {
     home = {
       applications = {
-        kitty.enable = true;
         lazygit.enable = true;
-        satty.enable = false;
-        shikane.enable = false;
-        rofi.enable = true;
-        swayosd.enable = false;
-        rofi.enable = true;
-        grim.enable = false;
-        nwg-displays.enable = false;
-        slurp.enable = false;
-        wayprompt.enable = false;
-        waybar = {
-          enable = true;
-          service.enable = true;
-        };
         ssh = {
           enable = true;
         };
-        virt-manager.enable = true;
+
+        visual-studio-code.enable = true;
       };
       feature = {
+        fonts.enable = true;
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = "sway";
+          windowManager = "hyprland";
         };
       };
       service = {
-        vscode-server.enable = false;
-      };
-      user = {
+        vscode-server.enable = true;
       };
     };
   };
 }
-
