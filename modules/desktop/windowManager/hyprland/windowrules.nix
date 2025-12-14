@@ -17,6 +17,7 @@ with lib;
 
           # Generics
           "float,class:^(xdg-desktop-portal-hyprland)$"
+          "float, class:(hyprland-share-picker)"
           "float,class:^()$,title:^(File Operation Progress)$"
           "suppressevent maximize, class:.*"
 
