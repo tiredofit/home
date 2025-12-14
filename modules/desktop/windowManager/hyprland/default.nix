@@ -78,20 +78,29 @@ EOF
     ;;
 esac
   '';
-in
 
+  dir = ./.;
+  files = builtins.readDir dir;
+  ignoreList = [
+  ];
+  importable = lib.filterAttrs (name: type:
+    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
+    || (
+      type == "directory"
+      && name != "default.nix"
+      && !(lib.elem name ignoreList)
+      && builtins.pathExists (dir + "/${name}/default.nix")
+    )
+  ) files;
+  imports = lib.mapAttrsToList (name: type:
+    if type == "regular"
+    then ./${name}
+    else ./${name}/default.nix
+  ) importable;
+in
 with lib;
 {
-  imports = [
-    #inputs.hyprland.homeManagerModules.default
-    ./binds.nix
-    ./decorations.nix
-    ./displays.nix
-    ./input.nix
-    ./settings.nix
-    ./startup.nix
-    ./windowrules.nix
-  ];
+  imports = imports;
 
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
     home = {
@@ -102,7 +111,6 @@ with lib;
           script_displayhelper_hyprland
         ];
     };
-
     host = {
       home = {
         applications = {
