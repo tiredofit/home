@@ -28,7 +28,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         bind = [
-          "SUPER_SHIFT, T, exec, ${config.host.home.feature.uwsm.prefix}hyprlauncher"
+          "SUPER, T, exec, ${config.host.home.feature.uwsm.prefix}hyprlauncher"
         ];
       };
     };
