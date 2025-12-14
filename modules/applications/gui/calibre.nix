@@ -29,13 +29,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    ## 26.05 - Switches to programs.calibre when available
     home = {
       packages = with pkgs;
         [
           calibre
         ];
     };
-
+    #programs = {
+    #  calibre = {
+    #    enable = true;
+    #  };
+    #};
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
       lib.genAttrs cfg.defaultApplication.mimeTypes (_: "calibre-gui.desktop")
     );
