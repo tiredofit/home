@@ -84,34 +84,31 @@ in {
       theme = "~/.config/rofi/themes/toi.rasi";
     };
 
-    wayland.windowManager.hyprland = mkIf
-      (config.host.home.feature.gui.displayServer == "wayland"
-        && config.host.home.feature.gui.windowManager == "hyprland"
-        && config.host.home.feature.gui.enable) {
-          settings = {
-            bind = mkMerge [
-              (mkAfter [
-                # Regular Launcher
-                "SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi drun,run,ssh -show drun -show-icons -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
-                # Run a shell comamnd shortcut
-                "SUPER, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd} && read\"' -no-show-icons -no-drun-show-actions -no-cycle -combi-display run -no-sidebar-mode -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'"
-                # SSH
-                "SUPER, S, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show ssh -no-parse-known-hosts -modi ssh -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
-                # Open a new terminal and execute command
-                "SUPER_SHIFT, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd}\"' -no-history -no-auto-select -disable-history -no-show-icons -no-drun-show-actions -no-cycle -no-sidebar-mode -theme-str 'window{width:50%; height:8%;} listview{columns:1;}'"
-                # Open Calculator
-                "SUPER_SHIFT, C, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show calc -modi calc:${rofiCalculator}/bin/rofi-calculator -theme-str 'window{width:50%; height:30%;} listview{columns:1;}'"
-              ])
-              (mkIf (config.host.home.applications.cliphist.enable) (mkAfter [
-                "CONTROLALT, V, exec, pkill rofi || ${pkgs.cliphist}/bin/cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu -columns 1 -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'| ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
-              ]))
-            ];
-            windowrule = [
-              #"stayfocused,class:(Rofi)"
-              #"forceinput,class:(Rofi)"
-            ];
-          };
-        };
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      settings = {
+        bind = mkMerge [
+          (mkAfter [
+            # Regular Launcher
+            "SUPER, D, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -combi-modi drun,run,ssh -show drun -show-icons -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
+            # Run a shell comamnd shortcut
+            "SUPER, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd} && read\"' -no-show-icons -no-drun-show-actions -no-cycle -combi-display run -no-sidebar-mode -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'"
+            # SSH
+            "SUPER, S, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show ssh -no-parse-known-hosts -modi ssh -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'"
+            # Open a new terminal and execute command
+            "SUPER_SHIFT, R, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show run -run-shell-command '${pkgs.kitty}/bin/kitty --hold \"{cmd}\"' -no-history -no-auto-select -disable-history -no-show-icons -no-drun-show-actions -no-cycle -no-sidebar-mode -theme-str 'window{width:50%; height:8%;} listview{columns:1;}'"
+            # Open Calculator
+            "SUPER_SHIFT, C, exec, pkill rofi || ${config.programs.rofi.package}/bin/rofi -show calc -modi calc:${rofiCalculator}/bin/rofi-calculator -theme-str 'window{width:50%; height:30%;} listview{columns:1;}'"
+          ])
+          (mkIf (config.host.home.applications.cliphist.enable) (mkAfter [
+            "CONTROLALT, V, exec, pkill rofi || ${pkgs.cliphist}/bin/cliphist list | ${config.programs.rofi.package}/bin/rofi -dmenu -columns 1 -theme-str 'window{width:50%; height:40%;} listview{columns:1;}'| ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
+          ]))
+        ];
+        windowrule = [
+          #"stayfocused,class:(Rofi)"
+          #"forceinput,class:(Rofi)"
+        ];
+      };
+    };
 
     xdg = {
       configFile = {

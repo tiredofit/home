@@ -37,41 +37,80 @@ in
         ];
     };
 
-    wayland.windowManager.hyprland = {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
-        # old
-        #windowrule = [
-        #  "float, ^(Zoom Workplace)$"
-        #  "float, ^(zoom)$"
-        #];
+        windowrule = [
+          "opaque,  class:(Zoom Workplace)"
+          "float,   class:(Zoom Workplace)"
 
-        #windowrule = [
-        #  "size 360 690,title:^Zoom - Licensed Account$,class:(^Zoom)$"
-        #  "float,title:^Zoom - Licensed Account$"
-        #  "noanim,class:(^Zoom)$"
-        #  "nodim,class:(^Zoom)$"
-        #  "noblur,class:(^Zoom)$"
-        #  "float,title:^as_toolbar$,class:(^Zoom)$"
-        #  "noborder,title:^as_toolbar$,class:(^Zoom)$"
-        #  "noshadow,title:^as_toolbar$,class:(^Zoom)$"
-        #  "noblur,title:^as_toolbar$,class:(^Zoom)$"
-        #  "minsize 1 1, title:^(Zoom Workplace.*)$, class:^(Zoom Workplace)$"
-        #  "minsize 1 1, title:^(menu window)$, class:^(Zoom Workplace)$"
-        #  "minsize 1 1, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
-        #  "minsize 1 1, title:^(Zoom Workplace.*)$, class:^(zoom)$"
-        #  "minsize 1 1, title:^(menu window)$, class:^(zoom)$"
-        #  "minsize 1 1, title:^(meeting bottombar popup)$, class:^(zoom)$"
-        #  "move onscreen cursor, title:^(Zoom Workplace)$, class:^(zoom)$"
-        #  "move onscreen cursor, title:^(menu window)$, class:^(zoom)$"
-        #  "move onscreen cursor, title:^(meeting bottombar popup)$, class:^(zoom)$"
-        #  "move onscreen cursor, title:^(Zoom Workplace)$, class:^(Zoom Workplace)$"
-        #  "move onscreen cursor, title:^(menu window)$, class:^(Zoom Workplace)$"
-        #  "move onscreen cursor, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
-        #  "stayfocused, title:^(menu window)$, class:^(Zoom Workplace)$"
-        #  "stayfocused, title:^(meeting bottombar popup)$, class:^(Zoom Workplace)$"
-        #  "stayfocused, title:^(menu window)$, class:^(zoom)$"
-        #  "stayfocused, title:^(meeting bottombar popup)$, class:^(zoom)$"
-        #];
+          "windowrule = stayfocused,class:(Zoom Workplace),initialTitle:(menu window)"
+          # Zoom Workplace Screen Sharing
+
+          # Sharing Toolbar
+          "windowrule = unset,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "windowrule = float,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "windowrule = noborder,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "windowrule = noshadow,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          #windowrule = move 930 85,class:^(Zoom Workplace)$,title:^(as_toolbar)$
+          "windowrule = pin,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          # Zoom Workplace Screen Sharing
+          # Green Border Selection
+          #windowrule = float,title:^(cpt_frame_xcb_window)$
+          #windowrule = noborder,title:^(cpt_frame_xcb_window)$
+
+          # Zoom Workplace
+          # Main Zoom Landing Window
+          "float,class:^(Zoom Workplace)$,title:^(Zoom Workplace - Licensed account)$"
+          "size 660 530,class:^(Zoom Workplace)$,title:^(Zoom Workplace - Licensed account)$"
+          "center,class:^(Zoom Workplace)$,title:^(Zoom Workplace - Licensed account)$"
+
+          # Zoom Workplace Settings
+          "windowrule = float,class:^(Zoom Workplace)$,title:^(Settings)$"
+
+          # Zoom Workplace Menu Windows
+          # Audio Settings, Video Settings, Gallery View etc..
+          "float,class:^(Zoom Workplace)$,title:^(menu window)$"
+          "size 300 600,class:^(Zoom Workplace)$,title:^(menu window)$"
+          "stayfocused,class:^(Zoom Workplace)$,title:^(menu window)$"
+          "center,class:^(Zoom Workplace)$,title:^(menu window)$"
+
+          # Zoom Workplace Top Bar Popups
+          # Zoom Meeting Info Window
+          "float,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+          "noborder,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+          "noshadow,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+          "center,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+          "stayfocused,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+          "size 485 442,class:^(Zoom Workplace)$,title:^(meeting topbar popup)$"
+
+          # Zoom Workplace Bottom Bar Popups
+          # Zoom Reactions
+          "float,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+          "noborder,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+          "noshadow,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+          "center,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+          "stayfocused,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+          "size 285 90,class:^(Zoom Workplace)$,title:^(meeting bottombar popup)$"
+
+          # Zoom Workplace Misc
+          # Captions Window, Breakout Room Creation, etc
+          "float,class:^(Zoom Workplace)$,title:^(zoom)$"
+          "noborder,class:^(Zoom Workplace)$,title:^(zoom)$"
+          "noshadow,class:^(Zoom Workplace)$,title:^(zoom)$"
+          "center,class:^(Zoom Workplace)$,title:^(zoom)$"
+
+          # Zoom Workplace
+          # Participants Window (Detached)
+          "float,class:^(Zoom Workplace)$,title:^(Participants)(.*)$"
+          "size 490 550,class:^(Zoom Workplace)$,title:^(Participants)(.*)$"
+          "center,class:^(Zoom Workplace)$,title:^(Participants)(.*)$"
+
+          # Zoom Workplace
+          # Chat Window (Detached)
+          "float,class:^(Zoom Workplace)$,title:^(Meeting chat)$"
+          "size 490 550,class:^(Zoom Workplace)$,title:^(Meeting chat)$"
+          "center,class:^(Zoom Workplace)$,title:^(Meeting chat)$"
+        ];
       };
     };
 

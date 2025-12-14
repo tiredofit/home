@@ -47,6 +47,17 @@ in
           chromium
         ];
     };
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+      settings = {
+        windowrule = [
+          # Chrome PWA Zoom
+          "windowrule = workspace 3,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          "windowrule = size 1200 1155,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          "windowrule = float,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+          #"windowrule = pin,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+        ];
+      };
+    };
     xdg  = {
       desktopEntries = {
         chromium-browser = {
