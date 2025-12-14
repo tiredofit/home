@@ -70,7 +70,7 @@ in
         thunderbird.enable = true;
         virt-manager.enable = true;
         visual-studio-code = {
-          enable = mkDefault true;
+          enable = true;
           defaultApplication.enable = true;
         };
         walker.enable = false;
