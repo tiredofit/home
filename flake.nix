@@ -191,7 +191,7 @@
               networkInterface = "wlp2s0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-unstable;
           };
           "nucleus.tttttt" = HomeConfiguration {
             extraSpecialArgs = {

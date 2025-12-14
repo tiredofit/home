@@ -120,6 +120,7 @@ with lib;
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
+          hyprlauncher.enable = mkDefault false;
           hyprlock.enable = true;
           hyprpaper = {
             enable = mkDefault true;

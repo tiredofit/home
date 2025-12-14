@@ -38,6 +38,7 @@ in
         ghostty.enable = true ;
         gnome-software.enable = true;
         hadolint.enable = true;
+        hyprlauncher.enable = true;
         kitty.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
