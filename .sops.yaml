@@ -1,18 +1,17 @@
 keys:
   - &user_dave age1upzm9um3qljxlmxcg8vl35d7eyeqtnsfcnqlh3wtnj46dhfzwyrqa80avw
-  - &host_beef age1wq5xj5mwv9xk4tp26cxc4xqjq9xd9hwqv0zeemawl2cc8sarmqesw366dh
+  - &user_tttttt age1ucran6ymjr0haphap2w0hy84wcwq38yck73r3qaajpu33lx4asfqk73t2a
   - &host_enigma age1nleq0q2kzh2zn4pyr0dcy0zjnsr6sx8c5ttjahhfttkltsr2s3ksahhpkx
 creation_rules:
-  - path_regex: secrets/.*
-    key_groups:
-    - age:
-      - *user_dave
-      - *host_beef
   - path_regex: home/*/secrets/.*
     key_groups:
     - age:
       - *user_dave
-      - *host_beef
+  - path_regex: home/toi/hostname/nucleus/tttttt/secrets/.*
+    key_groups:
+    - age:
+      - *user_dave
+      - *user_tttttt
   - path_regex: home/toi/user/dave/secrets/.*
     key_groups:
     - age:
