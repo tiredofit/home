@@ -73,9 +73,17 @@ with lib;
     cfg = config.host.home.service.wayvnc;
     hasSopsModule = config ? sops;
     hasSecrets = cfg.secretsFile != null;
-    configPath = if hasSopsModule
-      then config.sops.templates."wayvnc/config".path
-      else "${config.home.homeDirectory}/.config/wayvnc/config";
+    configPath = "${config.home.homeDirectory}/.config/wayvnc/config";
+    # Build command line args for wayvnc
+    wayvncArgs = [
+      cfg.address
+      (toString cfg.port)
+    ]
+    ++ (optional (cfg.output != null) ["--output" cfg.output])
+    ++ (optional (cfg.seat != null) ["--seat" cfg.seat])
+    ++ ["--log-level" cfg.logLevel]
+    ++ (mapAttrsToList (name: value: ["--${name}" (toString value)]) cfg.settings);
+    wayvncCmd = concatStringsSep " " (["${cfg.package}/bin/wayvnc"] ++ wayvncArgs ++ (if hasSopsModule && hasSecrets then ["-C" configPath] else []));
   in mkIf cfg.enable {
 
     home.packages = [
@@ -92,7 +100,7 @@ with lib;
       };
 
       Service = mkForce {
-        ExecStart = "${pkgs.wayvnc}/bin/wayvnc --config ${configPath} --log-level=${cfg.logLevel}";
+        ExecStart = wayvncCmd;
         Restart = "always";
         RestartSec = 10;
       };
@@ -107,32 +115,14 @@ with lib;
       "wayvnc/password" = { sopsFile = cfg.secretsFile; };
     };
 
-    sops.templates."wayvnc/config" = mkIf hasSopsModule {
+    sops.templates."wayvnc/config" = mkIf (hasSopsModule && hasSecrets) {
       name = "wayvnc/config";
-      path = "${config.home.homeDirectory}/.config/wayvnc/config";
+      path = configPath;
+      mode = "0600";
       content = ''
-        address=${cfg.address}
-        port=${toString cfg.port}
-        ${optionalString hasSecrets ''
-          enable_auth=true
-          ${if cfg.relaxEncryption then "relax_encryption=true" else "relax_encryption=false"}
-          username=${config.sops.placeholder."wayvnc/username"}
-          password=${config.sops.placeholder."wayvnc/password"}
-        ''}
-        ${optionalString (cfg.output != null) "output=${cfg.output}"}
-        ${optionalString (cfg.seat != null) "seat=${cfg.seat}"}
-        ${concatStringsSep "\n" (mapAttrsToList (name: value: "${name}=${toString value}") cfg.settings)}
-      '';
-    };
-
-    home.file."${config.home.homeDirectory}/.config/wayvnc/config" = mkIf (!hasSopsModule) {
-      text = ''
-        address=${cfg.address}
-        port=${toString cfg.port}
-        relax_encryption=${toString cfg.relaxEncryption}
-        ${optionalString (cfg.output != null) "output=${cfg.output}"}
-        ${optionalString (cfg.seat != null) "seat=${cfg.seat}"}
-        ${concatStringsSep "\n" (mapAttrsToList (name: value: "${name}=${toString value}") cfg.settings)}
+        enable_auth=true
+        username=${config.sops.placeholder."wayvnc/username"}
+        password=${config.sops.placeholder."wayvnc/password"}
       '';
     };
   };
