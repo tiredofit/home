@@ -105,7 +105,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-unstable;
           };
 
           "enigma.${gn}" = HomeConfiguration {
@@ -118,7 +118,7 @@
               networkInterface = "enp6s18";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-unstable;
           };
 
           "entropy.${gn}" = HomeConfiguration {
@@ -131,7 +131,7 @@
               networkInterface = "enp8s0f0np0";
               inherit inputs outputs;
             };
-            nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-unstable;
           };
 
           "mirage.${gn}" = HomeConfiguration {
