@@ -14,7 +14,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && (lib.version != "25.11")) {
     services = {
       hyprlauncher = {
         enable = true;
