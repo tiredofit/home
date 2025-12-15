@@ -52,6 +52,7 @@ in
           "noborder,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
           "noshadow,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
           #"move 930 85,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
+          "stayfocused,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
           "pin,class:^(Zoom Workplace)$,title:^(as_toolbar)$"
           # Zoom Workplace Screen Sharing
           # Green Border Selection
