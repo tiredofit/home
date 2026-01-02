@@ -51,10 +51,8 @@ in
       settings = {
         windowrule = [
           # Chrome PWA Zoom
-          "workspace 3,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "size 1200 1155,initialClass:(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "float,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
-          #"pin,initialClass:chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+          "workspace 3, size 1200 1155, match:initial_class (^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
+          "float on, match:initial_class chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
         ];
       };
     };

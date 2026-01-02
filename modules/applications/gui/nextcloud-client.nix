@@ -43,22 +43,10 @@ in
       };
     };
 
-
-
-
-
-
-
-
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         windowrule = [
-          "float,class:(com.nextcloud.desktopclient.nextcloud)"
-          "noborder,class:(com.nextcloud.desktopclient.nextcloud)"
-          "noblur,class:(com.nextcloud.desktopclient.nextcloud)"
-          "noinitialfocus,class:(com.nextcloud.desktopclient.nextcloud)"
-          "move onscreen cursor 50% 0%,class:(com.nextcloud.desktopclient.nextcloud)"
-          "noanim,class:(com.nextcloud.desktopclient.nextcloud)"
+          "float on, border_size 0, no_blur on, no_initial_focus on, move (cursor_x+(min(max((monitor_w*0.5)\,0)\,monitor_w-window_w))) (cursor_y+(min(max((monitor_h*0)\,0)\,monitor_h-window_h))), no_anim on, match:class (com.nextcloud.desktopclient.nextcloud)"
         ];
       };
     };

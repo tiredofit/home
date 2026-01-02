@@ -30,8 +30,7 @@ in
           "SUPER_SHIFT, S, exec, ${config.host.home.feature.uwsm.prefix}pkill satty || ${config.host.home.feature.uwsm.prefix}grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${config.host.home.feature.uwsm.prefix}satty --disable-notifications -f -"
         ];
         windowrule = [
-          "float,class:^(com.gabm.satty)$"
-          "pin,class:^(com.gabm.satty)$"
+          "float on, pin on, match:class ^(com.gabm.satty)$"
         ];
       };
     };

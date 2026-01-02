@@ -11,45 +11,34 @@ with lib;
         ## See more in modules/applications/* and modules/desktop/utils/*
         windowrule = [
           # XDG-Portal-GTK File Picker annoyances
-          "dimaround,title:^Open Files$"
-          "float,title:^Open Files$"
-          "size 1290 800, title:^Open Files$"
+          "dim_around on, float on, size 1290 800, match:title ^Open Files$"
 
           # Generics
-          "float,class:^(xdg-desktop-portal-hyprland)$"
-          "float, class:(hyprland-share-picker)"
-          "float,class:^()$,title:^(File Operation Progress)$"
-          "suppressevent maximize, class:.*"
+          "float on, match:class ^(xdg-desktop-portal-hyprland)$"
+          "float on, match:class (hyprland-share-picker)"
+          "float on, match:class ^()$, match:title ^(File Operation Progress)$"
+          "suppress_event maximize, match:class .*"
 
           # Position
-          "float,class:^(Viewnior)$"
-          "float,class:^(confirm)$"
-          "float,class:^(confirmreset)$"
-          "float,class:^(dialog)$"
-          "float,class:^(download)$"
-          "float,class:^(error)$"
-          "float,class:^(file_progress)$"
-          "float,class:^(notification)$"
-          "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
-          "float,class:^(pavucontrol)$"
-          "float,title:^(Confirm to replace files)"
-          "float,title:^(DevTools)$"
-          "float,title:^(File Operation Progress)"
-          "float,title:^(Media viewer)$"
-          "float,title:^(Open File)$"
-          "float,title:^(Picture-in-Picture)$"
-          "float,title:^(Volume Control)$"
-          "float,title:^(branchdialog)$"
-
-          # Size
-          "size 800 600,class:^(download)$"
-          "size 800 600,title:^(Open File)$"
-          "size 800 600,title:^(Save File)$"
-          "size 800 600,title:^(Volume Control)$"
-
-          # Test
-          "float, initialTitle:^(Print)$"
-          "size 800 600,initialTitle:^(Print)$"
+          "float on, match:class ^(Viewnior)$"
+          "float on, match:class ^(confirm)$"
+          "float on, match:class ^(confirmreset)$"
+          "float on, match:class ^(dialog)$"
+          "float on, size 800 600, match:class ^(download)$"
+          "float on, match:class ^(error)$"
+          "float on, match:class ^(file_progress)$"
+          "float on, match:class ^(notification)$"
+          "float on, match:class ^(org.kde.polkit-kde-authentication-agent-1)$"
+          "float on, match:class ^(pavucontrol)$"
+          "float on, match:title ^(Confirm to replace files)"
+          "float on, match:title ^(DevTools)$"
+          "float on, match:title ^(File Operation Progress)"
+          "float on, match:title ^(Media viewer)$"
+          "float on, size 800 600, match:title ^(Open File)$"
+          "float on, size 800 600, match:title ^(Volume Control)$"
+          "float on, match:title ^(branchdialog)$"
+          "size 800 600, match:title ^(Save File)$"
+          "float on, size 800 600, match:initial_title ^(Print)$"
         ];
       };
     };

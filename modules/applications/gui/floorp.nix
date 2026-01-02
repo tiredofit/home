@@ -157,11 +157,11 @@ in with lib; {
       settings = {
         windowrule = [
            ### Make Floorp PiP window floating and sticky
-           "float, title:^(Picture-in-Picture)$"
-           "pin, title:^(Picture-in-Picture)$"
+           "float on, pin on, match:title ^(Picture-in-Picture)$"
+
            ### Throw sharing indicators away
-           "workspace special silent, title:^(Floorp — Sharing Indicator)$"
-           "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
+           "workspace special silent, match:title ^(Floorp — Sharing Indicator)$"
+           "workspace special silent, match:title ^(.*is sharing (your screen|a window).)$"
          ];
       };
     };

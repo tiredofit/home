@@ -104,8 +104,6 @@ in {
           ]))
         ];
         windowrule = [
-          #"stayfocused,class:(Rofi)"
-          #"forceinput,class:(Rofi)"
         ];
       };
     };

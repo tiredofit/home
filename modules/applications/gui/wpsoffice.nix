@@ -40,8 +40,8 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         windowrule = [
-          "tile,title:(^WPS Spreadsheets$)"
-          "size 500 500,class:^(et)$,title:^(et)$"
+          "tile on, match:title (^WPS Spreadsheets$)"
+          "size 500 500, match:class ^(et)$, match:title ^(et)$"
         ];
       };
     };
