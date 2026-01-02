@@ -4,7 +4,7 @@
 if [ "${1}" ]; then
   latest_version="${1}"
 else
-  latest_version=$(curl -s https://api.github.com/repos/jeffvli/feishin/releases/latest | jq -r '.tag_name')
+  latest_version=$(curl -s https://api.github.com/repos/jeffvli/feishin/releases | jq -r '.[0].tag_name')
 fi
 
 echo "Updating version in default.nix to ${latest_version}"
