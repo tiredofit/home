@@ -35,7 +35,7 @@ in
     [
 
     ]
-    ++ lib.optionals ( role == "workstation" || role == "server" )
+    ++ lib.optionals ( role == "workstation" || role == "laptop" || role == "server" )
     [
 
     ];
