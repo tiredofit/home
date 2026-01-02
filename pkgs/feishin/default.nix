@@ -16,7 +16,7 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url = "https://github.com/jeffvli/feishin/releases/download/${version}/Feishin-linux-x86_64.AppImage";
-    sha256 = "1dh047w9134giq9q28vkq7i247n2zg9yaaqldl93sw83y70p05xi";
+    sha256 = "10ccch2r2jjcf62759b9pdfqf8mww9cfp199pbqs668qpv457lx0";
   };
 
   desktopItems = [
