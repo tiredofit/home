@@ -332,26 +332,32 @@ with lib; {
                   },
                   "format": "{capacity}% {icon}",
                   "format-icons": ["", "", "", "", ""],
+                  "tooltip-format": "{timeTo} {power}w",
+                  "format-charging": " {capacity}%",
+                  "format-plugged": "{capacity}% 󱘖",
+                  "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
                   "max-length": 25
                 },
                 "bluetooth": {
                   "format": " {status}",
                   "format-connected": " {num_connections} connected",
-                  "format-disabled": "Bluetooth Disabled",
                   "on-click": "blueman-manager",
                   "tooltip-format": "{controller_alias}\t{controller_address}",
                   "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
                   "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
                 },
                 "cpu": {
-                  "format": "{load} {usage} {avg_frequency} ",
-                  "interval": 10,
+                  "interval": 1,
+                  "format": "{usage}% 󰍛",
+                  "min-length": 5,
+                  "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
+                  "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
                   "on-click": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-resources-tab"
                 },
                 "disk": {
                   "format": "{used}/{total}",
                   "interval": 30,
-                  "on-click": "kitty ncdu ~",
+                  "on-click": "kitty gdu ~",
                   "on-click-right": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-file-systems-tab",
                   "path": "/"
                 },
@@ -371,16 +377,18 @@ with lib; {
                   "scrollock": true
                 },
                 "memory": {
-                  "format": "{used:0.1f}G/{total:0.1f}G ",
-                  "interval": 10,
+                  "format": "{used:0.1f}G 󰾆",
+                  "format-alt": "{percentage}% 󰾆",
+                  "tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
                   "on-click": "${pkgs.gnome-system-monitor}/bin/gnome-system-monitor --show-processes-tab"
                 },
                 "network": {
                   "format-alt": "{ifname}: {ipaddr}/{cidr}",
-                  "format-disconnected": "Disconnected ⚠",
-                  "format-ethernet": "{ipaddr}/{cidr} ",
+                  "format-ethernet": "{ipaddr}/{cidr} 󰌘",
+                  "format-disconnected": "󰌙",
                   "format-linked": "{ifname} (No IP) 󰈀",
                   "format-wifi": "{essid} ({signalStrength}%)  ",
+                  "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
                   "on-click-right": "nmcli device wifi rescan && kitty sudo nmtui",
                   "tooltip-format": "{ifname} via {gwaddr}"
                 },
@@ -404,11 +412,16 @@ with lib; {
                   "format-muted": "󰝟 {format_source}",
                   "format-source": " {volume}% ",
                   "format-source-muted": "",
-                  "on-click": "pwvucontrol",
+                  "on-click": "${pkgs.pwvucontrol}/bin/pwvucontrol",
                   "on-click-right": "sound-tool output cycle"
                 },
                 "temperature": {
+                  "interval": 10,
                   "critical-threshold": 80,
+                  "hwmon-path": [
+                      "/sys/class/hwmon/hwmon1/temp1_input",
+                      "/sys/class/thermal/thermal_zone0/temp"
+                  ],
                   "format": "{temperatureC}°C {icon}",
                   "format-icons": [
                       "",
