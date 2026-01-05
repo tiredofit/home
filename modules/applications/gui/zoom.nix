@@ -44,7 +44,7 @@ in
           "stay_focused on, match:class (Zoom Workplace), match:initial_title (menu window)"
 
           # Sharing Toolbar
-          "unset on, float on, border_size 0, no_shadow on, stay_focused on, pin on, match:class ^(Zoom Workplace)$, match:title ^(as_toolbar)$"
+          "float on, border_size 0, no_shadow on, stay_focused on, pin on, match:class ^(Zoom Workplace)$, match:title ^(as_toolbar)$"
 
           # Main Zoom Landing Window
           "float on, size 660 530, center on, match:class ^(Zoom Workplace)$, match:title ^(Zoom Workplace - Licensed account)$"

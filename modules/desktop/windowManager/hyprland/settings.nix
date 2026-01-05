@@ -14,7 +14,7 @@ with lib;
           disable_hyprland_logo = mkDefault true;
           disable_splash_rendering = mkDefault true;
           force_default_wallpaper = mkDefault "-3";
-          new_window_takes_over_fullscreen = mkDefault 2; # 0 - behind, 1 - takes over, 2 - unfullscreen/unmaxize
+          on_focus_under_fullscreen = mkDefault 2; # behind, 1 - takes over, 2 - unfullscreen/unmaxize
           middle_click_paste = mkDefault true;
         };
       };
