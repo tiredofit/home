@@ -16,22 +16,35 @@ let
     else
         _monitor1=$(_get_display_name "''${1}")
         echo "splash=false" > ''${HOME}/.config/hypr/hyprpaper.conf
-        echo "preload=~/.config/hypr/background/middle.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
-        echo "wallpaper=$_monitor1,~/.config/hypr/background/middle.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
-        _restart_hyprpaper
-    fi
+        cat >> ''${HOME}/.config/hypr/hyprpaper.conf <<EOF
 
-    if [ -n "''${2}" ]; then
-        _monitor2=$(_get_display_name "''${2}")
-        echo "preload=~/.config/hypr/background/right.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
-        echo "wallpaper=$_monitor2,~/.config/hypr/background/right.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
-        _restart_hyprpaper
-    fi
+wallpaper {
+  monitor = $_monitor1
+  path = ~/.config/hypr/background/middle.jpg
+}
+EOF
+        if [ -n "''${2}" ]; then
+            _monitor2=$(_get_display_name "''${2}")
+            cat >> ''${HOME}/.config/hypr/hyprpaper.conf <<EOF
 
-    if [ -n "''${3}" ]; then
-        _monitor3=$(_get_display_name "''${3}")
-        echo "preload=~/.config/hypr/background/left.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
-        echo "wallpaper=$_monitor3,~/.config/hypr/background/left.jpg" >> ''${HOME}/.config/hypr/hyprpaper.conf
+wallpaper {
+  monitor = $_monitor2
+  path = ~/.config/hypr/background/right.jpg
+}
+EOF
+        fi
+
+        if [ -n "''${3}" ]; then
+          _monitor3=$(_get_display_name "''${3}")
+          cat >> ''${HOME}/.config/hypr/hyprpaper.conf <<EOF
+
+wallpaper {
+  monitor = $_monitor3
+  path = ~/.config/hypr/background/left.jpg
+}
+EOF
+        fi
+
         _restart_hyprpaper
     fi
   '';
