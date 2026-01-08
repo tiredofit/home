@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 with lib; {
-  config = mkIf config.host.home.applications.waybar.enable {
+    config = mkIf config.host.home.applications.waybar.enable {
     programs = {
       waybar = {
         style = ''
           * {
-              font-family: Noto Sans NF;
+              font-family: "Noto Sans NF";
               font-size: 13px;
               color: #ffffff;
           }
@@ -79,7 +79,7 @@ with lib; {
           #idle_inhibitor,
           #custom-notification,
           #scratchpad {
-              padding: 0 20px;
+              padding: 0 10px;
               color: #ffffff;
           }
 
@@ -179,9 +179,9 @@ with lib; {
               min-width: 100px;
           }
 
-          #custom-hyprsunset {
-              background: #264653;
-              color: #ffffff;
+          #custom-hyprsunset-temperature {
+              background: #2e1e1e;
+              color: #cdd6f4;
               padding: 0 20px;
               opacity: 1;
               transition-property: opacity;
@@ -199,12 +199,12 @@ with lib; {
 
           #keyboard-state {
               background: #2a9d8f;
-              color: #000000;
+              color: #ffffff;
               min-width: 16px;
           }
 
           #keyboard-state > label {
-              color: #000000;
+              color: #ffffff;
               padding: 0 5px;
           }
 
@@ -214,7 +214,7 @@ with lib; {
 
           #pulseaudio {
               background-color: #8ab17d;
-              color: #111111;
+              color: #ffffff;
           }
 
           #pulseaudio.muted {
@@ -226,7 +226,17 @@ with lib; {
               font-family: "NotoSansM NF";
               background: #98bb6c;
               color: #ffffff;
-              padding: 0 20px;
+              padding: 0 15px;
+              opacity: 1;
+              transition-property: opacity;
+              transition-duration: 0.25s;
+          }
+
+          #custom-zerotier {
+              font-size: 18px;
+              background: #a97979;
+              color: #ffffff;
+              padding: 0 4px;
               opacity: 1;
               transition-property: opacity;
               transition-duration: 0.25s;
@@ -272,11 +282,13 @@ with lib; {
             {
               "custom/cryptotrackingBTC": {
                 "exec": "${pkgs.curl}/bin/curl -sSL https://cryptoprices.cc/BTC",
+                "exec-if": "which curl",
                 "format": "{}",
                 "restart-interval": 3600
               },
               "custom/cryptotrackingTRX": {
                 "exec": "${pkgs.curl}/bin/curl -sSL https://cryptoprices.cc/TRX",
+                "exec-if": "which curl",
                 "format": "{}",
                 "restart-interval": 3600
               },
@@ -303,6 +315,7 @@ with lib; {
               "custom/hyprsunset-temperature": {
                 "restart-interval": 3600,
                 "exec": "sleep 0.3; hyprctl hyprsunset temperature",
+                "exec-if": "which hyprsunset",
                 "exec-on-event": true,
                 "format": "{} ",
                 "on-click": "hyprctl hyprsunset temperature 3000",
@@ -313,8 +326,17 @@ with lib; {
               },
               "custom/weather": {
                 "exec": "${pkgs.wttrbar}/bin/wttrbar",
+                "exec-if": "which wttrbar",
                 "format": "{} °",
                 "restart-interval": 3600,
+                "return-type": "json",
+                "tooltip": true
+              },
+              "custom/zerotier": {
+                "exec": "${config.home.homeDirectory}/.config/scripts/zerotier_helper.sh status",
+                "on-click": "swaync-client -t -sw",
+                "format": "{}",
+                "restart-interval": 60,
                 "return-type": "json",
                 "tooltip": true
               }
@@ -557,6 +579,7 @@ with lib; {
                 "keyboard-state",
                 "pulseaudio",
                 "custom/notification",
+                "custom/zerotier",
                 "clock",
                 "tray"
               ],
