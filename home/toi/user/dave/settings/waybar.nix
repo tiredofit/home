@@ -334,7 +334,7 @@ with lib; {
               },
               "custom/zerotier": {
                 "exec": "${config.home.homeDirectory}/.config/scripts/zerotier_helper.sh status",
-                "on-click": "swaync-client -t -sw",
+                "on-click": "${config.home.homeDirectory}/.config/scripts/zerotier_helper.sh",
                 "format": "{}",
                 "restart-interval": 60,
                 "return-type": "json",
