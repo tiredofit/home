@@ -114,9 +114,9 @@ if [ -z "''${_selection}" ]; then exit 0; fi
 name=$(echo "''${_selection}" | ''${cut_command} -d' ' -f1)
 status=$(echo "''${_selection}" | ''${grep_command} -oE '\([A-Z]+\)')
 
-nwid=$(''${grep_command} "^[a-f0-9]\{16\} $name$" "''${known_networks_file}" | ''${cut_command} -d' ' -f1)
+nwid=$(awk -v n="$name" '$2 == n {print $1; exit}' "''${known_networks_file}")
 if [ -z "''${nwid}" ]; then
-    nwid=$( ''${zerotier_command} listnetworks | ''${grep_command} " ''${name} " | ''${cut_command} -d' ' -f3 | head -1 )
+  nwid=$( ''${zerotier_command} listnetworks | ''${grep_command} " ''${name} " | ''${cut_command} -d' ' -f3 | head -1 )
 fi
 
 if echo "''${status}" | ''${grep_command} -q "ON"; then
