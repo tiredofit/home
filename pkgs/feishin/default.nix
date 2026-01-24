@@ -7,7 +7,7 @@
 
 appimageTools.wrapType2 rec {
   pname = "feishin";
-  version = "v1.2.0";
+  version = "v1.3.0";
 
   extraPkgs = pkgs: [
     pkgs.gnome-keyring
@@ -16,7 +16,7 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url = "https://github.com/jeffvli/feishin/releases/download/${version}/Feishin-linux-x86_64.AppImage";
-    sha256 = "13lrpphr7aqz587rnbqkwc4nkxg4bvv8xhcwpwr3k8avshwz25y4";
+    sha256 = "19g971c6m5xslngjrn3hvbl6rq4jr9yapxqp53qsk2gg0ifa19nr";
   };
 
   desktopItems = [
