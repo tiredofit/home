@@ -17,16 +17,22 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      #roboto
+      #ubuntu-classic
+      corefonts
       dejavu_fonts
+      font-awesome
       liberation_ttf
       nerd-fonts.hack
       nerd-fonts.noto
+      nerd-fonts.symbols-only
       nerd-fonts.ubuntu
-      #noto-fonts
+      noto-fonts
+      #noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       noto-fonts-color-emoji
+      #noto-fonts-emoji-blob-bin
       open-sans
-      roboto
-      ubuntu-classic
     ];
 
     fonts = {
@@ -54,6 +60,23 @@ in
           emoji = [
             "Noto Color Emoji"
           ];
+        };
+        configFile = {
+          embedded-bitmaps = {
+            enable = true;
+            priority = 50;
+            text = ''
+              <?xml version="1.0"?>
+              <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+              <fontconfig>
+                <match target="font">
+                  <edit name="embeddedbitmap" mode="assign">
+                    <bool>true</bool>
+                  </edit>
+                </match>
+              </fontconfig>
+            '';
+          };
         };
       };
     };

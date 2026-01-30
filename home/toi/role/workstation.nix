@@ -4,6 +4,7 @@ with lib;
   imports = [
   ];
 
+  home.preferXdgDirectories = true;
   host = {
     home = {
       applications = {
@@ -31,5 +32,6 @@ with lib;
     mimeApps = {
       enable = mkDefault true;
     };
+
   };
 }

@@ -1,15 +1,9 @@
-{config, inputs, lib, pkgs, specialArgs, ...}:
-## PERSONALIZE
+{config, inputs, lib, pkgs, ...}:
 let
-  inherit (specialArgs) role username;
   cfg = config.host.home.feature.theming;
 in
   with lib;
 {
-  imports = [
-    inputs.nix-colors.homeManagerModule
-  ];
-
   options = {
     host.home.feature.theming = {
       enable = mkOption {
@@ -21,40 +15,15 @@ in
   };
 
   config = mkIf cfg.enable {
-    colorScheme = inputs.nix-colors.colorSchemes.dracula;
-    gtk = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
+    gtk = {
       enable = mkDefault true;
-      iconTheme = {
-        name = "Papirus";
-        package = pkgs.papirus-icon-theme;
-        #name = "BeautyLine";
-        #package = pkgs.beauty-line-icon-theme;
-      };
-      theme = {
-        name = "Zukitwo";
-        package = pkgs.zuki-themes;
-      };
     };
 
-    home = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
+    home = {
       packages = with pkgs;
         [
-          lxappearance
+          nwg-look
         ];
-
-      pointerCursor = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
-        gtk.enable = true;
-        name = "Quintom_Snow";
-        package = pkgs.quintom-cursor-theme;
-      };
-    };
-
-    programs = mkIf ((username == "dave" || username == "media") && ( role == "workstation")) {
-      bash = {
-        sessionVariables = {
-          GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
-        };
-      };
     };
   };
 }

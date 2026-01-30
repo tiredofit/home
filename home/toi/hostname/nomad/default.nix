@@ -16,29 +16,27 @@ let
 in
   with lib;
 {
+home.packages = [ pkgs.lutris pkgs.scummvm ];
   host = {
     home = {
-
-        applications = {
-
-        };
       applications = {
         act.enable = true;
         avidemux.enable = true;
-        calibre.enable = false;
+        bitwarden-cli.enable = true;
         chromium.enable = true;
-        claude-code.enable = false;
         cryfs.enable = true;
-        czkawka.enable = true;
+        czkawka.enable = false;
         devenv.enable = false;
         direnv.enable = true;
+        feishin.enable = true;
         file-roller.enable = true;
-        floorp.enable = false;
+        floorp.enable = true;
         github-client.enable = true;
         ghostty.enable = true ;
         gnome-software.enable = true;
         hadolint.enable = true;
         hyprlauncher.enable = true;
+        hyprcursor.enable = true;
         kitty.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
@@ -50,33 +48,23 @@ in
           systemtray.enable = false;
         };
         nmap.enable = false;
-        obsidian.enable = false;
+        obsidian.enable = true;
         opensnitch-ui.enable = false;
         python.enable = true;
         pwvucontrol.enable = true;
         rofi.enable = true;
-        sonusmix.enable = false;
         shellcheck.enable = true;
         shfmt.enable = true;
-        sonixd.enable = true;
         smartgit.enable = true;
-        ssh = {
-          enable = true;
-          relaxedBlocks = [
-            "192.168.1.0/24"
-          ];
-        };
-        steam-run.enable = false;
-        szyszka.enable = true;
+        ssh.enable = true;
+        steam-run.enable = true;
+        szyszka.enable = false;
         thunderbird.enable = true;
         virt-manager.enable = true;
         visual-studio-code = {
           enable = true;
           defaultApplication.enable = true;
         };
-        walker.enable = false;
-        wayprompt.enable = false;
-        wdisplays.enable = false;
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
