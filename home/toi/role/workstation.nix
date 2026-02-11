@@ -32,6 +32,10 @@ with lib;
     mimeApps = {
       enable = mkDefault true;
     };
+  };
 
+  wayland.windowManager.hyprland = {
+    package = null;
+    portalPackage = null;
   };
 }
