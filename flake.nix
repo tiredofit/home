@@ -50,24 +50,24 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager-stable, home-manager-unstable, ... }@inputs:
     let
-      inherit (self) outputs;
       displayName = "Dave Conroy";
       gn = "dave";
       gnsn = "daveconroy";
       handle = "tiredofit";
       sn = "conroy";
 
-      pkgsForSystem = system: nixpkgsSource: import nixpkgsSource {
-        overlays = [
-          inputs.comma.overlays.default
-          inputs.nur.overlays.default
-          outputs.overlays.additions
-          outputs.overlays.modifications
-          outputs.overlays.stable-packages
-          outputs.overlays.unstable-packages
-        ];
-        inherit system;
-      };
+      pkgsForSystem = system: nixpkgsSource:
+        let
+          localOverlays = import ./overlays { inherit inputs; };
+        in import nixpkgsSource {
+          overlays = (
+            [
+              inputs.comma.overlays.default
+              inputs.nur.overlays.default
+            ] ++ builtins.attrValues localOverlays
+          );
+          inherit system;
+        };
 
       HomeConfiguration = args:
         let
@@ -103,7 +103,7 @@
               hostname = "atlas" ;
               username = gn;
               networkInterface = "enp6s18";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-unstable;
           };
@@ -116,7 +116,7 @@
               hostname = "enigma";
               username = gn;
               networkInterface = "enp6s18";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-unstable;
           };
@@ -129,7 +129,7 @@
               hostname = "entropy" ;
               username = gn;
               networkInterface = "enp8s0f0np0";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-unstable;
           };
@@ -143,7 +143,7 @@
               hostname = "mirage";
               username = gn;
               networkInterface = "end0";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-stable;
           };
@@ -160,7 +160,7 @@
                 display_center = "HDMI-A-0";
                 display_right = "eDP";
                 networkInterface = "wlo1";
-                inherit inputs outputs;
+                inherit inputs;
               };
               nixpkgs = nixpkgs-stable;
             };
@@ -175,7 +175,7 @@
                 display_center = "eDP";
                 display_right = "HDMI-A-0";
                 networkInterface = "wlo1";
-                inherit inputs outputs;
+                inherit inputs;
               };
               nixpkgs = nixpkgs-stable;
             };
@@ -189,7 +189,7 @@
               hostname = "nomad";
               username = gn;
               networkInterface = "wlp2s0";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-unstable;
           };
@@ -201,7 +201,7 @@
               hostname = "nucleus";
               username = "tttttt";
               networkInterface = "null";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-unstable;
           };
@@ -213,7 +213,7 @@
               hostname = "seed" ;
               username = gn;
               networkInterface = "enp1s0f0";
-              inherit inputs outputs;
+              inherit inputs;
             };
             nixpkgs = nixpkgs-stable;
           };
@@ -226,7 +226,7 @@
               displayName = displayName;
               hostname = "server";
               username = gnsn;
-              inherit inputs outputs;
+              inherit inputs;
             };
           };
 
