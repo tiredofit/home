@@ -157,7 +157,7 @@ with lib;
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.hyprland;
+      package = mkDefault pkgs.hyprland;
       settings = {
         env = mkIf (! config.host.home.feature.uwsm.enable) [
           "XDG_CURRENT_DESKTOP,Hyprland"
@@ -176,7 +176,7 @@ with lib;
           "NIXOS_OZONE_WL,1"
         ];
       };
-      #portalPackage = mkForce pkgs.xdg-desktop-portal-wlr;
+      portalPackage = mkDefault null;
       systemd.enable = mkDefault false;
       xwayland.enable = mkDefault true;
     };
