@@ -1,9 +1,18 @@
 { config, inputs, lib, pkgs, ... }:
 let
-## PERSONALIZE
   cfg = config.host.home.applications.visual-studio-code;
+  ## PR 489440
+  nixpkgs-pr = import (pkgs.fetchgit {
+    url = "https://github.com/NixOS/nixpkgs.git";
+    rev = "d5d7b7b8a1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6";
+    sha256 = "0rxsc6sb1qm95zbcf7rif64dplz33qc3myn2mb6q2q7xvgaj4gg7";
+    fetchSubmodules = true;
+  }) {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
   pkgs-ext = import inputs.nixpkgs {
-    inherit (pkgs) system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
     overlays = [ inputs.nix-vscode-extensions.overlays.default ];
   };
@@ -51,6 +60,7 @@ in with lib; {
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
+      package = nixpkgs-pr.vscode;
       profiles = {
         default = {
           extensions = (with pkgs.vscode-extensions; [
@@ -79,7 +89,7 @@ in with lib; {
             # For extensions not avaialble in https://search.nixos.org/packages?type=packages&query=vscode-extensions
 
             ## AI
-            github.copilot
+            #github.copilot
             github.copilot-chat
             ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
 
