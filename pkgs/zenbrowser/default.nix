@@ -13,9 +13,9 @@
 }:
 
 let
-  rev = "1.18.6b";
-  linux_x86_64-hash = "03qnw3svy8zy2ji1j3ffc9d55i147yk4cimyigbkx5xk60dwhk1r";
-  darwin_universal-hash = "08ijkr29krzrr1bk9zzsr254n45dk59141f52ij3l9qrbwgpmhd8";
+  rev = "1.18.7b";
+  linux_x86_64-hash = "094q16jldp2g35q3j67y5ikhdrfi8l95x62vvf04ajb51r85g0z5";
+  darwin_universal-hash = "191igkfpjhqkn62700iacnwfpvjw7zz0v2a53ddwv70987ll51pk";
   domain = "github.com";
   owner = "zen-browser";
   repo = "desktop";
