@@ -1,16 +1,6 @@
 { config, inputs, lib, pkgs, ... }:
 let
   cfg = config.host.home.applications.visual-studio-code;
-  ## PR 489440
-  nixpkgs-pr = import (pkgs.fetchgit {
-    url = "https://github.com/NixOS/nixpkgs.git";
-    rev = "d5d7b7b8a1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6";
-    sha256 = "0rxsc6sb1qm95zbcf7rif64dplz33qc3myn2mb6q2q7xvgaj4gg7";
-    fetchSubmodules = true;
-  }) {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
   pkgs-ext = import inputs.nixpkgs {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
@@ -60,7 +50,6 @@ in with lib; {
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = nixpkgs-pr.vscode;
       profiles = {
         default = {
           extensions = (with pkgs.vscode-extensions; [
@@ -445,6 +434,7 @@ in with lib; {
             };
             #mutableExtensionsDir = false;
             chat.agent.maxRequests = 50;
+            chat.viewSessions.orientation = "stacked";
           };
         };
       };
