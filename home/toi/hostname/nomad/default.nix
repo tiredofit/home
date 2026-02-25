@@ -16,13 +16,14 @@ let
 in
   with lib;
 {
-home.packages = [ pkgs.lutris pkgs.scummvm ];
+home.packages = [ pkgs.scummvm pkgs.antigravity pkgs.heroic ];
   host = {
     home = {
       applications = {
-        act.enable = true;
-        avidemux.enable = true;
+        act.enable = false;
+        avidemux.enable = false;
         bitwarden-cli.enable = true;
+        calibre.enable = false;
         chromium.enable = true;
         cryfs.enable = true;
         czkawka.enable = false;
@@ -32,7 +33,7 @@ home.packages = [ pkgs.lutris pkgs.scummvm ];
         file-roller.enable = true;
         floorp.enable = true;
         github-client.enable = true;
-        ghostty.enable = true ;
+        ghostty.enable = false;
         gnome-software.enable = true;
         hadolint.enable = true;
         hyprlauncher.enable = true;
