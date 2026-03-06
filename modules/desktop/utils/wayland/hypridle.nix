@@ -54,54 +54,55 @@ let
                 ;;
                 dim )
                     if grep -q "eDP-1" ~/.config/hypr/display.conf ; then
-                        _backlight_device=''${_backlight_device:-"$(light -L | grep "backlight/auto")"}
-                        _backlight_dim_value=''${4:-".9"}
-                        case "$3" in
-                            save )
-                                _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'save existing display backlight brightness'"
-                                _hypridle_exec light -s ''${_backlight_device} -O
-                            ;;
-                            before )
-                                if [ "$5" = "battery" ] ; then
-                                    if acpi -a | grep "off-line" ; then
-                                        dim=true
-                                    else
-                                        dim=false
-                                    fi
-                                else
-                                    dim=true
-                                fi
+                      _backlight_device=''${_backlight_device:-"$(brightnessctl -l | grep "'backlight'" | cut -d "'" -f2)"}
+                      _backlight_dim_value=''${4:-".9"}
+                      case "$3" in
+                        save )
+                          _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'save existing display backlight brightness'"
+                          _hypridle_exec brightnessctl -d ''${_backlight_device} --save
+                        ;;
+                        before )
+                          if [ "$5" = "battery" ] ; then
+                            if acpi -a | grep "off-line" ; then
+                              dim=true
+                            else
+                              dim=false
+                            fi
+                          else
+                            dim=true
+                          fi
 
-                                if [ "$dim" = "true" ]; then
-                                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'dimming display backlight brightness by ''${_backlight_dim_value}'"
-                                    _hypridle_exec light -s ''${_backlight_device} -T ''${_backlight_dim_value}
-                                fi
-                            ;;
-                            after )
-                                _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'restore original display backlight brightness'"
-                                _hypridle_exec light -s ''${_backlight_device} -I
-                            ;;
-                        esac
+                          if [ "$dim" = "true" ]; then
+                            _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'dimming display backlight brightness by ''$_backlight_dim_value'"
+                            _target_percent=$(awk "BEGIN {printf \"%d\", ''${_backlight_dim_value} * 100}")
+                            _hypridle_exec brightnessctl -d ''${_backlight_device} s ''${_target_percent}%
+                          fi
+                        ;;
+                        after )
+                          _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [display] [dim] [timeout] 'restore original display backlight brightness'"
+                          _hypridle_exec brightnessctl -d ''${_backlight_device} --restore
+                        ;;
+                      esac
                     fi
             esac
         ;;
         keyboard )
-            _kbd_device=''${kbd_device:-"$(light -L | grep kbd_backlight)"}
+          _kbd_device=''${kbd_device:-"$(brightnessctl -l | grep 'kbd_backlight' | cut -d "'" -f2)"}
             case "$2" in
                 light )
                     case "$3" in
                         before )
                             if grep -q "eDP-1" ~/.config/hypr/display.conf ; then
                                 _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'save existing keyboard brightness'"
-                                _hypridle_exec light -s ''${_kbd_device} -O
-                                _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'disable keyboard light'"
-                                _hypridle_exec light -s ''${_kbd_device} -S 0
+                    _hypridle_exec brightnessctl -d ''${_kbd_device} --save
+                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'disable keyboard light'"
+                    _hypridle_exec brightnessctl -d ''${_kbd_device} s 0
                             fi
                         ;;
                         after )
                             if grep -q "eDP-1" ~/.config/hypr/display.conf ; then
                                 _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [restore] 'restore keyboard brightness'"
-                                _hypridle_exec light -s ''${_kbd_device} -I
+                    _hypridle_exec brightnessctl -d ''${_kbd_device} --restore
                             fi
                         ;;
                     esac
