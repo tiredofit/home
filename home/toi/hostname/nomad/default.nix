@@ -16,7 +16,7 @@ let
 in
   with lib;
 {
-home.packages = [ pkgs.scummvm pkgs.antigravity pkgs.heroic ];
+home.packages = [ pkgs.scummvm pkgs.antigravity ];
   host = {
     home = {
       applications = {
@@ -33,7 +33,7 @@ home.packages = [ pkgs.scummvm pkgs.antigravity pkgs.heroic ];
         file-roller.enable = true;
         floorp.enable = true;
         github-client.enable = true;
-        ghostty.enable = false;
+        ghostty.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
         hyprlauncher.enable = true;
