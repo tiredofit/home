@@ -15,7 +15,19 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      ls = "lsd --hyperlink=auto";
+    };
+
+    sessionVars = {};
+  in {
+    home = {
+      packages = with pkgs; [
+        lsd
+      ];
+    };
+
     programs = {
       lsd = {
         enable = true;
@@ -26,9 +38,12 @@ in
         };
       };
 
-      bash.initExtra = ''
-        alias ls="lsd --hyperlink=auto"
-      '';
+      bash = {
+        shellAliases = mkForce aliases;
+      };
+      zsh = {
+        shellAliases = lib.mkForce aliases;
+      };
     };
-  };
+  });
 }
