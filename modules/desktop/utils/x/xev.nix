@@ -31,6 +31,13 @@ in
           }
         '';
       };
+      zsh = {
+        initContent = lib.mkOrder 3000 ''
+          keypress() {
+            xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+          }
+        '';
+      };
     };
   };
 }
