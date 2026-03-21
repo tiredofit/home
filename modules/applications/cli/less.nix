@@ -15,7 +15,22 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      more = "less";
+    };
+
+    sessionVars = {
+      LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
+    };
+  in {
+    home = {
+      packages = with pkgs;
+        [
+          less
+        ];
+    };
+
     programs = {
       less = {
         enable = true;
@@ -24,17 +39,16 @@ in
           t forw-line
         '';
       };
+
       bash = {
-        initExtra = ''
-          alias more=less
-        '';
-        sessionVariables = {
-          LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
-        };
-        shellAliases = {
-          "more" = "less"; # pager
-        };
+        sessionVariables = sessionVars;
+        shellAliases = aliases;
+      };
+
+      zsh = {
+        sessionVariables = sessionVars;
+        shellAliases = aliases;
       };
     };
-  };
+  });
 }
