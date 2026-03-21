@@ -44,7 +44,6 @@ in
         sessionVariables = sessionVars;
         shellAliases = aliases;
       };
-
       zsh = {
         sessionVariables = sessionVars;
         shellAliases = aliases;

@@ -26,7 +26,6 @@ in
           dust
         ];
     };
-
     programs = {
       bash = {
         shellAliases = aliases;

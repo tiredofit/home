@@ -31,7 +31,6 @@ in
       bash = {
         shellAliases = aliases;
       };
-
       zsh = {
         shellAliases = aliases;
       };
