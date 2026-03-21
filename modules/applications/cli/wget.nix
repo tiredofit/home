@@ -15,19 +15,28 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    shellAliases = {
+      wget = ''
+        wget --hsts-file=$XDG_DATA_HOME/wget-hsts
+      '';
+    };
+  in {
     home = {
         packages = with pkgs;
           [
             wget
           ];
     };
+
     programs = {
       bash = {
-        initExtra = ''
-          alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
-        '';
+        shellAliases = shellAliases;
+      };
+
+      zsh = {
+        shellAliases = shellAliases;
       };
     };
-  };
+  });
 }
