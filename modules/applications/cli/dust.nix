@@ -15,19 +15,26 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      du = "dust";
+    };
+  in {
     home = {
       packages = with pkgs;
         [
           dust
         ];
     };
+
     programs = {
       bash = {
-        initExtra = ''
-          alias du=dust
-        '';
+        shellAliases = aliases;
+      };
+
+      zsh = {
+        shellAliases = aliases;
       };
     };
-  };
+  });
 }
