@@ -33,7 +33,6 @@ in
       bash = {
         shellAliases = shellAliases;
       };
-
       zsh = {
         shellAliases = shellAliases;
       };
