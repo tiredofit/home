@@ -1,4 +1,13 @@
 { config, lib, pkgs, ... }:
+let
+  shellInit = ''
+    if [ -d "/home/$USER/src/home" ] ; then
+      alias hm="cd ~/src/home"
+      alias hmupdate="nix flake update --flake $HOME/src/home"
+      alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER $@"
+    fi
+  '';
+in
 with lib;
 {
   home = {
@@ -27,18 +36,17 @@ with lib;
   manual.manpages.enable = mkDefault false;
   news.display = mkDefault "show";
 
-  programs = {
-    bash = {
-      initExtra = ''
-        if [ -d "/home/$USER/src/home" ] ; then
-          alias hm="cd ~/src/home"
-          alias hmupdate="nix flake update --flake $HOME/src/home"
-          alias hmswitch="home-manager switch --flake $HOME/src/home/#$HOSTNAME.$USER $@"
-        fi
-      '';
+    programs = {
+      bash = {
+        initExtra = shellInit;
+      };
+
+      zsh = {
+        initContent = shellInit;
+      };
+
+      home-manager = {
+        enable = mkForce true;
+      };
     };
-    home-manager = {
-      enable = mkForce true;
-    };
-  };
 }
