@@ -15,7 +15,45 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    shellInit = ''
+      ghpush() {
+          ghpush_show_last_version() {
+              if [ -f "CHANGELOG.md" ] ; then
+                  if [ $(cat CHANGELOG.md | wc -c) != "0" ]; then
+                      sed -n -e "/##/{:1;p;n;/##/{p;q};b1};p" CHANGELOG.md | head --lines=-2
+                  fi
+              fi
+          }
+
+          local _IMAGE_TAG
+          _IMAGE_TAG=$(head -n 1 CHANGELOG.md | awk '{print $2'})
+          local _git_branch
+          _git_branch=$(git rev-parse --abbrev-ref HEAD)
+          case $_git_branch in
+              "master" | "main" | "develop" )
+                  :
+              ;;
+              * )
+                  local _branch
+                  _branch="''${_git_branch}-"
+              ;;
+          esac
+
+          git push
+          git tag $_branch$_IMAGE_TAG
+          git push origin $_branch$_IMAGE_TAG
+      }
+    '';
+
+    shellAliases = {
+      ga = "git add .";
+      gp = "git push";
+      gc = "git commit -m \"$@\"";
+      gac = "git add . ; git commit -m \"$@\"";
+      gacp = "git add . ; git commit -m \"$@\" ; git push";
+    };
+  in {
     programs = {
       git = {
         enable = true;
@@ -47,47 +85,14 @@ in
       };
 
       bash = {
-        initExtra = ''
-          ghpush() {
-              ghpush_show_last_version() {
-                  if [ -f "CHANGELOG.md" ] ; then
-                      if [ $(cat CHANGELOG.md | wc -c) != "0" ]; then
-                          sed -n -e "/##/{:1;p;n;/##/{p;q};b1};p" CHANGELOG.md | head --lines=-2
-                      fi
-                  fi
-              }
+        initExtra = shellInit;
+        shellAliases = shellAliases;
+      };
 
-              #commit_changelog=$(mktemp)
-              #sed -n -e "/##/{:1;p;n;/##/{p;q};b1};p" CHANGELOG.md | head --lines=-2 >$commit_changelog
-              #cat $commit_changelog
-              local _IMAGE_TAG
-              _IMAGE_TAG=$(head -n 1 CHANGELOG.md | awk '{print $2'})
-              local _git_branch
-              _git_branch=$(git rev-parse --abbrev-ref HEAD)
-              case $_git_branch in
-                  "master" | "main" | "develop" )
-                      :
-                  ;;
-                  * )
-                      local _branch
-                      _branch="''${_git_branch}-"
-                  ;;
-              esac
-
-              git push
-              git tag $_branch$_IMAGE_TAG
-              git push origin $_branch$_IMAGE_TAG
-          }
-        '';
-
-        shellAliases = {
-          ga = "git add . " ;                                 # Git Add
-          gp = "git push" ;                                   # Git Push
-          gc = "git commit -m \"$@\"" ;                         # Git Commit
-          gac = "git add . ; git commit -m \"$@\"" ;             # Git Add and Commit
-          gacp = "git add . ; git commit -m \"$@\" ; git push" ;   # Git Add Commit and Push
-        };
+      zsh = {
+        initContent = shellInit;
+        shellAliases = shellAliases;
       };
     };
-  };
+  });
 }
