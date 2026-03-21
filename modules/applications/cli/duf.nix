@@ -15,7 +15,11 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      df = "duf";
+    };
+  in {
     home = {
       packages = with pkgs;
         [
@@ -25,10 +29,12 @@ in
 
     programs = {
       bash = {
-        initExtra = ''
-          alias df=duf;
-        '';
+        shellAliases = aliases;
+      };
+
+      zsh = {
+        shellAliases = aliases;
       };
     };
-  };
+  });
 }
