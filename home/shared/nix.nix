@@ -1,4 +1,18 @@
 { inputs, config, lib, pkgs, ... }:
+let
+  shellInit = ''
+    if [ -d "/home/$USER/src/nixos" ] ; then
+        alias nixos="cd ~/src/nixos"
+        alias nixosupdate="nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+        if command -v nixos-rebuild-ng > /dev/null 2>&1 ; then
+            NIXOS_REBUILD_CMD="nixos-rebuild-ng"
+        else
+            NIXOS_REBUILD_CMD="nixos-rebuild"
+        fi
+        alias nixswitch="$NIXOS_REBUILD_CMD switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
+    fi
+  '';
+in
 with lib;
 {
   home = {
@@ -65,22 +79,17 @@ with lib;
 
   programs = {
     bash = {
-      initExtra = ''
-          if [ -d "/home/$USER/src/nixos" ] ; then
-              alias nixos="cd ~/src/nixos"
-              alias nixosupdate="nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
-              if command -v nixos-rebuild-ng > /dev/null 2>&1 ; then
-                  NIXOS_REBUILD_CMD="nixos-rebuild-ng"
-              else
-                  NIXOS_REBUILD_CMD="nixos-rebuild"
-              fi  
-              alias nixswitch="$NIXOS_REBUILD_CMD switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
-          fi
-      '';
+      initExtra = shellInit;
     };
+
+    zsh = {
+      initContent = shellInit;
+    };
+
     nix-index = {
       enable = mkDefault true;
       enableBashIntegration = mkDefault true;
+      enableZshIntegration = mkDefault true;
     };
   };
 
