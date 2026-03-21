@@ -31,12 +31,17 @@ in
     #  package = pkgs.quintom-cursor-theme;
     #};
 
-   programs = mkIf ((role == "workstation" || role == "laptop")) {
-      bash = {
-        sessionVariables = {
-          GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
-        };
+   programs = mkIf ((role == "workstation" || role == "laptop")) (let
+      sessionVars = {
+        GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
       };
-    };
+    in {
+      bash = {
+        sessionVariables = sessionVars;
+      };
+      zsh = {
+        sessionVariables = sessionVars;
+      };
+    });
   };
 }
