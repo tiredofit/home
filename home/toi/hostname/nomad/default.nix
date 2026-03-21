@@ -71,6 +71,7 @@ home.packages = [ pkgs.scummvm pkgs.antigravity ];
         yt-dlp.enable = true;
         zoom.enable = true;
         zenbrowser.enable = true;
+        zsh.enable = true;
       };
       feature = {
         gui = {
