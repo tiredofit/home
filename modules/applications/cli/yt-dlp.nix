@@ -2,13 +2,6 @@
 
 let
   cfg = config.host.home.applications.yt-dlp;
-
-  ytdl-helper-script = pkgs.writeShellScriptBin "ytdl-helper-script" ''
-    output_path="/tmp/!YTDL"
-    mkdir -p "$output_path"
-    echo "$(date) $@" >> /tmp/ytdl.log
-    ${pkgs.yt-dlp}/bin/yt-dlp -P "$output_path" $@
-  '';
 in
   with lib;
 {
@@ -27,6 +20,14 @@ in
       youtube-dl = "yt-dlp";
       ytaudio = "yt-dlp -f 'ba' -x --audio-format mp3";
     };
+
+    ytdl-helper-script = pkgs.writeShellScriptBin "ytdl-helper-script" ''
+      output_path="/tmp/!YTDL"
+      mkdir -p "$output_path"
+      echo "$(date) $@" >> /tmp/ytdl.log
+      ${pkgs.yt-dlp}/bin/yt-dlp -P "$output_path" $@
+    '';
+
   in {
     home = {
       packages = with pkgs;
@@ -39,11 +40,9 @@ in
       yt-dlp = {
         enable = true;
       };
-
       bash = {
         shellAliases = aliases;
       };
-
       zsh = {
         shellAliases = aliases;
       };
