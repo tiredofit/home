@@ -15,20 +15,32 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      top = "btop";
+    };
+  in {
+    home = {
+      packages = with pkgs;
+        [
+          btop
+        ];
+    };
+
     programs = {
       bash = {
-        initExtra = ''
-          alias top=btop
-        '';
+        shellAliases = aliases;
       };
       btop = {
         enable = true;
         settings = {
-          color_theme = "Default";
-          theme_background = false;
+          color_theme = mkDefault "Default";
+          theme_background = mkDefault false;
         };
       };
+      zsh = {
+        shellAliases = aliases;
+      };
     };
-  };
+  });
 }
