@@ -22,7 +22,12 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    aliases = {
+      youtube-dl = "yt-dlp";
+      ytaudio = "yt-dlp -f 'ba' -x --audio-format mp3";
+    };
+  in {
     home = {
       packages = with pkgs;
         [
@@ -36,11 +41,12 @@ in
       };
 
       bash = {
-        initExtra = ''
-          alias youtube-dl="yt-dlp"
-          alias ytaudio="yt-dlp -f 'ba' -x --audio-format mp3"
-        '';
+        shellAliases = aliases;
+      };
+
+      zsh = {
+        shellAliases = aliases;
       };
     };
-  };
+  });
 }
