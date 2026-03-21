@@ -17,13 +17,21 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    programs = {
-      bash.initExtra = ''
-        if [ -f "$XDG_RUNTIME_DIR/secrets/gh_token/toi-gh_token.env" ] ; then
-          alias toigh="$(cat $XDG_RUNTIME_DIR/secrets/gh-token/toi-gh_token.env) gh"
+  config = mkIf cfg.enable (let
+    shellInit = ''
+      toigh() {
+        if [ -f "$XDG_RUNTIME_DIR/secrets/gh-token/toi-gh_token.env" ] ; then
+          . "$XDG_RUNTIME_DIR/secrets/gh-token/toi-gh_token.env"
+        elif [ -f "$XDG_RUNTIME_DIR/secrets/gh_token/toi-gh_token.env" ] ; then
+          . "$XDG_RUNTIME_DIR/secrets/gh_token/toi-gh_token.env"
         fi
-      '';
+        gh "$@"
+      }
+    '';
+  in {
+    programs = {
+      bash = { initExtra = shellInit; };
+      zsh = { initContent = shellInit; };
     };
 
     nix.extraOptions = ''
@@ -35,7 +43,7 @@ in
       format = "dotenv";
       path = "%r/github/toi-github.env" ;
     };
-  };
+  });
 
 
 }
