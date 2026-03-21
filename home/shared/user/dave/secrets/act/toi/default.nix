@@ -17,13 +17,28 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    programs = {
-      bash.initExtra = ''
+  config = mkIf cfg.enable (let
+    shellInit = ''
+      toiact() {
         if [ -f "$XDG_RUNTIME_DIR/act/toi-act.env" ] ; then
-            alias toiact="act --secret-file \"$XDG_RUNTIME_DIR/act/toi-act.env\""
+          SECRET_FILE="$XDG_RUNTIME_DIR/act/toi-act.env"
+        elif [ -f "$XDG_RUNTIME_DIR/act/toi_act.env" ] ; then
+          SECRET_FILE="$XDG_RUNTIME_DIR/act/toi_act.env"
+        else
+          SECRET_FILE=""
         fi
-        '';
+
+        if [ -n "$SECRET_FILE" ]; then
+          act --secret-file "$SECRET_FILE" "$@"
+        else
+          act "$@"
+        fi
+      }
+    '';
+  in {
+    programs = {
+      bash = { initExtra = shellInit; };
+      zsh = { initContent = shellInit; };
     };
 
     sops.secrets.toi-act = {
@@ -31,5 +46,5 @@ in
       path = "%r/act/toi-act.env" ;
       format = "dotenv";
     };
-  };
+  });
 }
