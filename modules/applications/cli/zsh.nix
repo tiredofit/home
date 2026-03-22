@@ -2,26 +2,6 @@
 ## PERSONALIZE
 let
   cfg = config.host.home.applications.zsh;
-  shellAliases = {
-    ".." = "cd ..";
-    "..." = "cd ...";
-    fuck = "sudo $(history -p !!)"; # run last command as root
-    home = "cd ~";
-    mkdir = "mkdir -p";
-    s = "sudo systemctl";
-    scdisable = "sudo systemctl disable $@";
-    scenable = "sudo systemctl  disable $@";
-    scstart = "sudo systemctl start $@";
-    scstop = "sudo systemctl stop $@";
-    sj = "sudo journalctl";
-    u = "systemctl --user";
-    uj = "journalctl --user";
-    uscdisable = "systemctl --user disable $@";
-    uscenable = "systemctl --user disable $@";
-    uscstart = "systemctl --user start $@";
-    uscstop = "systemctl --user stop $@";
-    # Directory-specific aliases are created conditionally in initContent
-  };
 in
   with lib;
 {
@@ -36,6 +16,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Disable Liquid Prompt by default to avoid slow prompt startup; enable manually if desired
+    host.home.applications.liquidprompt.enable = mkForce false;
     home = {
       activation = {
         config-zsh_history = ''
@@ -46,6 +28,25 @@ in
               chown -R $USER $HOME/.local/state/zsh
           fi
         '';
+            #zsh-compile-site-functions = ''
+            #  echo "** Compiling zsh site-functions for faster startup"
+            #  ZSHCOMPILER="${pkgs.zsh}/bin/zcompile"
+            #  CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compiled"
+            #  mkdir -p "$CACHE_DIR"
+            #  # Compile files placed by home-manager (siteFunctions) and common zsh configs
+            #  for f in "$HOME/.local/share/zsh"/*.zsh "$HOME/.local/share/zsh"/*/*.zsh "$HOME/.config/zsh"/*.zsh "$HOME/.config/zsh"/*/*.zsh; do
+            #    [ -f "$f" ] || continue
+            #    echo "Compiling $f"
+            #    $ZSHCOMPILER "$f" 2>/dev/null || true
+            #  done
+            #  # Pre-generate compinit dump so interactive shells skip heavy compinit work
+            #  # Determine zsh version by invoking the packaged zsh (activation runs in sh)
+            #  zsh_ver="$("${pkgs.zsh}/bin/zsh" -c 'printf "%s" "$ZSH_VERSION"')"
+            #  ZCOMPDUMP="''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-''${zsh_ver}"
+            #  mkdir -p "$(dirname "$ZCOMPDUMP")"
+            #  export ZCOMPDUMP
+            #  "${pkgs.zsh}/bin/zsh" -c 'autoload -Uz compinit; compinit -d "$ZCOMPDUMP" 2>/dev/null || true'
+            #'';
       };
     };
 
@@ -65,16 +66,6 @@ in
       };
 
       plugins = [
-        #{
-        #  name = "powerlevel10k";
-        #  src = pkgs.zsh-powerlevel10k;
-        #  file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        #}
-        #{
-        #  name = "powerlevel10k-config";
-        #  src = lib.cleanSource ../../../dotfiles/p10k;
-        #  file = "p10k.zsh";
-        #}
       ];
 
       oh-my-zsh = {
@@ -99,8 +90,6 @@ in
         '';
       };
 
-      inherit shellAliases;
-
       sessionVariables = {
         XDG_DATA_HOME = "$HOME/.local/share";
         XDG_CONFIG_HOME = "$HOME/.config";
@@ -108,20 +97,32 @@ in
         XDG_CACHE_HOME = "$HOME/.cache";
       };
 
-      #setOptions = [ "autocd" ];
+      shellAliases = {
+        ".." = "cd ..";
+        "..." = "cd ...";
+        fuck = "sudo $(history -p !!)"; # run last command as root
+        home = "cd ~";
+        mkdir = "mkdir -p";
+        s = "sudo systemctl";
+        scdisable = "sudo systemctl disable $@";
+        scenable = "sudo systemctl  disable $@";
+        scstart = "sudo systemctl start $@";
+        scstop = "sudo systemctl stop $@";
+        sj = "sudo journalctl";
+        u = "systemctl --user";
+        uj = "journalctl --user";
+        uscdisable = "systemctl --user disable $@";
+        uscenable = "systemctl --user disable $@";
+        uscstart = "systemctl --user start $@";
+        uscstop = "systemctl --user stop $@";
+      };
     };
 
     home.packages = with pkgs; [
-      #zsh-powerlevel10k
     ];
 
     programs.zsh.initContent = lib.mkOrder 500 ''
-      #source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      #if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-      #  source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      #fi
     '';
-
 
     programs.zsh.siteFunctions = {
       src = lib.mkOrder 5 ''
@@ -268,17 +269,6 @@ in
             tree -Cs "$@"
           else
             echo "tree not available"
-            return 1
-          fi
-        }
-      '';
-
-      rsync = lib.mkOrder 21 ''
-        rsync() {
-          if command -v rsync >/dev/null 2>&1; then
-            command rsync -aXxtv "$@"
-          else
-            echo "rsync not available"
             return 1
           fi
         }
