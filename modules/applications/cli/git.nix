@@ -27,7 +27,7 @@ in
           }
 
           local _IMAGE_TAG
-          _IMAGE_TAG=$(head -n 1 CHANGELOG.md | awk '{print $2'})
+          _IMAGE_TAG=$(head -n 1 CHANGELOG.md | awk '{print $2}')
           local _git_branch
           _git_branch=$(git rev-parse --abbrev-ref HEAD)
           case $_git_branch in
