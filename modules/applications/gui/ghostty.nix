@@ -23,26 +23,29 @@ in
         enable = true;
         package = pkgs.unstable.ghostty;
         enableBashIntegration = mkDefault true;
+        enableZshIntegration = mkDefault true;
         installBatSyntax = mkDefault true;
+        systemd.enable = mkDefault true;
         settings = {
-          theme = "hybrid-krompus";
+          #theme = "hybrid-krompus";
           font-family = "Hack";
           font-size = 11;
-gtk-titlebar = true;
-quit-after-last-window-closed = false;
-bold-is-bright = true;
+          gtk-titlebar = false;
+          quit-after-last-window-closed = true;
+          #bold-is-bright = true;
+          #clearDefaultKeybinds = true;
           cursor-style = "block";
           cursor-style-blink = true;
           keybind = [
-            "ctrl+h=goto_split:left"
-            "ctrl+l=goto_split:right"
-            "ctrl+enter=new_window"
-      "ctrl+t=new_split:down"
-      "ctrl+shift+r=new_split:right"
-      "ctrl+shift+t=new_tab"
-      "ctrl+s=goto_split:next"
-      "ctrl+shift+s=next_tab"
-      "ctrl+w=close_surface"
+            "ctrl+w=unbind"
+            #"ctrl+w=close_surface"
+            "ctrl+s=unbind"
+
+            "escape=end_search"
+            "f1=new_tab"
+            "f2=new_split:down"
+            "copy=copy_to_clipboard:mixed"
+            "paste=paste_from_clipboard"
           ];
         };
         themes = {
@@ -118,6 +121,7 @@ bold-is-bright = true;
         ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [
           "SUPER, P, exec, ghostty +new-window"
+          "SUPER, Return, exec, ghostty +new-window"
         ];
       };
     };
