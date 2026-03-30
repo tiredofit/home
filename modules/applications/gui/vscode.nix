@@ -80,7 +80,7 @@ in with lib; {
             ## AI
             #github.copilot
             github.copilot-chat
-            ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
+            #ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
 
             ## CI
             github.vscode-github-actions                # Github actions helper
@@ -357,7 +357,7 @@ in with lib; {
                 "jinhyuk.replace-curly-quotes"
                 "ms-azuretools.vscode-docker"
                 "ms-azuretools.vscode-containers"
-                "ms-vscode.copilot-mermaid-diagram"
+                #"ms-vscode.copilot-mermaid-diagram"
                 "nickdemayo.vscode-json-editor"
                 "pinage404.bash-extension-pack"
                 "redhat.vscode-yaml"
