@@ -43,7 +43,7 @@ with lib;
           ranger.enable = mkDefault true;
           ripgrep.enable = mkDefault true;
           secrets.enable = mkDefault true;
-          starship.enable = mkDefault true;
+          starship.enable = mkDefault false;
           tmux.enable = mkDefault true;
           wget.enable = mkDefault true;
           zoxide.enable = mkDefault true;
