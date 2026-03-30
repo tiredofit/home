@@ -61,7 +61,7 @@ with lib;
         };
 
         animations = {
-          enabled = mkDefault true;
+          enabled = mkDefault false;
           animation = mkDefault [
             "border, 1, 10, default"
             "fade, 1, 7, default"
