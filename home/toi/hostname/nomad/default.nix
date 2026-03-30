@@ -16,6 +16,7 @@ let
 in
   with lib;
 {
+
 home.packages = [ pkgs.scummvm pkgs.antigravity ];
   host = {
     home = {
