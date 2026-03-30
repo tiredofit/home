@@ -31,11 +31,14 @@ in
     programs = {
       lsd = {
         enable = true;
+        enableBashIntegration = mkDefault true;
+        enableZshIntegration = mkDefault true;
         settings = {
           blocks = [ "permission" "user" "group" "size" "date" "name" ];
           date = "date";
           ignore-globs = [ ".git" ".hg" ];
         };
+
       };
 
       bash = {

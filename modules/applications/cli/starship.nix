@@ -53,7 +53,7 @@ in
           scan_timeout = 35;
           command_timeout = 700;
           add_newline = false;
-          format = "$time\\[$username$hostname$directory\\] $character";
+          format = "$time\\[$username$hostname$directory\\]$all$character";
           right_format = "$php$nix_shell$docker_context$golang$direnv$memory_usage$battery";
 
           time = {
@@ -142,38 +142,38 @@ in
             format = "[$duration](bold yellow)";
           };
 
-          git_branch = {
-            symbol = "🌱 ";
-            truncation_length = 4;
-            truncation_symbol = "";
-            ignore_branches = [ "main" ];
-          };
-
-          git_commit = {
-            commit_hash_length = 4;
-            tag_symbol = "🔖 ";
-          };
-
-          git_state = {
-            format = "[\\($state( $progress_current of $progress_total)\\)]($style) ";
-          };
-
-          git_metrics = {
-            added_style = "bold blue";
-          };
-
-          git_status = {
-            ahead = "⇡$''{count}";
-            diverged = "⇕⇡$''{ahead_count}⇣$''{behind_count}";
-            behind = "⇣$''{count}";
-          };
-
-          status = {
-            style = "bg:blue";
-            format = "[\\[$symbol$common_meaning$signal_name$maybe_int\\]]($style) ";
-            map_symbol = true;
-            disabled = false;
-          };
+          #git_branch = {
+          #  symbol = "🌱 ";
+          #  truncation_length = 4;
+          #  truncation_symbol = "";
+          #  ignore_branches = [ "main" ];
+          #};
+#
+          #git_commit = {
+          #  commit_hash_length = 4;
+          #  tag_symbol = "🔖 ";
+          #};
+#
+          #git_state = {
+          #  format = "[\\($state( $progress_current of $progress_total)\\)]($style) ";
+          #};
+#
+          #git_metrics = {
+          #  added_style = "bold blue";
+          #};
+#
+          #git_status = {
+          #  ahead = "⇡$''{count}";
+          #  diverged = "⇕⇡$''{ahead_count}⇣$''{behind_count}";
+          #  behind = "⇣$''{count}";
+          #};
+#
+          #status = {
+          #  style = "bg:blue";
+          #  format = "[\\[$symbol$common_meaning$signal_name$maybe_int\\]]($style) ";
+          #  map_symbol = true;
+          #  disabled = false;
+          #};
         };
       };
     };

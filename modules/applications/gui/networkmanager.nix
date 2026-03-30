@@ -33,12 +33,29 @@ in
         exec-once = [
           "${config.host.home.feature.uwsm.prefix}nm-applet"
         ];
+
         windowrule = [
           "float, class:^(nm-applet|nm-connection-editor)$"
         ];
       };
     };
+
+    programs = (let
+      shellFunctions = ''
+        wifi_scan() {
+          # scan and list Wi‑Fi networks using nmcli
+          # syntax: wifi_scan
+          nmcli device wifi rescan && nmcli device wifi list
+        }
+      '';
+    in {
+      bash = mkIf config.host.home.applications.bash.enable {
+        initExtra = shellFunctions;
+      };
+
+      zsh = mkIf config.host.home.applications.zsh.enable {
+        initContent = shellFunctions;
+      };
+    });
   };
-
-
 }

@@ -22,5 +22,6 @@ in
           lazygit
         ];
     };
+    programs.lazygit.enableZshIntegration = mkDefault true;
   };
 }

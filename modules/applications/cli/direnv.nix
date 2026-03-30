@@ -20,6 +20,7 @@ in
       direnv = {
         enable = true;
         enableBashIntegration = mkDefault true;
+        enableZshIntegration = mkDefault true;
         nix-direnv.enable = mkDefault true;
         silent = mkDefault true;
       };
