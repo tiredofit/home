@@ -161,7 +161,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
       settings = {
         bind = [
-          "SUPER, Return, exec, ${config.host.home.feature.uwsm.prefix}${pkgs.kitty}/bin/kitty"
+          #"SUPER, Return, exec, ${config.host.home.feature.uwsm.prefix}${pkgs.kitty}/bin/kitty"
         ];
       };
     };
