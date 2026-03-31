@@ -94,15 +94,15 @@ let
                         before )
                             if grep -q "eDP-1" ~/.config/hypr/display.conf ; then
                                 _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'save existing keyboard brightness'"
-                    _hypridle_exec brightnessctl -d ''${_kbd_device} --save
-                    _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'disable keyboard light'"
-                    _hypridle_exec brightnessctl -d ''${_kbd_device} s 0
+                                _hypridle_exec brightnessctl -d ''${_kbd_device} --save
+                                _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [timeout] 'disable keyboard light'"
+                                _hypridle_exec brightnessctl -d ''${_kbd_device} s 0
                             fi
                         ;;
                         after )
                             if grep -q "eDP-1" ~/.config/hypr/display.conf ; then
                                 _hypridle_log "$(date +'%Y-%m-%d %H:%M:%s') [keyboard] [light] [restore] 'restore keyboard brightness'"
-                    _hypridle_exec brightnessctl -d ''${_kbd_device} --restore
+                                _hypridle_exec brightnessctl -d ''${_kbd_device} --restore
                             fi
                         ;;
                     esac
@@ -254,7 +254,7 @@ in
       };
 
       Service = mkForce {
-        ExecStart = "${pkgs.hypridle}/bin/hypridle";
+        ExecStart = "${pkgs.hypridle}/bin/hypridle -q";
         Restart = "always";
         RestartSec = 10;
         X-Restart-Triggers =
