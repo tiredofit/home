@@ -332,5 +332,9 @@ in
       shellAliases = shellAliases;
     };
   };
+
+  home.file = {
+    "${config.xdg.configHome}/zsh/.p10k.zsh".source = ../dotfiles/p10k/p10k.zsh;
+  };
 }
 
