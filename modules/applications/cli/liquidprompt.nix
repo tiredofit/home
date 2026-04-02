@@ -12,6 +12,18 @@ in
         type = with types; bool;
         description = "Shell customization ";
       };
+      shellIntegration = {
+        bash = mkOption {
+          default = true;
+          type = with types; bool;
+          description = "Enable bash integration for Liquidprompt";
+        };
+        zsh = mkOption {
+          default = false;
+          type = with types; bool;
+          description = "Enable zsh integration for Liquidprompt";
+        };
+      };
     };
   };
 
@@ -23,33 +35,36 @@ in
         ];
     };
 
-    programs = {
-      bash = {
-        initExtra = ''
-          # Only load Liquidprompt in interactive shells, not from a script or from scp
-          if [[ $- = *i* ]] ; then
-             if [ -f /home/$USER/.nix-profile/bin/liquidprompt ]; then
-                source /home/$USER/.nix-profile/bin/liquidprompt
-             elif [ -f /home/$USER/.local/state/nix/profile/bin/liquidprompt ]; then
-                source /home/$USER/.local/state/nix/profile/bin/liquidprompt
-             fi
-          fi
-        '';
-      };
-
-      zsh = {
-        initContent = lib.mkOrder 500 ''
-          # Only load Liquidprompt in interactive shells
-          if [[ -o interactive ]]; then
-             if [ -f /home/$USER/.nix-profile/bin/liquidprompt ]; then
-                source /home/$USER/.nix-profile/bin/liquidprompt
-             elif [ -f /home/$USER/.local/state/nix/profile/bin/liquidprompt ]; then
-                source /home/$USER/.local/state/nix/profile/bin/liquidprompt
-             fi
-          fi
-        '';
-      };
-    };
+    programs = lib.mkMerge [
+      (lib.mkIf cfg.shellIntegration.bash {
+        bash = {
+          initExtra = ''
+            # Only load Liquidprompt in interactive shells, not from a script or from scp
+            if [[ $- = *i* ]] ; then
+               if [ -f /home/$USER/.nix-profile/bin/liquidprompt ]; then
+                  source /home/$USER/.nix-profile/bin/liquidprompt
+               elif [ -f /home/$USER/.local/state/nix/profile/bin/liquidprompt ]; then
+                  source /home/$USER/.local/state/nix/profile/bin/liquidprompt
+               fi
+            fi
+          '';
+        };
+      })
+      (lib.mkIf cfg.shellIntegration.zsh {
+        zsh = {
+          initContent = lib.mkOrder 500 ''
+            # Only load Liquidprompt in interactive shells
+            if [[ -o interactive ]]; then
+               if [ -f /home/$USER/.nix-profile/bin/liquidprompt ]; then
+                  source /home/$USER/.nix-profile/bin/liquidprompt
+               elif [ -f /home/$USER/.local/state/nix/profile/bin/liquidprompt ]; then
+                  source /home/$USER/.local/state/nix/profile/bin/liquidprompt
+               fi
+            fi
+          '';
+        };
+      })
+    ];
 
     xdg.configFile."liquidpromptrc".text = ''
       #############
