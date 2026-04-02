@@ -37,7 +37,13 @@ with lib;
           jq.enable = mkDefault true;
           less.enable = mkDefault true;
           lsd.enable = mkDefault true;
-          liquidprompt.enable = mkDefault false;
+          liquidprompt = {
+            enable = mkDefault true;
+            shellIntegration = {
+              bash = mkDefault true;
+              zsh = mkDefault false;
+            };
+          };
           mtr.enable = mkDefault true;
           nano.enable = mkDefault true;
           ranger.enable = mkDefault true;
@@ -47,6 +53,7 @@ with lib;
           tmux.enable = mkDefault true;
           wget.enable = mkDefault true;
           zoxide.enable = mkDefault true;
+          zsh.enable = mkDefault true;
         };
         feature = {
         };
