@@ -14,7 +14,7 @@ in
       cursor = {
         name = mkOption {
           type = types.str;
-          default = "HyprBibataModernClassicSVG";
+          default = "Bibata-Modern-Classic";
           description = "Cursor theme name.";
         };
         package = mkOption {
@@ -40,15 +40,16 @@ in
       packages = with pkgs; [
         hyprcursor
       ];
+    };
 
-      pointerCursor = {
-        package = mkDefault cfg.cursor.package;
-        name = mkDefault cfg.cursor.name;
-        size = mkDefault cfg.cursor.size;
-        hyprcursor = {
-          enable = mkDefault true;
-        };
-        gtk.enable = mkDefault true;
+    gtk = {
+      gtk3.extraConfig = {
+        "gtk-cursor-theme-name" = "${cfg.cursor.name}";
+      };
+      gtk4.extraConfig = {
+        Settings = ''
+          gtk-cursor-theme-name=${cfg.cursor.name};
+        '';
       };
     };
 

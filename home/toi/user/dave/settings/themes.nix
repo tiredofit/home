@@ -31,11 +31,11 @@ in
       package = pkgs.papirus-icon-theme;
     };
 
-    #pointerCursor =  {
-    #  gtk.enable = true;
-    #  name = "Quintom_Snow";
-    #  package = pkgs.quintom-cursor-theme;
-    #};
+    cursorTheme = {
+      package = pkgs.bibata-cursors;  # or pkgs.apple-cursor, pkgs.fastcursor, etc.
+      name = "Bibata-Modern-Classic";
+      size = mkDefault 24;
+    };
 
     theme = {
       name = "Catppuccin-Mocha";
