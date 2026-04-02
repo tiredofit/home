@@ -32,7 +32,6 @@ in
           font-size = 11;
           gtk-titlebar = false;
           quit-after-last-window-closed = true;
-          #bold-is-bright = true;
           #clearDefaultKeybinds = true;
           cursor-style = "block";
           cursor-style-blink = true;
@@ -40,7 +39,8 @@ in
             "ctrl+w=unbind"
             #"ctrl+w=close_surface"
             "ctrl+s=unbind"
-
+            #"shift+enter=text:\"\\n\""
+            "shift+enter=ignore"
             "escape=end_search"
             "f1=new_tab"
             "f2=new_split:down"
