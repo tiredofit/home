@@ -332,6 +332,8 @@ in
       dotDir = "${config.xdg.configHome}/zsh";
       initContent = shellFunctions;
       initExtraFirst = ''
+        autoload -Uz compinit && compinit || true
+
         p10k_file="$HOME/.cache/p10k-instant-prompt-$USER.zsh"
         if [[ -r "$p10k_file" ]]; then source "$p10k_file"; fi
         source ${config.xdg.configHome}/zsh/.p10k.zsh
@@ -342,6 +344,8 @@ in
         if [ -f "${config.xdg.configHome}/zsh/aliases" ]; then
           source "${config.xdg.configHome}/zsh/aliases"
         fi
+
+        autoload -Uz compinit && compinit || true
 
       '';
       plugins = [
