@@ -7,10 +7,9 @@ let
     XDG_CACHE_HOME = "$HOME/.cache";
   };
 
-  shellAliases = {
+  baseAliases = {
     ".." = "cd ..";
     "..." = "cd ...";
-    fuck = "sudo $(history -p !!)";
     home = "cd ~";
     mkdir = "mkdir -p";
     s = "sudo systemctl";
@@ -25,7 +24,25 @@ let
     uscstop = "systemctl --user stop $@";
   };
 
+  bashAliases = baseAliases // {
+    fuck = "sudo $(history -p !!)";
+  };
+
+  zshAliases = baseAliases // {
+    fuck = "sudo $(fc -ln -1)";
+  };
+
+  aliasToLine = name: val: "alias " + name + "='" + val + "'";
+
+  zshAliasesText = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: val: aliasToLine name val) zshAliases);
+  bashAliasesText = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: val: aliasToLine name val) bashAliases);
+
   shellFunctions = ''
+    if [ -d "/home/$USER/src" ]; then alias src="cd $HOME/src" ; fi
+    if [ -f "/home/$USER/src/scripts/changelog/changelogger.sh" ] ; then
+        alias changelog="/home/$USER/src/scripts/changelog/changelogger.sh"
+    fi
+
     system_update() {
       # update system and/or home configurations
       # syntax: system_update [home|system|all]
@@ -303,8 +320,12 @@ in
 
   programs = {
     bash = lib.mkIf config.host.home.applications.bash.enable {
-      initExtra = shellFunctions;
-      shellAliases = shellAliases;
+      shellAliases = bashAliases;
+      initExtra = ''
+        if [ -f "${config.xdg.configHome}/bash/aliases" ]; then
+          source "${config.xdg.configHome}/bash/aliases"
+        fi
+      '';
     };
 
     zsh = lib.mkIf config.host.home.applications.zsh.enable {
@@ -318,6 +339,10 @@ in
             typeset POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
         fi
 
+        if [ -f "${config.xdg.configHome}/zsh/aliases" ]; then
+          source "${config.xdg.configHome}/zsh/aliases"
+        fi
+
       '';
       plugins = [
         {
@@ -329,12 +354,14 @@ in
       sessionVariables = {
         ZDOTDIR = "${config.xdg.configHome}/zsh";
       };
-      shellAliases = shellAliases;
+      shellAliases = zshAliases;
     };
   };
 
   home.file = {
     "${config.xdg.configHome}/zsh/.p10k.zsh".source = ../dotfiles/p10k/p10k.zsh;
+    "${config.xdg.configHome}/zsh/aliases".text = zshAliasesText;
+    "${config.xdg.configHome}/bash/aliases".text = bashAliasesText;
   };
 }
 
