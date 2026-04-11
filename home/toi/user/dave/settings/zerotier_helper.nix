@@ -28,6 +28,74 @@ done
 known_networks_file="''${HOME}/.config/zerotier/known-zt-networks"
 
 if [ ! -d "$(dirname "''${known_networks_file}")" ]; then
+
+  # ------------------ Kill-switch helpers ------------------
+  killswitch_state_file="''${HOME}/.config/zerotier/zt_killswitch_enabled"
+
+  enable_killswitch() {
+    sudo iptables -N ZT_KILLSWITCH 2>/dev/null || true
+    sudo iptables -F ZT_KILLSWITCH
+    sudo iptables -I OUTPUT -j ZT_KILLSWITCH
+    sudo iptables -A ZT_KILLSWITCH -o lo -j ACCEPT
+    sudo iptables -A ZT_KILLSWITCH -o zt+ -j ACCEPT
+    sudo iptables -A ZT_KILLSWITCH -j DROP
+    touch "''${killswitch_state_file}"
+    ''${notify} "ZeroTier" "Killswitch enabled"
+  }
+
+  disable_killswitch() {
+    sudo iptables -D OUTPUT -j ZT_KILLSWITCH 2>/dev/null || true
+    sudo iptables -F ZT_KILLSWITCH 2>/dev/null || true
+    sudo iptables -X ZT_KILLSWITCH 2>/dev/null || true
+    rm -f "''${killswitch_state_file}" 2>/dev/null || true
+    ''${notify} "ZeroTier" "Killswitch disabled"
+  }
+
+  killswitch_status() {
+    if [ -f "''${killswitch_state_file}" ]; then echo "enabled"; else echo "disabled"; fi
+  }
+
+  monitor_killswitch_loop() {
+    prev_default_active=0
+    if check_default_route_active; then prev_default_active=1; fi
+    while true; do
+      sleep 3
+      if check_default_route_active; then
+        if [ "$prev_default_active" -eq 0 ]; then
+          disable_killswitch
+        fi
+        prev_default_active=1
+      else
+        if [ "$prev_default_active" -eq 1 ]; then
+          enable_killswitch
+        fi
+        prev_default_active=0
+      fi
+    done
+  }
+
+  # CLI entry for killswitch management
+  if [[ "''${1}" == "killswitch" ]]; then
+    case "''${2}" in
+      enable)
+        enable_killswitch
+        ;;
+      disable)
+        disable_killswitch
+        ;;
+      status)
+        killswitch_status
+        ;;
+      monitor)
+        monitor_killswitch_loop
+        ;;
+      *)
+        echo "Usage: $0 killswitch {enable|disable|status|monitor}"
+        ;;
+    esac
+    exit 0
+  fi
+
   mkdir -p "$(dirname "''${known_networks_file}")"
 fi
 
