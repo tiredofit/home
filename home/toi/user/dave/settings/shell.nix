@@ -330,8 +330,8 @@ in
 
     zsh = lib.mkIf config.host.home.applications.zsh.enable {
       dotDir = "${config.xdg.configHome}/zsh";
-      initContent = shellFunctions;
-      initExtraFirst = ''
+      initContent = lib.mkBefore (
+        ''
         autoload -Uz compinit && compinit || true
 
         p10k_file="$HOME/.cache/p10k-instant-prompt-$USER.zsh"
@@ -345,9 +345,10 @@ in
           source "${config.xdg.configHome}/zsh/aliases"
         fi
 
-        autoload -Uz compinit && compinit || true
+        #autoload -Uz compinit && compinit || true
 
-      '';
+        '' + shellFunctions
+      );
       plugins = [
         {
           name = "zsh-powerlevel10k";
