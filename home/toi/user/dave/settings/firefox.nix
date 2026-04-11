@@ -5,11 +5,10 @@ let
 
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
     bitwarden
-    clearurls
+    #clearurls
     containerise
     copy-selected-links
     copy-selection-as-markdown
-    decentraleyes
     export-cookies-txt
     facebook-container
     floccus
@@ -53,10 +52,23 @@ let
       definedAliases = [ "@17" ];
       icon = "https://www.17track.net/favicon.ico";
       name = "17track";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = [
         {
           template = "https://t.17track.net/en#nums={searchTerms}";
+        }
+      ];
+    };
+    "Alpine Packages" = {
+      definedAliases = [ "@apk" ];
+      icon = "https://pkgs.alpinelinux.org/static/favicon.ico";
+      name = "Alpine Packages";
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
+      urls = [
+        { template = "https://pkgs.alpinelinux.org/packages";
+          params = [
+           { name = "name"; value = "{searchTerms}"; }
+          ];
         }
       ];
     };
@@ -64,7 +76,7 @@ let
       definedAliases = [ "@dh" ];
       icon = "https://hub.docker.com/favicon.ico";
       name = "Docker Hub";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = [
         { template = "https://hub.docker.com/search";
           params = [
@@ -76,7 +88,7 @@ let
     "GitHub" = {
       definedAliases = [ "@github" "@gh" ];
       icon = "https://github.com/favicon.ico";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = [
         { template = "https://github.com/search";
           params = [
@@ -90,7 +102,7 @@ let
       definedAliases = [ "@ghn" ];
       icon = "https://github.com/favicon.ico";
       name = "Github Nix Code";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = lib.singleton {
         template = "https://github.com/search";
         params = lib.attrsToList {

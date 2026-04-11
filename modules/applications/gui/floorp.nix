@@ -1,32 +1,6 @@
 { config, lib, pkgs, specialArgs, ... }:
 
 let
-  floorpHelper_bitwarden = pkgs.writeShellScriptBin "floorpHelper_bitwarden" ''
-    windowtitlev2() {
-      IFS=',' read -r -a args <<< "$1"
-      args[0]="''${args[0]#*>>}"
-
-      if [[ ''${args[1]} == "Extension: (Bitwarden Password Manager) - — Floorp" ]]; then
-        hyprctl --batch "\
-          dispatch setfloating address:0x''${args[0]}; \
-          dispatch resizewindowpixel exact 20% 50%, address:0x''${args[0]}; \
-          dispatch centerwindow; \
-        "
-      fi
-    }
-
-    handle() {
-      case $1 in
-        windowtitlev2\>*) windowtitlev2 "$1" ;;
-      esac
-    }
-
-    ${pkgs.socat}/bin/socat -U - UNIX-CONNECT:"/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" \
-      | while read -r line; do
-          handle "$line"
-        done
-  '';
-
   inherit (specialArgs) username;
   cfg = config.host.home.applications.floorp;
 in with lib; {
@@ -76,7 +50,6 @@ in with lib; {
     home = {
       packages = with pkgs; [
         pkgs.nur.repos.rycee.mozilla-addons-to-nix
-        floorpHelper_bitwarden
       ];
     };
 
@@ -135,24 +108,6 @@ in with lib; {
       };
     };
 
-    systemd.user.services.hyperlandHelper_floorp_bitwarden = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
-      Unit = {
-        Description = "Help float Floorp Extension Windows in Hyprland";
-        After = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        #Type = "exec";
-        ExecStart = "${floorpHelper_bitwarden}/bin/floorpHelper_bitwarden";
-        #ExecReload = "kill -SIGUSR2 $MAINPID";
-        #Restart = "always";
-      };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         windowrule = [
@@ -162,6 +117,7 @@ in with lib; {
            ### Throw sharing indicators away
            "workspace special silent, match:title ^(Floorp — Sharing Indicator)$"
            "workspace special silent, match:title ^(.*is sharing (your screen|a window).)$"
+           "float on, size 720 312, match:class ^(firefox)$, match:title ^Extension: (Bitwarden Password Manager) - — Floorp$"
          ];
       };
     };
