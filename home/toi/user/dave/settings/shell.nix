@@ -32,11 +32,6 @@ let
     fuck = "sudo $(fc -ln -1)";
   };
 
-  aliasToLine = name: val: "alias " + name + "='" + val + "'";
-
-  zshAliasesText = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: val: aliasToLine name val) zshAliases);
-  bashAliasesText = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: val: aliasToLine name val) bashAliases);
-
   shellFunctions = ''
     if [ -d "/home/$USER/src" ]; then alias src="cd $HOME/src" ; fi
     if [ -f "/home/$USER/src/scripts/changelog/changelogger.sh" ] ; then
@@ -321,11 +316,6 @@ in
   programs = {
     bash = lib.mkIf config.host.home.applications.bash.enable {
       shellAliases = bashAliases;
-      initExtra = ''
-        if [ -f "${config.xdg.configHome}/bash/aliases" ]; then
-          source "${config.xdg.configHome}/bash/aliases"
-        fi
-      '';
     };
 
     zsh = lib.mkIf config.host.home.applications.zsh.enable {
@@ -341,10 +331,6 @@ in
             typeset POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
         fi
 
-        if [ -f "${config.xdg.configHome}/zsh/aliases" ]; then
-          source "${config.xdg.configHome}/zsh/aliases"
-        fi
-
         #autoload -Uz compinit && compinit || true
 
         '' + shellFunctions
@@ -356,17 +342,18 @@ in
           file = "powerlevel10k.zsh-theme";
         }
       ];
-      sessionVariables = {
-        ZDOTDIR = "${config.xdg.configHome}/zsh";
-      };
+      sessionVariables = lib.mkMerge [
+        config.home.sessionVariables
+        {
+          ZDOTDIR = "${config.xdg.configHome}/zsh";
+        }
+      ];
       shellAliases = zshAliases;
     };
   };
 
   home.file = {
     "${config.xdg.configHome}/zsh/.p10k.zsh".source = ../dotfiles/p10k/p10k.zsh;
-    "${config.xdg.configHome}/zsh/aliases".text = zshAliasesText;
-    "${config.xdg.configHome}/bash/aliases".text = bashAliasesText;
   };
 }
 

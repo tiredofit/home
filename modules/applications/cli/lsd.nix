@@ -31,8 +31,8 @@ in
     programs = {
       lsd = {
         enable = true;
-        enableBashIntegration = mkDefault true;
-        enableZshIntegration = mkDefault true;
+        enableBashIntegration = mkDefault false;
+        enableZshIntegration = mkDefault false;
         settings = {
           blocks = [ "permission" "user" "group" "size" "date" "name" ];
           date = "date";
@@ -42,10 +42,10 @@ in
       };
 
       bash = {
-        shellAliases = mkForce aliases;
+        shellAliases = aliases;
       };
       zsh = {
-        shellAliases = lib.mkForce aliases;
+        shellAliases = aliases;
       };
     };
   });
