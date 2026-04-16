@@ -17,7 +17,7 @@ in
   with lib;
 {
 
-home.packages = [ pkgs.scummvm pkgs.antigravity ];
+home.packages = [ pkgs.scummvm ];
   host = {
     home = {
       applications = {
@@ -40,7 +40,7 @@ home.packages = [ pkgs.scummvm pkgs.antigravity ];
         hadolint.enable = true;
         hyprlauncher.enable = false;
         hyprcursor.enable = true;
-        kitty.enable = true;
+        kitty.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
         meld.enable = true;
