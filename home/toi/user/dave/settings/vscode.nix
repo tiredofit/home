@@ -6,12 +6,39 @@ in
   with lib;
   {
     config = mkIf cfg.enable (let
+      shellInit = ''
+        workspace() {
+          local target="''${1:-.}"
+          local workspaceFile
+
+          if [[ -d "$target" ]]; then
+            workspaceFile="$(find "$target" -maxdepth 1 -type f \( -name '*.code-workspace' -o -name '*.workspace' \) | head -n 1)"
+            if [[ -n "$workspaceFile" ]]; then
+              code "$workspaceFile"
+            else
+              code "$target"
+            fi
+          elif [[ -f "$target" ]]; then
+            if [[ "$target" == *.code-workspace || "$target" == *.workspace ]]; then
+              code "$target"
+            else
+              code "$(dirname "$target")"
+            fi
+          else
+            code .
+          fi
+        }
+      '';
+
+      shellAliases = {
+        "ws" = "workspace";
+      };
+
       pkgs-ext = import inputs.nixpkgs {
         system = pkgs.stdenv.hostPlatform.system;
         config.allowUnfree = true;
         overlays = [
           inputs.nix-vscode-extensions.overlays.default
-          #inputs.nix-vscode-extensions.overlays.release
         ];
       };
 
@@ -161,7 +188,10 @@ in
           ];
 
           userSettings = {
-            "explorer.confirmDelete" = false;
+            "explorer" = {
+              "confirmDragAndDrop"  = false;
+              "confirmDelete" = false;
+            };
 
             ## Editor
             "editor" = {
@@ -185,7 +215,6 @@ in
                 "renderCharacters" = false;
                 "maxColumn" = 80;
               };
-
               "mouseWheelZoom" = true;
               "overviewRulerBorder" = false;
               "renderControlCharacters" = true;
@@ -375,11 +404,22 @@ in
             ## Terminal
             "terminal" = {
               "integrated" = {
+                "copyOnSelection" = true;
+                "defaultProfile" = {
+                  "linux" = "bash";
+                };
                 "enableImages" = true;
                 "enableMultiLinePasteWarning" = "never";
                 "fontFamily" = "Hack Nerd Font";
                 "profiles" = {
                   "linux" = {
+                    "sh" = null;
+                    "sh (2)" = null;
+                    "zsh (2)" = null;
+                    "bash (2)" = null;
+                    "tmux" = null;
+                    "JavaScript Debug Terminal" = null;
+                    "Github Copilot Chat" = null;
                     "bash" = {
                       "path" = "/usr/bin/env bash";
                       #"args" = ["--login"];
@@ -513,9 +553,9 @@ in
 
         php = {
           nixpkgs = with pkgs.vscode-extensions; [
+
           ];
           marketplace = with marketplace; [
-            laravel.vscode-laravel                      # Official Larvel
             bmewburn.vscode-intelephense-client         # PHP Intelephense
             ryannaddy.laravel-artisan                   # Run artisan commands
             amiralizadeh9480.laravel-extra-intellisense # Extra Intellisense for Laravel
@@ -525,6 +565,8 @@ in
             devsense.composer-php-vscode                # Composer Support
           ];
           marketplace-release = with marketplace-release; [
+            laravel.vscode-laravel                      # Official Larvel
+
           ];
           keybindings = [
           ];
@@ -582,82 +624,92 @@ in
       };
 
     in {
-      programs.vscode = {
-        enable = true;
-        profiles = {
-          default = {
-            extensions = (with pkgs.vscode-extensions;
-                            profileBlocks.global.nixpkgs ++
-                            profileBlocks.ai.nixpkgs ++
-                            profileBlocks.docker.nixpkgs ++
-                            profileBlocks.go.nixpkgs ++
-                            profileBlocks.nix.nixpkgs ++
-                            profileBlocks.php.nixpkgs ++
-                            profileBlocks.shell.nixpkgs
-                          )
-                          ++
-                          (with marketplace-release;
-                            profileBlocks.global.marketplace-release ++
-                            profileBlocks.ai.marketplace-release ++
-                            profileBlocks.docker.marketplace-release ++
-                            profileBlocks.go.marketplace-release ++
-                            profileBlocks.nix.marketplace-release ++
-                            profileBlocks.php.marketplace-release ++
-                            profileBlocks.shell.marketplace-release
-                          )
-                          ++
-                          (with marketplace;
-                            profileBlocks.global.marketplace ++
-                            profileBlocks.ai.marketplace ++
-                            profileBlocks.docker.marketplace ++
-                            profileBlocks.go.marketplace ++
-                            profileBlocks.nix.marketplace ++
-                            profileBlocks.php.marketplace ++
-                            profileBlocks.shell.marketplace
-                          )
-                        ;
-            keybindings = profileBlocks.global.keybindings ++
-                          profileBlocks.ai.keybindings ++
-                          profileBlocks.docker.keybindings ++
-                          profileBlocks.go.keybindings ++
-                          profileBlocks.nix.keybindings ++
-                          profileBlocks.php.keybindings ++
-                          profileBlocks.shell.keybindings
-                        ;
-            userSettings = profileBlocks.global.userSettings
-                           // profileBlocks.ai.userSettings
-                           // profileBlocks.docker.userSettings
-                           // profileBlocks.go.userSettings
-                           // profileBlocks.nix.userSettings
-                           // profileBlocks.php.userSettings
-                           // profileBlocks.shell.userSettings
-                         ;
-          };
-          docker = {
-            extensions =  (with pkgs.vscode-extensions;
-                            profileBlocks.global.nixpkgs ++
-                            profileBlocks.docker.nixpkgs
-                          )
-                          ++
-                          (with marketplace-release;
-                            profileBlocks.global.marketplace-release ++
-                            profileBlocks.docker.marketplace-release
-                          )
-                          ++
-                          (with marketplace;
-                            profileBlocks.global.marketplace ++
-                            profileBlocks.docker.marketplace
-                          )
-                        ;
-            keybindings = profileBlocks.global.keybindings
-                          ++ profileBlocks.go.keybindings
-                          ++ profileBlocks.docker.keybindings
-                        ;
-            userSettings = profileBlocks.global.userSettings
-                           // profileBlocks.docker.userSettings
-                         ;
+      programs = {
+        bash = {
+          initExtra = shellInit;
+          shellAliases = shellAliases;
+        };
+        zsh = {
+          initContent = shellInit;
+          shellAliases = shellAliases;
+        };
+        vscode = {
+          enable = true;
+          profiles = {
+            default = {
+              extensions = (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.docker.nixpkgs ++
+                              profileBlocks.go.nixpkgs ++
+                              profileBlocks.nix.nixpkgs ++
+                              profileBlocks.php.nixpkgs ++
+                              profileBlocks.shell.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.docker.marketplace-release ++
+                              profileBlocks.go.marketplace-release ++
+                              profileBlocks.nix.marketplace-release ++
+                              profileBlocks.php.marketplace-release ++
+                              profileBlocks.shell.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.docker.marketplace ++
+                              profileBlocks.go.marketplace ++
+                              profileBlocks.nix.marketplace ++
+                              profileBlocks.php.marketplace ++
+                              profileBlocks.shell.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.docker.keybindings ++
+                            profileBlocks.go.keybindings ++
+                            profileBlocks.nix.keybindings ++
+                            profileBlocks.php.keybindings ++
+                            profileBlocks.shell.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.ai.userSettings
+                             // profileBlocks.docker.userSettings
+                             // profileBlocks.go.userSettings
+                             // profileBlocks.nix.userSettings
+                             // profileBlocks.php.userSettings
+                             // profileBlocks.shell.userSettings
+                           ;
+            };
+            docker = {
+              extensions =  (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.docker.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.docker.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.docker.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings
+                            ++ profileBlocks.go.keybindings
+                            ++ profileBlocks.docker.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.docker.userSettings
+                           ;
+            };
           };
         };
-      };
+       };
     });
   }
