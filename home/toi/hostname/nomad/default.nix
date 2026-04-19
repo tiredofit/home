@@ -22,6 +22,7 @@ home.packages = [ pkgs.scummvm ];
     home = {
       applications = {
         act.enable = false;
+        android-studio.enable = true;
         avidemux.enable = false;
         bitwarden-cli.enable = true;
         calibre.enable = false;

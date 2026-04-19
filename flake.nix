@@ -46,6 +46,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    android-sdk = {
+      url = "github:tadfisher/android-nixpkgs/stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager-stable, home-manager-unstable, ... }@inputs:
@@ -64,6 +68,7 @@
             [
               inputs.comma.overlays.default
               inputs.nur.overlays.default
+              inputs.android-sdk.overlays.default
             ] ++ builtins.attrValues localOverlays
           );
           inherit system;
@@ -76,6 +81,7 @@
         in
           hmInput.lib.homeManagerConfiguration {
             modules = [
+              inputs.android-sdk.hmModule
               (import ./home)
               (import ./modules)
             ];
