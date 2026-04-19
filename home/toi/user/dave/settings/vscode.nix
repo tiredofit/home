@@ -67,6 +67,7 @@ in
 
             ## Development
             mkhl.direnv
+            ms-vscode-remote.remote-containers
 
             ## Editor Helpers
             shd101wyy.markdown-preview-enhanced         # Better Markdown Preview
@@ -486,7 +487,13 @@ in
                 "orientation" = "stacked";
               };
             };
-            "github.copilot.editor.enableCodeActions" = true;
+            "github" = {
+              "copilot" = {
+                 "editor" = {
+                   "enableCodeActions" = true;
+                 };
+              };
+            };
           };
         };
 
@@ -687,25 +694,147 @@ in
             docker = {
               extensions =  (with pkgs.vscode-extensions;
                               profileBlocks.global.nixpkgs ++
-                              profileBlocks.docker.nixpkgs
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.docker.nixpkgs ++
+                              profileBlocks.shell.nixpkgs
                             )
                             ++
                             (with marketplace-release;
                               profileBlocks.global.marketplace-release ++
-                              profileBlocks.docker.marketplace-release
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.docker.marketplace-release ++
+                              profileBlocks.shell.marketplace-release
                             )
                             ++
                             (with marketplace;
                               profileBlocks.global.marketplace ++
-                              profileBlocks.docker.marketplace
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.docker.marketplace ++
+                              profileBlocks.shell.marketplace
+
                             )
                           ;
-              keybindings = profileBlocks.global.keybindings
-                            ++ profileBlocks.go.keybindings
-                            ++ profileBlocks.docker.keybindings
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.docker.keybindings ++
+                            profileBlocks.shell.keybindings
                           ;
               userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.ai.userSettings
                              // profileBlocks.docker.userSettings
+                             // profileBlocks.shell.userSettings
+                           ;
+            };
+            go = {
+              extensions =  (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.go.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.go.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.go.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.go.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.ai.userSettings
+                             // profileBlocks.go.userSettings
+                           ;
+            };
+            nix = {
+              extensions =  (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.nix.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.nix.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.nix.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.nix.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.php.userSettings
+                             // profileBlocks.nix.userSettings
+                           ;
+            };
+            php = {
+              extensions =  (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.php.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.php.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.php.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.php.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.php.userSettings
+                             // profileBlocks.ai.userSettings
+                           ;
+            };
+            shell = {
+              extensions =  (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs ++
+                              profileBlocks.ai.nixpkgs ++
+                              profileBlocks.shell.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release ++
+                              profileBlocks.ai.marketplace-release ++
+                              profileBlocks.shell.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace ++
+                              profileBlocks.ai.marketplace ++
+                              profileBlocks.shell.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings ++
+                            profileBlocks.ai.keybindings ++
+                            profileBlocks.shell.keybindings
+                          ;
+              userSettings = profileBlocks.global.userSettings
+                             // profileBlocks.ai.userSettings
+                             // profileBlocks.shell.userSettings
                            ;
             };
           };
