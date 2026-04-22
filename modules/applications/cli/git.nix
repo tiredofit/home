@@ -82,6 +82,7 @@ in
           init = { defaultBranch = "main"; };
           pull = { ff = "only"; };
         };
+        signing.format = null;
       };
 
       bash = {
