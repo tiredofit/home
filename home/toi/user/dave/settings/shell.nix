@@ -324,6 +324,8 @@ in
         ''
         autoload -Uz compinit && compinit || true
 
+        unsetopt nomatch
+
         p10k_file="$HOME/.cache/p10k-instant-prompt-$USER.zsh"
         if [[ -r "$p10k_file" ]]; then source "$p10k_file"; fi
         source ${config.xdg.configHome}/zsh/.p10k.zsh
