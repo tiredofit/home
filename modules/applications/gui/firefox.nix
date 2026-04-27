@@ -57,7 +57,7 @@ in with lib; {
     programs.firefox = {
       enable = true;
       package = if pkgs.stdenv.isLinux then pkgs.unstable.firefox else pkgs.unstable.firefox-bin;
-      configPath = "${config.xdg.configHome}/mozilla/firefox";
+      configPath = mkDefault "${config.xdg.configHome}/mozilla/firefox";
       profiles = {
         default = mkIf cfg.defaultSettings.enable {
           name = mkDefault username;
