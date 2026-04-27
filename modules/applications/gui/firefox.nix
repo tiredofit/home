@@ -57,7 +57,7 @@ in with lib; {
     programs.firefox = {
       enable = true;
       package = if pkgs.stdenv.isLinux then pkgs.unstable.firefox else pkgs.unstable.firefox-bin;
-
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       profiles = {
         default = mkIf cfg.defaultSettings.enable {
           name = mkDefault username;
@@ -72,21 +72,6 @@ in with lib; {
               "google".metaData.alias = mkDefault "@g";
               "wikipedia".metaData.hidden = mkDefault true;
               "ebay".metaData.hidden = mkDefault true;
-
-              "youtube" = {
-                definedAliases = ["@youtube" "@yt"];
-                icon = "https://www.youtube.com/s/desktop/8b6c1f4c/img/favicon_144x144.png";
-                urls = [
-                  {
-                    template = "https://www.youtube.com/results";
-                    params = [
-                      {
-                        name = "search_query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
               };
             };
           };
