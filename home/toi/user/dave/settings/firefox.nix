@@ -255,6 +255,21 @@ let
         }
       ];
     };
+    "youtube" = {
+      definedAliases = ["@youtube" "@yt"];
+      icon = "https://www.youtube.com/s/desktop/8b6c1f4c/img/favicon_144x144.png";
+      urls = [
+        {
+          template = "https://www.youtube.com/results";
+          params = [
+            {
+              name = "search_query";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+    };
   };
 in
   with lib;
