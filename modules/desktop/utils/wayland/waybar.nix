@@ -122,10 +122,18 @@ in
         Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
         Documentation = "man:waybar(5)";
         After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
       };
 
       Service = {
         Type = "exec";
+        ExecCondition = "${pkgs.writeShellScript "waybar-check-desktop" ''
+          case "$XDG_CURRENT_DESKTOP" in
+            Hyprland|niri) exit 0;;
+            *) exit 1;;
+          esac
+        ''}";
         ExecStart = "${pkgs.waybar}/bin/waybar";
         ExecReload = "kill -SIGUSR2 $MAINPID";
         Restart = "on-failure";

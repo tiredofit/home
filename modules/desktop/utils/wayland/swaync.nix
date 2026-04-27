@@ -41,6 +41,12 @@ in
       Service = mkForce {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
+        ExecCondition = "${pkgs.writeShellScript "swaync-check-desktop" ''
+          case "$XDG_CURRENT_DESKTOP" in
+            Hyprland|niri) exit 0;;
+            *) exit 1;;
+          esac
+        ''}";
         ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
         ExecReload = "${pkgs.swaynotificationcenter}/bin/swaync-client --reload-config ; ${pkgs.swaynotificationcenter}/bin/swaync-client --reload-css";
         Restart = "on-failure";

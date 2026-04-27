@@ -42,6 +42,12 @@ in
       };
 
       Service = {
+        ExecCondition = "${pkgs.writeShellScript "swayosd-check-desktop" ''
+          case "$XDG_CURRENT_DESKTOP" in
+            Hyprland|niri) exit 0;;
+            *) exit 1;;
+          esac
+        ''}";
         ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
         Restart = "on-failure";
       };

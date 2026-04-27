@@ -250,7 +250,7 @@ in
         Documentation = "https://github.com/hyprwm/hypridle";
         After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
-        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=Hyprland" ];
       };
 
       Service = mkForce {

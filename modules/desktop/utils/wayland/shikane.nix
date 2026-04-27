@@ -65,9 +65,17 @@ in
         Description = "Dynamic output configuration tool";
         Documentation = "man:shikane(1)";
         After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
       };
 
       Service = {
+        ExecCondition = "${pkgs.writeShellScript "shikane-check-desktop" ''
+          case "$XDG_CURRENT_DESKTOP" in
+            Hyprland|niri) exit 0;;
+            *) exit 1;;
+          esac
+        ''}";
         ExecStart = "${pkgs.shikane}/bin/shikane -c" + config.xdg.configFile."shikane/config.toml".target;
         ExecReload = "${pkgs.shikane}/bin/shikanectl reload";
         Restart = "on-failure";

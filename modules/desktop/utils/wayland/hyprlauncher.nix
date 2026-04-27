@@ -73,11 +73,12 @@ in
     #  };
     #};
 
-    systemd.user.services.waybar = mkIf cfg.service.enable {
+    systemd.user.services.hyprlauncher = mkIf cfg.service.enable {
       Unit = {
         Description = "Application launcher for Hyprland";
         After = [ config.wayland.systemd.target ];
         PartOf = [ config.wayland.systemd.target ];
+        ConditionEnvironment = [ "XDG_CURRENT_DESKTOP=Hyprland" ];
         X-Restart-Triggers = lib.mkIf (cfg.settings != { }) [
           "${config.xdg.configFile."hypr/hyprlauncher.conf".source}"
         ];

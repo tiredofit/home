@@ -3,6 +3,10 @@ with lib; {
     config = mkIf config.host.home.applications.waybar.enable {
     programs = {
       waybar = {
+        #systemd = {
+        #  enable = true;
+        #  target = "hyprland-session.target";  # Only starts under Hyprland
+        #};
         style = ''
           * {
               font-family: "Noto Sans NF";
@@ -667,6 +671,9 @@ with lib; {
         };
       };
     };
+
+
+
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
       settings = {
         bind = [

@@ -84,7 +84,7 @@ in
         Documentation = "https://github.com/hyprwm/hyprpaper";
         After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
-        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=Hyprland" ];
         X-Restart-Triggers= [ "~/.config/hypr/hyprpaper.conf" ];
       };
 
