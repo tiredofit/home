@@ -66,13 +66,11 @@ in with lib; {
           search = {
             force = mkDefault true;
             default = mkDefault "ddg";
-
             engines = {
               "bing".metaData.hidden = mkDefault true;
               "google".metaData.alias = mkDefault "@g";
               "wikipedia".metaData.hidden = mkDefault true;
               "ebay".metaData.hidden = mkDefault true;
-              };
             };
           };
 
