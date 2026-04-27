@@ -14,8 +14,6 @@ If you would like to base your own configuration from this repository, you will 
 - Some interesting **bash scripts** for automating common tasks.
 - **Declarative** **themes** and **wallpapers** with **nix-colors**
 
-- I ~sort of~ totally spent the summer of 2023 moving into this configuration after waving a fond farewell to near 2 decades of running Arch Linux. This, as with life, is still WIP. I documented the process on the [Tired of IT! NixOS](https://notes.tiredofit.ca/books/linux/chapter/nixos) chapter on my website.
-
 ## Tree Structure
 
 - `flake.nix`: Entrypoint for home configurations.
@@ -51,8 +49,6 @@ If you would like to base your own configuration from this repository, you will 
 
 ## Usage
 
-I used nix flakes in a system that had a multi user installation of Nix. I documented it on my website here: [Tired of I.T! Home Manager Setup](https://notes.tiredofit.ca/books/linux/page/home-manager-setup). The quick steps were:
-
 - Initialize Home Manager
 
 ```
@@ -70,10 +66,6 @@ home-manager switch --flake .#${HOSTNAME}.${USERNAME} --extra-experimental-featu
 ```
 nix flake update .
 ```
-
-### Managing Secrets
-
-I took some notes and documented the process of getting encrypted secrets created and keeping up to date on my website. [Tired of IT! Secrets Management](https://notes.tiredofit.ca/books/linux/page/secrets-management).
 
 # License
 
