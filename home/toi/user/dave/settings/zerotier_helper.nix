@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib; {
-  config = {
+  config = mkIf config.host.home.feature.gui.enable {
     home.file = {
       "${config.home.homeDirectory}/.config/scripts/zerotier_helper.sh" = {
         executable = true;
