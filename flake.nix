@@ -100,7 +100,7 @@
     }) // {
         overlays = import ./overlays {inherit inputs;};
         homeConfigurations = {
-          "atlas.${gn}" = HomeConfiguration {
+          "${gn}@atlas" = HomeConfiguration {
             system = "aarch64-linux";
             extraSpecialArgs = {
               org = "toi";
@@ -114,7 +114,7 @@
             nixpkgs = nixpkgs-unstable;
           };
 
-          "enigma.${gn}" = HomeConfiguration {
+          "${gn}@enigma" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
@@ -127,7 +127,7 @@
             nixpkgs = nixpkgs-unstable;
           };
 
-          "entropy.${gn}" = HomeConfiguration {
+          "${gn}@entropy" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
@@ -140,54 +140,39 @@
             nixpkgs = nixpkgs-unstable;
           };
 
-          "mirage.${gn}" = HomeConfiguration {
-            system = "aarch64-linux";
-            extraSpecialArgs = {
+          "${gn}@nakulaptop" = HomeConfiguration {
+`            extraSpecialArgs = {
               org = "toi";
-              role = "server";
+              role = "workstation";
               displayName = displayName;
-              hostname = "mirage";
+              hostname = "nakulaptop";
               username = gn;
-              networkInterface = "end0";
+              displays = 2;
+              display_center = "HDMI-A-0";
+              display_right = "eDP";
+              networkInterface = "wlo1";
               inherit inputs;
             };
             nixpkgs = nixpkgs-stable;
           };
-
-          "nakulaptop" = {
-            "${gn}" = HomeConfiguration {
-              extraSpecialArgs = {
-                org = "toi";
-                role = "workstation";
-                displayName = displayName;
-                hostname = "nakulaptop";
-                username = gn;
-                displays = 2;
-                display_center = "HDMI-A-0";
-                display_right = "eDP";
-                networkInterface = "wlo1";
-                inherit inputs;
-              };
-              nixpkgs = nixpkgs-stable;
+          "ireen@nakulaptop" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "workstation";
+              displayName = displayName;
+              hostname = "nakulaptop";
+              username = "ireen";
+              displays = 1;
+              display_center = "eDP";
+              display_right = "HDMI-A-0";
+              networkInterface = "wlo1";
+              inherit inputs;
             };
-            "ireen" = HomeConfiguration {
-              extraSpecialArgs = {
-                org = "toi";
-                role = "workstation";
-                displayName = displayName;
-                hostname = "nakulaptop";
-                username = "ireen";
-                displays = 1;
-                display_center = "eDP";
-                display_right = "HDMI-A-0";
-                networkInterface = "wlo1";
-                inherit inputs;
-              };
-              nixpkgs = nixpkgs-stable;
+            nixpkgs = nixpkgs-stable;
             };
           };
 
-          "nomad.${gn}" = HomeConfiguration {
+          "${gn}@nomad" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "workstation";
@@ -199,7 +184,7 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
-          "nucleus.tttttt" = HomeConfiguration {
+          "tttttt@nucleus" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
@@ -211,7 +196,7 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
-          "seed.${gn}" = HomeConfiguration {
+          "${gn}@seed" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
               role = "server";
@@ -225,7 +210,7 @@
           };
       ##
 
-          "sd.${gnsn}" = HomeConfiguration {
+          "${gnsn}@sd" = HomeConfiguration {
             extraSpecialArgs = {
               org = "sd";
               role = "server";
@@ -238,7 +223,6 @@
 
           ###
       };
-
       inherit home-manager-stable home-manager-unstable;
       inherit (home-manager-stable) packages;
     };
