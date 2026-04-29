@@ -17,10 +17,7 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs;
-        [
-          mate.mate-calc
-        ];
+      packages = if pkgs ? mate-calc then [ pkgs.mate-calc ] else [];
     };
   };
 }
