@@ -81,7 +81,8 @@ home.packages = [ pkgs.scummvm ];
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = [ "hyprland" ];
+          windowManager = [ "cosmic" "niri" "hyprland" ];
+          #shell = [ "dms" ];
         };
       };
       service = {
