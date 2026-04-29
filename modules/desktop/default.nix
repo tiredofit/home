@@ -42,9 +42,15 @@ with lib;
       };
 
       windowManager = mkOption {
-        type = types.enum ["cinnamon" "hyprland" "sway" ];
-        default = null;
-        description = "Type of window manager (yes, I know some are desktop environments)";
+        type = types.listOf (types.enum ["cinnamon" "cosmic" "hyprland" "niri" "sway"]);
+        default = [];
+        description = "List of window managers / desktop environments to enable";
+      };
+
+      shell = mkOption {
+        type = types.listOf (types.enum ["dms" "noctalia"]);
+        default = [];
+        description = "List of desktop shells to layer on top of the window manager";
       };
     };
   };
