@@ -102,7 +102,7 @@ with lib;
 {
   imports = imports;
 
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     home = {
       packages = with pkgs;
         [

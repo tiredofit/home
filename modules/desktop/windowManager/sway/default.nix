@@ -4,7 +4,7 @@ let
   windowManager = config.host.home.feature.gui.windowManager;
 in
 with lib; {
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "sway") {
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "sway" windowManager) {
     host = {
       home = {
         applications = {
