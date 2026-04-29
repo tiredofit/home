@@ -42,6 +42,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-colors = {
       url = "github:misterio77/nix-colors";
     };
@@ -100,6 +104,7 @@
               inputs.niri.homeModules.niri
               inputs.dms.homeModules.dank-material-shell
               inputs.noctalia-shell.homeModules.default
+              inputs.stylix.homeModules.default
               (import ./home)
               (import ./modules)
             ];
