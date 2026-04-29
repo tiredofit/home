@@ -8,10 +8,12 @@
     ];
     extra-substituters = [
       "https://nix-community.cachix.org"
+      "https://niri.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 
@@ -26,6 +28,18 @@
     };
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-colors = {
@@ -69,6 +83,7 @@
               inputs.comma.overlays.default
               inputs.nur.overlays.default
               inputs.android-sdk.overlays.default
+              inputs.niri.overlays.niri
             ] ++ builtins.attrValues localOverlays
           );
           inherit system;
@@ -82,12 +97,13 @@
           hmInput.lib.homeManagerConfiguration {
             modules = [
               inputs.android-sdk.hmModule
+              inputs.niri.homeModules.niri
+              inputs.dms.homeModules.dank-material-shell
+              inputs.noctalia-shell.homeModules.default
               (import ./home)
               (import ./modules)
             ];
-            extraSpecialArgs = {
-              inherit (args) nixpkgs;
-            } // args.extraSpecialArgs;
+            extraSpecialArgs = { inherit (args) nixpkgs; } // args.extraSpecialArgs;
             pkgs = pkgsForSystem (args.system or "x86_64-linux") nixpkgsInput;
           };
 
@@ -141,7 +157,7 @@
           };
 
           "${gn}@nakulaptop" = HomeConfiguration {
-`            extraSpecialArgs = {
+            extraSpecialArgs = {
               org = "toi";
               role = "workstation";
               displayName = displayName;
@@ -169,7 +185,6 @@
               inherit inputs;
             };
             nixpkgs = nixpkgs-stable;
-            };
           };
 
           "${gn}@nomad" = HomeConfiguration {
@@ -208,6 +223,8 @@
             };
             nixpkgs = nixpkgs-stable;
           };
+
+
       ##
 
           "${gnsn}@sd" = HomeConfiguration {
