@@ -61,7 +61,7 @@ with lib;
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = "hyprland";
+          windowManager = [ "hyprland" ];
         };
       };
       service.decrypt_cryfs_workspace.enable = true;

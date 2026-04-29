@@ -5,7 +5,7 @@ let
 in
 with lib;
 {
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "x" && windowManager == "cinnamon") {
+  config = mkIf (config.host.home.feature.gui.enable && displayServer == "x" && builtins.elem "cinnamon" windowManager) {
     home = {
       packages = with pkgs;
         [

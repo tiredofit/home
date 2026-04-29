@@ -58,7 +58,7 @@ in
     };
 
     ## TODO Make this work for dynamic Display (monitor_primary)
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
         bindl = [
           ",XF86AudioMute, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume mute-toggle"

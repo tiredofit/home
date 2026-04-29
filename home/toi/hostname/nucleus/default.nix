@@ -20,7 +20,7 @@ in
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = "hyprland";
+          windowManager = [ "hyprland" ];
         };
       };
       service = {

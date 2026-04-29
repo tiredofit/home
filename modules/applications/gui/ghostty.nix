@@ -116,7 +116,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
       settings = {
         ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [

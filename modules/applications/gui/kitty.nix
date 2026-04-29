@@ -158,7 +158,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && windowManager == "hyprland") {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
       settings = {
         bind = [
           #"SUPER, Return, exec, ${config.host.home.feature.uwsm.prefix}${pkgs.kitty}/bin/kitty"

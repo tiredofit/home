@@ -18,7 +18,7 @@
         gui = {
           enable = true;
           displayServer = "x";
-          windowManager = "cinnamon";
+          windowManager = [ "cinnamon" ];
         };
       };
       service = {

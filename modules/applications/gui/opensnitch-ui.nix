@@ -23,7 +23,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland") {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager) {
       settings = {
         windowrule = [
           "float,initialClass:(^opensnitch_ui$)"

@@ -24,7 +24,7 @@ home.packages = [ pkgs.scummvm ];
         act.enable = false;
         android-studio.enable = true;
         avidemux.enable = false;
-        bitwarden-cli.enable = true;
+        bitwarden-cli.enable = false;
         calibre.enable = false;
         claude-code.enable = true;
         chromium.enable = true;
@@ -60,7 +60,7 @@ home.packages = [ pkgs.scummvm ];
         rofi.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
-        smartgit.enable = true;
+        smartgit.enable = false;
         ssh.enable = true;
         steam-run.enable = true;
         szyszka.enable = false;
@@ -81,7 +81,7 @@ home.packages = [ pkgs.scummvm ];
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = "hyprland";
+          windowManager = [ "hyprland" ];
         };
       };
       service = {

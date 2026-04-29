@@ -184,7 +184,7 @@ in with lib; {
       };
     };
 
-    #systemd.user.services.hyperlandHelper_firefox_bitwarden = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    #systemd.user.services.hyperlandHelper_firefox_bitwarden = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
     #  Unit = {
     #    Description = "Help float Firefox Extension Windows in Hyprland";
     #    After = [ "graphical-session.target" ];
@@ -202,7 +202,7 @@ in with lib; {
     #  };
     #};
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && config.host.home.feature.gui.windowManager == "hyprland" && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
         windowrule = [
            ### Make Firefox PiP window floating and sticky
