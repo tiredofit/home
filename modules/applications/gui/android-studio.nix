@@ -32,16 +32,16 @@ in
       enable = true;
       packages = sdk: with sdk; [
         build-tools-36-1-0
-        build-tools-37-0-0
+        #build-tools-37-0-0
         cmdline-tools-latest
         emulator
         platform-tools
         platforms-android-36-1
-        platforms-android-37-0
+        #platforms-android-37-0
         sources-android-36-1
-        sources-android-37-0
+        #sources-android-37-0
         system-images-android-36-1-google-apis-playstore-x86-64
-        system-images-android-37-0-google-apis-playstore-ps16k-x86-64
+        #system-images-android-37-0-google-apis-playstore-ps16k-x86-64
       ];
     };
 
