@@ -19,8 +19,8 @@ in
     home = {
       packages = with pkgs;
         [
-          bitwarden-cli
-          bws
+          #bitwarden-cli
+          #bws
           rbw
         ];
     };
