@@ -48,7 +48,7 @@ in
 
    programs = mkIf ((role == "workstation" || role == "laptop")) (let
       sessionVars = {
-        GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
+        GTK2_RC_FILES = mkForce "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
         GTK_THEME = "Catppuccin-Mocha";
       };
     in {
