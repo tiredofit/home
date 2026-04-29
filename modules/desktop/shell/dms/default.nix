@@ -25,13 +25,13 @@ with lib;
       systemd.enable = mkDefault true;
       enableDynamicTheming = mkDefault true;
       enableSystemMonitoring = mkDefault true;
-      enableVPN = mkDefault false;
+      enableVPN = mkDefault true;
       enableAudioWavelength = mkDefault true;
-      enableCalendarEvents = mkDefault false;
+      enableCalendarEvents = mkDefault true;
 
       # Niri-specific: let DMS manage niri config via includes
       niri = mkIf niriActive {
-        enableKeybinds = mkDefault true;
+        enableKeybinds = mkDefault false;
         enableSpawn = mkDefault true;
       };
     };
@@ -40,29 +40,29 @@ with lib;
     # These are all set with mkDefault in the hyprland/niri modules so
     # mkForce is only needed for hyprlock which is set with a plain `= true`.
     host.home.applications = mkIf hyprlandActive {
-      waybar = {
-        enable = false;
-        service.enable = false;
-      };
-      sway-notification-center = {
-        enable = false;
-        service.enable = false;
-      };
-      swayosd = {
-        enable = false;
-        service.enable = false;
-      };
-      hypridle = {
-        enable = false;
-        service.enable = false;
-      };
-      hyprlock.enable = mkForce false;   # set with plain `true`, needs mkForce
-      hyprpolkitagent.enable = false;
-      rofi.enable = false;
-      # hyprpaper: keep enabled — DMS dynamic theming calls matugen which sets
-      # wallpaper itself, but hyprpaper can coexist. Set to false if you want
-      # DMS to fully own wallpaper:
-      # hyprpaper = { enable = false; service.enable = false; };
+      #waybar = {
+      #  enable = mkDefault false;
+      #  service.enable = mkDefault false;
+      #};
+      #sway-notification-center = {
+      #  enable = mkDefault false;
+      #  service.enable = mkDefault false;
+      #};
+      #swayosd = {
+      #  enable = mkDefault false;
+      #  service.enable = mkDefault false;
+      #};
+      #hypridle = {
+      #  enable = mkDefault false;
+      #  service.enable = mkDefault false;
+      #};
+      #hyprlock.enable = mkForce false;   # set with plain `true`, needs mkForce
+      #hyprpolkitagent.enable = mkDefault false;
+      #rofi.enable = mkDefault false;
+      ## hyprpaper: keep enabled — DMS dynamic theming calls matugen which sets
+      ## wallpaper itself, but hyprpaper can coexist. Set to false if you want
+      ## DMS to fully own wallpaper:
+      ## hyprpaper = { enable = false; service.enable = false; };
     };
   };
 }
