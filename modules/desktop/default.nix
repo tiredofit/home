@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 
 let
-  displayServer = config.host.home.feature.gui.displayServer.server ;
+  displayServer = config.host.home.feature.gui.displayServer ;
   cfg = config.host.home.feature.gui ;
 
   dir = ./.;
