@@ -2,6 +2,8 @@
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
+  shell = config.host.home.feature.gui.shell ;
+  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
   gameMode = pkgs.writeShellScriptBin "hyprland_gamemode" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then
@@ -118,16 +120,24 @@ with lib;
           hyprdim.enable = mkDefault true;
           hypridle = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
+            service = mkIf (! dmsActive) {
+              enable = mkDefault true;
+            };
           };
-          hyprlock.enable = true;
+          hyprlock = mkIf (! dmsActive) {
+            enable = mkDefault true;
+          };
           hyprpaper = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
+            service = mkIf (! dmsActive) {
+              enable = mkDefault true;
+            };
           };
-          hyprpicker.enable = mkDefault true;
-          hyprpolkitagent.enable = mkDefault true;
-          hyprsunset.enable = mkDefault true;
+          hyprpicker.enable = mkDefault false;
+          hyprpolkitagent = mkIf (! dmsActive) { enable = mkDefault true; };
+          hyprsunset = mkIf (! dmsActive) {
+            enable = mkDefault true;
+          };
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
           satty.enable = mkDefault true;
@@ -135,16 +145,16 @@ with lib;
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          rofi.enable = mkDefault true;
-          sway-notification-center = {
+          rofi = mkIf (! dmsActive) { enable = mkDefault true; };
+          sway-notification-center = mkIf (! dmsActive) {
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          swayosd = {
+          swayosd = mkIf (! dmsActive) {
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          waybar = {
+          waybar = mkIf (! dmsActive) {
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
@@ -208,11 +218,7 @@ with lib;
         xdgOpenUsePortal = mkDefault true;
         config = {
           common = {
-            #"org.freedesktop.impl.portal.Screenshot" = "hyprland";
-            #"org.freedesktop.impl.portal.Screencast" = "hyprland";
             "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-            #"org.freedesktop.portal.Screencast" = "hyprland";
-            default = [ "wlr" ];
           };
           hyprland.default = [
             "wlr"
