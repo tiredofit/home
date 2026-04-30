@@ -4,6 +4,8 @@ let
   windowManager = config.host.home.feature.gui.windowManager ;
   shell = config.host.home.feature.gui.shell ;
   dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
+  noctaliaActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "noctalia" shell;
+  shellOverridesServices = dmsActive || noctaliaActive;
   gameMode = pkgs.writeShellScriptBin "hyprland_gamemode" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then
@@ -116,27 +118,36 @@ with lib;
     host = {
       home = {
         applications = {
+          cliphist = {
+            enable = mkDefault true;
+            service.enable = mkDefault true;
+          };
+          grim.enable = mkDefault true;
+          nwg-displays.enable = mkDefault true;
+          slurp.enable = mkDefault true;
+          wl-clipboard.enable = mkDefault true;
+          wlogout.enable = mkDefault true;
           hyprcursor.enable = mkDefault true;
           hyprdim.enable = mkDefault true;
           hypridle = {
             enable = mkDefault true;
-            service = mkIf (! dmsActive) {
-              enable = mkDefault true;
-            };
+            service.enable = mkDefault (! shellOverridesServices);
           };
-          hyprlock = mkIf (! dmsActive) {
+          hyprlock = {
             enable = mkDefault true;
           };
           hyprpaper = {
             enable = mkDefault true;
-            service = mkIf (! dmsActive) {
-              enable = mkDefault true;
-            };
+            service.enable = mkDefault (! shellOverridesServices);
           };
           hyprpicker.enable = mkDefault false;
-          hyprpolkitagent = mkIf (! dmsActive) { enable = mkDefault true; };
-          hyprsunset = mkIf (! dmsActive) {
+          hyprpolkitagent = {
             enable = mkDefault true;
+            service.enable = mkDefault (! shellOverridesServices);
+          };
+          hyprsunset = {
+            enable = mkDefault true;
+            service.enable = mkDefault (! shellOverridesServices);
           };
           hyprkeys.enable = mkDefault true;
           playerctl.enable = mkDefault true;
@@ -145,18 +156,20 @@ with lib;
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          rofi = mkIf (! dmsActive) { enable = mkDefault true; };
-          sway-notification-center = mkIf (! dmsActive) {
+          rofi = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
           };
-          swayosd = mkIf (! dmsActive) {
+          sway-notification-center = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
+            service.enable = mkDefault (! shellOverridesServices);
           };
-          waybar = mkIf (! dmsActive) {
+          swayosd = {
             enable = mkDefault true;
-            service.enable = mkDefault true;
+            service.enable = mkDefault (! shellOverridesServices);
+          };
+          waybar = {
+            enable = mkDefault true;
+            service.enable = mkDefault (! shellOverridesServices);
           };
         };
         feature = {
