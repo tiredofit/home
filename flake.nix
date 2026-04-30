@@ -30,12 +30,31 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+    };
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    android-sdk = {
+      url = "github:tadfisher/android-nixpkgs/stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    danksearch = {
+      url = "github:AvengeMedia/danksearch";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     noctalia-shell = {
@@ -46,27 +65,9 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-    };
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-    };
-    nur = {
-      url = "github:nix-community/NUR";
-    };
-    sops-nix = {
-      url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-    android-sdk = {
-      url = "github:tadfisher/android-nixpkgs/stable";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -100,10 +101,6 @@
         in
           hmInput.lib.homeManagerConfiguration {
             modules = [
-              inputs.android-sdk.hmModule
-              inputs.niri.homeModules.niri
-              inputs.dms.homeModules.dank-material-shell
-              inputs.noctalia-shell.homeModules.default
               inputs.stylix.homeModules.default
               (import ./home)
               (import ./modules)
@@ -228,7 +225,6 @@
             };
             nixpkgs = nixpkgs-stable;
           };
-
 
       ##
 
