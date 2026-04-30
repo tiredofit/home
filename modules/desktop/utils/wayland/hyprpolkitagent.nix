@@ -12,11 +12,19 @@ in
         type = with types; bool;
         description = "Polkit authentication agent written in QT/QML";
       };
+      service.enable = mkOption {
+        default = true;
+        type = with types; bool;
+        description = "Auto start on user session start";
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    services.hyprpolkitagent = {
+    home.packages = with pkgs; [
+      hyprpolkitagent
+    ];
+    services.hyprpolkitagent = mkIf cfg.service.enable {
       enable = mkDefault true;
       package = mkDefault pkgs.hyprpolkitagent;
     };
