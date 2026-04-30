@@ -10,22 +10,8 @@ in
     host = {
       home = {
         applications = {
-          cliphist = {
-            enable = mkDefault true;
-            service.enable = mkDefault true;
-          };
-          grim.enable = mkDefault true;
-          nwg-displays.enable = mkDefault true;
-          slurp.enable = mkDefault true;
-          wayprompt.enable = mkDefault false;
           wdisplays.enable = mkDefault true;
           wev.enable = mkDefault true;
-          wl-clipboard.enable = mkDefault true;
-          wl-gammarelay-rs = {
-            enable = mkDefault false;
-            service.enable = mkDefault false;
-          };
-          wlogout.enable = mkDefault true;
           wlr-randr.enable = mkDefault true;
         };
       };
