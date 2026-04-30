@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, inputs, lib, pkgs, ...}:
 
 let
   cfg = config.host.home.applications.android-studio;
@@ -6,6 +6,10 @@ let
 in
   with lib;
 {
+  imports = [
+    inputs.android-sdk.hmModule
+  ];
+
   options = {
     host.home.applications.android-studio = {
       enable = mkOption {
@@ -15,6 +19,7 @@ in
       };
     };
   };
+
 
   config = mkIf cfg.enable {
     home = {
