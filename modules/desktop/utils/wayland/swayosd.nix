@@ -2,6 +2,9 @@
 ## PERSONALIZE
 let
   cfg = config.host.home.applications.swayosd;
+  shell = config.host.home.feature.gui.shell;
+  displayServer = config.host.home.feature.gui.displayServer;
+  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
   prefixUWSM =
     if config.host.network.firewall.fail2ban.enable
     then "VERBOSE"
@@ -58,7 +61,7 @@ in
     };
 
     ## TODO Make this work for dynamic Display (monitor_primary)
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
         bindl = [
           ",XF86AudioMute, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume mute-toggle"

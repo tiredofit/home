@@ -1,8 +1,11 @@
 { config, inputs, lib, pkgs, ... }:
 let
   cfg = config.host.home.applications.hyprlock;
+  shell = config.host.home.feature.gui.shell;
+  displayServer = config.host.home.feature.gui.displayServer;
+  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
 ## PERSONALIZE
- script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprlock" ''
+  script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprlock" ''
     _get_display_name() {
         ${pkgs.wlr-randr}/bin/wlr-randr --json | ${pkgs.jq}/bin/jq -r --arg desc "$(echo "''${1}" | sed "s|^d/||g")" '.[] | select(.description | test("^(d/)?\($desc)")) | .name'
     }
@@ -110,7 +113,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
         bind = [
           "SUPER_SHIFT, X, exec, ${config.host.home.feature.uwsm.prefix}hyprlock"

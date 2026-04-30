@@ -221,6 +221,7 @@ with lib;
       portal = {
         enable = mkForce true;
         configPackages = with pkgs; [
+          xdg-desktop-portal-hyprland
           xdg-desktop-portal-wlr
           xdg-desktop-portal-gtk
         ];
@@ -235,6 +236,7 @@ with lib;
           };
           hyprland.default = [
             "wlr"
+            "hyprland"
             "gtk"
           ];
         };

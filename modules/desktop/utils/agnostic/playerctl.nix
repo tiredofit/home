@@ -2,6 +2,9 @@
 
 let
   cfg = config.host.home.applications.playerctl;
+  shell = config.host.home.feature.gui.shell;
+  displayServer = config.host.home.feature.gui.displayServer;
+  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
 in
   with lib;
 {
@@ -23,7 +26,7 @@ in
         ];
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
         bindl = [
           ",XF86AudioPlay, exec, ${config.host.home.feature.uwsm.prefix}playerctl play-pause"

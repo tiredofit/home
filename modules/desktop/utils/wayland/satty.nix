@@ -2,6 +2,9 @@
 ## PERSONALIZE
 let
   cfg = config.host.home.applications.satty;
+  shell = config.host.home.feature.gui.shell;
+  displayServer = config.host.home.feature.gui.displayServer;
+  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
 in
   with lib;
 {
@@ -23,6 +26,8 @@ in
         ];
     };
 
+    ## DMS
+    #wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
         #"SUPER_SHIFT, S, exec, pkill satty || hyprshot -s -r -m region | satty  -f -"
