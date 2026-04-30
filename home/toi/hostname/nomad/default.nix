@@ -82,7 +82,7 @@ home.packages = [ pkgs.scummvm ];
           enable = true;
           displayServer = "wayland";
           windowManager = [ "cosmic" "niri" "hyprland" ];
-          #shell = [ "dms" ];
+          shell = [ "dms" ];
         };
       };
       service = {
