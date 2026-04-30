@@ -94,6 +94,9 @@ in
             evgeniypeshkov.syntax-highlighter           # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
             bierner.markdown-mermaid                    # MermaidJS in MarkDown
             redhat.vscode-yaml                          # YAML
+
+            # Theme
+            danklinux.dms-theme
           ];
 
           keybindings = [
