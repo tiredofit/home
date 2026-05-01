@@ -459,6 +459,8 @@ in
         ai = {
           nixpkgs = with pkgs.vscode-extensions; [
             github.copilot-chat                          # Github CoPilot
+            #anthropic.claude-code                        # Claude Code
+
           ];
           marketplace = with marketplace; [
             anthropic.claude-code                        # Claude Code
@@ -466,6 +468,7 @@ in
             #ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
           ];
           marketplace-release = with marketplace-release; [
+            #anthropic.claude-code                        # Claude Code
           ];
           keybindings = [
           ];
