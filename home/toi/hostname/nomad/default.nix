@@ -57,7 +57,7 @@ home.packages = [ pkgs.scummvm ];
         playwright.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
-        rofi.enable = true;
+        rofi.enable = mkForce false;
         shellcheck.enable = true;
         shfmt.enable = true;
         smartgit.enable = false;
@@ -76,12 +76,14 @@ home.packages = [ pkgs.scummvm ];
         zoom.enable = true;
         zenbrowser.enable = false;
         zsh.enable = true;
+        waybar.enable = false;
+        wlogout.enable = false;
       };
       feature = {
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = [ "cosmic" "niri" "hyprland" ];
+          windowManager = [ "niri" "hyprland" ];
           shell = [ "dms" ];
         };
       };
@@ -108,7 +110,8 @@ home.packages = [ pkgs.scummvm ];
       };
     };
   };
-
+  services.network-manager-applet.enable = false;
+  services.blueman-applet.enable = false;
   host.home.applications.shikane.settings = {
     profile = [
       {
