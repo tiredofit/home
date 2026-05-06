@@ -106,9 +106,9 @@ with lib;
       settings = {
         # === Application Launchers ===
         bind = [
-          "SUPER, space, exec, dms ipc call spotlight toggle"
+          "SUPER, D, exec, dms ipc call spotlight toggle"
           "SUPER, V, exec, dms ipc call clipboard toggle"
-          "SUPER, M, exec, dms ipc call processlist focusOrToggle"
+          #"SUPER, M, exec, dms ipc call processlist focusOrToggle"
           "SUPER, comma, exec, dms ipc call settings focusOrToggle"
           "SUPER, N, exec, dms ipc call notifications toggle"
           "SUPER SHIFT, N, exec, dms ipc call notepad toggle"
@@ -120,6 +120,9 @@ with lib;
           # === Security ===
           "SUPER SHIFT, X, exec, dms ipc call lock lock"
           "CTRL ALT, Delete, exec, dms ipc call processlist focusOrToggle"
+
+          "SUPER_SHIFT, W, exec, systemctl --user restart dms.service"
+
 
           # === Screenshots ===
           #", Print, exec, dms screenshot"
