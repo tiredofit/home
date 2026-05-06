@@ -31,6 +31,9 @@ in
           email = email;
         };
       };
+      ignores = [
+        "*.code-workspace"
+      ];
     };
   };
 }

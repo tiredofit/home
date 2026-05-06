@@ -110,8 +110,7 @@ home.packages = [ pkgs.scummvm ];
       };
     };
   };
-  services.network-manager-applet.enable = false;
-  services.blueman-applet.enable = false;
+
   host.home.applications.shikane.settings = {
     profile = [
       {
