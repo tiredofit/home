@@ -16,7 +16,11 @@ in
 {
   programs = {
     git = {
-      userEmail = email;
+      settings = {
+        user = {
+          email = email;
+        };
+      };
     };
   };
 }
