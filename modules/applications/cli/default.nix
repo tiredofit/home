@@ -4,7 +4,6 @@ let
   dir = ./.;
   files = builtins.readDir dir;
   ignoreList = [
-    "neovim"
   ];
   importable = lib.filterAttrs (name: type:
     (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
