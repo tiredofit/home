@@ -101,7 +101,6 @@ home.packages = [ pkgs.scummvm ];
               toi.enable = true;
             };
             ssh = {
-              sd.enable = true;
               toi.enable = true;
               ghtoi.enable = true;
             };

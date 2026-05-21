@@ -229,21 +229,6 @@
             };
             nixpkgs = nixpkgs-stable;
           };
-
-      ##
-
-          "${gnsn}@sd" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "sd";
-              role = "server";
-              displayName = displayName;
-              hostname = "server";
-              username = gnsn;
-              inherit inputs;
-            };
-          };
-
-          ###
       };
       inherit home-manager-stable home-manager-unstable;
       inherit (home-manager-stable) packages;
