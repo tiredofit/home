@@ -8,7 +8,7 @@ with lib;
     home = {
       applications = {
         android-tools.enable = mkDefault true;
-        blueman.enable = mkDefault true;
+        blueman.enable = mkDefault false;
         calibre = {
           enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
