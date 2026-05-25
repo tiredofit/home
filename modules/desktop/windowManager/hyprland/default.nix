@@ -119,57 +119,53 @@ with lib;
       home = {
         applications = {
           cliphist = {
-            enable = mkDefault true;
-            service.enable = mkDefault true;
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
           grim.enable = mkDefault true;
-          nwg-displays.enable = mkDefault true;
+          nwg-displays.enable = (! shellOverridesServices);
           slurp.enable = mkDefault true;
           wl-clipboard.enable = mkDefault true;
-          wlogout.enable = mkDefault true;
+          wlogout.enable = (! shellOverridesServices);
           hyprcursor.enable = mkDefault true;
-          hyprdim.enable = mkDefault true;
+          hyprdim.enable = (! shellOverridesServices);
           hypridle = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
-          hyprlock = {
-            enable = mkDefault true;
-          };
+          hyprlock.enable = (! shellOverridesServices);
           hyprpaper = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
           hyprpicker.enable = mkDefault false;
           hyprpolkitagent = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
           hyprsunset = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
-          hyprkeys.enable = mkDefault true;
-          playerctl.enable = mkDefault true;
+          hyprkeys.enable = mkDefault false;
+          playerctl.enable = (! shellOverridesServices);
           satty.enable = mkDefault true;
           shikane = {
             enable = mkDefault true;
             service.enable = mkDefault true;
           };
-          rofi = {
-            enable = mkDefault true;
-          };
+          rofi.enable = (! shellOverridesServices);
           sway-notification-center = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
           swayosd = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
           waybar = {
-            enable = mkDefault true;
-            service.enable = mkDefault (! shellOverridesServices);
+            enable = (! shellOverridesServices);
+            service.enable = (! shellOverridesServices);
           };
         };
         feature = {
