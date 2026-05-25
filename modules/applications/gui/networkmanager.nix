@@ -21,12 +21,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs;
-        [
-          networkmanagerapplet
-        ];
-    };
+    home.packages = mkIf cfg.systemtray.enable (with pkgs; [
+       networkmanagerapplet
+     ]);
 
     wayland.windowManager.hyprland = mkIf ((cfg.systemtray.enable) && (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable)) {
       settings = {
