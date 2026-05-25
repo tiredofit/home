@@ -16,8 +16,8 @@ with lib;
             action.spawn = "ghostty";
           };
           "Mod+D" = {
-            hotkey-overlay.title = "Run an Application: rofi";
-            action.spawn-sh = "pkill rofi || rofi -combi-modi drun,run,ssh -show drun -show-icons -theme-str 'window{width:30%; height:30%;} listview{columns:1;}'";
+            hotkey-overlay.title = "Run an Application: Spotlight";
+            action.spawn-sh = "dms ipc call spotlight toggle";
           };
           #"Super+Alt+L" = {
           #  hotkey-overlay.title = "Lock the Screen: swaylock";
@@ -26,45 +26,45 @@ with lib;
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+            action.spawn-sh = "dms ipc call audio increment 1";
           };
           "XF86AudioLowerVolume" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+            action.spawn-sh = "dms ipc call audio decrement 1";
           };
           "XF86AudioMute" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            action.spawn-sh = "dms ipc call audio mute";
           };
           "XF86AudioMicMute" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            action.spawn-sh = "dms ipc call audio micmute";
           };
 
           "XF86AudioPlay" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl play-pause";
+            action.spawn-sh = "dms ipc call mpris playPause";
           };
           "XF86AudioStop" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl stop";
+            action.spawn-sh = "dms ipc call mpris stop";
           };
           "XF86AudioPrev" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl previous";
+            action.spawn-sh = "dms ipc call mpris previous";
           };
           "XF86AudioNext" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl next";
+            action.spawn-sh = "dms ipc call mpris next";
           };
 
           "XF86MonBrightnessUp" = {
             allow-when-locked = true;
-            action.spawn = [ "brightnessctl" "--class=backlight" "set" "+10%" ];
+            action.spawn-sh = "dms ipc call brightness increment 5 ''";
           };
           "XF86MonBrightnessDown" = {
             allow-when-locked = true;
-            action.spawn = [ "brightnessctl" "--class=backlight" "set" "10%-" ];
+            action.spawn-sh = "dms ipc call brightness decrement 5 ''";
           };
 
           "Mod+O" = {
@@ -201,19 +201,19 @@ with lib;
           "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [ ];
           "Mod+W".action.toggle-column-tabbed-display = [ ];
 
-          "Print".action.screenshot = [ ];
-          "Ctrl+Print".action.screenshot-screen = [ ];
-          "Alt+Print".action.screenshot-window = [ ];
+          #"Print".action.screenshot = [ ];
+          #"Ctrl+Print".action.screenshot-screen = [ ];
+          #"Alt+Print".action.screenshot-window = [ ];
 
           "Mod+Escape" = {
             allow-inhibiting = false;
             action.toggle-keyboard-shortcuts-inhibit = [ ];
           };
 
-          "Mod+Shift+E".action.quit = [ ];
-          "Ctrl+Alt+Delete".action.quit = [ ];
+          #"Mod+Shift+E".action.quit = [ ];
+          #"Ctrl+Alt+Delete".action.quit = [ ];
 
-          "Mod+Shift+P".action.power-off-monitors = [ ];
+          #"Mod+Shift+P".action.power-off-monitors = [ ];
         };
       };
     };
