@@ -15,12 +15,12 @@ with lib;
         };
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
-        diffuse = {
-          enable = mkDefault true;
+        meld = {
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
         drawio = {
-          enable = mkDefault true;
+          enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
         easyeffects.enable = mkDefault true;
@@ -29,9 +29,9 @@ with lib;
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        gnome-system-monitor.enable = mkDefault true;
+        ghostty.enable = mkDefault true;
+        gnome-system-monitor.enable = mkDefault false;
         gparted.enable = mkDefault true;
-        kitty.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
         master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
@@ -61,7 +61,7 @@ with lib;
         theming.enable = mkDefault true;
       };
       service = {
-        vscode-server.enable = mkDefault true;
+        vscode-server.enable = mkDefault false;
       };
     };
   };
