@@ -7,6 +7,7 @@ with lib;
 {
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
+      configType = "hyprlang";
       settings = {
         source = [
           "../../src/home/dotfiles/hypr/hyprland.conf"
