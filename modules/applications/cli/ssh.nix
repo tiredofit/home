@@ -25,22 +25,20 @@ in
       ssh = lib.mkMerge [
         {
           enable = true;
-          matchBlocks =
+          settings =
             let
               relaxedBlocksAttrs = listToAttrs (map (pattern: {
                 name = pattern;
                 value = {
-                  checkHostIP = false;
-                  extraOptions = {
-                    "UserKnownHostsFile" = "/dev/null";
-                    "StrictHostKeyChecking" = "no";
-                  };
+                  CheckHostIP = false;
+                  UserKnownHostsFile = "/dev/null";
+                  StrictHostKeyChecking = "no";
                 };
               }) (filter (p: p != "*") cfg.relaxedBlocks));
               defaultBlock = {
                 "*" = {
-                  checkHostIP = false;
-                  serverAliveInterval = mkDefault 60;
+                  CheckHostIP = false;
+                  ServerAliveInterval = mkDefault 60;
                 };
               };
             in

@@ -49,9 +49,9 @@ in
     programs = {
       ssh = {
         enable = mkDefault true;
-        matchBlocks = {
+        settings = {
           "*.${s}${_p}${_a}${m}${t}${r}${a_}${p_}" = {
-            identityFile = config.sops.secrets."ssh/toi-id_ed25519".path;
+            IdentityFile = config.sops.secrets."ssh/toi-id_ed25519".path;
           };
         };
       };
