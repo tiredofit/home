@@ -17,50 +17,41 @@ in
   with lib;
 {
 
-home.packages = [ pkgs.scummvm ];
+#home.packages = [ pkgs.scummvm pkgs.kdePackages.kdeconnect-kde pkgs.valent pkgs.opencode pkgs.opencode-desktop ];
+home.packages = [ pkgs.opencode pkgs.opencode-desktop ];
   host = {
     home = {
       applications = {
         act.enable = false;
         android-studio.enable = true;
-        avidemux.enable = false;
         bitwarden-cli.enable = true;
         calibre.enable = false;
         claude-code.enable = true;
         chromium.enable = true;
         cryfs.enable = true;
-        czkawka.enable = false;
         devenv.enable = false;
         direnv.enable = true;
         feishin.enable = true;
         file-roller.enable = true;
-        floorp.enable = false;
         github-client.enable = true;
         ghostty.enable = true;
         gnome-software.enable = true;
         hadolint.enable = true;
-        hyprlauncher.enable = false;
         hyprcursor.enable = true;
-        kitty.enable = false;
         lazydocker.enable = true;
         lazygit.enable = true;
         meld.enable = true;
-        mp3gain.enable = false;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
-          systemtray.enable = false;
+          systemtray.enable = mkForce false;
         };
-        nmap.enable = false;
         obsidian.enable = true;
-        opensnitch-ui.enable = false;
         playwright.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
-        rofi.enable = mkForce false;
         shellcheck.enable = true;
         shfmt.enable = true;
-        smartgit.enable = false;
         ssh.enable = true;
         steam-run.enable = true;
         szyszka.enable = false;
@@ -74,10 +65,7 @@ home.packages = [ pkgs.scummvm ];
         yq.enable = true;
         yt-dlp.enable = true;
         zoom.enable = true;
-        zenbrowser.enable = false;
         zsh.enable = true;
-        waybar.enable = false;
-        wlogout.enable = false;
       };
       feature = {
         gui = {
@@ -125,13 +113,12 @@ home.packages = [ pkgs.scummvm ];
             adaptive_sync = false;
           }
         ];
-        exec = [
-          "displayhelper_hyprland   \"${laptop_display}\""
-          "displayhelper_hyprpaper  \"${laptop_display}\""
-          "displayhelper_waybar     \"${laptop_display}\""
-          "displayhelper_hyprlock   \"${laptop_display}\""
-          "sound-tool               \"reset\""
-        ];
+        exec = []
+          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${laptop_display}\""
+          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${laptop_display}\""
+          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${laptop_display}\""
+          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${laptop_display}\""
+          ++ [ "sound-tool               \"reset\"" ];
       }
       {
         name = "dock";
@@ -168,13 +155,12 @@ home.packages = [ pkgs.scummvm ];
             adaptive_sync = false;
           }
         ];
-        exec = [
-          "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_hyprlock   \"${dock_middle}\""
-          "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          "sound-tool               \"disable\"         \"AIR HUB,Jabra SPEAK\""
-        ];
+        exec = []
+          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${dock_middle}\""
+          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+          ++ [ "sound-tool               \"disable\"         \"AIR HUB,Jabra SPEAK\"" ];
       }
 #      {
 #        name = "laptop (+embedded, -hdmi)";
