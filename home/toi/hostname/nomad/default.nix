@@ -17,8 +17,7 @@ in
   with lib;
 {
 
-#home.packages = [ pkgs.scummvm pkgs.kdePackages.kdeconnect-kde pkgs.valent pkgs.opencode pkgs.opencode-desktop ];
-home.packages = [ pkgs.opencode pkgs.opencode-desktop ];
+home.packages = [ ];
   host = {
     home = {
       applications = {
@@ -29,7 +28,6 @@ home.packages = [ pkgs.opencode pkgs.opencode-desktop ];
         claude-code.enable = true;
         chromium.enable = true;
         cryfs.enable = true;
-        devenv.enable = false;
         direnv.enable = true;
         feishin.enable = true;
         file-roller.enable = true;
@@ -47,6 +45,7 @@ home.packages = [ pkgs.opencode pkgs.opencode-desktop ];
           systemtray.enable = mkForce false;
         };
         obsidian.enable = true;
+        opencode.enable = true;
         playwright.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
@@ -55,7 +54,7 @@ home.packages = [ pkgs.opencode pkgs.opencode-desktop ];
         ssh.enable = true;
         steam-run.enable = true;
         szyszka.enable = false;
-        thunderbird.enable = true;
+        thunderbird.enable = false;
         virt-manager.enable = true;
         visual-studio-code = {
           enable = true;
