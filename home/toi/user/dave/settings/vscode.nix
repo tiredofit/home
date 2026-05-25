@@ -464,6 +464,7 @@ in
           ];
           marketplace = with marketplace; [
             anthropic.claude-code                        # Claude Code
+            sst-dev.opencode
             #github.copilot-chat                          # Github CoPilot
             #ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
           ];
