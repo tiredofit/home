@@ -42,13 +42,13 @@ with lib;
       };
 
       windowManager = mkOption {
-        type = types.listOf (types.enum ["cinnamon" "cosmic" "hyprland" "niri" "sway"]);
+        type = types.listOf (types.enum ["cinnamon" "cosmic" "hyprland" "niri" ]);
         default = [];
         description = "List of window managers / desktop environments to enable";
       };
 
       shell = mkOption {
-        type = types.listOf (types.enum ["dms" "noctalia"]);
+        type = types.listOf (types.enum ["dms"]);
         default = [];
         description = "List of desktop shells to layer on top of the window manager";
       };

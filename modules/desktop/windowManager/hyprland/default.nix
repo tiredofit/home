@@ -4,8 +4,7 @@ let
   windowManager = config.host.home.feature.gui.windowManager ;
   shell = config.host.home.feature.gui.shell ;
   dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
-  noctaliaActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "noctalia" shell;
-  shellOverridesServices = dmsActive || noctaliaActive;
+  shellOverridesServices = dmsActive;
   gameMode = pkgs.writeShellScriptBin "hyprland_gamemode" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then

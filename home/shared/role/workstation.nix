@@ -19,10 +19,6 @@ with lib;
           enable = mkDefault false;
           defaultApplication.enable = mkDefault true;
         };
-        drawio = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
         easyeffects.enable = mkDefault true;
         ferdium.enable = mkDefault true;
         firefox = {
