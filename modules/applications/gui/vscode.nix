@@ -44,6 +44,13 @@ in with lib; {
           ];
         };
       };
+      mcp = {
+        enable = mkOption {
+          default = false;
+          type = with types; bool;
+          description = "Inject MCP server definitions into VSCode (mcp.servers). Non-secret servers are declared directly. Servers with secrets use VSCode env var interpolation (''${env:VAR}) — the actual values are provided via sessionVariables populated by sops-nix at login. Requires host.home.applications.mcp-servers.enable = true.";
+        };
+      };
     };
   };
 

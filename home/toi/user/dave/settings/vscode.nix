@@ -2,6 +2,8 @@
 
 let
   cfg = config.host.home.applications.visual-studio-code;
+  mcpCfg = config.host.home.applications.mcp-servers;
+  writeMcp = cfg.enable && cfg.mcp.enable && mcpCfg.enable;
 in
   with lib;
   {
@@ -44,6 +46,38 @@ in
 
       marketplace = pkgs-ext.vscode-marketplace;
       marketplace-release = pkgs-ext.vscode-marketplace-release;
+
+      # MCP
+      # TODO Refine and move to application module
+      enabledServers = lib.filterAttrs (_: s: s.enable) mcpCfg.servers;
+      uvx = "${pkgs.uv}/bin/uvx";
+      npx = "${pkgs.nodejs}/bin/npx";
+      vscodeConfigPath = "${config.xdg.configHome}/Code/User/mcp.json";
+      mkVscodeCommandArgs = if writeMcp then (_name: scfg:
+        if scfg.runtime == "uvx" then {
+          command = uvx;
+          args = [ scfg.package ] ++ scfg.args;
+        } else if scfg.runtime == "npx" then {
+          command = npx;
+          args = [ "-y" scfg.package ] ++ scfg.args;
+        } else {
+          command = scfg.package;
+          args = scfg.args;
+        }
+      ) else (_: _: { command = ""; args = []; });
+
+      mkVscodeServer = if writeMcp then (name: scfg:
+        let
+          ca = mkVscodeCommandArgs name scfg;
+          plainEnv = scfg.env;
+          secretEnv = lib.mapAttrs (envVar: _secretKey: "\${env:${envVar}}") scfg.secretEnv;
+          allEnv = plainEnv // secretEnv;
+        in
+          { type = "stdio"; } // ca // lib.optionalAttrs (allEnv != {}) { env = allEnv; }
+      ) else (_: _: {});
+      mcpServersBlock = if writeMcp then lib.mapAttrs mkVscodeServer enabledServers else {};
+      allSecretEnv = if writeMcp then lib.foldlAttrs (acc: _name: scfg: acc // scfg.secretEnv) {} enabledServers else {};
+      mcpSessionVars = if writeMcp then lib.mapAttrs (envVar: secretKey: "$(cat ${config.sops.secrets.${secretKey}.path})") allSecretEnv else {};
 
       profileBlocks = {
         global = {
@@ -193,7 +227,7 @@ in
 
           userSettings = {
             "explorer" = {
-              "confirmDragAndDrop"  = false;
+              "confirmDragAndDrop" = false;
               "confirmDelete" = false;
             };
 
@@ -465,6 +499,7 @@ in
           marketplace = with marketplace; [
             anthropic.claude-code                        # Claude Code
             sst-dev.opencode
+
             #github.copilot-chat                          # Github CoPilot
             #ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
           ];
@@ -847,5 +882,20 @@ in
           };
         };
        };
+      # MCP Configuration
+      # TODO Refine and move to application module
+      # Use sops-nix template when secrets are present, otherwise write the JSON via xdg.configFile
+       sops.templates."mcp/vscode" = mkIf (writeMcp && mcpCfg.output.useTemplate) {
+         path = vscodeConfigPath;
+         mode = "0600";
+         content = mcpCfg.output.prettyJson;
+       };
+
+       xdg.configFile."Code/User/mcp.json" = mkIf (writeMcp && !mcpCfg.output.useTemplate) {
+         text = mcpCfg.output.prettyJson;
+       };
+
+       home.sessionVariables = mkIf (writeMcp && mcpCfg.output.useTemplate)
+         mcpSessionVars;
     });
   }

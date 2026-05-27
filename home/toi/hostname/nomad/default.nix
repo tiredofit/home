@@ -25,8 +25,11 @@ home.packages = [ ];
         android-studio.enable = true;
         bitwarden-cli.enable = true;
         calibre.enable = false;
-        claude-code.enable = true;
         chromium.enable = true;
+        claude-code = {
+          enable = true;
+          mcp.enable = true;
+        };
         cryfs.enable = true;
         direnv.enable = true;
         feishin.enable = true;
@@ -38,6 +41,55 @@ home.packages = [ ];
         hyprcursor.enable = true;
         lazydocker.enable = true;
         lazygit.enable = true;
+        mcp-servers = {
+          enable = true;
+          secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;
+          servers = {
+            context7.enable = true;
+            everything.enable = true;
+            fetch.enable = true;
+            filesystem = {
+              enable = true;
+              args = [ "/home/dave/src/" ];
+            };
+            git = {
+              enable = true;
+              args = [ "--repository" "/home/dave/src/nfra/" ];
+            };
+            github = {
+              enable = true;
+              secretEnv = { GITHUB_PERSONAL_ACCESS_TOKEN = "mcp/github_token"; };
+            };
+            homeassistant = {
+              enable = true;
+              secretEnv = {
+                HOMEASSISTANT_URL = "mcp/homeassistant_url";
+                HOMEASSISTANT_TOKEN = "mcp/homeassistant_token";
+              };
+            };
+            mcp-nixos.enable = true;
+            memory.enable = true;
+            mqtt = {
+              enable = true;
+              #env = {
+              #  MQTT_HOST  = "192.168.1.1";
+              #  MQTT_PORT  = "1883";
+              #};
+            };
+            playwright.enable = true;
+            sequential-thinking.enable = true;
+            # myservice = {
+            #   enable      = true;
+            #   runtime     = "uvx";
+            #   package     = "another-mcp-server";
+            #   secretsFile = ../../user/dave/secrets/mcp/other.yaml;
+            #   secretEnv = {
+            #     API_KEY = "mcp/myservice_api_key";
+            #   };
+            # };
+            # ─────────────────────────────────────────────────────────────────
+          };
+        };
         meld.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
@@ -45,7 +97,10 @@ home.packages = [ ];
           systemtray.enable = mkForce false;
         };
         obsidian.enable = true;
-        opencode.enable = true;
+        opencode = {
+          enable = true;
+          mcp.enable = true;
+        };
         playwright.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
@@ -59,6 +114,7 @@ home.packages = [ ];
         visual-studio-code = {
           enable = true;
           defaultApplication.enable = true;
+          mcp.enable = true;
         };
         wps-office.enable = mkForce true;
         yq.enable = true;
