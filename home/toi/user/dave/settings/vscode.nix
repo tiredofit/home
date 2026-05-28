@@ -494,11 +494,11 @@ in
           nixpkgs = with pkgs.vscode-extensions; [
             github.copilot-chat                          # Github CoPilot
             #anthropic.claude-code                        # Claude Code
-
           ];
           marketplace = with marketplace; [
             anthropic.claude-code                        # Claude Code
             sst-dev.opencode
+            hidenobunagai.nvidia-nim-provider
 
             #github.copilot-chat                          # Github CoPilot
             #ms-vscode.copilot-mermaid-diagram           # Copilot Mermaid Diagram
