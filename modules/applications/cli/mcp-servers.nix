@@ -36,6 +36,11 @@ let
         description = "Mapping of env var name -> sops secret key within secretsFile. Prefix all keys with 'mcp/'";
         example = "{ SUPER_SECRET_TOKEN = "mcp/super_secret_token" }";
       };
+      autoStart = mkOption {
+        default = false;
+        type = with types; bool;
+        description = "Auto-start this MCP server when the client launches. For opencode, maps to the 'enabled' field — servers can be toggled on/off at runtime via the TUI. Claude Code and VSCode always start all servers included in their config (no runtime toggle).";
+      };
       secretsFile = mkOption {
         type = types.nullOr types.path;
         default = null;
@@ -72,6 +77,16 @@ in
         type = types.str;
         default = "";
         description = "Pretty-printed MCP JSON (with placeholders if secrets present)";
+      };
+      opencodeMcpJson = mkOption {
+        type = types.str;
+        default = "";
+        description = "OpenCode-format MCP JSON (mcp section only)";
+      };
+      opencodeFullConfigJson = mkOption {
+        type = types.str;
+        default = "";
+        description = "Full opencode.jsonc with MCP servers (with placeholders if secrets present)";
       };
     };
   };
@@ -119,16 +134,46 @@ in
                scfg.secretEnv;
       in
         { command = ca.cmd; args = ca.args; }
-        // optionalAttrs (envAttrs != {}) { env = envAttrs; };
+        // optionalAttrs (envAttrs != {}) { env = envAttrs; }
+        // optionalAttrs (!scfg.autoStart) { disabled = true; };
+
+    mkOpendocServerEntry = name: scfg:
+      let
+        ca = mkCommandArgs name scfg;
+        envAttrs =
+          scfg.env
+          // mapAttrs
+               (_envVar: secretKey: config.sops.placeholder."${secretKey}")
+               scfg.secretEnv;
+      in {
+        type = "local";
+        command = [ ca.cmd ] ++ ca.args;
+        enabled = scfg.autoStart;
+      } // optionalAttrs (envAttrs != {}) {
+        environment = envAttrs;
+      };
 
     mcpAttrset = { mcpServers = mapAttrs mkServerEntry enabledServers; };
     jsonFormat = pkgs.formats.json {};
     prettyJson = builtins.readFile (jsonFormat.generate "mcp-config.json" mcpAttrset);
 
+    opencodeMcpAttrset = mapAttrs mkOpendocServerEntry enabledServers;
+    opencodeMcpJson = builtins.readFile (jsonFormat.generate "opencode-mcp.json" opencodeMcpAttrset);
+
+    opencodeFullConfigJson = ''
+      {
+        "$schema": "https://opencode.ai/config.json",
+        "shell": "/run/current-system/sw/bin/bash",
+        "mcp": ${opencodeMcpJson}
+      }
+    '';
+
   in {
     host.home.applications.mcp-servers = {
       output.useTemplate = useTemplate;
       output.prettyJson = prettyJson;
+      output.opencodeMcpJson = opencodeMcpJson;
+      output.opencodeFullConfigJson = opencodeFullConfigJson;
 
       servers = {
         context7 = { runtime = mkDefault "npx"; package = mkDefault "@upstash/context7-mcp"; };

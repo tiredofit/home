@@ -4,7 +4,14 @@ let
   cfg = config.host.home.applications.opencode;
   mcpCfg = config.host.home.applications.mcp-servers;
   writeMcp = cfg.enable && cfg.mcp.enable && mcpCfg.enable;
-  opencodeConfigPath = "${config.xdg.configHome}/opencode/mcp.json";
+  jsonFormat = pkgs.formats.json {};
+  baseConfigJson = builtins.readFile (jsonFormat.generate "opencode-base.json"
+    (builtins.listToAttrs [
+      { name = "$schema"; value = "https://opencode.ai/config.json"; }
+      { name = "shell"; value = "/run/current-system/sw/bin/bash"; }
+    ])
+  );
+  contentJson = if writeMcp then mcpCfg.output.opencodeFullConfigJson else baseConfigJson;
 in
 with lib;
 {
@@ -26,20 +33,16 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs; [
-        opencode
-      ];
-    };
+    home.packages = with pkgs; [ opencode ];
 
-    sops.templates."mcp/opencode" = mkIf (writeMcp && mcpCfg.output.useTemplate) { # Secrets Path
-      path = opencodeConfigPath;
+    sops.templates."opencode/config" = mkIf (writeMcp && mcpCfg.output.useTemplate) {
+      path = "${config.xdg.configHome}/opencode/opencode.jsonc";
       mode = "0600";
-      content = mcpCfg.output.prettyJson;
+      content = contentJson;
     };
 
-    xdg.configFile."opencode/mcp.json" = mkIf (writeMcp && !mcpCfg.output.useTemplate) {
-      text = mcpCfg.output.prettyJson;
+    xdg.configFile."opencode/opencode.jsonc" = mkIf (!(writeMcp && mcpCfg.output.useTemplate)) {
+      text = contentJson;
     };
   };
 }
