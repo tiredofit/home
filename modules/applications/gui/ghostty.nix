@@ -41,9 +41,10 @@ in
             "ctrl+s=unbind"
             #"shift+enter=text:\"\\n\""
             "shift+enter=ignore"
-            "escape=end_search"
+            "shift+escape=end_search"
             "f1=new_tab"
             "f2=new_split:down"
+            "f3=new_split:right"
             "copy=copy_to_clipboard:mixed"
             "paste=paste_from_clipboard"
           ];
