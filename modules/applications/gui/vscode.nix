@@ -29,7 +29,8 @@ let
             // lib.mapAttrs (envVar: _: "\${env:${envVar}}") scfg.secretEnv;
     in
       { type = "stdio"; inherit command args; }
-      // lib.optionalAttrs (env != {}) { inherit env; };
+      // lib.optionalAttrs (env != {}) { inherit env; }
+      // lib.optionalAttrs (!scfg.autoStart) { disabled = true; };
 
   mcpServers = lib.mapAttrs mkVscodeServer enabledServers;
 

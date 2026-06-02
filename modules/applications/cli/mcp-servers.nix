@@ -39,7 +39,7 @@ let
       autoStart = mkOption {
         default = false;
         type = with types; bool;
-        description = "Auto-start this MCP server when the client launches. For opencode, maps to the 'enabled' field — servers can be toggled on/off at runtime via the TUI. Claude Code and VSCode always start all servers included in their config (no runtime toggle).";
+        description = "Auto Start MCP servers on launch"
       };
       secretsFile = mkOption {
         type = types.nullOr types.path;
