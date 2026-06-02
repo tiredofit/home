@@ -213,18 +213,6 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
-          "${gn}@seed" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "server";
-              displayName = displayName;
-              hostname = "seed" ;
-              username = gn;
-              networkInterface = "enp1s0f0";
-              inherit inputs;
-            };
-            nixpkgs = nixpkgs-stable;
-          };
       };
       inherit home-manager-stable home-manager-unstable;
       inherit (home-manager-stable) packages;
