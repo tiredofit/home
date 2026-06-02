@@ -91,6 +91,7 @@ home.packages = [ ];
           };
         };
         meld.enable = true;
+        mqtt-explorer.enable=true;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
@@ -119,6 +120,7 @@ home.packages = [ ];
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
+        zellij.enable = true;
         zoom.enable = true;
         zsh.enable = true;
       };
