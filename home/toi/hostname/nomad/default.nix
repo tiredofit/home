@@ -71,23 +71,14 @@ home.packages = [ ];
             memory.enable = true;
             mqtt = {
               enable = true;
-              #env = {
-              #  MQTT_HOST  = "192.168.1.1";
-              #  MQTT_PORT  = "1883";
+              #secretEnv = {
+              #  MQTT_HOST = "mcp/mqtt_host";
+              #  MQTT_PORT = "mcp/mqtt_port";
+              #  MQTT_USERNAME = "mcp/mqtt_username";
+              #  MQTT_PASSWORD = "mcp/mqtt_password";
               #};
             };
             playwright.enable = true;
-            sequential-thinking.enable = true;
-            # myservice = {
-            #   enable      = true;
-            #   runtime     = "uvx";
-            #   package     = "another-mcp-server";
-            #   secretsFile = ../../user/dave/secrets/mcp/other.yaml;
-            #   secretEnv = {
-            #     API_KEY = "mcp/myservice_api_key";
-            #   };
-            # };
-            # ─────────────────────────────────────────────────────────────────
           };
         };
         meld.enable = true;
@@ -120,7 +111,7 @@ home.packages = [ ];
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
-        zellij.enable = true;
+        zellij.enable = false;
         zoom.enable = true;
         zsh.enable = true;
       };

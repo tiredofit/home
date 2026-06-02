@@ -179,16 +179,16 @@ in
         context7 = { runtime = mkDefault "npx"; package = mkDefault "@upstash/context7-mcp"; };
         everything = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-everything"; };
         fetch = { runtime = mkDefault "uvx"; package = mkDefault "mcp-server-fetch"; };
-        filesystem = { runtime = mkDefault "uvx"; package = mkDefault "@modelcontextprotocol/server-filesystem"; args = [ ]; };
-        git = { runtime = mkDefault "uvx"; package = mkDefault "mcp/git"; args = [ ]; };
+        filesystem = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-filesystem"; args = [ ]; };
+        git = { runtime = mkDefault "uvx"; package = mkDefault "mcp-server-git"; args = [ ]; };
         github = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-github"; secretEnv = mkDefault { GITHUB_PERSONAL_ACCESS_TOKEN = "mcp/github_token"; }; };
         homeassistant = { runtime = mkDefault "uvx"; package = mkDefault "ha-mcp"; secretEnv = mkDefault { HOMEASSISTANT_URL = "mcp/homeassistant_url"; HOMEASSISTANT_TOKEN = "mcp/homeassistant_token"; }; };
         mcp-nixos = { runtime = mkDefault "uvx"; package = mkDefault "mcp-nixos"; };
-        memory = { runtime = mkDefault "uvx"; package = mkDefault "@modelcontextprotocol/server-memory"; };
+        memory = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-memory"; };
         mqtt = { runtime = mkDefault "uvx"; package = mkDefault "mqtt-mcp"; };
         n8n = { runtime = mkDefault "npx"; package = mkDefault "n8n-mcp"; secretEnv = mkDefault { N8N_API_URL = "mcp/n8n_url"; N8N_API_KEY = "mcp/n8n_key"; };};
-        playwright = { runtime = mkDefault "uvx"; package = mkDefault "@playwright/mcp@latest"; };
-        sequential-thinking = { runtime = mkDefault "uvx"; package = mkDefault "@modelcontextprotocol/server-sequential-thinking"; };
+        playwright = { runtime = mkDefault "npx"; package = mkDefault "@playwright/mcp@latest"; };
+        sequential-thinking = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-sequential-thinking"; };
       };
     };
 
