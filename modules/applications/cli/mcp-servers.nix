@@ -39,7 +39,7 @@ let
       autoStart = mkOption {
         default = false;
         type = with types; bool;
-        description = "Auto Start MCP servers on launch"
+        description = "Auto Start MCP servers on launch";
       };
       secretsFile = mkOption {
         type = types.nullOr types.path;
