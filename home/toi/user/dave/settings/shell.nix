@@ -286,7 +286,7 @@ let
       # tree wrapper with options
       # syntax: tree [dir]
       if command -v tree >/dev/null 2>&1; then
-        tree -Cs "$@"
+        command tree -Cs "$@"
       else
         echo "tree not available"
         return 1
