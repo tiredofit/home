@@ -3,6 +3,7 @@
   host = {
     home = {
       applications = {
+              direnv.enable = true;
         mcp-servers = {
           enable = true;
           secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;

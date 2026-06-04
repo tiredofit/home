@@ -41,6 +41,16 @@ let
         type = with types; bool;
         description = "Auto Start MCP servers on launch";
       };
+      transport = mkOption {
+        type = types.enum [ "local" "http" ];
+        default = "local";
+        description = "Transport type: local = stdio via command, http = HTTP endpoint";
+      };
+      url = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Endpoint URL for http transport (required when transport = 'http')";
+      };
       secretsFile = mkOption {
         type = types.nullOr types.path;
         default = null;
@@ -124,7 +134,10 @@ in
       };
 
     mkServerEntry = name: scfg:
-      let
+      if scfg.transport == "http" then
+        { command = "${pkgs.curl}/bin/curl"; args = [ scfg.url ]; type = "http"; }
+        // optionalAttrs (!scfg.autoStart) { disabled = true; }
+      else let
         ca = mkCommandArgs name scfg;
 
         envAttrs =
@@ -138,7 +151,11 @@ in
         // optionalAttrs (!scfg.autoStart) { disabled = true; };
 
     mkOpendocServerEntry = name: scfg:
-      let
+      if scfg.transport == "http" then {
+        type = "remote";
+        url = scfg.url;
+        enabled = scfg.autoStart;
+      } else let
         ca = mkCommandArgs name scfg;
         envAttrs =
           scfg.env
@@ -189,6 +206,7 @@ in
         n8n = { runtime = mkDefault "npx"; package = mkDefault "n8n-mcp"; secretEnv = mkDefault { N8N_API_URL = "mcp/n8n_url"; N8N_API_KEY = "mcp/n8n_key"; };};
         playwright = { runtime = mkDefault "npx"; package = mkDefault "@playwright/mcp@latest"; };
         sequential-thinking = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-sequential-thinking"; };
+        zigbee2mqtt = { transport = mkDefault "http"; url = mkDefault "http://127.0.0.1:4747/mcp"; };
       };
     };
 

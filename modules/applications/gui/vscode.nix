@@ -18,7 +18,10 @@ let
     else enabledByName;
 
   mkVscodeServer = name: scfg:
-    let
+    if scfg.transport == "http" then
+      { type = "http"; url = scfg.url; }
+      // lib.optionalAttrs (!scfg.autoStart) { disabled = true; }
+    else let
       command = if scfg.runtime == "uvx" then "${pkgs.uv}/bin/uvx"
                 else if scfg.runtime == "npx" then "${pkgs.nodejs}/bin/npx"
                 else scfg.package;
