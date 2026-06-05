@@ -93,7 +93,7 @@ with lib;
 
           alias dpull='$dsudo $docker_bin_location pull'                                                                                                                                                                 # $docker_bin_location Pull
 
-          docker_compose_bin_location="$(which docker-compose)"
+          docker_compose_bin_location="${pkgs.unstable.docker-compose}/bin/docker-compose"
           export DOCKER_COMPOSE_TIMEOUT=''${DOCKER_TIMEOUT:-"120"}
 
           docker-compose() {
