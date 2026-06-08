@@ -3,7 +3,7 @@
   host = {
     home = {
       applications = {
-              direnv.enable = true;
+        direnv.enable = true;
         mcp-servers = {
           enable = true;
           secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;
@@ -53,12 +53,16 @@
           mcp.enable = true;
         };
         python.enable = true;
-        zellij.enable = true;
+        zellij = {
+          enable = true;
+          enableShellIntegration = true;
+          attachExistingSession = true;
+          exitShellOnExit = true;
+        };
       };
       service = {
         vscode-server.enable = false;
       };
     };
   };
-
 }
