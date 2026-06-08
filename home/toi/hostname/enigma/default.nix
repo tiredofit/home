@@ -53,12 +53,7 @@
           mcp.enable = true;
         };
         python.enable = true;
-        zellij = {
-          enable = true;
-          enableShellIntegration = true;
-          attachExistingSession = true;
-          exitShellOnExit = true;
-        };
+        zellij.enable = true;
       };
       service = {
         vscode-server.enable = false;
