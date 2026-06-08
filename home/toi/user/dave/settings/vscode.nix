@@ -463,6 +463,8 @@ in
           marketplace = with marketplace; [
             anthropic.claude-code                        # Claude Code
             sst-dev.opencode
+            ltmoerdani.opencode-copilot-chat
+            #sst-dev.opencode-v2
             #hidenobunagai.nvidia-nim-provider
           ];
           marketplace-release = with marketplace-release; [
