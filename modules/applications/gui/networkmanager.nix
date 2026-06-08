@@ -27,12 +27,14 @@ in
 
     wayland.windowManager.hyprland = mkIf ((cfg.systemtray.enable) && (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable)) {
       settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}nm-applet"
-        ];
-
-        windowrule = [
-          "float, class:^(nm-applet|nm-connection-editor)$"
+        on._args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}nm-applet') end")];
+        window_rule = [
+          {
+            float = true;
+            match = {
+              class = "^(nm-applet|nm-connection-editor)$";
+            };
+          }
         ];
       };
     };

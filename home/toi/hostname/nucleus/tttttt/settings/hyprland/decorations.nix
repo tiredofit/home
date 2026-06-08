@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, ... }:
+q{ config, inputs, lib, pkgs, ... }:
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
@@ -9,8 +9,10 @@ with lib;
     wayland.windowManager.hyprland = {
       settings = {
         general = {
-          #col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          #col.inactive_border = "rgba(595959aa)";
+          col = {
+            active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+            inactive_border = "rgba(595959aa)";
+          };
           allow_tearing = mkDefault true;
           border_size = mkDefault 2;
           gaps_in = mkDefault 2;
@@ -49,7 +51,6 @@ with lib;
             enabled = false;
           };
         };
-
       };
     };
   };

@@ -8,11 +8,7 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
       settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}virt-manager"
-          "${config.host.home.feature.uwsm.prefix}kitty"
-          "${config.host.home.feature.uwsm.prefix}firefox"
-        ];
+        on._args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}virt-manager') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}ghosttyu') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}firefox') end")];
       };
     };
   };

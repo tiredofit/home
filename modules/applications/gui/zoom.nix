@@ -39,36 +39,128 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
-          "opaque on, float on, match:class (Zoom Workplace)"
-          "stay_focused on, match:class (Zoom Workplace), match:initial_title (menu window)"
+        window_rule = [
+          {
+            opaque = true;
+            float = true;
+            match = {
+              class = "(Zoom Workplace)";
+            };
+          }
+          {
+            stay_focused = true;
+            match = {
+              class = "(Zoom Workplace)";
+              initial_title = "(menu window)";
+            };
+          }
 
           # Sharing Toolbar
-          "float on, border_size 0, no_shadow on, stay_focused on, pin on, match:class ^(Zoom Workplace)$, match:title ^(as_toolbar)$"
+          {
+            float = true;
+            border_size = 0;
+            no_shadow = true;
+            stay_focused = true;
+            pin = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(as_toolbar)$";
+            };
+          }
 
           # Main Zoom Landing Window
-          "float on, size 660 530, center on, match:class ^(Zoom Workplace)$, match:title ^(Zoom Workplace - Licensed account)$"
+          {
+            float = true;
+            size = "660 530";
+            center = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(Zoom Workplace - Licensed account)$";
+            };
+          }
 
           # Zoom Workplace Settings
-          "float on, match:class ^(Zoom Workplace)$, match:title ^(Settings)$"
+          {
+            float = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(Settings)$";
+            };
+          }
 
           # Zoom Workplace Menu Windows
           # Audio Settings, Video Settings, Gallery View etc..
-          "float on, size 300 600, stay_focused on, center on, match:class ^(Zoom Workplace)$, match:title ^(menu window)$"
+          {
+            float = true;
+            size = "300 600";
+            stay_focused = true;
+            center = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(menu window)$";
+            };
+          }
 
           # Zoom Meeting Info Window
           # Zoom Workplace Top Bar Popups
-          "float on, border_size 0, no_shadow on, center on, stay_focused on, size 485 442, match:class ^(Zoom Workplace)$, match:title ^(meeting topbar popup)$"
+          {
+            float = true;
+            border_size = 0;
+            no_shadow = true;
+            center = true;
+            stay_focused = true;
+            size = "485 442";
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(meeting topbar popup)$";
+            };
+          }
 
           # Zoom Workplace Bottom Bar Popups
           # Zoom Reactions
-          "float on, border_size 0, no_shadow on, center on, stay_focused on, size 285 90, match:class ^(Zoom Workplace)$, match:title ^(meeting bottombar popup)$"
+          {
+            float = true;
+            border_size = 0;
+            no_shadow = true;
+            center = true;
+            stay_focused = true;
+            size = "285 90";
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(meeting bottombar popup)$";
+            };
+          }
           # Captions Window, Breakout Room Creation, etc
-          "float on, border_size 0, no_shadow on, center on, match:class ^(Zoom Workplace)$, match:title ^(zoom)$"
+          {
+            float = true;
+            border_size = 0;
+            no_shadow = true;
+            center = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(zoom)$";
+            };
+          }
           # Participants Window (Detached)
-          "float on, size 490 550, center on, match:class ^(Zoom Workplace)$, match:title ^(Participants)(.*)$"
+          {
+            float = true;
+            size = "490 550";
+            center = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(Participants)(.*)$";
+            };
+          }
           # Chat Window (Detached)
-          "float on, size 490 550, center on, match:class ^(Zoom Workplace)$, match:title ^(Meeting chat)$"
+          {
+            float = true;
+            size = "490 550";
+            center = true;
+            match = {
+              class = "^(Zoom Workplace)$";
+              title = "^(Meeting chat)$";
+            };
+          }
         ];
       };
     };

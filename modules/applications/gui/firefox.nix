@@ -204,15 +204,38 @@ in with lib; {
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
+        window_rule = [
            ### Make Firefox PiP window floating and sticky
-           "float on, pin on, match:title ^(Picture-in-Picture)$"
+           {
+             float = true;
+             pin = true;
+             match = {
+               title = "^(Picture-in-Picture)$";
+             };
+           }
 
            ### Throw sharing indicators away
-           "workspace special silent, match:title ^(.*is sharing (your screen|a window).)$"
-           "workspace special silent, match:title ^(Firefox — Sharing Indicator)$"
-           "float on, size 720 312, match:class ^(firefox)$, match:title ^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox$"
-         ];
+           {
+             workspace = "special silent";
+             match = {
+               title = "^(.*is sharing (your screen|a window).)$";
+             };
+           }
+           {
+             workspace = "special silent";
+             match = {
+               title = "^(Firefox — Sharing Indicator)$";
+             };
+           }
+           {
+             float = true;
+             size = "720 312";
+             match = {
+               class = "^(firefox)$";
+               title = "^Extension: \\(Bitwarden Password Manager\\) - Bitwarden — Mozilla Firefox$";
+             };
+           }
+        ];
       };
     };
 

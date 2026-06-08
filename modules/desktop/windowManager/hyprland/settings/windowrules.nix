@@ -8,37 +8,167 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
       settings = {
-        ## See more in modules/applications/* and modules/desktop/utils/*
-        windowrule = [
+
+
+
+        ### See more in modules/applications/* and modules/desktop/utils/*
+        window_rule = [
           # XDG-Portal-GTK File Picker annoyances
-          "dim_around on, float on, size 1290 800, match:title ^Open Files$"
+          {
+            dim_around = true;
+            float = true;
+            size = "1290 800";
+            match = {
+              title = "^Open Files$";
+            };
+          }
 
           # Generics
-          "float on, match:class ^(xdg-desktop-portal-hyprland)$"
-          "float on, match:class (hyprland-share-picker)"
-          "float on, match:class ^()$, match:title ^(File Operation Progress)$"
-          "suppress_event maximize, match:class .*"
+          {
+            float = true;
+            match = {
+              class = "^(xdg-desktop-portal-hyprland)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "(hyprland-share-picker)";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^()$";
+              title = "^(File Operation Progress)$";
+            };
+          }
+          {
+            suppress_event = "maximize";
+            match = {
+              class = ".*";
+            };
+          }
 
           # Position
-          "float on, match:class ^(Viewnior)$"
-          "float on, match:class ^(confirm)$"
-          "float on, match:class ^(confirmreset)$"
-          "float on, match:class ^(dialog)$"
-          "float on, size 800 600, match:class ^(download)$"
-          "float on, match:class ^(error)$"
-          "float on, match:class ^(file_progress)$"
-          "float on, match:class ^(notification)$"
-          "float on, match:class ^(org.kde.polkit-kde-authentication-agent-1)$"
-          "float on, match:class ^(pavucontrol)$"
-          "float on, match:title ^(Confirm to replace files)"
-          "float on, match:title ^(DevTools)$"
-          "float on, match:title ^(File Operation Progress)"
-          "float on, match:title ^(Media viewer)$"
-          "float on, size 800 600, match:title ^(Open File)$"
-          "float on, size 800 600, match:title ^(Volume Control)$"
-          "float on, match:title ^(branchdialog)$"
-          "size 800 600, match:title ^(Save File)$"
-          "float on, size 800 600, match:initial_title ^(Print)$"
+          {
+            float = true;
+            match = {
+              class = "^(Viewnior)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(confirm)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(confirmreset)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(dialog)$";
+            };
+          }
+          {
+            float = true;
+            size = "800 600";
+            match = {
+              class = "^(download)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(error)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(file_progress)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(notification)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(org.kde.polkit-kde-authentication-agent-1)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(pavucontrol)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              title = "^(Confirm to replace files)";
+            };
+          }
+          {
+            float = true;
+            match = {
+              title = "^(DevTools)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              title = "^(File Operation Progress)";
+            };
+          }
+          {
+            float = true;
+            match = {
+              title = "^(Media viewer)$";
+            };
+          }
+          {
+            float = true;
+            size = "800 600";
+            match = {
+              title = "^(Open File)$";
+            };
+          }
+          {
+            float = true;
+            size = "800 600";
+            match = {
+              title = "^(Volume Control)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              title = "^(branchdialog)$";
+            };
+          }
+          {
+            size = "800 600";
+            match = {
+              title = "^(Save File)$";
+            };
+          }
+          {
+            float = true;
+            size = "800 600";
+            match = {
+              initial_title = "^(Print)$";
+            };
+          }
         ];
       };
     };

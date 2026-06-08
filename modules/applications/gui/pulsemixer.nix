@@ -26,8 +26,13 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
-          "float on, match:title ^(pavucontrol)$"
+        window_rule = [
+          {
+            float = true;
+            match = {
+              title = "^(pavucontrol)$";
+            };
+          }
         ];
       };
     };

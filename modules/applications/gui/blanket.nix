@@ -25,8 +25,14 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
-          "float on, size 920 684, match:title ^(Blanket)$"
+        window_rule = [
+          {
+            float = true;
+            size = "920 684";
+            match = {
+              title = "^(Blanket)$";
+            };
+          }
         ];
       };
     };

@@ -63,7 +63,7 @@ in
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
         bind = [
-          "SUPER, N, exec, ${config.host.home.feature.uwsm.prefix}swaync-client -t"
+          { _args = ["SUPER + N" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${config.host.home.feature.uwsm.prefix}swaync-client -t")'')]; }
         ];
       };
     };

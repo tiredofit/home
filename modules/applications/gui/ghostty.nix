@@ -119,10 +119,9 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
       settings = {
-        ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          "SUPER, P, exec, ghostty +new-window"
-          "SUPER, Return, exec, ghostty +new-window"
+          {_args = ["SUPER + P" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("ghostty +new-window")'')];}
+          {_args = ["SUPER + Return" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("ghostty +new-window")'')];}
         ];
       };
     };

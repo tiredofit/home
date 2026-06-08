@@ -49,10 +49,21 @@ in
     };
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
+        window_rule = [
           # Chrome PWA Zoom
-          "workspace 3, size 1200 1155, match:initial_class (^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)"
-          "float on, match:initial_class chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom"
+          {
+            workspace = "3";
+            size = "1200 1155";
+            match = {
+              initial_class = "(^chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom$)";
+            };
+          }
+          {
+            float = true;
+            match = {
+              initial_class = "chrome-fdbibeljcgcjkpedilpdafnjdmbjjjep-zoom";
+            };
+          }
         ];
       };
     };

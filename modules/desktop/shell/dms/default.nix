@@ -103,68 +103,71 @@ with lib;
     };
 
     wayland.windowManager.hyprland = mkIf (dmsActive && config.programs.dank-material-shell.systemd.enable) {
+      extraConfig = ''
+        require("dms.colors")
+        require("dms.outputs")
+        require("dms.layout")
+        require("dms.cursor")
+        require("dms.binds")
+        require("dms.binds-user")
+        require("dms.windowrules")
+      '';
       settings = {
-        # === Application Launchers ===
+        ## Application Launchers
         bind = [
-          "SUPER, D, exec, dms ipc call spotlight toggle"
-          "SUPER, V, exec, dms ipc call clipboard toggle"
-          #"SUPER, M, exec, dms ipc call processlist focusOrToggle"
-          "SUPER, comma, exec, dms ipc call settings focusOrToggle"
-          "SUPER, N, exec, dms ipc call notifications toggle"
-          "SUPER SHIFT, N, exec, dms ipc call notepad toggle"
-          #"SUPER, Y, exec, dms ipc call dankdash wallpaper"
-          "SUPER, TAB, exec, dms ipc call hypr toggleOverview"
-          "SUPER, P, exec, dms ipc call powermenu toggle"
-          # === Cheat sheet ===
-          "SUPER SHIFT, Slash, exec, dms ipc call keybinds toggle hyprland"
-          # === Security ===
-          "SUPER SHIFT, X, exec, dms ipc call lock lock"
-          "CTRL ALT, Delete, exec, dms ipc call processlist focusOrToggle"
+          { _args = ["SUPER + D" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call spotlight toggle")'')]; }
+          { _args = ["SUPER + V" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call clipboard toggle")'')]; }
+          { _args = ["SUPER + comma" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call settings focusOrToggle")'')]; }
+          { _args = ["SUPER + N" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call notifications toggle")'')]; }
+          { _args = ["SUPER + SHIFT + N" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call notepad toggle")'')]; }
+          { _args = ["SUPER + TAB" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call hypr toggleOverview")'')]; }
+          { _args = ["SUPER + P" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call powermenu toggle")'')]; }
+          # Cheat sheet
+          { _args = ["SUPER + SHIFT + Slash" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call keybinds toggle hyprland")'')]; }
+          # Security
+          { _args = ["SUPER + SHIFT + X" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call lock lock")'')]; }
+          { _args = ["CTRL + ALT + Delete" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle")'')]; }
 
-          "SUPER_SHIFT, W, exec, systemctl --user restart dms.service"
+          { _args = ["SUPER + SHIFT + W" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("systemctl --user restart dms.service")'')]; }
 
-
-          # === Screenshots ===
-          #", Print, exec, dms screenshot"
-          #"CTRL, Print, exec, dms screenshot full"
-          #"ALT, Print, exec, dms screenshot window"
-
-          #"SUPER SHIFT, S, exec, dms screenshot --no-file --reset"
+          # Audio Controls (repeating + locked)
+          {_args = ["XF86AudioRaiseVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call audio increment 1")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          {_args = ["XF86AudioLowerVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call audio decrement 1")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          {_args = ["CTRL + XF86AudioRaiseVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call mpris increment 1")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          {_args = ["CTRL + XF86AudioLowerVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call mpris decrement 1")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          # Brightness Controls (repeating + locked)
+          {_args = ["XF86MonBrightnessUp" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call brightness increment 5 \"\"")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          {_args = ["XF86MonBrightnessDown" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call brightness decrement 5 \"\"")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          # Audio Mute (locked)
+          {_args = ["XF86AudioMute" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call audio mute')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioMicMute" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call audio micmute')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioPause" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call mpris playPause')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioPlay" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call mpris playPause')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioPrev" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call mpris previous')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioNext" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('dms ipc call mpris next')") (lib.generators.mkLuaInline "{locked=true}")];}
         ];
 
-        bindel = [
-          # === Audio Controls ===
-          ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 1"
-          ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 1"
-          "CTRL, XF86AudioRaiseVolume, exec, dms ipc call mpris increment 1"
-          "CTRL, XF86AudioLowerVolume, exec, dms ipc call mpris decrement 1"
-          # === Brightness Controls ===
-          ", XF86MonBrightnessUp, exec, dms ipc call brightness increment 5 \"\""
-          ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5 \"\""
+        layer_rule = [
+          {
+            no_anim = true;
+            match = {
+              namespace = "^dms:.*";
+            };
+          }
+          {
+            no_anim = true;
+            match = {
+              namespace = "^(quickshell)$";
+            };
+          }
         ];
-        bindl = [
-          # === Audio Controls ===
-          ", XF86AudioMute, exec, dms ipc call audio mute"
-          ", XF86AudioMicMute, exec, dms ipc call audio micmute"
-          ", XF86AudioPause, exec, dms ipc call mpris playPause"
-          ", XF86AudioPlay, exec, dms ipc call mpris playPause"
-          ", XF86AudioPrev, exec, dms ipc call mpris previous"
-          ", XF86AudioNext, exec, dms ipc call mpris next"
-        ];
-        source = [
-          #"./dms/binds.conf"
-          "./dms/colors.conf"
-          "./dms/cursor.conf"
-          "./dms/layout.conf"
-          "./dms/outputs.conf"
-          "./dms/windowrules.conf"
-        ];
-        layerrule = [
-          "no_anim on, match:namespace ^dms:.*"
-          "no_anim on, match:namespace ^(quickshell)$"
-        ];
-        windowrule = [
-          "float on, match:class ^(org.quickshell)$"
+        window_rule = [
+          {
+            float = true;
+            match = {
+              class = "^(org.quickshell)$";
+            };
+          }
         ];
       };
     };

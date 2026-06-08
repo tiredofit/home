@@ -45,8 +45,17 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
-          "float on, border_size 0, no_blur on, no_initial_focus on, no_anim on, match:class (com.nextcloud.desktopclient.nextcloud)"
+        window_rule = [
+          {
+            float = true;
+            border_size = 0;
+            no_blur = true;
+            no_initial_focus = true;
+            no_anim = true;
+            match = {
+              class = "(com.nextcloud.desktopclient.nextcloud)";
+            };
+          }
         ];
       };
     };

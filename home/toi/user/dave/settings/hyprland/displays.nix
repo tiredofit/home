@@ -7,13 +7,9 @@ with lib;
 {
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
-      settings = {
-        source = [
-          "display.conf"
-        ];
-        monitor = [
-        ];
-      };
+      extraConfig = ''
+        require("display")
+      '';
     };
   };
 }

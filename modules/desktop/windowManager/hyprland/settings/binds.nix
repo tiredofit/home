@@ -8,125 +8,116 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
       settings = {
-        ## See more in modules/applications/* and modules/desktop/utils/*
+        ### See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          "SUPER, F, fullscreenstate, 1, 1"
-          "SUPER_SHIFT, F, fullscreen"
-          "SUPER, P, pin" # Pin dispatcher, make window appear above everything else on all windows
-          # See Terminal for the bind for SUPER, RETURN
-          "SUPER, V, togglefloating,"
-          "SUPER, mouse:274, killactive" # Middle Mouse
-          "SUPER, space, pseudo,"
+          # These don't work but work without them bound
+          #{ _args = ["SUPER + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen_state({ internal = 1 , client = 1, action = "toggle" })'')]; }
+          #{ _args = ["SUPER + SHIFT + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')]; }
 
-          "SUPER_SHIFT, Q, killactive"
-          "ALT, Tab, bringactivetotop,"
-          "ALT, Tab, cyclenext,"
-          #"ALT,TAB,workspace,previous"
+          # Pin dispatcher, make window appear above everything else on all windows
+          { _args = ["SUPER + P" (lib.generators.mkLuaInline ''hl.dsp.window.pin()'')]; }
+          { _args = ["SUPER + V" (lib.generators.mkLuaInline ''hl.dsp.window.float({ action = "toggle" })'')]; }
+          { _args = ["SUPER + mouse:274" (lib.generators.mkLuaInline ''hl.dsp.window.close()'')]; }
+          { _args = ["SUPER + space" (lib.generators.mkLuaInline ''hl.dsp.window.pseudo()'')]; }
+
+          { _args = ["SUPER + SHIFT + Q" (lib.generators.mkLuaInline ''hl.dsp.window.close()'')]; }
+          { _args = ["ALT + Tab" (lib.generators.mkLuaInline ''hl.dsp.window.bring_to_top()'')]; }
+          { _args = ["ALT + Tab" (lib.generators.mkLuaInline ''hl.dsp.window.cycle_next({ next = true })'')]; }
 
           # Move focus with mainMod + arrow keys
-          "SUPER, left, movefocus, l"
-          "SUPER, right, movefocus, r"
-          "SUPER, up, movefocus, u"
-          "SUPER, down, movefocus, d"
+          { _args = ["SUPER + left" (lib.generators.mkLuaInline ''hl.dsp.focus({ direction = "left" })'')]; }
+          { _args = ["SUPER + right" (lib.generators.mkLuaInline ''hl.dsp.focus({ direction = "right" })'')]; }
+          { _args = ["SUPER + up" (lib.generators.mkLuaInline ''hl.dsp.focus({ direction = "up" })'')]; }
+          { _args = ["SUPER + down" (lib.generators.mkLuaInline ''hl.dsp.focus({ direction = "down" })'')]; }
 
           # Switch workspaces with mainMod + [0-9] (numpad)
-          "SUPER, KP_End, workspace, 1"
-          "SUPER, KP_Down, workspace, 2"
-          "SUPER, KP_Next, workspace, 3"
-          "SUPER, KP_Left, workspace, 4"
-          "SUPER, KP_Begin, workspace, 5"
-          "SUPER, KP_Right, workspace, 6"
-          "SUPER, KP_Home, workspace, 7"
-          "SUPER, KP_Up, workspace, 8"
-          "SUPER, KP_Prior, workspace, 9"
-          #"SUPER, KP_Insert, workspace, 10"
+          { _args = ["SUPER + KP_End" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 1 })'')]; }
+          { _args = ["SUPER + KP_Down" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 2 })'')]; }
+          { _args = ["SUPER + KP_Next" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 3 })'')]; }
+          { _args = ["SUPER + KP_Left" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 4 })'')]; }
+          { _args = ["SUPER + KP_Begin" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 5 })'')]; }
+          { _args = ["SUPER + KP_Right" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 6 })'')]; }
+          { _args = ["SUPER + KP_Home" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 7 })'')]; }
+          { _args = ["SUPER + KP_Up" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 8 })'')]; }
+          { _args = ["SUPER + KP_Prior" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 9 })'')]; }
 
           # Move active window to a workspace with mainMod + SHIFT + [0-9] (numpad)
-          "SUPER_SHIFT, KP_End, movetoworkspace, 1"
-          "SUPER_SHIFT, KP_Down, movetoworkspace, 2"
-          "SUPER_SHIFT, KP_Next, movetoworkspace, 3"
-          "SUPER_SHIFT, KP_Left, movetoworkspace, 4"
-          "SUPER_SHIFT, KP_Begin, movetoworkspace, 5"
-          "SUPER_SHIFT, KP_Right, movetoworkspace, 6"
-          "SUPER_SHIFT, KP_Home, movetoworkspace, 7"
-          "SUPER_SHIFT, KP_Up,  movetoworkspace, 8"
-          "SUPER_SHIFT, KP_Prior, movetoworkspace, 9"
-          #"SUPER_SHIFT, KP_Insert, movetoworkspace, 10"
+          { _args = ["SUPER + SHIFT + KP_End" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 1 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Down" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 2 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Next" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 3 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Left" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 4 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Begin" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 5 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Right" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 6 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Home" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 7 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Up" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 8 })'')]; }
+          { _args = ["SUPER + SHIFT + KP_Prior" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 9 })'')]; }
 
           # moving windows to other workspaces (silent) (numpad)
-          "SUPER_ALT, KP_End,   movetoworkspacesilent,1"
-          "SUPER_ALT, KP_Down,  movetoworkspacesilent,2"
-          "SUPER_ALT, KP_Next,  movetoworkspacesilent,3"
-          "SUPER_ALT, KP_Left,  movetoworkspacesilent,4"
-          "SUPER_ALT, KP_Begin, movetoworkspacesilent,5"
-          "SUPER_ALT, KP_Right, movetoworkspacesilent,6"
-          "SUPER_ALT, KP_Home,  movetoworkspacesilent,7"
-          "SUPER_ALT, KP_Up,    movetoworkspacesilent,8"
-          "SUPER_ALT, KP_Prior, movetoworkspacesilent,9"
-          #"SUPER_ALT, KP_Insert, movetoworkspacesilent,0"
+          { _args = ["SUPER + ALT + KP_End" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 1, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Down" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 2, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Next" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 3, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Left" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 4, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Begin" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 5, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Right" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 6, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Home" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 7, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Up" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 8, follow = false })'')]; }
+          { _args = ["SUPER + ALT + KP_Prior" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 9, follow = false })'')]; }
 
           # Switch workspaces with mainMod + [0-9]
-          "SUPER, 1, workspace, 1"
-          "SUPER, 2, workspace, 2"
-          "SUPER, 3, workspace, 3"
-          "SUPER, 4, workspace, 4"
-          "SUPER, 5, workspace, 5"
-          "SUPER, 6, workspace, 6"
-          "SUPER, 7, workspace, 7"
-          "SUPER, 8, workspace, 8"
-          "SUPER, 9, workspace, 9"
-          #"SUPER, KP_Insert, workspace, 10"
+          { _args = ["SUPER + 1" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 1 })'')]; }
+          { _args = ["SUPER + 2" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 2 })'')]; }
+          { _args = ["SUPER + 3" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 3 })'')]; }
+          { _args = ["SUPER + 4" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 4 })'')]; }
+          { _args = ["SUPER + 5" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 5 })'')]; }
+          { _args = ["SUPER + 6" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 6 })'')]; }
+          { _args = ["SUPER + 7" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 7 })'')]; }
+          { _args = ["SUPER + 8" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 8 })'')]; }
+          { _args = ["SUPER + 9" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = 9 })'')]; }
 
           # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "SUPER_SHIFT, 1, movetoworkspace, 1"
-          "SUPER_SHIFT, 2, movetoworkspace, 2"
-          "SUPER_SHIFT, 3, movetoworkspace, 3"
-          "SUPER_SHIFT, 4, movetoworkspace, 4"
-          "SUPER_SHIFT, 5, movetoworkspace, 5"
-          "SUPER_SHIFT, 6, movetoworkspace, 6"
-          "SUPER_SHIFT, 7, movetoworkspace, 7"
-          "SUPER_SHIFT, 8, movetoworkspace, 8"
-          "SUPER_SHIFT, 9, movetoworkspace, 9"
-          #"SUPER_SHIFT, KP_Insert, movetoworkspace, 10"
+          { _args = ["SUPER + SHIFT + 1" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 1 })'')]; }
+          { _args = ["SUPER + SHIFT + 2" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 2 })'')]; }
+          { _args = ["SUPER + SHIFT + 3" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 3 })'')]; }
+          { _args = ["SUPER + SHIFT + 4" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 4 })'')]; }
+          { _args = ["SUPER + SHIFT + 5" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 5 })'')]; }
+          { _args = ["SUPER + SHIFT + 6" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 6 })'')]; }
+          { _args = ["SUPER + SHIFT + 7" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 7 })'')]; }
+          { _args = ["SUPER + SHIFT + 8" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 8 })'')]; }
+          { _args = ["SUPER + SHIFT + 9" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 9 })'')]; }
 
           # moving windows to other workspaces (silent)
-          "SUPER_ALT, 1,  movetoworkspacesilent,1"
-          "SUPER_ALT, 2,  movetoworkspacesilent,2"
-          "SUPER_ALT, 3,  movetoworkspacesilent,3"
-          "SUPER_ALT, 4,  movetoworkspacesilent,4"
-          "SUPER_ALT, 5,  movetoworkspacesilent,5"
-          "SUPER_ALT, 6,  movetoworkspacesilent,6"
-          "SUPER_ALT, 7,  movetoworkspacesilent,7"
-          "SUPER_ALT, 8,  movetoworkspacesilent,8"
-          "SUPER_ALT, 9,  movetoworkspacesilent,9"
-          #"SUPER_ALT, KP_Insert, movetoworkspacesilent,0"
-
+          { _args = ["SUPER + ALT + 1" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 1, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 2" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 2, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 3" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 3, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 4" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 4, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 5" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 5, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 6" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 6, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 7" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 7, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 8" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 8, follow = false })'')]; }
+          { _args = ["SUPER + ALT + 9" (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = 9, follow = false })'')]; }
 
           # moving windows around
-          "SUPER_SHIFT, left, movewindow,l"
-          "SUPER_SHIFT, right,movewindow,r"
-          "SUPER_SHIFT, up, movewindow,u"
-          "SUPER_SHIFT, down, movewindow,d"
+          { _args = ["SUPER + SHIFT + left" (lib.generators.mkLuaInline ''hl.dsp.window.move({ direction = "l" })'')]; }
+          { _args = ["SUPER + SHIFT + right" (lib.generators.mkLuaInline ''hl.dsp.window.move({ direction = "r" })'')]; }
+          { _args = ["SUPER + SHIFT + up" (lib.generators.mkLuaInline ''hl.dsp.window.move({ direction = "u" })'')]; }
+          { _args = ["SUPER + SHIFT + down" (lib.generators.mkLuaInline ''hl.dsp.window.move({ direction = "d" })'')]; }
 
-           # Turn off animations / game mode
-          "WIN, F1, exec,  hyprland_gamemode"
+          # Turn off animations / game mode
+          { _args = ["SUPER + F1" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("hyprland_gamemode")'')]; }
 
           # Scroll through existing workspaces with mainMod + scroll
-          "SUPER, mouse_down, workspace, e+1"
-          "SUPER, mouse_up, workspace, e-1"
-        ];
+          { _args = ["SUPER + mouse_down" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = "e+1" })'')]; }
+          { _args = ["SUPER + mouse_up" (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = "e-1" })'')]; }
 
-        binde = [
-          "SUPERCTRL, left, resizeactive,-20 0"
-          "SUPERCTRL, right, resizeactive,20 0"
-          "SUPERCTRL, up, resizeactive,0 -20"
-          "SUPERCTRL, down, resizeactive,0 20"
-        ];
+          # Resize windows with SUPER + CTRL + arrow keys (repeating)
+          {_args = ["SUPER + CTRL + left" (lib.generators.mkLuaInline "hl.dsp.window.resize({ x = -20, y = 0, relative = true })") (lib.generators.mkLuaInline "{repeating=true}")];}
+          {_args = ["SUPER + CTRL + right" (lib.generators.mkLuaInline "hl.dsp.window.resize({ x = 20, y = 0, relative = true })") (lib.generators.mkLuaInline "{repeating=true}")];}
+          {_args = ["SUPER + CTRL + up" (lib.generators.mkLuaInline "hl.dsp.window.resize({ x = 0, y = -20, relative = true })") (lib.generators.mkLuaInline "{repeating=true}")];}
+          {_args = ["SUPER + CTRL + down" (lib.generators.mkLuaInline "hl.dsp.window.resize({ x = 0, y = 20, relative = true })") (lib.generators.mkLuaInline "{repeating=true}")];}
 
-        bindm = [
           # Move/resize windows with mainMod + LMB/RMB and dragging
-          "SUPER, mouse:272, movewindow"
-          "SUPER, mouse:273, resizewindow"
+          {_args = ["SUPER + mouse:272" (lib.generators.mkLuaInline "hl.dsp.window.drag()") (lib.generators.mkLuaInline "{mouse=true}")];}
+          {_args = ["SUPER + mouse:273" (lib.generators.mkLuaInline "hl.dsp.window.resize()") (lib.generators.mkLuaInline "{mouse=true}")];}
         ];
       };
     };

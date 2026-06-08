@@ -11,12 +11,6 @@ with lib;
         ## See more in modules/applications/* and modules/desktop/utils/*
         bind = [
         ];
-
-        binde = [
-        ];
-
-        bindm = [
-        ];
       };
     };
   };

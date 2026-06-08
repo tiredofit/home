@@ -28,12 +28,12 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
-        bindl = [
-          ",XF86AudioPlay, exec, ${config.host.home.feature.uwsm.prefix}playerctl play-pause"
-          ",XF86AudioPrev, exec, ${config.host.home.feature.uwsm.prefix}playerctl previous"
-          ",XF86AudioNext, exec, ${config.host.home.feature.uwsm.prefix}playerctl next"
-          ",XF86AudioMedia, exec, ${config.host.home.feature.uwsm.prefix}playerctl play-pause"
-          ",XF86AudioStop, exec, ${config.host.home.feature.uwsm.prefix}playerctl stop"
+        bind = [
+          {_args = ["XF86AudioPlay" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}playerctl play-pause')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioPrev" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}playerctl previous')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioNext" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}playerctl next')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioMedia" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}playerctl play-pause')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioStop" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}playerctl stop')") (lib.generators.mkLuaInline "{locked=true}")];}
         ];
       };
     };

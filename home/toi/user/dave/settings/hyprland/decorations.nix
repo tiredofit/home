@@ -8,74 +8,151 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
       settings = {
-        general = {
-          allow_tearing = mkDefault true;
-          border_size = mkDefault 2;
-          gaps_in = mkDefault 2;
-          gaps_out = mkDefault 5;
-          layout = mkDefault "master";
-          resize_corner = mkDefault 2;
-          resize_on_border = mkDefault true;
-        };
-
-        cursor = {
-          inactive_timeout = mkDefault 10;
-          hide_on_key_press = mkDefault true;
-        };
-
-        master = {
-          allow_small_split = mkDefault true;
-          drop_at_cursor = mkDefault true;
-          mfact = mkDefault 0.55;
-          new_on_top = mkDefault true;
-          new_status = mkDefault "master";
-          orientation = mkDefault "center";
-          smart_resizing = mkDefault true;
-        };
-
-        decoration = {
-          blur = {
-            enabled = mkDefault true;
-            brightness = mkDefault 1;
-            contrast = mkDefault 1.0;
-            ignore_opacity = mkDefault true;
-            new_optimizations = mkDefault true;
-            passes = mkDefault 3;
-            popups = mkDefault true;
-            size = mkDefault 4;
-            vibrancy = mkDefault 0.50;
-            vibrancy_darkness = mkDefault 0.50;
-            xray = mkDefault false;
+        config = {
+          animations = {
+            enabled = false;
+          };
+          general = {
+            allow_tearing = mkDefault true;
+            border_size = mkDefault 2;
+            gaps_in = mkDefault 2;
+            gaps_out = mkDefault 5;
+            layout = mkDefault "master";
+            resize_corner = mkDefault 2;
+            resize_on_border = mkDefault true;
           };
 
-          #col.shadow = "rgba(1a1a1aee)";
-          dim_inactive = mkDefault false;
-          dim_strength = mkDefault 0.2;
-          rounding = mkDefault 5;
+          cursor = {
+            inactive_timeout = mkDefault 10;
+            hide_on_key_press = mkDefault true;
+          };
 
-          shadow = {
-            enabled = mkDefault true;
-            range = mkDefault 4;
-            render_power = mkDefault 4;
+          master = {
+            allow_small_split = mkDefault true;
+            drop_at_cursor = mkDefault true;
+            mfact = mkDefault 0.55;
+            new_on_top = mkDefault true;
+            new_status = mkDefault "master";
+            orientation = mkDefault "center";
+            smart_resizing = mkDefault true;
+          };
+
+          decoration = {
+            blur = {
+              enabled = mkDefault true;
+              brightness = mkDefault 1;
+              contrast = mkDefault 1.0;
+              ignore_opacity = mkDefault true;
+              new_optimizations = mkDefault true;
+              passes = mkDefault 3;
+              popups = mkDefault true;
+              size = mkDefault 4;
+              vibrancy = mkDefault 0.50;
+              vibrancy_darkness = mkDefault 0.50;
+              xray = mkDefault false;
+            };
+
+            dim_inactive = mkDefault false;
+            dim_strength = mkDefault 0.2;
+            rounding = mkDefault 5;
+            shadow = {
+              enabled = mkDefault true;
+              range = mkDefault 4;
+              render_power = mkDefault 4;
+            };
           };
         };
 
-        animations = {
-          enabled = mkDefault false;
-          animation = mkDefault [
-            "border, 1, 10, default"
-            "fade, 1, 7, default"
-            "windows, 1, 5, myBezier"
-            "windowsMove, 1, 5, myBezier"
-            "windowsOut, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 20%"
-            "workspaces, 1, 10, overshot , slidevert"
-          ];
-          bezier = mkDefault [
-            "myBezier, 0.05, 0.9, 0.1, 1.1"
-            "overshot, 0.05, 0.9, 0.1, 1.1"
-          ];
-        };
+        curve = [
+          {
+            _args = [
+              "myBezier"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.9
+                  ]
+                  [
+                    0.1
+                    1.1
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "overshot"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.9
+                  ]
+                  [
+                    0.1
+                    1.1
+                  ]
+                ];
+              }
+            ];
+          }
+        ];
+        animation = [
+          {
+            leaf = "border";
+            enabled = true;
+            speed = 10;
+            bezier = "default";
+          }
+
+          {
+            leaf = "fade";
+            enabled = true;
+            speed = 7;
+            bezier = "default";
+          }
+
+          {
+            leaf = "windows";
+            enabled = true;
+            speed = 5;
+            bezier = "myBezier";
+          }
+
+          {
+            leaf = "windowsMove";
+            enabled = true;
+            speed = 5;
+            bezier = "myBezier";
+          }
+
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 7;
+            bezier = "myBezier";
+          }
+
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 7;
+            bezier = "default";
+            style = "popin 20%";
+          }
+
+          {
+            leaf = "workspaces";
+            enabled = true;
+            speed = 10;
+            bezier = "overshot";
+            style = "slidevert";
+          }
+        ];
       };
     };
   };

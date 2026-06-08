@@ -25,13 +25,48 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager) {
       settings = {
-        windowrule = [
-          "float,initialClass:(^opensnitch_ui$)"
-          "size 900 600,initialClass:(^opensnitch_ui$),initialTitle:(^Preferences$)"
-          "size 900 600,initialClass:(^opensnitch_ui$),initialTitle:(^Rule$)"
-          "size 650 460,initialClass:(^opensnitch_ui$),initialTitle:(Firewall)"
-          "size 650 460,initialClass:(^opensnitch_ui$),initialTitle:(OpenSnitch Network Statistics.*)"
-          "size 650 460,initialClass:(^opensnitch_ui$),initialTitle:(^OpenSnitch v[0-9]\.[0-9]\.[0-9]$)"
+        window_rule = [
+          {
+            float = true;
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+            };
+          }
+          {
+            size = "900 600";
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+              initial_title = "(^Preferences$)";
+            };
+          }
+          {
+            size = "900 600";
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+              initial_title = "(^Rule$)";
+            };
+          }
+          {
+            size = "650 460";
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+              initial_title = "(Firewall)";
+            };
+          }
+          {
+            size = "650 460";
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+              initial_title = "(OpenSnitch Network Statistics.*)";
+            };
+          }
+          {
+            size = "650 460";
+            match = {
+              initial_class = "(^opensnitch_ui$)";
+              initial_title = "(^OpenSnitch v[0-9]\\.[0-9]\\.[0-9]$)";
+            };
+          }
         ];
       };
     };

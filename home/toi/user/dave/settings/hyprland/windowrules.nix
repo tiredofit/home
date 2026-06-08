@@ -8,9 +8,12 @@ with lib;
   config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
     wayland.windowManager.hyprland = {
       settings = {
+
+
+
         ## See more in modules/applications/* and modules/desktop/utils/*
-        windowrule = [
-        ];
+        #window_rule = [
+        #];
       };
     };
   };

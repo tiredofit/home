@@ -63,9 +63,7 @@ in
 
     wayland.windowManager.hyprland = {
       settings = {
-        exec-once = [
-          "${config.host.home.feature.uwsm.prefix}hyprctl setcursor ${cfg.cursor.name} ${toString cfg.cursor.size}"
-        ];
+        on._args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}hyprctl setcursor ${cfg.cursor.name} ${toString cfg.cursor.size}') end")];
       };
     };
   };

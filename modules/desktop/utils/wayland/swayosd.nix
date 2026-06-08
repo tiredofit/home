@@ -63,12 +63,10 @@ in
     ## TODO Make this work for dynamic Display (monitor_primary)
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
       settings = {
-        bindl = [
-          ",XF86AudioMute, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume mute-toggle"
-        ];
-        bindle = [
-          ",XF86AudioRaiseVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume +1 --max-volume=100"
-          ",XF86AudioLowerVolume, exec, ${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume -1"
+        bind = [
+          {_args = ["XF86AudioMute" (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume mute-toggle')") (lib.generators.mkLuaInline "{locked=true}")];}
+          {_args = ["XF86AudioRaiseVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume +1 --max-volume=100")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
+          {_args = ["XF86AudioLowerVolume" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${config.host.home.feature.uwsm.prefix}swayosd-client --output-volume -1")'') (lib.generators.mkLuaInline "{repeating=true,locked=true}")];}
         ];
       };
     };

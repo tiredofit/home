@@ -33,12 +33,38 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        windowrule = [
-          "noanim, class:^(flameshot)$"
-          "float, class:^(flameshot)$"
-          "move 0 0, class:^(flameshot)$"
-          "pin, class:^(flameshot)$"
-          "monitor 3, class:^(flameshot)$" # set this to your leftmost monitor id, otherwise you have to move your cursor to the leftmost monitor before executing flameshot
+        window_rule = [
+          {
+            no_anim = true;
+            match = {
+              class = "^(flameshot)$";
+            };
+          }
+          {
+            float = true;
+            match = {
+              class = "^(flameshot)$";
+            };
+          }
+          {
+            move = "0 0";
+            match = {
+              class = "^(flameshot)$";
+            };
+          }
+          {
+            pin = true;
+            match = {
+              class = "^(flameshot)$";
+            };
+          }
+          {
+            monitor = "3";
+            match = {
+              class = "^(flameshot)$";
+            };
+            # set this to your leftmost monitor id, otherwise you have to move your cursor to the leftmost monitor before executing flameshot
+          }
         ];
       };
     };
