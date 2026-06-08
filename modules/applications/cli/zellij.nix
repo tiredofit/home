@@ -16,14 +16,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      zellij = {
-        enable = true;
-        enableBashIntegration = mkDefault true;
-        enableZshIntegration = mkDefault true;
-        exitShellOnExit = mkDefault false;
-        
-      };
+    home = {
+      packages = with pkgs;
+        [
+          zellij
+        ];
     };
+
+    #programs = {
+    #  zellij = {
+    #    enable = true;
+    #    enableBashIntegration = mkDefault false;
+    #    enableZshIntegration = mkDefault false;
+    #    exitShellOnExit = mkDefault false;
+    #  };
+    #};
   };
 }
