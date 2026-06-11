@@ -13,7 +13,7 @@ with lib;
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.danksearch.homeModules.dsearch
-    inputs.dms-plugin-registry.modules.default
+    inputs.dms-plugin-registry.nixosModules.default
   ];
 
   config = mkIf dmsActive {
