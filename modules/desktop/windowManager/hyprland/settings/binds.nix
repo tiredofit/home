@@ -10,9 +10,8 @@ with lib;
       settings = {
         ### See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          # These don't work but work without them bound
-          #{ _args = ["SUPER + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen_state({ internal = 1 , client = 1, action = "toggle" })'')]; }
-          #{ _args = ["SUPER + SHIFT + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')]; }
+          { _args = ["SUPER + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen_state({ internal = 1 , client = 1, action = "toggle" })'')]; }
+          { _args = ["SUPER + SHIFT + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')]; }
 
           # Pin dispatcher, make window appear above everything else on all windows
           { _args = ["SUPER + P" (lib.generators.mkLuaInline ''hl.dsp.window.pin()'')]; }
