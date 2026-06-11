@@ -25,7 +25,7 @@ in
       output_path="/tmp/!YTDL"
       mkdir -p "$output_path"
       echo "$(date) $@" >> /tmp/ytdl.log
-      ${pkgs.yt-dlp}/bin/yt-dlp -P "$output_path" $@
+      ${pkgs.yt-dlp}/bin/yt-dlp  --cookies-from-browser firefox -P "$output_path" $@
     '';
 
   in {
