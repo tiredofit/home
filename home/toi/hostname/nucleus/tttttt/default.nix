@@ -4,6 +4,7 @@ with lib; {
     home = {
       applications = {
         firefox.enable = true;
+        ghostty.enable = true;
         grim.enable = false;
         hyprcursor.enable = false;
         hyprdim.enable = false;
