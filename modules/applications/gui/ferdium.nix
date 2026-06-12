@@ -37,6 +37,17 @@ in
       ];
     };
 
+    xdg.desktopEntries.ferdium = {
+      exec = "ferdium %U";
+      name = "Ferdium";
+      terminal = false;
+      type = "Application";
+      icon = "ferdium";
+      startupNotify = true;
+      mimeType = [ "x-scheme-handler/ferdium" ];
+      categories = [ "Network" "InstantMessaging" ];
+    };
+
     systemd.user.services.ferdium = mkIf cfg.service.enable {
       Unit = {
         Description = "Ferdium - Multi Messaging Tool";
