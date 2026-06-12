@@ -47,7 +47,7 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
       settings = {
-        on._args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}wl-gammarelay-rs ; sleep 1; ${config.host.home.feature.uwsm.prefix}busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000') end")];
+        on = [{ _args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}wl-gammarelay-rs ; sleep 1; ${config.host.home.feature.uwsm.prefix}busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3000') end")]; }];
       };
     };
   };
