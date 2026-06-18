@@ -28,6 +28,7 @@ with lib;
           diceware.enable = mkDefault true;
           duf.enable = mkDefault true;
           dust.enable = mkDefault true;
+          fd.enable = mkDefault true;
           file-compression.enable = mkDefault true;
           fzf.enable = mkDefault true;
           gdu.enable = mkDefault true;
