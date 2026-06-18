@@ -5,7 +5,7 @@ let
 in
 with lib;
 {
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
+  config = mkIf (config.host.home.feature.gui.isHyprland) {
     wayland.windowManager.hyprland = {
       configType = "lua";
       settings = {

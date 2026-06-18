@@ -23,7 +23,7 @@ in
         ];
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
       settings = {
         bind = [
           { _args = ["SUPER + SHIFT + E" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("pkill wlogout || ${config.host.home.feature.uwsm.prefix}wlogout")'')]; }

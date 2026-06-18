@@ -3,7 +3,6 @@ let
   shell = config.host.home.feature.gui.shell;
   windowManager = config.host.home.feature.gui.windowManager;
   displayServer = config.host.home.feature.gui.displayServer;
-  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
   niriActive = builtins.elem "niri" windowManager;
   hyprlandActive = builtins.elem "hyprland" windowManager;
 in
@@ -16,7 +15,7 @@ with lib;
     inputs.dms-plugin-registry.nixosModules.default
   ];
 
-  config = mkIf dmsActive {
+  config = mkIf config.host.home.feature.gui.isDms {
     programs = {
       dank-material-shell = {
         enable = true;
@@ -102,7 +101,7 @@ with lib;
       #};
     };
 
-    wayland.windowManager.hyprland = mkIf (dmsActive && config.programs.dank-material-shell.systemd.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isDms && config.programs.dank-material-shell.systemd.enable) {
       extraConfig = ''
         require("dms.colors")
         require("dms.outputs")

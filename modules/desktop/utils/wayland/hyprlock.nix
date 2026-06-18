@@ -3,7 +3,6 @@ let
   cfg = config.host.home.applications.hyprlock;
   shell = config.host.home.feature.gui.shell;
   displayServer = config.host.home.feature.gui.displayServer;
-  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
 ## PERSONALIZE
   script_displayhelper_hyprlock = pkgs.writeShellScriptBin "displayhelper_hyprlock" ''
     _get_display_name() {
@@ -113,7 +112,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable && !dmsActive) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland && !config.host.home.feature.gui.isDms) {
       settings = {
         bind = [
           { _args = ["SUPER + SHIFT + X" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${config.host.home.feature.uwsm.prefix}hyprlock")'')]; }

@@ -117,7 +117,7 @@ in
       };
     };
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
       settings = {
         bind = [
           {_args = ["SUPER + P" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("ghostty +new-window")'')];}

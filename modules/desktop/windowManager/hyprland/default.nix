@@ -3,8 +3,7 @@ let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
   shell = config.host.home.feature.gui.shell ;
-  dmsActive = config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "dms" shell;
-  shellOverridesServices = dmsActive;
+  shellOverridesServices = config.host.home.feature.gui.isDms;
   gameMode = pkgs.writeShellScriptBin "hyprland_gamemode" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then
@@ -82,30 +81,12 @@ EOF
 esac
   '';
 
-  dir = ./.;
-  files = builtins.readDir dir;
-  ignoreList = [
-  ];
-  importable = lib.filterAttrs (name: type:
-    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
-    || (
-      type == "directory"
-      && name != "default.nix"
-      && !(lib.elem name ignoreList)
-      && builtins.pathExists (dir + "/${name}/default.nix")
-    )
-  ) files;
-  imports = lib.mapAttrsToList (name: type:
-    if type == "regular"
-    then ./${name}
-    else ./${name}/default.nix
-  ) importable;
 in
 with lib;
 {
-  imports = imports;
+  imports = import ../../../../lib/import-dir.nix { inherit lib; } ./. { };
 
-  config = mkIf (config.host.home.feature.gui.enable && displayServer == "wayland" && builtins.elem "hyprland" windowManager) {
+  config = mkIf (config.host.home.feature.gui.isHyprland) {
     home = {
       packages = with pkgs;
         [
