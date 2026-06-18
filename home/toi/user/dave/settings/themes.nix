@@ -27,11 +27,8 @@ in
           size = mkDefault 24;
         };
         theme = {
-          name = "Catppuccin-Mocha";
-          package = pkgs.catppuccin-gtk.override {
-            tweaks = [ "rimless" ];
-            variant = "mocha";
-          };
+          name = "Tokyonight-Dark";
+          package = pkgs.tokyonight-gtk-theme;
         };
       })
       # Stylix mode: just add Papirus icons on top (stylix owns everything else)
@@ -46,7 +43,7 @@ in
     programs = mkIf ((role == "workstation" || role == "laptop")) (let
         sessionVars = mkIf stylixOff {
           GTK2_RC_FILES = mkForce "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
-          GTK_THEME = "Catppuccin-Mocha";
+          GTK_THEME = "Tokyonight-Dark";
         };
       in {
         bash = {
