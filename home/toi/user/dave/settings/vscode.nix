@@ -461,7 +461,7 @@ in
             github.copilot-chat                          # Github CoPilot
           ];
           marketplace = with marketplace; [
-            anthropic.claude-code                        # Claude Code
+            #anthropic.claude-code                        # Claude Code
             sst-dev.opencode
             ltmoerdani.opencode-copilot-chat
             #sst-dev.opencode-v2
