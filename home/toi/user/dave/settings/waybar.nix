@@ -674,7 +674,7 @@ with lib; {
 
 
 
-    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.displayServer == "wayland" && builtins.elem "hyprland" config.host.home.feature.gui.windowManager && config.host.home.feature.gui.enable) {
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
       settings = {
         bind = [
           { _args = ["SUPER + SHIFT + W" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${config.host.home.feature.uwsm.prefix}systemctl --user restart waybar.service")'')]; }
