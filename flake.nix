@@ -32,14 +32,14 @@
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nur = {
       url = "github:nix-community/NUR";
     };
     sops-nix = {
       url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     android-sdk = {
       url = "github:tadfisher/android-nixpkgs/stable";
@@ -73,11 +73,8 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-unstable, flake-utils, home-manager-stable, home-manager-unstable, ... }@inputs:
     let
-      displayName = "Dave Conroy";
-      gn = "dave";
-      gnsn = "daveconroy";
-      handle = "tiredofit";
-      sn = "conroy";
+      identity = import ./lib/identity.nix;
+      inherit (identity) displayName gn;
 
       pkgsForSystem = system: nixpkgsSource:
         let
