@@ -27,12 +27,13 @@ home.packages = [ ];
         calibre.enable = false;
         chromium.enable = true;
         claude-code = {
-          enable = true;
+          enable = false;
           mcp.enable = true;
         };
         cryfs.enable = true;
         direnv.enable = true;
         feishin.enable = true;
+        ferdium.service.enable = true;
         file-roller.enable = true;
         github-client.enable = true;
         ghostty.enable = true;
@@ -61,7 +62,7 @@ home.packages = [ ];
               secretEnv = { GITHUB_PERSONAL_ACCESS_TOKEN = "mcp/github_token"; };
             };
             homeassistant = {
-              enable = true;
+              enable = false;
               secretEnv = {
                 HOMEASSISTANT_URL = "mcp/homeassistant_url";
                 HOMEASSISTANT_TOKEN = "mcp/homeassistant_token";
@@ -70,7 +71,7 @@ home.packages = [ ];
             mcp-nixos.enable = true;
             memory.enable = true;
             mqtt = {
-              enable = true;
+              enable = false;
               #secretEnv = {
               #  MQTT_HOST = "mcp/mqtt_host";
               #  MQTT_PORT = "mcp/mqtt_port";
@@ -82,7 +83,8 @@ home.packages = [ ];
           };
         };
         meld.enable = true;
-        mqtt-explorer.enable=true;
+        mqtt-explorer.enable = true;
+        neovim.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
           enable = true;
@@ -97,6 +99,7 @@ home.packages = [ ];
         python.enable = true;
         pwvucontrol.enable = true;
         shellcheck.enable = true;
+        shikane.enable = false;
         shfmt.enable = true;
         ssh.enable = true;
         steam-run.enable = true;
@@ -146,70 +149,89 @@ home.packages = [ ];
     };
   };
 
-  host.home.applications.shikane.settings = {
-    profile = [
-      {
-        name = "laptop";
-        output = [
-          {
-            enable = true;
-            search = "${laptop_display}";
-            mode = "${laptop_display_mode}";
-            position = "0,0";
-            scale = 1.0;
-            transform = "normal";
-            adaptive_sync = false;
-          }
-        ];
-        exec = []
-          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${laptop_display}\""
-          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${laptop_display}\""
-          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${laptop_display}\""
-          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${laptop_display}\""
-          ++ [ "sound-tool               \"reset\"" ];
-      }
-      {
-        name = "dock";
-        output = [
-          {
-            enable = false;
-            search = "${laptop_display}";
-          }
-          {
-            enable = true;
-            search = "${dock_left}";
-            mode = "${dock_left_mode}";
-            position = "${dock_left_position}";
-            scale = 1.0;
-            transform = "normal";
-            adaptive_sync = false;
-          }
-          {
-            enable = true;
-            search = "${dock_middle}";
-            mode = "${dock_middle_mode}";
-            position = "${dock_middle_position}";
-            scale = 1.0;
-            transform = "normal";
-            adaptive_sync = false;
-          }
-          {
-            enable = true;
-            search = "${dock_right}";
-            mode = "${dock_right_mode}";
-            position = "${dock_right_position}";
-            scale = 1.0;
-            transform = "normal";
-            adaptive_sync = false;
-          }
-        ];
-        exec = []
-          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${dock_middle}\""
-          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-          ++ [ "sound-tool               \"disable\"         \"AIR HUB,Jabra SPEAK\"" ];
-      }
+programs.opencode.web = {
+  enable = true;
+  extraArgs = [
+    "--hostname"
+    "0.0.0.0"
+    "--port"
+    "4096"
+    "--mdns"
+    "--cors"
+    "https://example.com"
+    "--cors"
+    "http://localhost:3000"
+    "--print-logs"
+    "--log-level"
+    "DEBUG"
+ ];
+ #environmentFile = "";
+};
+
+#  host.home.applications.shikane.settings = {
+#    profile = [
+#      {
+#        name = "laptop";
+#        output = [
+#          {
+#            enable = true;
+#            search = "${laptop_display}";
+#            mode = "${laptop_display_mode}";
+#            position = "0,0";
+#            scale = 1.0;
+#            transform = "normal";
+#            adaptive_sync = false;
+#          }
+#        ];
+#        exec = []
+#          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${laptop_display}\""
+#          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${laptop_display}\""
+#          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${laptop_display}\""
+#          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${laptop_display}\""
+#          ++ [ "sound-tool               \"reset\"" ];
+#      }
+#      {
+#        name = "dock";
+#        output = [
+#          {
+#            enable = false;
+#            search = "${laptop_display}";
+#          }
+#          {
+#            enable = true;
+#            search = "${dock_left}";
+#            mode = "${dock_left_mode}";
+#            position = "${dock_left_position}";
+#            scale = 1.0;
+#            transform = "normal";
+#            adaptive_sync = false;
+#          }
+#          {
+#            enable = true;
+#            search = "${dock_middle}";
+#            mode = "${dock_middle_mode}";
+#            position = "${dock_middle_position}";
+#            scale = 1.0;
+#            transform = "normal";
+#            adaptive_sync = false;
+#          }
+#          {
+#            enable = true;
+#            search = "${dock_right}";
+#            mode = "${dock_right_mode}";
+#            position = "${dock_right_position}";
+#            scale = 1.0;
+#            transform = "normal";
+#            adaptive_sync = false;
+#          }
+#        ];
+#        exec = []
+#          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+#          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${dock_middle}\""
+#          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+#          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
+#          ++ [ "sound-tool               \"disable\"         \"AIR HUB,Jabra SPEAK\"" ];
+#      }
 #      {
 #        name = "laptop (+embedded, -hdmi)";
 #        output = [
@@ -646,6 +668,6 @@ home.packages = [ ];
 #          "displayhelper_waybar     \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
 #        ];
 #      }
-    ];
-  };
+#    ];
+#  };
 }
