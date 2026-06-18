@@ -3,29 +3,10 @@
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   cfg = config.host.home.feature.gui ;
-
-  dir = ./.;
-  files = builtins.readDir dir;
-  ignoreList = [
-  ];
-  importable = lib.filterAttrs (name: type:
-    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && !(lib.elem name ignoreList))
-    || (
-      type == "directory"
-      && name != "default.nix"
-      && !(lib.elem name ignoreList)
-      && builtins.pathExists (dir + "/${name}/default.nix")
-    )
-  ) files;
-  imports = lib.mapAttrsToList (name: type:
-    if type == "regular"
-    then ./${name}
-    else ./${name}/default.nix
-  ) importable;
 in
 with lib;
 {
-  imports = imports;
+  imports = import ../../lib/import-dir.nix { inherit lib; } ./. { };
 
   options = {
     host.home.feature.gui = {
@@ -47,10 +28,28 @@ with lib;
         description = "List of window managers / desktop environments to enable";
       };
 
+      isHyprland = mkOption {
+        readOnly = true;
+        default = config.host.home.feature.gui.enable
+          && config.host.home.feature.gui.displayServer == "wayland"
+          && builtins.elem "hyprland" config.host.home.feature.gui.windowManager;
+        type = types.bool;
+        description = "Whether Hyprland is the active window manager";
+      };
+
       shell = mkOption {
         type = types.listOf (types.enum ["dms"]);
         default = [];
         description = "List of desktop shells to layer on top of the window manager";
+      };
+
+      isDms = mkOption {
+        readOnly = true;
+        default = config.host.home.feature.gui.enable
+          && config.host.home.feature.gui.displayServer == "wayland"
+          && builtins.elem "dms" config.host.home.feature.gui.shell;
+        type = types.bool;
+        description = "Whether DMS is the active desktop shell";
       };
     };
   };
