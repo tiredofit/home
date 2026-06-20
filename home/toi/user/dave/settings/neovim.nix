@@ -194,6 +194,23 @@ with lib;
         { key = "gco"; mode = [ "n" ]; action = "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";  options = { desc = "Add Comment Below"; }; }
         { key = "gcO"; mode = [ "n" ]; action = "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";  options = { desc = "Add Comment Above"; }; }
 
+        # File browser (yazi)
+        { key = "<leader>e";  mode = [ "n" ]; action = "<cmd>Yazi<cr>";                       options = { desc = "File Browser"; }; }
+
+        # Find / pick (Snacks picker)
+        { key = "<leader>ff"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.files()<cr>";      options = { desc = "Find Files"; }; }
+        { key = "<leader>fg"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.grep()<cr>";       options = { desc = "Find Text (Grep)"; }; }
+        { key = "<leader>fb"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.buffers()<cr>";    options = { desc = "Find Buffers"; }; }
+        { key = "<leader>fr"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.recent()<cr>";     options = { desc = "Recent Files"; }; }
+        { key = "<leader>sg"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.grep()<cr>";       options = { desc = "Grep"; }; }
+        { key = "<leader>sw"; mode = [ "n" "x" ]; action = "<cmd>lua Snacks.picker.grep_word()<cr>"; options = { desc = "Grep Word"; }; }
+        { key = "<leader>sb"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.lines()<cr>";      options = { desc = "Buffer Lines"; }; }
+        { key = "<leader>gs"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.git_status()<cr>"; options = { desc = "Git Status"; }; }
+        { key = "<leader>sh"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.help()<cr>";       options = { desc = "Help Pages"; }; }
+
+        # Dashboard
+        { key = "<leader>fd"; mode = [ "n" ]; action = "<cmd>lua Snacks.dashboard()<cr>";          options = { desc = "Dashboard"; }; }
+
         # New file
         { key = "<leader>fn"; mode = [ "n" ]; action = "<cmd>enew<cr>";                       options = { desc = "New File"; }; }
 
@@ -424,7 +441,7 @@ with lib;
                 stop_after_first = true;
               };
               json = [ "jq" ];
-              "_" = [ "trim_whitespace" ];
+              # "_" = [ "trim_whitespace" ];  # disabled
               lua = [ "stylua" ];
               markdown = {
                 __unkeyed-1 = "prettierd";
@@ -685,6 +702,7 @@ with lib;
             indent.enabled = true;
             input.enabled = true;
             notifier.enabled = true;
+            picker.enabled = true;
             quickfile.enabled = true;
             scope.enabled = true;
             scroll.enabled = true;
@@ -706,6 +724,8 @@ with lib;
                   { icon = " "; key = "g"; desc = "Find Text"; action = ":lua Snacks.dashboard.pick('live_grep')"; }
                   { icon = " "; key = "r"; desc = "Recent Files"; action = ":lua Snacks.dashboard.pick('oldfiles')"; }
                   { icon = " "; key = "c"; desc = "Config"; action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})"; }
+                  { icon = " "; key = "n"; desc = "New File"; action = ":ene | startinsert"; }
+                  { icon = " "; key = "k"; desc = "Browse Keymaps"; action = ":lua Snacks.picker.keymaps()"; }
                   { icon = " "; key = "s"; desc = "Restore Session"; section = "session"; }
                   { icon = " "; key = "q"; desc = "Quit"; action = ":qa"; }
                 ];
@@ -713,6 +733,8 @@ with lib;
               sections = [
                 { section = "header"; }
                 { section = "keys"; gap = 1; padding = 1; }
+                { icon = " "; title = "Recent Files"; section = "recent_files"; indent = 2; padding = { __unkeyed-1 = 2; __unkeyed-2 = 2; }; }
+                { icon = " "; title = "Projects"; section = "projects"; indent = 2; padding = 2; }
               ];
             };
           };
