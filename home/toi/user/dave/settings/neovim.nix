@@ -68,7 +68,7 @@ with lib;
         signcolumn = "yes";                      # always show diagnostics/git signs
         smartcase = true;                        # case-sensitive when uppercase in search
         smartindent = true;                      # auto-indent
-        smoothscroll = true;                     # smooth horizontal scroll
+        smoothscroll = false;                     # smooth horizontal scroll
         spelllang = [ "en" ];                    # spell check language
         splitbelow = true;                       # new horizontal split below
         splitkeep = "screen";                    # keep view when splitting
@@ -121,7 +121,7 @@ with lib;
       };
 
       extraPackages = with pkgs; [
-        nixfmt                                   # Nix formatter (conform)
+        fzf                                      # fuzzy finder (fzf-lua)
         stylua                                   # Lua formatter (conform)
       ];
 
@@ -197,16 +197,16 @@ with lib;
         # File browser (yazi)
         { key = "<leader>e";  mode = [ "n" ]; action = "<cmd>Yazi<cr>";                       options = { desc = "File Browser"; }; }
 
-        # Find / pick (Snacks picker)
-        { key = "<leader>ff"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.files()<cr>";      options = { desc = "Find Files"; }; }
-        { key = "<leader>fg"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.grep()<cr>";       options = { desc = "Find Text (Grep)"; }; }
-        { key = "<leader>fb"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.buffers()<cr>";    options = { desc = "Find Buffers"; }; }
-        { key = "<leader>fr"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.recent()<cr>";     options = { desc = "Recent Files"; }; }
-        { key = "<leader>sg"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.grep()<cr>";       options = { desc = "Grep"; }; }
-        { key = "<leader>sw"; mode = [ "n" "x" ]; action = "<cmd>lua Snacks.picker.grep_word()<cr>"; options = { desc = "Grep Word"; }; }
-        { key = "<leader>sb"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.lines()<cr>";      options = { desc = "Buffer Lines"; }; }
-        { key = "<leader>gs"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.git_status()<cr>"; options = { desc = "Git Status"; }; }
-        { key = "<leader>sh"; mode = [ "n" ]; action = "<cmd>lua Snacks.picker.help()<cr>";       options = { desc = "Help Pages"; }; }
+        # Find / pick (fzf-lua)
+        { key = "<leader>ff"; mode = [ "n" ]; action = "<cmd>FzfLua files<CR>";                  options = { desc = "Find Files"; }; }
+        { key = "<leader>fg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";              options = { desc = "Find Text (Grep)"; }; }
+        { key = "<leader>fb"; mode = [ "n" ]; action = "<cmd>FzfLua buffers<CR>";                options = { desc = "Find Buffers"; }; }
+        { key = "<leader>fr"; mode = [ "n" ]; action = "<cmd>FzfLua oldfiles<CR>";               options = { desc = "Recent Files"; }; }
+        { key = "<leader>sg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";              options = { desc = "Grep"; }; }
+        { key = "<leader>sw"; mode = [ "n" "x" ]; action = "<cmd>FzfLua grep_visual<CR>";        options = { desc = "Grep Word"; }; }
+        { key = "<leader>sb"; mode = [ "n" ]; action = "<cmd>FzfLua lines<CR>";                  options = { desc = "Buffer Lines"; }; }
+        { key = "<leader>gs"; mode = [ "n" ]; action = "<cmd>FzfLua git_status<CR>";             options = { desc = "Git Status"; }; }
+        { key = "<leader>sh"; mode = [ "n" ]; action = "<cmd>FzfLua help_tags<CR>";              options = { desc = "Help Pages"; }; }
 
         # Dashboard
         { key = "<leader>fd"; mode = [ "n" ]; action = "<cmd>lua Snacks.dashboard()<cr>";          options = { desc = "Dashboard"; }; }
@@ -336,18 +336,19 @@ with lib;
       ];
 
       plugins = {
-        nvim-autopairs = {                                   # auto-close brackets, quotes, etc.
-          enable = true;
-          settings.disable_filetype = [
-            "TelescopePrompt"
-            "vim"
-          ];
+        mini = {                                             # text objects, pairs, icons
+          modules = {
+            ai = { };
+            pairs = { };
+            icons = { };
+          };
         };
         auto-save = {                                        # auto-save buffers on idle/blur
           enable = true;
         };
         aerial = {                                           # code outline sidebar
           enable = true;
+          autoLoad = true;
           settings = {
             attach_mode = "global";
             backends = [
@@ -420,6 +421,7 @@ with lib;
             format_on_save = ''
               function(bufnr)
                 if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+                if vim.bo[bufnr].filetype == "nix" or vim.bo[bufnr].filetype == "dockerfile" then return false end
                 return { timeout_ms = 500, lsp_fallback = true }
               end
             '';
@@ -448,7 +450,6 @@ with lib;
                 __unkeyed-2 = "prettier";
                 stop_after_first = true;
               };
-              nix = [ "nixfmt" ];
               typescript = {
                 __unkeyed-1 = "prettierd";
                 __unkeyed-2 = "prettier";
@@ -462,12 +463,10 @@ with lib;
 
             };
             formatters = {
-              nixfmt = { command = "${lib.getExe pkgs.nixfmt}"; };
               stylua = { command = "${lib.getExe pkgs.stylua}"; };
             };
           };
         };
-        dressing.enable = true;                              # telescope-style vim.ui.select/input
         fidget = {                                           # LSP progress spinner
           enable = true;
           settings = {
@@ -492,6 +491,7 @@ with lib;
           };
         };
         flash.enable = true;                                 # labelled jump (f/F/t/T)
+        fzf-lua.enable = true;                               # fuzzy finder (LazyVim 14+ default)
         gitsigns = {                                         # git signs in signcolumn
           enable = true;
           settings = {
@@ -533,7 +533,6 @@ with lib;
             line_num = { style = "#91bef0"; use_treesitter = true; };
           };
         };
-        indent-blankline.enable = true;                      # vertical indent guidelines
         lazygit = {                                          # Git TUI integration
           enable = true;
           settings = {
@@ -544,7 +543,9 @@ with lib;
         };
         lint.enable = true;                                  # async linting engine
         lsp-lines.enable = true;                             # LSP diagnostic line numbers
-        lsp-format.enable = true;                            # LSP format on save
+        lazydev = {                                          # LuaLS completions for vim.*, snacks.*
+          enable = true;
+        };
         lsp = {                                              # built-in LSP client
           enable = true;
           inlayHints = true;
@@ -623,8 +624,7 @@ with lib;
             };
           };
         };
-        mini.modules.ai = { };                               # improved text objects (ai, ii, a(, i())
-        neoscroll.enable = true;                             # smooth scrolling
+        neoscroll.enable = false;                             # smooth scrolling
         nix-develop = {                                      # nix develop shell integration
           enable = true;
           autoLoad = true;
@@ -675,24 +675,6 @@ with lib;
             }];
           };
         };
-        notify = {                                           # notification window replacement
-          enable = true;
-          settings.settings = {
-            background_colour = "#000000";
-            fps = 30;
-            icons = {
-              debug = "";
-              error = "";
-              info = "";
-              trace = "✎";
-              warn = "";
-            };
-            level = "info";
-            timeout = 5000;
-            stages = "fade_in_slide_out";
-            top_down = true;
-          };
-        };
         nvim-surround.enable = true;                         # ds/cs/ys surround operations
         persistence.enable = true;                           # auto session save/restore
         snacks = {                                           # QoL collection (picker, dashboard, notifier)
@@ -702,10 +684,10 @@ with lib;
             indent.enabled = true;
             input.enabled = true;
             notifier.enabled = true;
-            picker.enabled = true;
+            picker.enabled = false;                          # using fzf-lua instead
             quickfile.enabled = true;
             scope.enabled = true;
-            scroll.enabled = true;
+            scroll.enabled = false;
             statuscolumn.enabled = false;
             words.enabled = true;
             dashboard = {
@@ -714,18 +696,17 @@ with lib;
                                .o88o.                                 .                       oooo
                                888 `"                               .o8                       `888
                   ooo. .oo.   o888oo  oooo d8b  .oooo.    .oooo.o .o888oo  .oooo.    .ooooo.   888  oooo
-                  `888P"Y88b   888    `888""8P `P  )88b  d88(  "8   888   `P  )88b  d88' `"Y8  888 .8P'
-                   888   888   888     888      .oP"888  `"Y88b.    888    .oP"888  888        888888.
+                 `888P"Y88b   888    `888""8P `P  )88b  d88(  "8   888   `P  )88b  d88' `"Y8  888 .8P'
+                  888   888   888     888      .oP"888  `"Y88b.    888    .oP"888  888        888888.
                    888   888   888     888     d8(  888  o.  )88b   888 . d8(  888  888   .o8  888 `88b.
-                  o888o o888o o888o   d888b    `Y888""8o 8""888P'   "888" `Y888""8o `Y8bod8P' o888o o888o
+                   o888o o888o o888o   d888b    `Y888""8o 8""888P'   "888" `Y888""8o `Y8bod8P' o888o o888o
                 '';
                 keys = [
-                  { icon = " "; key = "f"; desc = "Find File"; action = ":lua Snacks.dashboard.pick('files')"; }
-                  { icon = " "; key = "g"; desc = "Find Text"; action = ":lua Snacks.dashboard.pick('live_grep')"; }
-                  { icon = " "; key = "r"; desc = "Recent Files"; action = ":lua Snacks.dashboard.pick('oldfiles')"; }
-                  { icon = " "; key = "c"; desc = "Config"; action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})"; }
+                  { icon = " "; key = "f"; desc = "Find File"; action = ":FzfLua files"; }
                   { icon = " "; key = "n"; desc = "New File"; action = ":ene | startinsert"; }
-                  { icon = " "; key = "k"; desc = "Browse Keymaps"; action = ":lua Snacks.picker.keymaps()"; }
+                  { icon = " "; key = "g"; desc = "Find Text"; action = ":FzfLua live_grep"; }
+                  { icon = " "; key = "r"; desc = "Recent Files"; action = ":FzfLua oldfiles"; }
+                  { icon = "󰓅 "; key = "k"; desc = "LazyGit"; action = ":LazyGit"; }
                   { icon = " "; key = "s"; desc = "Restore Session"; section = "session"; }
                   { icon = " "; key = "q"; desc = "Quit"; action = ":qa"; }
                 ];
@@ -751,7 +732,6 @@ with lib;
           enable = true;
           settings.minutes = [ 5 10 15 20 25 30 ];
         };
-        tmux-navigator.enable = true;                        # Ctrl+hjkl through tmux/neovim
         todo-comments.enable = true;                         # TODO/FIX/HACK/BUG highlighting
         toggleterm = {                                       # floating terminal
           enable = true;
@@ -766,8 +746,10 @@ with lib;
             open_mapping = "[[<c-t>]]";
             autochdir = true;
             close_on_exit = true;
+            on_open.__raw = "function() vim.cmd('startinsert') end";
           };
         };
+        treesitter-context.enable = true;                    # sticky function/class header
         treesitter = {                                       # syntax highlighting & parsing
           enable = true;
           nixGrammars = true;
@@ -822,10 +804,6 @@ with lib;
         };
         ts-autotag.enable = true;                            # auto-close/rename HTML/JSX tags
         ts-comments.enable = true;                           # treesitter-aware commenting
-        web-devicons = {                                     # filetype icons
-          enable = true;
-          settings = { color_icons = true; strict = true; };
-        };
         which-key = {                                        # leader key popup
           enable = true;
           settings = {
@@ -886,9 +864,13 @@ with lib;
       extraConfigLua = ''
         -- border styling for LSP popups (cannot be expressed in pure nix)
         local border = "rounded"
-        if vim.lsp.with then
-          vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-          vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+        vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+          config = vim.tbl_deep_extend("force", config or {}, { border = border })
+          vim.lsp.handlers.hover(_, result, ctx, config)
+        end
+        vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, ctx, config)
+          config = vim.tbl_deep_extend("force", config or {}, { border = border })
+          vim.lsp.handlers.signature_help(_, result, ctx, config)
         end
         vim.diagnostic.config { float = { border = border } }
       '';
