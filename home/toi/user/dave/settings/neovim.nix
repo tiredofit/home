@@ -875,5 +875,5 @@ with lib;
         vim.diagnostic.config { float = { border = border } }
       '';
    };
-  };
+       };
 }
