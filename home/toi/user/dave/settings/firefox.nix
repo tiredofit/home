@@ -9,6 +9,7 @@ let
     containerise
     copy-selected-links
     copy-selection-as-markdown
+    ebates-express-cash-back
     export-cookies-txt
     facebook-container
     floccus
@@ -16,10 +17,10 @@ let
     multi-account-containers
     image-search-options
     localcdn
-    #pwas-for-firefox
     reddit-enhancement-suite
     refined-github
     sidebery
+    the-camelizer-price-history-ch
     ublock-origin
     user-agent-string-switcher
 
@@ -29,20 +30,17 @@ let
     ## F.B Purity - Cleans up Facebook extension 36.8.0.0 true fbpElectroWebExt@fbpurity.com
     ## Hard Refresh Button extension 1.0.0 true {b6da57d3-9727-4bc0-b974-d13e7c004af0}
     ## Open With extension 7.2.6 true openggwith@darktrojan.net
-    ## PasswordMaker X extension 0.2.2 true passwordmaker@emersion.fr
-    ## Rakuten Canada Button extension 7.8.1 true ebatesca@ebates.com
+    ### Rakuten Canada Button extension 7.8.1 true ebatesca@ebates.com
     ## StockTrack.ca plugin extension 0.2.4 true {50b98f8c-707d-4dd8-86e4-7c0e15745027}
-    ## The Camelizer extension 3.0.15 true izer@camelcamelcamel.com
+    ### The Camelizer extension 3.0.15 true izer@camelcamelcamel.com
     ## Language: English (CA) locale 114.0.20230608.214645 false langpack-en-CA@firefox.mozilla.org
     # firefox-addons.json | mozilla-addons-to-nix firefox-addons.json output.json
     #[
     #  { "slug": "en-CA@dictionaries.addons.mozilla.org" },
     #  { "slug": "{b6da57d3-9727-4bc0-b974-d13e7c004af0}", "pname": "Hard Refresh Button" }
     #  { "slug": "openwith@darktrojan.net" },
-    #  { "slug": "passwordmaker@emersion.fr" },
     #  { "slug": "ebatesca@ebates.com" },
     #  { "slug": "{50b98f8c-707d-4dd8-86e4-7c0e15745027}", "pname": "StockTrack.ca" },
-    #  { "slug": "izer@camelcamelcamel.com" },
     #  { "slug": "langpack-en-CA@firefox.mozilla.org" },
     #  { "slug": "s3download@statusbar" }
     #]
