@@ -16,8 +16,6 @@ let
 in
   with lib;
 {
-
-home.packages = [ ];
   host = {
     home = {
       applications = {
@@ -35,6 +33,7 @@ home.packages = [ ];
         feishin.enable = true;
         ferdium.service.enable = true;
         file-roller.enable = true;
+        flameshot.enable = true;
         github-client.enable = true;
         ghostty.enable = true;
         gnome-software.enable = true;
@@ -70,20 +69,11 @@ home.packages = [ ];
             };
             mcp-nixos.enable = true;
             memory.enable = true;
-            mqtt = {
-              enable = false;
-              #secretEnv = {
-              #  MQTT_HOST = "mcp/mqtt_host";
-              #  MQTT_PORT = "mcp/mqtt_port";
-              #  MQTT_USERNAME = "mcp/mqtt_username";
-              #  MQTT_PASSWORD = "mcp/mqtt_password";
-              #};
-            };
             playwright.enable = true;
           };
         };
         meld.enable = true;
-        mqtt-explorer.enable = true;
+        mqtt-explorer.enable = false;
         neovim.enable = true;
         nix-development_tools.enable = true;
         networkmanager = {
@@ -149,24 +139,6 @@ home.packages = [ ];
     };
   };
 
-programs.opencode.web = {
-  enable = true;
-  extraArgs = [
-    "--hostname"
-    "0.0.0.0"
-    "--port"
-    "4096"
-    "--mdns"
-    "--cors"
-    "https://example.com"
-    "--cors"
-    "http://localhost:3000"
-    "--print-logs"
-    "--log-level"
-    "DEBUG"
- ];
- #environmentFile = "";
-};
 
 #  host.home.applications.shikane.settings = {
 #    profile = [
