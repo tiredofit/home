@@ -30,16 +30,13 @@ let
     ## F.B Purity - Cleans up Facebook extension 36.8.0.0 true fbpElectroWebExt@fbpurity.com
     ## Hard Refresh Button extension 1.0.0 true {b6da57d3-9727-4bc0-b974-d13e7c004af0}
     ## Open With extension 7.2.6 true openggwith@darktrojan.net
-    ### Rakuten Canada Button extension 7.8.1 true ebatesca@ebates.com
     ## StockTrack.ca plugin extension 0.2.4 true {50b98f8c-707d-4dd8-86e4-7c0e15745027}
-    ### The Camelizer extension 3.0.15 true izer@camelcamelcamel.com
     ## Language: English (CA) locale 114.0.20230608.214645 false langpack-en-CA@firefox.mozilla.org
     # firefox-addons.json | mozilla-addons-to-nix firefox-addons.json output.json
     #[
     #  { "slug": "en-CA@dictionaries.addons.mozilla.org" },
     #  { "slug": "{b6da57d3-9727-4bc0-b974-d13e7c004af0}", "pname": "Hard Refresh Button" }
     #  { "slug": "openwith@darktrojan.net" },
-    #  { "slug": "ebatesca@ebates.com" },
     #  { "slug": "{50b98f8c-707d-4dd8-86e4-7c0e15745027}", "pname": "StockTrack.ca" },
     #  { "slug": "langpack-en-CA@firefox.mozilla.org" },
     #  { "slug": "s3download@statusbar" }
@@ -277,10 +274,6 @@ in
     host.home.applications.floorp.defaultSettings.enable = mkDefault true;
 
     programs.firefox = mkIf config.host.home.applications.firefox.enable {
-      #nativeMessagingHosts = with pkgs; [
-      #  pkgs.unstable.firefoxpwa
-      #];
-
       profiles.default = {
         extensions.packages = extensions;
         search = {
