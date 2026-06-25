@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   displayServer = config.host.home.feature.gui.displayServer ;
   windowManager = config.host.home.feature.gui.windowManager ;
@@ -11,6 +11,9 @@ with lib;
         input = {
           keyboard = {
             numlock = mkDefault true;
+          };
+          focus-follows-mouse = { 
+            max-scroll-amount= "0%"; 
           };
           touchpad = {
             tap = mkDefault true;
