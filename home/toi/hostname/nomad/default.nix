@@ -88,6 +88,7 @@ in
         playwright.enable = true;
         python.enable = true;
         pwvucontrol.enable = true;
+        satty.enable = false;
         shellcheck.enable = true;
         shikane.enable = false;
         shfmt.enable = true;
