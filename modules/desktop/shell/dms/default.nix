@@ -114,7 +114,7 @@ with lib;
       settings = {
         ## Application Launchers
         bind = [
-          { _args = ["SUPER + D" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call spotlight toggle")'')]; }
+          { _args = ["SUPER + D" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call spotlight-bar toggle")'')]; }
           { _args = ["SUPER + V" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call clipboard toggle")'')]; }
           { _args = ["SUPER + comma" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call settings focusOrToggle")'')]; }
           { _args = ["SUPER + N" (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("dms ipc call notifications toggle")'')]; }
