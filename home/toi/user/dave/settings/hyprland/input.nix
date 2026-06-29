@@ -13,10 +13,10 @@ with lib;
             follow_mouse = 1; # 0=disabled 1=autofocus 2=sloppy 3=seperated
             kb_layout = "us";
             kb_model = "";
-            kb_options = "";
+            #kb_options = "caps:swapescape";
             kb_rules = "";
             kb_variant = "";
-            mouse_refocus= false;
+            mouse_refocus = false;
             numlock_by_default = true;
             repeat_delay = 200;
             repeat_rate = 40;
