@@ -5,7 +5,7 @@ let
   flags = [
     "--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer"
     "--ozone-platform=wayland"
-    "--enable-smooth-scrolling"
+    #"--enable-smooth-scrolling"
   ];
   ferdium-wrapped = pkgs.writeShellScriptBin "ferdium" ''
     exec ${pkgs.unstable.ferdium}/bin/ferdium ${builtins.toString flags} "$@"
@@ -70,8 +70,12 @@ in
         window_rule = [
           {
             workspace = "3";
+            #border_size = 0;
+            no_blur = true;
+            no_anim = true;
+            tile = true;
             match = {
-              class = "(^Ferdium)$";
+              class = "(^ferdium)$";
             };
           }
         ];
