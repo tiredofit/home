@@ -1,7 +1,10 @@
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, options, ...}:
 
 let
   cfg = config.host.home.applications.fzf;
+
+  ## 26.11
+  hasNewWidget = options ? programs.fzf.fileWidget.options;
 in
   with lib;
 {
@@ -86,10 +89,17 @@ in
           "--height 40%"
           "--border"
         ];
-        fileWidgetOptions = [
+        ## 26.11
+        fileWidgetOptions = mkIf (!hasNewWidget) [
           "--preview 'head {}'"
         ];
-        historyWidgetOptions = [
+        historyWidgetOptions = mkIf (!hasNewWidget) [
+          "--sort"
+        ];
+        fileWidget.options = mkIf hasNewWidget [
+          "--preview 'head {}'"
+        ];
+        historyWidget.options = mkIf hasNewWidget [
           "--sort"
         ];
       };
