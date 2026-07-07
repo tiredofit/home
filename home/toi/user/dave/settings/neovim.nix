@@ -122,6 +122,7 @@ with lib;
 
       extraPackages = with pkgs; [
         fzf                                      # fuzzy finder (fzf-lua)
+      ] ++ optionals cfg.formatters [
         stylua                                   # Lua formatter (conform)
       ];
 
@@ -170,7 +171,7 @@ with lib;
 
         # Save / Quit
         { key = "<leader>w";  mode = [ "n" ]; action = "<cmd>w<cr>";                          options = { desc = "Save"; }; }
-        { key = "<C-s>";      mode = [ "i" "x" "n" "s" ]; action = "<cmd>w<cr><esc>";        options = { desc = "Save File"; }; }
+        { key = "<C-s>";      mode = [ "i" "x" "n" "s" ]; action = "<cmd>w<cr><esc>";         options = { desc = "Save File"; }; }
         { key = "<leader>q";  mode = [ "n" ]; action = "<cmd>q<cr>";                          options = { desc = "Quit"; }; }
         { key = "<leader>qq"; mode = [ "n" ]; action = "<cmd>qa<cr>";                         options = { desc = "Quit All"; }; }
 
@@ -191,25 +192,25 @@ with lib;
         { key = ">"; mode = [ "x" ]; action = ">gv";                                          options = { desc = "Indent Right"; }; }
 
         # Commenting — add comment below/above
-        { key = "gco"; mode = [ "n" ]; action = "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";  options = { desc = "Add Comment Below"; }; }
-        { key = "gcO"; mode = [ "n" ]; action = "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";  options = { desc = "Add Comment Above"; }; }
+        { key = "gco"; mode = [ "n" ]; action = "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";   options = { desc = "Add Comment Below"; }; }
+        { key = "gcO"; mode = [ "n" ]; action = "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>";   options = { desc = "Add Comment Above"; }; }
 
         # File browser (yazi)
         { key = "<leader>e";  mode = [ "n" ]; action = "<cmd>Yazi<cr>";                       options = { desc = "File Browser"; }; }
 
         # Find / pick (fzf-lua)
-        { key = "<leader>ff"; mode = [ "n" ]; action = "<cmd>FzfLua files<CR>";                  options = { desc = "Find Files"; }; }
-        { key = "<leader>fg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";              options = { desc = "Find Text (Grep)"; }; }
-        { key = "<leader>fb"; mode = [ "n" ]; action = "<cmd>FzfLua buffers<CR>";                options = { desc = "Find Buffers"; }; }
-        { key = "<leader>fr"; mode = [ "n" ]; action = "<cmd>FzfLua oldfiles<CR>";               options = { desc = "Recent Files"; }; }
-        { key = "<leader>sg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";              options = { desc = "Grep"; }; }
-        { key = "<leader>sw"; mode = [ "n" "x" ]; action = "<cmd>FzfLua grep_visual<CR>";        options = { desc = "Grep Word"; }; }
-        { key = "<leader>sb"; mode = [ "n" ]; action = "<cmd>FzfLua lines<CR>";                  options = { desc = "Buffer Lines"; }; }
-        { key = "<leader>gs"; mode = [ "n" ]; action = "<cmd>FzfLua git_status<CR>";             options = { desc = "Git Status"; }; }
-        { key = "<leader>sh"; mode = [ "n" ]; action = "<cmd>FzfLua help_tags<CR>";              options = { desc = "Help Pages"; }; }
+        { key = "<leader>ff"; mode = [ "n" ]; action = "<cmd>FzfLua files<CR>";               options = { desc = "Find Files"; }; }
+        { key = "<leader>fg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";           options = { desc = "Find Text (Grep)"; }; }
+        { key = "<leader>fb"; mode = [ "n" ]; action = "<cmd>FzfLua buffers<CR>";             options = { desc = "Find Buffers"; }; }
+        { key = "<leader>fr"; mode = [ "n" ]; action = "<cmd>FzfLua oldfiles<CR>";            options = { desc = "Recent Files"; }; }
+        { key = "<leader>sg"; mode = [ "n" ]; action = "<cmd>FzfLua live_grep<CR>";           options = { desc = "Grep"; }; }
+        { key = "<leader>sw"; mode = [ "n" "x" ]; action = "<cmd>FzfLua grep_visual<CR>";     options = { desc = "Grep Word"; }; }
+        { key = "<leader>sb"; mode = [ "n" ]; action = "<cmd>FzfLua lines<CR>";               options = { desc = "Buffer Lines"; }; }
+        { key = "<leader>gs"; mode = [ "n" ]; action = "<cmd>FzfLua git_status<CR>";          options = { desc = "Git Status"; }; }
+        { key = "<leader>sh"; mode = [ "n" ]; action = "<cmd>FzfLua help_tags<CR>";           options = { desc = "Help Pages"; }; }
 
         # Dashboard
-        { key = "<leader>fd"; mode = [ "n" ]; action = "<cmd>lua Snacks.dashboard()<cr>";          options = { desc = "Dashboard"; }; }
+        { key = "<leader>fd"; mode = [ "n" ]; action = "<cmd>lua Snacks.dashboard()<cr>";     options = { desc = "Dashboard"; }; }
 
         # New file
         { key = "<leader>fn"; mode = [ "n" ]; action = "<cmd>enew<cr>";                       options = { desc = "New File"; }; }
@@ -550,22 +551,22 @@ with lib;
           enable = true;
           inlayHints = true;
           servers = {
-            nil_ls.enable = true;                            # Nix
+            nil_ls.enable = cfg.lsp.nix;                           # Nix
             lua_ls = {
-              enable = true;
+              enable = cfg.lsp.lua;
               settings.Lua = {
                 runtime.version = "LuaJIT";
                 diagnostics.globals = [ "vim" ];
                 workspace.checkThirdParty = false;
               };
             };
-            ts_ls.enable = true;                             # TypeScript / JavaScript
-            marksman.enable = true;                          # Markdown
-            pyright.enable = true;                           # Python
-            gopls.enable = true;                             # Go
-            jsonls.enable = true;                            # JSON
-            yamlls = {                                       # YAML w/ schema validation
-              enable = true;
+            ts_ls.enable = cfg.lsp.typescript;                          # TypeScript / JavaScript
+            marksman.enable = cfg.lsp.markdown;                         # Markdown
+            pyright.enable = cfg.lsp.python;                            # Python
+            gopls.enable = cfg.lsp.go;                                  # Go
+            jsonls.enable = cfg.lsp.json;                               # JSON
+            yamlls = {                                                  # YAML w/ schema validation
+              enable = cfg.lsp.yaml;
               extraOptions.settings.yaml = {
                 schemas = {
                   "http://json.schemastore.org/github-workflow" = ".github/workflows/*";
@@ -575,17 +576,17 @@ with lib;
                 };
               };
             };
-            sqls.enable = true;                              # SQL
-            superhtml.enable = true;                         # HTML
-            bashls.enable = true;                            # Bash
-            docker_compose_language_service.enable = true;   # Docker Compose
-            docker_language_server.enable = true;            # Docker Language Server
-            dockerls.enable = true;                          # Docker
-            dotls.enable = true;                             # .NET
-            html.enable = true;                              # HTML
-            jqls.enable = true;                              # jq queries
-            phpactor.enable = true;                          # PHP
-            tailwindcss.enable = true;                       # Tailwind CSS
+            sqls.enable = cfg.lsp.sql;                                  # SQL
+            superhtml.enable = cfg.lsp.html;                            # HTML
+            bashls.enable = cfg.lsp.bash;                               # Bash
+            docker_compose_language_service.enable = cfg.lsp.docker;    # Docker Compose
+            docker_language_server.enable = cfg.lsp.docker;             # Docker Language Server
+            dockerls.enable = cfg.lsp.docker;                           # Docker
+            dotls.enable = cfg.lsp.dotnet;                              # .NET
+            html.enable = cfg.lsp.html;                                 # HTML
+            jqls.enable = cfg.lsp.jq;                                   # jq queries
+            phpactor.enable = cfg.lsp.phpactor;                         # PHP
+            tailwindcss.enable = cfg.lsp.tailwind;                      # Tailwind CSS
           };
         };
         lualine = {                                          # statusline
@@ -624,7 +625,7 @@ with lib;
             };
           };
         };
-        neoscroll.enable = false;                             # smooth scrolling
+        neoscroll.enable = false;                            # smooth scrolling
         nix-develop = {                                      # nix develop shell integration
           enable = true;
           autoLoad = true;
@@ -752,7 +753,7 @@ with lib;
         treesitter-context.enable = true;                    # sticky function/class header
         treesitter = {                                       # syntax highlighting & parsing
           enable = true;
-          nixGrammars = true;
+          nixGrammars = cfg.treesitter.nixGrammars;
           settings = {
             highlight.enable = true;
             indent.enable = true;
