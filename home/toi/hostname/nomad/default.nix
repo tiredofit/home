@@ -45,17 +45,6 @@ in
           enable = true;
           secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;
           servers = {
-            context7.enable = true;
-            everything.enable = true;
-            fetch.enable = true;
-            filesystem = {
-              enable = true;
-              args = [ "/home/dave/src/" ];
-            };
-            git = {
-              enable = true;
-              args = [ "--repository" "/home/dave/src/nfra/" ];
-            };
             github = {
               enable = true;
               secretEnv = { GITHUB_PERSONAL_ACCESS_TOKEN = "mcp/github_token"; };
@@ -106,7 +95,7 @@ in
         yq.enable = true;
         yt-dlp.enable = true;
         zellij.enable = false;
-        zoom.enable = true;
+        zoom.enable = false;
         zsh.enable = true;
       };
       feature = {
