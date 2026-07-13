@@ -24,6 +24,27 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       flameshot
+      jq
+      (pkgs.writeShellScriptBin "flameshot-active-monitor" ''
+        set -euo pipefail
+
+        pkill -f "flameshot screen" 2>/dev/null || true
+
+        target="''${1:-}"
+        monitors_json=$(hyprctl monitors -j)
+
+        if [ -z "$target" ]; then
+          target=$(echo "$monitors_json" | ${pkgs.jq}/bin/jq -r '
+            .[] | select(.focused == true) | .name
+          ')
+        fi
+
+        idx=$(echo "$monitors_json" | ${pkgs.jq}/bin/jq -r --arg t "$target" '
+          [.[].name] | index($t) // 0
+        ')
+
+        exec flameshot screen --number "$idx" --edit
+      '')
     ];
 
     services.flameshot = mkIf cfg.service.enable {
@@ -39,8 +60,8 @@ in
               (lib.generators.mkLuaInline ''
                 function()
                   local mon = hl.get_active_monitor()
-                  local n = mon and mon.id or 0
-                  hl.exec_cmd("flameshot screen --number " .. n .. " --edit")
+                  local name = mon and mon.name or ""
+                  hl.exec_cmd("exec flameshot-active-monitor " .. name)
                 end
               '')
             ];
@@ -50,8 +71,8 @@ in
               "SUPER + SHIFT + S" (lib.generators.mkLuaInline ''
                 function()
                   local mon = hl.get_active_monitor()
-                  local n = mon and mon.id or 0
-                  hl.exec_cmd("flameshot screen --number " .. n .. " --edit")
+                  local name = mon and mon.name or ""
+                  hl.exec_cmd("exec flameshot-active-monitor " .. name)
                 end
               '')
             ];
@@ -63,23 +84,25 @@ in
               class = "^(flameshot)$";
             };
             no_anim = true;
+            no_dim = true;
             pin = true;
             float = true;
             decorate = false;
             no_blur = true;
             no_shadow = true;
+            stay_focused = true;
           }
           {
             match = {
-              class = "^(flameshot)$";
-              title = "^flameshot$";
+              class = "flameshot";
+              title = "flameshot";
             };
             move = "0 0";
           }
           {
             match = {
-              class = "^(flameshot)$";
-              title = "^flameshot-pin$";
+              class = "flameshot";
+              title = "flameshot-pin";
             };
             move = "cursor_x-(window_w*0.5) cursor_y-(window_h*0.5)";
           }
@@ -103,7 +126,6 @@ in
       showSidePanelButton=false
       showStartupLaunchMessage=false
       squareMagnifier=false
-      uiColor=#e60007
       uiColor=#ff1a1e
       uiLanguage=en
     '';
