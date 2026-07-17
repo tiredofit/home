@@ -21,6 +21,7 @@ in
       applications = {
         act.enable = false;
         android-studio.enable = false;
+        beets.enable = true;
         calibre.enable = false;
         chromium.enable = true;
         cryfs.enable = true;
