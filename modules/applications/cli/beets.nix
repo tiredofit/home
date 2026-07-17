@@ -55,6 +55,10 @@ let
       };
     in
     customPython.pkgs.toPythonApplication customPython.pkgs.beets;
+
+  companionPackages =
+    [ pkgs.ffmpeg ]
+    ++ lib.optionals cfg.plugins.ytimport [ pkgs.yt-dlp ];
 in
 with lib;
 {
@@ -118,7 +122,7 @@ with lib;
       packages = with pkgs;
         [
           beetsPluginPkg
-        ];
+        ] ++ companionPackages;
     };
   };
 }
