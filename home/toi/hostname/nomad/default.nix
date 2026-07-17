@@ -20,14 +20,9 @@ in
     home = {
       applications = {
         act.enable = false;
-        android-studio.enable = true;
-        bitwarden-cli.enable = true;
+        android-studio.enable = false;
         calibre.enable = false;
         chromium.enable = true;
-        claude-code = {
-          enable = false;
-          mcp.enable = true;
-        };
         cryfs.enable = true;
         direnv.enable = true;
         feishin.enable = true;
@@ -43,19 +38,7 @@ in
         lazygit.enable = true;
         mcp-servers = {
           enable = true;
-          secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;
           servers = {
-            github = {
-              enable = true;
-              secretEnv = { GITHUB_PERSONAL_ACCESS_TOKEN = "mcp/github_token"; };
-            };
-            homeassistant = {
-              enable = false;
-              secretEnv = {
-                HOMEASSISTANT_URL = "mcp/homeassistant_url";
-                HOMEASSISTANT_TOKEN = "mcp/homeassistant_token";
-              };
-            };
             mcp-nixos.enable = true;
             memory.enable = true;
             playwright.enable = true;
@@ -94,15 +77,13 @@ in
         wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
-        zellij.enable = false;
-        zoom.enable = false;
         zsh.enable = true;
       };
       feature = {
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = [ "niri" "hyprland" ];
+          windowManager = [ "cosmic" "niri" "hyprland" ];
           shell = [ "dms" ];
         };
       };
