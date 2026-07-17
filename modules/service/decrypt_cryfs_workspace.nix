@@ -25,7 +25,7 @@ with lib;
            if [ -f "$XDG_RUNTIME_DIR/secrets/cryfs/workspace" ] ; then
              echo "INFO Mounting cryfs 'workspace'"
              ${pkgs.coreutils}/bin/mkdir -p $HOME/Documents/Workspace
-             ${pkgs.coreutils}/bin/cat "$XDG_RUNTIME_DIR/secrets/cryfs/workspace" | ${pkgs.cryfs}/bin/cryfs --create-missing-basedir --create-missing-mountpoint "$HOME/Nextcloud/TOI/.cryfs/Documents" "$HOME/Documents/Workspace" -f
+             ${pkgs.coreutils}/bin/cat "$XDG_RUNTIME_DIR/secrets/cryfs/workspace" | ${pkgs.pkg-cryfs}/bin/cryfs --create-missing-basedir --create-missing-mountpoint "$HOME/Nextcloud/TOI/.cryfs/Documents" "$HOME/Documents/Workspace" -f
            else
              echo "ERROR Can't mount cryfs 'workspace' as 'cryfs_workspace' secret doesn't exist"
            fi
