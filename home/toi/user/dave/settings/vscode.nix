@@ -70,19 +70,19 @@ in
             ms-vscode-remote.remote-containers
 
             ## Editor Helpers
-            shd101wyy.markdown-preview-enhanced         # Better Markdown Preview
-            nickdemayo.vscode-json-editor               # JSON Editor
-            hilleer.yaml-plus-json                      # JSON <> YAML converter
+            #shd101wyy.markdown-preview-enhanced         # Better Markdown Preview
+            #nickdemayo.vscode-json-editor               # JSON Editor
+            #hilleer.yaml-plus-json                      # JSON <> YAML converter
             tyriar.sort-lines                           # Sort Lines
             fabiospampinato.vscode-diff                 # Show differences between files
             uyiosa-enabulele.reopenclosedtab            # Reopen last tab
-            jinhyuk.replace-curly-quotes                # Replace all ` with '
+            #jinhyuk.replace-curly-quotes                # Replace all ` with '
             tombonnike.vscode-status-bar-format-toggle  # Toggle formatting with a single click
 
             ## Language Support
             esbenp.prettier-vscode                      # JavaScript TypeScript Flow JSX JSON CSS SCSS Less HTML Vue Angular HANDLEBARS Ember Glimmer GraphQL Markdown YAML
             richie5um2.vscode-sort-json                 # JSON
-            davidanson.vscode-markdownlint              # Markdown
+            #davidanson.vscode-markdownlint              # Markdown
             yzhang.markdown-all-in-one                  # Markdown
 
             ## Remote
@@ -92,7 +92,7 @@ in
 
             ## Syntax Highlighting | File Support | Linting
             evgeniypeshkov.syntax-highlighter           # C++, C, Python, TypeScript, TypeScriptReact, JavaScript, Go, Rust, Php, Ruby, ShellScript, Bash, OCaml, Lua
-            bierner.markdown-mermaid                    # MermaidJS in MarkDown
+            #bierner.markdown-mermaid                    # MermaidJS in MarkDown
             redhat.vscode-yaml                          # YAML
 
             # Theme
@@ -305,7 +305,7 @@ in
 
             ## Git
             "git" = {
-              "autofetch" = true;
+              "autofetch" = false;
               "ignoreLegacyWarning" = true;
               "ignoreMissingGitWarning" = true;
               "openRepositoryInParentFolders" = "never";
@@ -334,7 +334,6 @@ in
               "go"
               "javascript"
               "lua"
-              "ocaml"
               "php"
               "python"
               "ruby"
@@ -373,8 +372,8 @@ in
 
                   ## Editor Helpers
                   "fabiospampinato.vscode-diff"
-                  "rpinski.shebang-snippets"
-                  "shd101wyy.markdown-preview-enhanced"
+                  #"rpinski.shebang-snippets"
+                  #"shd101wyy.markdown-preview-enhanced"
                   "tombonnike.vscode-status-bar-format-toggle"
                   "tyriar.sort-lines"
                   "uyiosa-enabulele.reopenclosedtab"
@@ -384,11 +383,11 @@ in
                   "esbenp.prettier-vscode"
                   "evgeniypeshkov.syntax-highlighter"
                   "hilleer.yaml-plus-json"
-                  "jinhyuk.replace-curly-quotes"
+                  #"jinhyuk.replace-curly-quotes"
                   "nickdemayo.vscode-json-editor"
                   "pinage404.bash-extension-pack"
                   "redhat.vscode-yaml"
-                  "richie5um2.vscode-sort-json"
+                  #"richie5um2.vscode-sort-json"
                   "shakram02.bash-beautify"
                   "yzhang.markdown-all-in-one"
                 ];
@@ -607,7 +606,7 @@ in
           ];
           marketplace = with marketplace; [
             ## Editor Helpers
-            rpinski.shebang-snippets                    # Shebang helpers when typing #!
+            #rpinski.shebang-snippets                    # Shebang helpers when typing #!
 
             ## Syntax Highlighting | File Support | Linting
             dunstontc.vscode-docker-syntax              # DockerFile
@@ -649,6 +648,22 @@ in
           enable = true;
           profiles = {
             default = {
+              extensions = (with pkgs.vscode-extensions;
+                              profileBlocks.global.nixpkgs
+                            )
+                            ++
+                            (with marketplace-release;
+                              profileBlocks.global.marketplace-release
+                            )
+                            ++
+                            (with marketplace;
+                              profileBlocks.global.marketplace
+                            )
+                          ;
+              keybindings = profileBlocks.global.keybindings;
+              userSettings = profileBlocks.global.userSettings;
+            };
+            full = {
               extensions = (with pkgs.vscode-extensions;
                               profileBlocks.global.nixpkgs ++
                               profileBlocks.ai.nixpkgs ++
