@@ -3,6 +3,7 @@
   host = {
     home = {
       applications = {
+        beets.enable = true;
         direnv.enable = true;
         mcp-servers = {
           enable = true;

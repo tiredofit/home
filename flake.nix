@@ -146,19 +146,6 @@
             nixpkgs = nixpkgs-unstable;
           };
 
-          "${gn}@entropy" = HomeConfiguration {
-            extraSpecialArgs = {
-              org = "toi";
-              role = "server";
-              displayName = displayName;
-              hostname = "entropy" ;
-              username = gn;
-              networkInterface = "enp8s0f0np0";
-              inherit inputs;
-            };
-            nixpkgs = nixpkgs-unstable;
-          };
-
           "${gn}@nakulaptop" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
