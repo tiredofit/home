@@ -3,7 +3,10 @@
   host = {
     home = {
       applications = {
-        beets.enable = true;
+        beets = {
+          enable = true;
+          plugins.bandcamp = true;
+        };
         direnv.enable = true;
         mcp-servers = {
           enable = true;

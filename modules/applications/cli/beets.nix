@@ -21,6 +21,10 @@ let
           enable = cfg.plugins.alternatives;
           propagatedBuildInputs = [ pkgs.python3.pkgs.beets-alternatives ];
         };
+        bandcamp = {
+          enable = cfg.plugins.bandcamp;
+          propagatedBuildInputs = [ pkgs.python3.pkgs.beetcamp ];
+        };
         audible = {
           enable = cfg.plugins.audible;
           propagatedBuildInputs = [ pkgs.python3.pkgs.beets-audible ];
@@ -82,6 +86,12 @@ with lib;
           default = false;
           type = with types; bool;
           description = "beets-alternatives: manage external files alongside music";
+        };
+
+        bandcamp = mkOption {
+          default = false;
+          type = with types; bool;
+          description = "beetcamp: Bandcamp autotagger source for beets";
         };
 
         audible = mkOption {
