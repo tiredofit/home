@@ -83,29 +83,29 @@ in
             match = {
               class = "^(flameshot)$";
             };
-            no_anim = true;
-            no_dim = true;
-            pin = true;
-            float = true;
             decorate = false;
+            float = true;
+            no_anim = true;
             no_blur = true;
+            no_dim = true;
             no_shadow = true;
+            pin = true;
             stay_focused = true;
           }
-          {
-            match = {
-              class = "flameshot";
-              title = "flameshot";
-            };
-            move = "0 0";
-          }
-          {
-            match = {
-              class = "flameshot";
-              title = "flameshot-pin";
-            };
-            move = "cursor_x-(window_w*0.5) cursor_y-(window_h*0.5)";
-          }
+          #{
+          #  match = {
+          #    class = "flameshot";
+          #    title = "flameshot";
+          #  };
+          #  move = "0 0";
+          #}
+          #{
+          #  match = {
+          #    class = "flameshot";
+          #    title = "flameshot-pin";
+          #  };
+          #  move = "cursor_x-(window_w*0.5) cursor_y-(window_h*0.5)";
+          #}
         ];
       };
     };
