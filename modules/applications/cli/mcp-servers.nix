@@ -203,6 +203,7 @@ in
         mcp-nixos = { runtime = mkDefault "uvx"; package = mkDefault "mcp-nixos"; };
         memory = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-memory"; };
         mqtt = { runtime = mkDefault "uvx"; package = mkDefault "mqtt-mcp"; };
+        opnsense = { runtime = mkDefault "uvx"; package = mkDefault "opnsense-mcp-server"; secretEnv = mkDefault { OPNSENSE_URL = "mcp/opnsense_url"; OPNSENSE_API_KEY = "mcp/opnsense_api_key"; OPNSENSE_API_SECRET = "mcp/opnsense_api_secret"; OPNSENSE_VERIFY_SSL = "mcp/opnsense_verify_ssl"; OPNSENSE_ALLOW_WRITES = "mcp/opnsense_allow_writes";};};
         n8n = { runtime = mkDefault "npx"; package = mkDefault "n8n-mcp"; secretEnv = mkDefault { N8N_API_URL = "mcp/n8n_url"; N8N_API_KEY = "mcp/n8n_key"; };};
         playwright = { runtime = mkDefault "npx"; package = mkDefault "@playwright/mcp@latest"; };
         sequential-thinking = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-sequential-thinking"; };
