@@ -15,7 +15,7 @@
                 HOMEASSISTANT_TOKEN = "mcp/homeassistant_token";
               };
             };
-            opensense.enable = true;
+            opnsense.enable = true;
             zigbee2mqtt.enable = true;
 
           };
