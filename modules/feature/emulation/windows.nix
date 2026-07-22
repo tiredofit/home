@@ -31,7 +31,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       winetricks
-      wineWowPackages.staging
+      wineWow64Packages.staging
     ];
 
     xdg.mimeApps.defaultApplications = mkIf cfg.defaultApplication.enable (
