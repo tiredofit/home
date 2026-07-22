@@ -39,10 +39,12 @@ in
         lazygit.enable = true;
         mcp-servers = {
           enable = true;
+          secretsFile = ../../user/dave/secrets/mcp/mcp.yaml;
           servers = {
-            mcp-nixos.enable = true;
-            memory.enable = true;
-            playwright.enable = true;
+            mcp-nixos.enable = false;
+            memory.enable = false;
+            playwright.enable = false;
+            opnsense.enable = true;
           };
         };
         meld.enable = true;
@@ -81,6 +83,7 @@ in
         zsh.enable = true;
       };
       feature = {
+        emulation.windows.enable = true;
         gui = {
           enable = true;
           displayServer = "wayland";
