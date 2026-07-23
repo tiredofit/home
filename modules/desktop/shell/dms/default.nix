@@ -86,6 +86,11 @@ with lib;
       };
     };
 
+    # Disable niri config on non-niri hosts
+    xdg.configFile.niri-config-dms = mkIf (!niriActive) {
+      enable = mkForce false;
+    };
+
     # Guard the DMS service: don't start under COSMIC desktop.
     systemd.user.services = {
       dms = {

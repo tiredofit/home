@@ -201,6 +201,19 @@
             };
             nixpkgs = nixpkgs-unstable;
           };
+          "tttttt@pulsar" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "pulsar";
+              username = "tttttt";
+              networkInterface = "null";
+              inherit inputs;
+            };
+            nixpkgs = nixpkgs-unstable;
+          };
+
       };
       inherit home-manager-stable home-manager-unstable;
       inherit (home-manager-stable) packages;
