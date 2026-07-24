@@ -3,32 +3,31 @@ with lib; {
   host = {
     home = {
       applications = {
-        firefox.enable = true;
-        ghostty.enable = true;
-        grim.enable = false;
-        hyprcursor.enable = false;
-        hyprdim.enable = false;
-        hypridle.enable = false;
+        firefox.enable = mkForce true;
+        ghostty.enable = mkForce true;
+        grim.enable = mkForce false;
+        hyprcursor.enable = mkForce false;
+        hyprdim.enable = mkForce false;
+        hypridle.enable = mkForce false;
         hyprlock.enable = mkForce false;
-        hyprpaper.enable = false;
-        hyprpicker.enable = false;
-        hyprsunset.enable = false;
-        kitty.enable = true;
-        nwg-displays.enable = false;
-        playerctl.enable = false;
-        python.enable = true;
-        rofi.enable = true;
-        satty.enable = false;
-        shellcheck.enable = true;
-        shikane.enable = false;
-        slurp.enable = false;
-        sway-notification-center.enable = false;
-        swayosd.enable = false;
-        virt-manager.enable = true;
-        wayprompt.enable = false;
+        hyprpaper.enable = mkForce false;
+        hyprpicker.enable = mkForce false;
+        hyprsunset.enable = mkForce false;
+        nwg-displays.enable = mkForce false;
+        playerctl.enable = mkForce false;
+        python.enable = mkForce true;
+        rofi.enable = mkForce false;
+        satty.enable = mkForce false;
+        shellcheck.enable = mkForce false;
+        shikane.enable = mkForce false;
+        slurp.enable = mkForce false;
+        sway-notification-center.enable = mkForce false;
+        swayosd.enable = mkForce false;
+        virt-manager.enable = mkForce true;
+        wayprompt.enable = mkForce false;
         waybar = {
-          enable = true;
-          service.enable = true;
+          enable = mkForce false;
+          service.enable = mkForce false;
         };
       };
 
@@ -45,4 +44,3 @@ with lib; {
 
   wayland.windowManager.hyprland.xwayland.enable = false;
 }
-
