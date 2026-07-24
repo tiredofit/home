@@ -19,6 +19,7 @@ in
     home.packages = with pkgs; [
       #roboto
       #ubuntu-classic
+      fontconfig
       corefonts
       dejavu_fonts
       font-awesome
@@ -38,6 +39,9 @@ in
     fonts = {
       fontconfig = {
         enable = mkDefault true;
+        antialiasing = mkDefault true;
+        hinting = mkDefault "slight";
+        subpixelRendering = mkDefault "rgb";
         defaultFonts = {
           serif = [
             "Noto Serif NF"
@@ -60,23 +64,6 @@ in
           emoji = [
             "Noto Color Emoji"
           ];
-        };
-        configFile = {
-          embedded-bitmaps = {
-            enable = true;
-            priority = 50;
-            text = ''
-              <?xml version="1.0"?>
-              <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-              <fontconfig>
-                <match target="font">
-                  <edit name="embeddedbitmap" mode="assign">
-                    <bool>true</bool>
-                  </edit>
-                </match>
-              </fontconfig>
-            '';
-          };
         };
       };
     };
