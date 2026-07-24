@@ -9,6 +9,16 @@ in
     home = {
       applications = {
         lazygit.enable = true;
+        mcp-servers = {
+          enable = true;
+          servers = {
+            mcp-nixos.enable = false;
+          };
+        };
+        opencode = {
+          enable = true;
+          mcp.enable = true;
+        };
         ssh = {
           enable = true;
         };
@@ -23,6 +33,7 @@ in
           windowManager = [ "hyprland" ];
           shell = [ "dms" ];
         };
+        theming.enable = true;
       };
       service = {
         vscode-server.enable = true;
