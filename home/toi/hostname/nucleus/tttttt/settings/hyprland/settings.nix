@@ -8,6 +8,14 @@ with lib;
   config = mkIf (config.host.home.feature.gui.isHyprland) {
     wayland.windowManager.hyprland = {
       settings = {
+        config = {
+          ecosystem = {
+            enforce_permissions = false;
+          };
+          misc = {
+            disable_watchdog_warning = true;
+          };
+        };
         on = [{ _args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}virt-manager') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}ghosttyu') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}firefox') end")]; }];
       };
     };
