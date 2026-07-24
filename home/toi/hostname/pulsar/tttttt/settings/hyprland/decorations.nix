@@ -11,7 +11,7 @@ with lib;
         config = {
           general = {
             col = {
-              active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+              active_border = "rgba(33ccffee)";
               inactive_border = "rgba(595959aa)";
             };
             allow_tearing = mkDefault true;
@@ -31,7 +31,6 @@ with lib;
           master = {
             allow_small_split = mkDefault true;
             drop_at_cursor = mkDefault true;
-            inherit_fullscreen = mkDefault true;
             mfact = mkDefault 0.55;
             new_on_top = mkDefault true;
             new_status = mkDefault "master";
