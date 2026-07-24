@@ -5,21 +5,23 @@ let
 
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
     bitwarden
+    #clearurls
     containerise
     copy-selected-links
     copy-selection-as-markdown
-    export-cookies-txt
-    facebook-container
     multi-account-containers
+    localcdn
+    refined-github
     sidebery
     ublock-origin
+    user-agent-string-switcher
   ];
   searchEngines = {
     "Docker Hub" = {
       definedAliases = [ "@dh" ];
       icon = "https://hub.docker.com/favicon.ico";
       name = "Docker Hub";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = [
         { template = "https://hub.docker.com/search";
           params = [
@@ -31,7 +33,7 @@ let
     "GitHub" = {
       definedAliases = [ "@github" "@gh" ];
       icon = "https://github.com/favicon.ico";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = [
         { template = "https://github.com/search";
           params = [
@@ -45,7 +47,7 @@ let
       definedAliases = [ "@ghn" ];
       icon = "https://github.com/favicon.ico";
       name = "Github Nix Code";
-      updateInterval = 24 * 60 * 60 * 1000;
+      updateInterval = 30 * 24 * 60 * 60 * 1000;
       urls = lib.singleton {
         template = "https://github.com/search";
         params = lib.attrsToList {
@@ -78,6 +80,7 @@ let
         };
       };
     };
+
     "Home Manager Options" = {
       definedAliases = [ "@hmo" ];
       icon = nixicon;
@@ -184,16 +187,6 @@ let
               value = "{searchTerms}";
             }
           ];
-        }
-      ];
-    };
-    "Perplexity" = {
-      name = "Perplexity "; # This eats the firefox internal one and allows the alias to work
-      definedAliases = [ "@pp" ];
-      icon = "https://www.perplexity.ai/favicon.ico";
-      updateInterval = 24 * 60 * 60 * 1000;
-      urls = [
-        { template = "https://www.perplexity.ai/?q={searchTerms}";
         }
       ];
     };
