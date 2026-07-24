@@ -21,11 +21,12 @@ in
       applications = {
         act.enable = false;
         android-studio.enable = false;
-        beets.enable = true;
+        blanket.enable = true;
         calibre.enable = false;
         chromium.enable = true;
         cryfs.enable = true;
         direnv.enable = true;
+        docker-compose.enable = true;
         feishin.enable = true;
         ferdium.service.enable = true;
         file-roller.enable = true;
@@ -54,6 +55,10 @@ in
         networkmanager = {
           enable = true;
           systemtray.enable = mkForce false;
+        };
+        nextcloud-client = {
+          enable = mkDefault true;
+          service.enable = mkDefault true;
         };
         obsidian.enable = true;
         opencode = {
