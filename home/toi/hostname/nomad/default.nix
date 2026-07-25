@@ -23,7 +23,6 @@ in
         android-studio.enable = false;
         blanket.enable = true;
         calibre.enable = false;
-        chromium.enable = true;
         cryfs.enable = true;
         direnv.enable = true;
         docker-compose.enable = true;
@@ -32,11 +31,9 @@ in
         file-roller.enable = true;
         flameshot.enable = true;
         github-client.enable = true;
-        ghostty.enable = true;
-        gnome-software.enable = true;
         hadolint.enable = true;
         hyprcursor.enable = true;
-        lazydocker.enable = true;
+        lazydocker.enable = false;
         lazygit.enable = true;
         mcp-servers = {
           enable = true;
@@ -57,8 +54,8 @@ in
           systemtray.enable = mkForce false;
         };
         nextcloud-client = {
-          enable = mkDefault true;
-          service.enable = mkDefault true;
+          enable = true;
+          service.enable = true;
         };
         obsidian.enable = true;
         opencode = {
@@ -67,7 +64,7 @@ in
         };
         playwright.enable = true;
         python.enable = true;
-        pwvucontrol.enable = true;
+        remmina.enable = true;
         satty.enable = false;
         shellcheck.enable = true;
         shikane.enable = false;
@@ -75,6 +72,7 @@ in
         ssh.enable = true;
         steam-run.enable = true;
         szyszka.enable = false;
+        tea.enable = true;
         thunderbird.enable = false;
         virt-manager.enable = true;
         visual-studio-code = {
@@ -82,7 +80,6 @@ in
           defaultApplication.enable = true;
           mcp.enable = true;
         };
-        wps-office.enable = mkForce true;
         yq.enable = true;
         yt-dlp.enable = true;
         zsh.enable = true;
@@ -98,7 +95,6 @@ in
       };
       service = {
         decrypt_cryfs_workspace.enable = true;
-        vscode-server.enable = mkForce false;
       };
       user = {
         dave = {
@@ -118,508 +114,4 @@ in
       };
     };
   };
-
-
-#  host.home.applications.shikane.settings = {
-#    profile = [
-#      {
-#        name = "laptop";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = []
-#          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${laptop_display}\""
-#          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${laptop_display}\""
-#          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${laptop_display}\""
-#          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${laptop_display}\""
-#          ++ [ "sound-tool               \"reset\"" ];
-#      }
-#      {
-#        name = "dock";
-#        output = [
-#          {
-#            enable = false;
-#            search = "${laptop_display}";
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_left}";
-#            mode = "${dock_left_mode}";
-#            position = "${dock_left_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            mode = "${dock_middle_mode}";
-#            position = "${dock_middle_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = []
-#          ++ optional (builtins.elem "hyprland" config.host.home.feature.gui.windowManager) "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          ++ optional config.host.home.applications.hyprlock.enable "displayhelper_hyprlock   \"${dock_middle}\""
-#          ++ optional config.host.home.applications.hyprpaper.enable "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          ++ optional config.host.home.applications.waybar.enable "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          ++ [ "sound-tool               \"disable\"         \"AIR HUB,Jabra SPEAK\"" ];
-#      }
-#      {
-#        name = "laptop (+embedded, -hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\""
-#          "displayhelper_waybar     \"${laptop_display}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          ];
-#      }
-#      {
-#        name = "laptop (+embedded, +hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\""
-#        ];
-#      }
-#      {
-#        name = "laptop (-embedded, +hdmi)";
-#        output = [
-#          {
-#            enable = false;
-#            search = "${laptop_display}";
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            mode = "${laptop_display_mode}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"HDMI-A-1\""
-#          "displayhelper_hyprpaper  \"HDMI-A-1\""
-#          "displayhelper_hyprlock   \"HDMI-A-1\""
-#          "displayhelper_waybar     \"HDMI-A-1\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, -hdmi) + dock (-dp2, -dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_right}\""
-#          "displayhelper_hyprpaper   \"${laptop_display}\" \"${dock_right}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"${dock_right}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-#          "displayhelper_hyprpaper   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_right}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (-embedded, -hdmi) + dock (-dp2, -dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = false;
-#            search = "${laptop_display}";
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${dock_right}\""
-#          "displayhelper_hyprpaper  \"${dock_right}\""
-#          "displayhelper_hyprlock   \"${dock_right}\""
-#          "displayhelper_waybar     \"${dock_right}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (-embedded, +hdmi) + dock (-dp2, -dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = false;
-#            search = "${laptop_display}";
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"HDMI-A-1\" \"${dock_right}\""
-#          "displayhelper_hyprlock   \"HDMI-A-1\""
-#          "displayhelper_hyprpaper  \"HDMI-A-1\" \"${dock_right}\""
-#          "displayhelper_waybar     \"HDMI-A-1\" \"${dock_right}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, -hdmi) + dock (-dp2, +dp1, -hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_middle}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"${dock_middle}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, +hdmi) + dock (-dp2, +dp1, -hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            position = "0,0";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            mode = "${dock_middle_mode}";
-#            position = "${dock_middle_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, +hdmi) + dock (+dp2, -dp1, -hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_left}";
-#            mode = "${dock_left_mode}";
-#            position = "${dock_left_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_left}\""
-#        ];
-#      }
-#      {
-#        name = "laptop (+embedded, +hdmi) + dock (+dp2, +dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "HDMI-A-1";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_left}";
-#            mode = "${dock_left_mode}";
-#            position = "${dock_left_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            mode = "${dock_middle_mode}";
-#            position = "${dock_middle_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"HDMI-A-1\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#        ];
-#      }
-#
-#        #   .-------.       .-------.       .-------.
-#        #   |  LEFT |       |MIDDLE |       | RIGHT |
-#        #   |       |       |       |       |       |
-#        #   |       |       |       |       |       |
-#        #   '-------'       '-------'       '-------'
-#
-#      {
-#        name = "laptop (-embedded, -hdmi) + dock (+dp2, +dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = false;
-#            search = "${laptop_display}";
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_left}";
-#            mode = "${dock_left_mode}";
-#            position = "${dock_left_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            mode = "${dock_middle_mode}";
-#            position = "${dock_middle_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_hyprlock   \"${dock_middle}\""
-#          "displayhelper_hyprpaper  \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_waybar     \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#        ];
-#      }
-#
-#      {
-#        name = "laptop (+embedded, -hdmi) + dock (+dp2, +dp1, +hdmi)";
-#        output = [
-#          {
-#            enable = true;
-#            search = "${laptop_display}";
-#            mode = "${laptop_display_mode}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_left}";
-#            mode = "${dock_left_mode}";
-#            position = "${dock_left_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_middle}";
-#            mode = "${dock_middle_mode}";
-#            position = "${dock_middle_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#          {
-#            enable = true;
-#            search = "${dock_right}";
-#            mode = "${dock_right_mode}";
-#            position = "${dock_right_position}";
-#            scale = 1.0;
-#            transform = "normal";
-#            adaptive_sync = false;
-#          }
-#        ];
-#        exec = [
-#          "displayhelper_hyprland   \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_hyprlock   \"${laptop_display}\""
-#          "displayhelper_hyprpaper  \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#          "displayhelper_waybar     \"${laptop_display}\" \"${dock_middle}\" \"${dock_right}\" \"${dock_left}\""
-#        ];
-#      }
-#    ];
-#  };
 }
