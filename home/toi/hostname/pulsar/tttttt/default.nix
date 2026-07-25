@@ -6,7 +6,7 @@ with lib; {
         firefox.enable = mkForce true;
         ghostty.enable = mkForce true;
         grim.enable = mkForce false;
-        hyprcursor.enable = mkForce false;
+        hyprcursor.enable = mkForce true;
         hyprdim.enable = mkForce false;
         hypridle.enable = mkForce false;
         hyprlock.enable = mkForce false;

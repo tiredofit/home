@@ -16,7 +16,7 @@ with lib;
             disable_watchdog_warning = true;
           };
         };
-        on = [{ _args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('${config.host.home.feature.uwsm.prefix}virt-manager') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}ghosttyu') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}firefox') end")]; }];
+        on = [{ _args = ["hyprland.start" (lib.generators.mkLuaInline "function() hl.exec_cmd('workspace=1,,default:true,persistent:true') hl.exec_cmd('workspace=2,persistent:true') hl.exec_cmd('workspace=3,persistent:true') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}virt-manager') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}ghosttyu') hl.exec_cmd('${config.host.home.feature.uwsm.prefix}firefox') end")]; }];
       };
     };
   };
