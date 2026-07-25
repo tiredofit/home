@@ -146,6 +146,19 @@
             nixpkgs = nixpkgs-unstable;
           };
 
+          "${gn}@lapa" = HomeConfiguration {
+            extraSpecialArgs = {
+              org = "toi";
+              role = "server";
+              displayName = displayName;
+              hostname = "lapa";
+              username = gn;
+              networkInterface = "enp6s18";
+              inherit inputs;
+            };
+            nixpkgs = nixpkgs-unstable;
+          };
+
           "${gn}@nakulaptop" = HomeConfiguration {
             extraSpecialArgs = {
               org = "toi";
