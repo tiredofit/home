@@ -9,16 +9,8 @@ with lib;
       applications = {
         android-tools.enable = mkDefault true;
         blueman.enable = mkDefault false;
-        calibre = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
         chromium.enable = mkDefault true;
         comma.enable = mkDefault true;
-        meld = {
-          enable = mkDefault false;
-          defaultApplication.enable = mkDefault true;
-        };
         easyeffects.enable = mkDefault true;
         ferdium.enable = mkDefault true;
         firefox = {
@@ -26,10 +18,9 @@ with lib;
           defaultApplication.enable = mkDefault true;
         };
         ghostty.enable = mkDefault true;
-        gnome-system-monitor.enable = mkDefault false;
+        gnome-software.enable = mkDefault true;
         gparted.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
-        master-pdf-editor.enable = mkDefault true;
         mate-calc.enable = mkDefault true;
         nemo.enable = mkDefault true;
         pinta.enable = mkDefault true;
@@ -39,12 +30,7 @@ with lib;
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
         };
-        remmina = {
-          enable = mkDefault true;
-          defaultApplication.enable = mkDefault true;
-        };
         seahorse.enable = mkDefault true;
-        tea.enable = mkDefault true;
         vlc = {
           enable = mkDefault true;
           defaultApplication.enable = mkDefault true;
