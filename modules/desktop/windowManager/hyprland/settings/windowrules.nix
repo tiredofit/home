@@ -43,13 +43,6 @@ with lib;
               title = "^(File Operation Progress)$";
             };
           }
-          {
-            suppress_event = "maximize";
-            match = {
-              class = ".*";
-            };
-          }
-
           # Position
           {
             float = true;
