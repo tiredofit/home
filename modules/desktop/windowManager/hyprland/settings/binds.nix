@@ -10,7 +10,7 @@ with lib;
       settings = {
         ### See more in modules/applications/* and modules/desktop/utils/*
         bind = [
-          { _args = ["SUPER + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen_state({ internal = 1 , client = 0, action = "toggle" })'')]; }
+          { _args = ["SUPER + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen_state({ internal = 1 , client = 1, action = "toggle" })'')];}
           { _args = ["SUPER + SHIFT + F" (lib.generators.mkLuaInline ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')]; }
 
           # Pin dispatcher, make window appear above everything else on all windows
