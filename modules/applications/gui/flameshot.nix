@@ -53,6 +53,12 @@ in
 
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
       settings = {
+        permission = [{
+          binary = "${lib.getExe' pkgs.flameshot "flameshot"}";
+          type = "screencopy";
+          mode = "allow";
+        }];
+
         bind = [
           {
             _args = [
