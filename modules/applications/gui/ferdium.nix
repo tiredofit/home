@@ -5,9 +5,9 @@ let
   flags = [
     "--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer"
     "--ozone-platform=wayland"
-    "--disable-renderer-backgrounding"
-    "--disable-background-timer-throttling"
-    "--disable-backgrounding-occluded-windows"
+    #"--disable-renderer-backgrounding"
+    #"--disable-background-timer-throttling"
+    #"--disable-backgrounding-occluded-windows"
   ];
   ferdium-wrapped = pkgs.writeShellScriptBin "ferdium" ''
     exec ${pkgs.unstable.ferdium}/bin/ferdium ${builtins.toString flags} "$@"
