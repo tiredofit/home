@@ -1,6 +1,6 @@
 { config, lib, ... }:
 with lib; {
-  config.host.home.feature.gui.dms.search.config = {
+  config.host.home.feature.gui.shell.dms.search.config = {
     worker_count = mkDefault 8;
     index_paths = [
       {
