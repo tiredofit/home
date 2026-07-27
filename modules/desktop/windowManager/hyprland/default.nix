@@ -39,27 +39,27 @@ if [ -z "''${1}" ]; then exit 1; fi
 case "''${#}" in
     1)
         cat <<EOF > ''${HOME}/.config/hypr/display.lua
-hl.exec_cmd("workspace=1,,default:true,persistent:true")
-hl.exec_cmd("workspace=2,persistent:true")
-hl.exec_cmd("workspace=3,persistent:true")
-hl.exec_cmd("workspace=4,persistent:true")
-hl.exec_cmd("workspace=5,persistent:true")
-hl.exec_cmd("workspace=6,persistent:true")
-hl.exec_cmd("workspace=7,persistent:true")
-hl.exec_cmd("workspace=8,persistent:true")
-hl.exec_cmd("workspace=9,persistent:true")
+hl.workspace_rule({workspace="1",default=true,persistent=true})
+hl.workspace_rule({workspace="2",persistent=true})
+hl.workspace_rule({workspace="3",persistent=true})
+hl.workspace_rule({workspace="4",persistent=true})
+hl.workspace_rule({workspace="5",persistent=true})
+hl.workspace_rule({workspace="6",persistent=true})
+hl.workspace_rule({workspace="7",persistent=true})
+hl.workspace_rule({workspace="8",persistent=true})
+hl.workspace_rule({workspace="9",persistent=true})
 EOF
     ;;
     2)
         _monitor1=$(_get_display_name "''${1}")
         _monitor2=$(_get_display_name "''${2}")
         cat <<EOF > ''${HOME}/.config/hypr/display.lua
-hl.exec_cmd("workspace=2,monitor:$_monitor1,,default:true,persistent:true")
-hl.exec_cmd("workspace=5,monitor:$_monitor1,persistent:true")
-hl.exec_cmd("workspace=8,monitor:$_monitor1,persistent:true")
-hl.exec_cmd("workspace=3,monitor:$_monitor2,,default:true,persistent:true")
-hl.exec_cmd("workspace=6,monitor:$_monitor2,persistent:true")
-hl.exec_cmd("workspace=9,monitor:$_monitor2,persistent:true")
+hl.workspace_rule({workspace="2",monitor="$_monitor1",default=true,persistent=true})
+hl.workspace_rule({workspace="5",monitor="$_monitor1",persistent=true})
+hl.workspace_rule({workspace="8",monitor="$_monitor1",persistent=true})
+hl.workspace_rule({workspace="3",monitor="$_monitor2",default=true,persistent=true})
+hl.workspace_rule({workspace="6",monitor="$_monitor2",persistent=true})
+hl.workspace_rule({workspace="9",monitor="$_monitor2",persistent=true})
 EOF
     ;;
     3 | *)
@@ -67,15 +67,15 @@ EOF
         _monitor2=$(_get_display_name "''${2}")
         _monitor3=$(_get_display_name "''${3}")
         cat <<EOF > ''${HOME}/.config/hypr/display.lua
-hl.exec_cmd("workspace=2,monitor:$_monitor1,,default:true,persistent:true")
-hl.exec_cmd("workspace=5,monitor:$_monitor1,persistent:true")
-hl.exec_cmd("workspace=8,monitor:$_monitor1,persistent:true")
-hl.exec_cmd("workspace=3,monitor:$_monitor2,,default:true,persistent:true")
-hl.exec_cmd("workspace=6,monitor:$_monitor2,persistent:true")
-hl.exec_cmd("workspace=9,monitor:$_monitor2,persistent:true")
-hl.exec_cmd("workspace=1,monitor:$_monitor3,,default:true,persistent:true")
-hl.exec_cmd("workspace=4,monitor:$_monitor3,persistent:true")
-hl.exec_cmd("workspace=7,monitor:$_monitor3,persistent:true")
+hl.workspace_rule({workspace="2",monitor="$_monitor1",default=true,persistent=true})
+hl.workspace_rule({workspace="5",monitor="$_monitor1",persistent=true})
+hl.workspace_rule({workspace="8",monitor="$_monitor1",persistent=true})
+hl.workspace_rule({workspace="3",monitor="$_monitor2",default=true,persistent=true})
+hl.workspace_rule({workspace="6",monitor="$_monitor2",persistent=true})
+hl.workspace_rule({workspace="9",monitor="$_monitor2",persistent=true})
+hl.workspace_rule({workspace="1",monitor="$_monitor3",default=true,persistent=true})
+hl.workspace_rule({workspace="4",monitor="$_monitor3",persistent=true})
+hl.workspace_rule({workspace="7",monitor="$_monitor3",persistent=true})
 EOF
     ;;
 esac
