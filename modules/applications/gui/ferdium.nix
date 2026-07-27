@@ -3,8 +3,11 @@
 let
   cfg = config.host.home.applications.ferdium;
   flags = [
-    "--enable-features=UseOzonePlatform"
+    "--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer"
     "--ozone-platform=wayland"
+    "--disable-renderer-backgrounding"
+    "--disable-background-timer-throttling"
+    "--disable-backgrounding-occluded-windows"
   ];
   ferdium-wrapped = pkgs.writeShellScriptBin "ferdium" ''
     exec ${pkgs.unstable.ferdium}/bin/ferdium ${builtins.toString flags} "$@"
@@ -69,9 +72,6 @@ in
         window_rule = [
           {
             workspace = "3";
-            no_blur = true;
-            no_anim = true;
-            suppress_event = "fullscreen maximize";
             match = {
               class = "(^ferdium)$";
             };
