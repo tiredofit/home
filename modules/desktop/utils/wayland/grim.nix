@@ -22,5 +22,13 @@ in
           grim
         ];
     };
+
+    wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
+      settings.permission = [{
+        binary = "${lib.getExe' pkgs.grim "grim"}";
+        type = "screencopy";
+        mode = "allow";
+      }];
+    };
   };
 }
