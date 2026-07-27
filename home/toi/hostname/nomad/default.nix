@@ -75,6 +75,7 @@ in
         tea.enable = true;
         thunderbird.enable = false;
         virt-manager.enable = true;
+        volatile-migrate.enable = true;
         visual-studio-code = {
           enable = true;
           defaultApplication.enable = true;
@@ -89,7 +90,7 @@ in
         gui = {
           enable = true;
           displayServer = "wayland";
-          windowManager = [ "cosmic" "niri" "hyprland" ];
+          windowManager = [ "hyprland" ];
           shell.enable = [ "dms" ];
         };
       };
