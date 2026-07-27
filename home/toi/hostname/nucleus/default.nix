@@ -31,7 +31,7 @@ in
           enable = true;
           displayServer = "wayland";
           windowManager = [ "hyprland" ];
-          shell = [ "dms" ];
+          shell.enable = [ "dms" ];
         };
         theming.enable = true;
       };
