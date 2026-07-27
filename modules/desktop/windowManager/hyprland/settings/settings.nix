@@ -25,6 +25,11 @@ with lib;
             middle_click_paste = mkDefault true;
           };
         };
+        permission = [{
+          binary = "${pkgs.xdg-desktop-portal-hyprland}/libexec/xdg-desktop-portal-hyprland";
+          type = "screencopy";
+          mode = "allow";
+        }];
       };
     };
   };
