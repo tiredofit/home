@@ -1,10 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 let
-  shell = config.host.home.feature.gui.shell;
   windowManager = config.host.home.feature.gui.windowManager;
-  displayServer = config.host.home.feature.gui.displayServer;
   niriActive = builtins.elem "niri" windowManager;
-  hyprlandActive = builtins.elem "hyprland" windowManager;
   dmsCfg = config.host.home.feature.gui.shell.dms;
 in
 with lib;

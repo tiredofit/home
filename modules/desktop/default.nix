@@ -38,16 +38,24 @@ with lib;
       };
 
       shell = mkOption {
-        type = types.listOf (types.enum ["dms"]);
-        default = [];
-        description = "List of desktop shells to layer on top of the window manager";
+        type = types.submodule {
+          options = {
+            enable = mkOption {
+              type = types.listOf (types.enum ["dms"]);
+              default = [];
+              description = "List of desktop shells to layer on top of the window manager";
+            };
+          };
+        };
+        default = { };
+        description = "Desktop shell options";
       };
 
       isDms = mkOption {
         readOnly = true;
         default = config.host.home.feature.gui.enable
           && config.host.home.feature.gui.displayServer == "wayland"
-          && builtins.elem "dms" config.host.home.feature.gui.shell;
+          && builtins.elem "dms" config.host.home.feature.gui.shell.enable;
         type = types.bool;
         description = "Whether DMS is the active desktop shell";
       };

@@ -1,0 +1,4 @@
+{ lib, ... }:
+with lib; {
+  config = { };
+}
