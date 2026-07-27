@@ -90,7 +90,7 @@ in
           enable = true;
           displayServer = "wayland";
           windowManager = [ "cosmic" "niri" "hyprland" ];
-          shell = [ "dms" ];
+          shell.enable = [ "dms" ];
         };
       };
       service = {
