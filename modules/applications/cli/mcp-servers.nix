@@ -216,7 +216,12 @@ in
         n8n = { runtime = mkDefault "npx"; package = mkDefault "n8n-mcp"; secretEnv = mkDefault { N8N_API_URL = "mcp/n8n_url"; N8N_API_KEY = "mcp/n8n_key"; };};
         playwright = { runtime = mkDefault "npx"; package = mkDefault "@playwright/mcp@latest"; };
         sequential-thinking = { runtime = mkDefault "npx"; package = mkDefault "@modelcontextprotocol/server-sequential-thinking"; };
-        zigbee2mqtt = { transport = mkDefault "http"; url = mkDefault "http://127.0.0.1:4747/mcp"; };
+        zigbee2mqtt = {
+          runtime = mkDefault "bin";
+          package = mkDefault "${pkgs.bash}/bin/bash";
+          args = mkDefault [ "-c" "exec /run/current-system/sw/bin/docker exec -i \"$Z2M_CONTAINER\" start-mcp" ];
+          secretEnv = mkDefault { Z2M_CONTAINER = "mcp/zigbee2mqtt_container"; };
+        };
       };
     };
 
