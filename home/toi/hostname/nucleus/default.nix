@@ -11,8 +11,10 @@ in
         lazygit.enable = true;
         mcp-servers = {
           enable = true;
+          secretsFile = ./tttttt/secrets/mcp/mcp.yaml;
           servers = {
             mcp-nixos.enable = false;
+            opnsense.enable = true;
           };
         };
         opencode = {
