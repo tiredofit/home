@@ -37,13 +37,13 @@ in
 
     src = sources.${stdenv.hostPlatform.system} or (throw "unsupported system: ${stdenv.hostPlatform.system}");
 
-    dontUnpack = stdenv.isDarwin;
+    dontUnpack = stdenv.hostPlatform.isDarwin;
     unpackPhase = ''
       mkdir -p $out
       tar xJvf ${finalAttrs.src} -C $out
     '';
 
-    nativeBuildInputs = lib.optionals stdenv.isLinux [
+    nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [
       alsa-lib
       autoPatchelfHook
       glibc
@@ -53,11 +53,11 @@ in
     ];
     buildInputs = [
       makeWrapper
-    ] ++ lib.optionals stdenv.isDarwin [
+    ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
       undmg
     ];
 
-    buildPhase = if stdenv.isDarwin then ''
+    buildPhase = if stdenv.hostPlatform.isDarwin then ''
       undmg ${finalAttrs.src}
       mkdir -p $out/bin
       cp -r "Zen Browser.app" $out

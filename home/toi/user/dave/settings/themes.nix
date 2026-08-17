@@ -27,8 +27,15 @@ in
           size = mkDefault 24;
         };
         theme = {
-          name = "Tokyonight-Dark";
-          package = pkgs.tokyonight-gtk-theme;
+          name = "Orchis-Dark-Tokyonight";
+          package = pkgs.orchis-theme.overrideAttrs (oldAttrs: {
+            installPhase = ''
+              runHook preInstall
+              mkdir -p $out/share/themes
+              ./install.sh -d $out/share/themes -c dark -t tokyonight
+              runHook postInstall
+            '';
+          });
         };
       })
       # Stylix mode: just add Papirus icons on top (stylix owns everything else)
