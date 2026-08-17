@@ -1,8 +1,29 @@
-{config, inputs, lib, pkgs, specialArgs, ...}:
+{ config, inputs, lib, pkgs, specialArgs, ... }:
 let
   inherit (specialArgs) role username;
   cfg = config.host.home.feature.theming;
   stylixOff = !cfg.stylix.enable;
+
+  tokyonight-gtk = pkgs.stdenvNoCC.mkDerivation {
+    pname = "tokyonight-gtk-theme";
+    version = "unstable-2025";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "Fausto-Korpsvart";
+      repo = "Tokyonight-GTK-Theme";
+      rev = "master";
+      hash = "sha256-7H2n9wTaW8Db1RejWK071ITV1j5KIuzfql0Tx9WT6zM=";
+    };
+
+    dontBuild = true;
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/share/themes
+      cp -r themes/* $out/share/themes/
+      runHook postInstall
+    '';
+  };
 in
   with lib;
 {
@@ -27,15 +48,8 @@ in
           size = mkDefault 24;
         };
         theme = {
-          name = "Orchis-Dark-Tokyonight";
-          package = pkgs.orchis-theme.overrideAttrs (oldAttrs: {
-            installPhase = ''
-              runHook preInstall
-              mkdir -p $out/share/themes
-              ./install.sh -d $out/share/themes -c dark -t tokyonight
-              runHook postInstall
-            '';
-          });
+          name = "Tokyonight-Dark";
+          package = tokyonight-gtk;
         };
       })
       # Stylix mode: just add Papirus icons on top (stylix owns everything else)
@@ -47,7 +61,7 @@ in
       })
     ]);
 
-    programs = mkIf ((role == "workstation" || role == "laptop")) (let
+    programs = mkIf (role == "workstation" || role == "laptop") (let
         sessionVars = mkIf stylixOff {
           GTK2_RC_FILES = mkForce "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
           GTK_THEME = "Tokyonight-Dark";
