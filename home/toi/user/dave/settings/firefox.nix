@@ -375,6 +375,7 @@ in
           "signon.rememberSignons" = false;
           "ui.context_menus.after_mouseup" = true;
           "widget.use-xdg-desktop-portal" = true;
+          identity.fxaccounts.enabled = false; # Send to .. Sync
         };
 
         extraConfig = ''
