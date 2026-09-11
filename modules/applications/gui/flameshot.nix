@@ -51,6 +51,11 @@ in
       enable = true;
     };
 
+    systemd.user.services.flameshot.Service.Environment = [
+      "QT_AUTO_SCREEN_SCALE_FACTOR=0"
+      "QT_ENABLE_HIGHDPI_SCALING=0"
+    ];
+
     wayland.windowManager.hyprland = mkIf (config.host.home.feature.gui.isHyprland) {
       settings = {
         permission = [{
@@ -98,20 +103,13 @@ in
             pin = true;
             stay_focused = true;
           }
-          #{
-          #  match = {
-          #    class = "flameshot";
-          #    title = "flameshot";
-          #  };
-          #  move = "0 0";
-          #}
-          #{
-          #  match = {
-          #    class = "flameshot";
-          #    title = "flameshot-pin";
-          #  };
-          #  move = "cursor_x-(window_w*0.5) cursor_y-(window_h*0.5)";
-          #}
+          {
+            match = {
+              class = "^(flameshot)$";
+              title = "^flameshot-pin$";
+            };
+            move = "cursor_x-(window_w*0.5) cursor_y-(window_h*0.5)";
+          }
         ];
       };
     };
