@@ -90,7 +90,7 @@ with lib;
         };
         reindex_interval_hours = mkOption {
           type = types.int;
-          default = 24;
+          default = 160;
           description = "Interval in hours between reindexes";
         };
         text_extensions = mkOption {
