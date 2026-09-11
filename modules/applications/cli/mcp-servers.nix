@@ -13,12 +13,14 @@ let
         description = "Enable MCP server ${name}";
       };
       runtime = mkOption {
-        type = types.enum [ "npx" "uvx" "bin" ];
-        description = "npx = npm package, uvx = PyPI package, bin = absolute nix store path";
+        type = types.nullOr (types.enum [ "npx" "uvx" "bin" ]);
+        default = null;
+        description = "npx = npm package, uvx = PyPI package, bin = absolute nix store path. Required when transport = 'local'.";
       };
       package = mkOption {
-        type = types.str;
-        description = "PyPI/npm package name, or absolute binary path for bin runtime";
+        type = types.nullOr types.str;
+        default = null;
+        description = "PyPI/npm package name, or absolute binary path for bin runtime. Required when transport = 'local'.";
       };
       args = mkOption {
         type = types.listOf types.str;
@@ -54,7 +56,24 @@ let
       url = mkOption {
         type = types.nullOr types.str;
         default = null;
-        description = "Endpoint URL for http transport (required when transport = 'http')";
+        description = "Endpoint URL for http transport (required when transport = 'http', unless secretUrl is set).  Use secretUrl to keep hostnames out of  public repo.";
+      };
+      secretUrl = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Sops key holding the full endpoint URL (e.g. \"mcp/poznote_url\"). Overrides url when set. Resolved via sops template for opencode, via session env for VSCode.";
+        example = "mcp/mcpserver_url";
+      };
+      headers = mkOption {
+        type = types.attrsOf types.str;
+        default = {};
+        description = "Plain HTTP headers for http transport (e.g. { Authorization = \"Bearer static-token\"; }). Prefer secretHeaders for secrets.";
+      };
+      secretHeaders = mkOption {
+        type = types.attrsOf types.str;
+        default = {};
+        description = "Mapping of header name -> sops secret key holding the FULL header value. Prefix all keys with 'mcp/'/";
+        example = "{ Authorization = \"mcp/mcpserver_auth\"; }";
       };
       secretsFile = mkOption {
         type = types.nullOr types.path;
@@ -120,11 +139,22 @@ in
     # Flat list of { key, sopsFile } for every secret across all enabled servers that have a resolvable file. Used to register sops.secrets entries.
     serverSecretPairs = concatMap (scfg:
       let ef = effectiveSecretsFile scfg;
-      in optionals (ef != null && scfg.secretEnv != {})
+      in optionals (ef != null) (
            (map (key: { inherit key; sopsFile = ef; }) (attrValues scfg.secretEnv))
+        ++ (map (key: { inherit key; sopsFile = ef; }) (attrValues scfg.secretHeaders))
+        ++ (optionals (scfg.secretUrl != null) [{ key = scfg.secretUrl; sopsFile = ef; }])
+      )
     ) (attrValues enabledServers);
 
     useTemplate = hasSops && serverSecretPairs != [];
+
+    effectiveUrlTemplate = scfg:
+      if scfg.secretUrl != null then config.sops.placeholder."${scfg.secretUrl}"
+      else scfg.url;
+
+    effectiveHeadersTemplate = scfg:
+      scfg.headers
+      // mapAttrs (_h: key: config.sops.placeholder."${key}") scfg.secretHeaders;
 
     mkCommandArgs = _name: scfg:
       if scfg.runtime == "uvx" then
@@ -144,7 +174,8 @@ in
 
     mkServerEntry = name: scfg:
       if scfg.transport == "http" then
-        { command = "${pkgs.curl}/bin/curl"; args = [ scfg.url ]; type = "http"; }
+        { type = "http"; url = effectiveUrlTemplate scfg; }
+        // optionalAttrs (effectiveHeadersTemplate scfg != {}) { headers = effectiveHeadersTemplate scfg; }
         // optionalAttrs (!scfg.autoStart) { disabled = true; }
       else let
         ca = mkCommandArgs name scfg;
@@ -162,8 +193,10 @@ in
     mkOpendocServerEntry = name: scfg:
       if scfg.transport == "http" then {
         type = "remote";
-        url = scfg.url;
+        url = effectiveUrlTemplate scfg;
         enabled = scfg.autoStart;
+      } // optionalAttrs (effectiveHeadersTemplate scfg != {}) {
+        headers = effectiveHeadersTemplate scfg;
       } else let
         ca = mkCommandArgs name scfg;
         envAttrs =
@@ -222,15 +255,33 @@ in
           args = mkDefault [ "-c" "exec /run/current-system/sw/bin/docker exec -i \"$Z2M_CONTAINER\" start-mcp" ];
           secretEnv = mkDefault { Z2M_CONTAINER = "mcp/zigbee2mqtt_container"; };
         };
+        poznote = {
+          transport = mkDefault "http";
+          url = mkDefault "http://127.0.0.1:8045/mcp";
+        };
       };
     };
+
+    assertions = concatMap (name: let scfg = cfg.servers.${name}; in optionals scfg.enable [
+      {
+        assertion = scfg.transport != "local" || (scfg.runtime != null && scfg.package != null);
+        message = "mcp-servers.${name}: transport='local' requires runtime and package.";
+      }
+      {
+        assertion = scfg.transport != "http" || (scfg.url != null || scfg.secretUrl != null);
+        message = "mcp-servers.${name}: transport='http' requires url or secretUrl.";
+      }
+      {
+        assertion = (scfg.secretEnv == {} && scfg.secretHeaders == {} && scfg.secretUrl == null) || effectiveSecretsFile scfg != null;
+        message = "mcp-servers.${name}: secrets set but no secretsFile (per-server or global) to resolve them.";
+      }
+    ]) (attrNames (filterAttrs (_: s: s.enable) cfg.servers));
 
     home.packages = with pkgs; [
       uv       # uvx
       nodejs   # npx
     ];
 
-    # Auto-register every sops key referenced across all enabled servers, each against its resolved secrets file (per-server or global).
     sops.secrets = mkIf (hasSops && serverSecretPairs != []) (
       listToAttrs (map
         ({ key, sopsFile }: nameValuePair key { inherit sopsFile; })
