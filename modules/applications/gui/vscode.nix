@@ -17,9 +17,19 @@ let
     then lib.filterAttrs (name: _: builtins.elem name cfg.mcp.servers) enabledByName
     else enabledByName;
 
+  toEnvName = s: lib.toUpper (builtins.replaceStrings [ "-" "/" "." " " ] [ "_" "_" "_" "_" ] s);
+  urlEnvVar = name: "MCP_${toEnvName name}_URL";
+  headerEnvVar = name: header: "MCP_${toEnvName name}_${toEnvName header}";
+
   mkVscodeServer = name: scfg:
     if scfg.transport == "http" then
-      { type = "http"; url = scfg.url; }
+      let
+        url = if scfg.secretUrl != null then "\${env:${urlEnvVar name}}" else scfg.url;
+        headers = scfg.headers
+          // lib.mapAttrs (header: _: "\${env:${headerEnvVar name header}}") scfg.secretHeaders;
+      in
+      { type = "http"; inherit url; }
+      // lib.optionalAttrs (headers != {}) { inherit headers; }
       // lib.optionalAttrs (!scfg.autoStart) { disabled = true; }
     else let
       command = if scfg.runtime == "uvx" then "${pkgs.uv}/bin/uvx"
@@ -37,7 +47,17 @@ let
 
   mcpServers = lib.mapAttrs mkVscodeServer enabledServers;
 
-  allSecretEnv = lib.foldl (acc: scfg: acc // scfg.secretEnv) {} (lib.attrValues enabledServers);
+  httpSecretEnv = lib.foldl (acc: name:
+    let scfg = enabledServers.${name}; in acc
+    // lib.optionalAttrs (scfg.transport == "http" && scfg.secretUrl != null) {
+      ${urlEnvVar name} = scfg.secretUrl;
+    }
+    // lib.mapAttrs' (header: key: lib.nameValuePair (headerEnvVar name header) key)
+      (if scfg.transport == "http" then scfg.secretHeaders else {})
+  ) {} (builtins.attrNames enabledServers);
+
+  allSecretEnv = lib.foldl (acc: scfg: acc // scfg.secretEnv) {} (lib.attrValues enabledServers)
+    // httpSecretEnv;
 
   mcpSessionVars = lib.mapAttrs (envVar: secretKey: "$(cat ${config.sops.secrets.${secretKey}.path})") allSecretEnv;
 in with lib; {
