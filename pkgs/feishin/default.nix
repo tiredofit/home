@@ -8,11 +8,11 @@
 
 let
   pname = "feishin";
-  version = "v1.16.0";
+  version = "v1.17.0";
 
   src = fetchurl {
     url = "https://github.com/jeffvli/feishin/releases/download/${version}/Feishin-linux-x86_64.AppImage";
-    sha256 = "1gm25wf5bibbd2h2p2qybqr4pzkmj3dfs1gwsw204y6635kcr2gh";
+    sha256 = "18aby7aa87fnvfg7za2z2jgazxzf72315dxqsn3ymh8amg0mmk1i";
   };
 
   extracted = appimageTools.extract { inherit pname version src; };
