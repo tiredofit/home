@@ -457,12 +457,12 @@ in
 
         ai = {
           nixpkgs = with pkgs.vscode-extensions; [
-            github.copilot-chat                          # Github CoPilot
+            #github.copilot-chat                          # Github CoPilot
           ];
           marketplace = with marketplace; [
             #anthropic.claude-code                        # Claude Code
-            sst-dev.opencode
-            ltmoerdani.opencode-copilot-chat
+            #sst-dev.opencode
+            #ltmoerdani.opencode-copilot-chat
             #sst-dev.opencode-v2
             #hidenobunagai.nvidia-nim-provider
           ];
