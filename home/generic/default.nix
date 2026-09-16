@@ -12,7 +12,7 @@ let
   email = "${username}@${s}${_p}${_a}${m}${t}${r}${a_}${p_}";
 
   inherit (specialArgs) hostname role;
-  inherit (pkgs.stdenv) isLinux isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isLinux isDarwin;
   homeDir = if isDarwin then "/Users/" else "/home/";
   if-exists = f: builtins.pathExists f;
   existing-imports = imports: builtins.filter if-exists imports;
