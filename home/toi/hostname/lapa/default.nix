@@ -15,6 +15,12 @@
                 HOMEASSISTANT_TOKEN = "mcp/homeassistant_token";
               };
             };
+            poznote = {
+              enable = true;
+              autoStart = true;
+              secretUrl = "mcp/poznote_url";
+              secretHeaders.Authorization = "mcp/poznote_auth";
+            };
             zigbee2mqtt.enable = true;
           };
         };

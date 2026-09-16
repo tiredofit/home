@@ -12,15 +12,22 @@ in
         type = with types; bool;
         description = "Word processor, Spreadsheet, Presentations";
       };
+      package = mkOption {
+        default =
+          if pkgs ? libreoffice-stable
+          then pkgs.libreoffice
+          else pkgs.libreoffice-fresh;
+        type = with types; package;
+        description = "LibreOffice package to install.";
+      };
     };
   };
 
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs;
-        [
-          libreoffice-fresh
-        ];
+      packages = [
+        cfg.package
+      ];
     };
   };
 }
