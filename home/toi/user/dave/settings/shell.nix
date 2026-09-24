@@ -322,6 +322,8 @@ in
       dotDir = "${config.xdg.configHome}/zsh";
       initContent = lib.mkBefore (
         ''
+        HOST=''${HOST%%.*}
+
         autoload -Uz compinit && compinit || true
 
         unsetopt nomatch
