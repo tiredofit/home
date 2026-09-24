@@ -18,6 +18,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    xdg.configFile."systemd/user/app-com.mitchellh.ghostty.service.d/10-silence-logs.conf".text = ''
+      [Service]
+      Environment=GHOSTTY_LOG=false
+    '';
+
     programs = {
       ghostty = {
         enable = true;
