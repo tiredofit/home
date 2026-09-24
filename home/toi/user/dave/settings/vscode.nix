@@ -248,6 +248,8 @@ in
               "zoomLevel" = 1;
             };
 
+            "chat.titleBar.openInAgentsWindow.enabled" = false;
+
             "files" = {
               ## Disable File Operations
               "exclude" = {
