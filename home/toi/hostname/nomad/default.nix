@@ -32,6 +32,7 @@ in
         flameshot.enable = true;
         github-client.enable = true;
         hadolint.enable = true;
+        herdr.enable = true;
         hyprcursor.enable = true;
         lazydocker.enable = false;
         lazygit.enable = true;
@@ -41,9 +42,16 @@ in
           servers = {
             mcp-nixos.enable = false;
             memory.enable = false;
-            playwright.enable = false;
+            playwright.enable = true;
             opnsense.enable = true;
+            poznote = {
+              enable = true;
+              autoStart = true;
+              secretUrl = "mcp/poznote_url";
+              secretHeaders.Authorization = "mcp/poznote_auth";
+            };
           };
+
         };
         meld.enable = true;
         mqtt-explorer.enable = false;
@@ -62,18 +70,19 @@ in
           enable = true;
           mcp.enable = true;
         };
+        opencode2 = {
+          enable = true;
+          mcp.enable = true;
+        };
         playwright.enable = true;
         python.enable = true;
         remmina.enable = true;
-        satty.enable = false;
         shellcheck.enable = true;
-        shikane.enable = false;
         shfmt.enable = true;
         ssh.enable = true;
         steam-run.enable = true;
         szyszka.enable = false;
         tea.enable = true;
-        thunderbird.enable = false;
         virt-manager.enable = true;
         volatile-migrate.enable = true;
         visual-studio-code = {
@@ -96,6 +105,7 @@ in
       };
       service = {
         decrypt_cryfs_workspace.enable = true;
+        #paseo.enable = true;
       };
       user = {
         dave = {
