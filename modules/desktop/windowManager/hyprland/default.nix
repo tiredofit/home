@@ -129,10 +129,10 @@ with lib;
           };
           hyprkeys.enable = mkDefault false;
           playerctl.enable = (! shellOverridesServices);
-          satty.enable = mkDefault true;
+          satty.enable = mkDefault false;
           shikane = {
-            enable = mkDefault true;
-            service.enable = mkDefault true;
+            enable = mkDefault false;
+            service.enable = mkDefault false;
           };
           rofi.enable = (! shellOverridesServices);
           sway-notification-center = {
