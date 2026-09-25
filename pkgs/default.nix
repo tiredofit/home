@@ -4,5 +4,6 @@ pkgs: {
   pkg-cura = pkgs.callPackage ./cura { } ;
   pkg-feishin = pkgs.callPackage ./feishin { } ;
   pkg-mqtt-explorer = pkgs.callPackage ./mqtt-explorer { } ;
+  pkg-opencode2 = pkgs.callPackage ./opencode2 { } ;
   pkg-zenbrowser = pkgs.callPackage ./zenbrowser { } ;
 }
