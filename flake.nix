@@ -41,6 +41,10 @@
     nur = {
       url = "github:nix-community/NUR";
     };
+    paseo = {
+      url = "github:getpaseo/paseo";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -89,7 +93,7 @@
               inputs.comma.overlays.default
               inputs.nur.overlays.default
               inputs.android-sdk.overlays.default
-              inputs.niri.overlays.niri
+              #inputs.niri.overlays.niri
             ] ++ builtins.attrValues localOverlays
           );
           inherit system;
