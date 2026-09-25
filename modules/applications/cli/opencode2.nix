@@ -37,11 +37,26 @@ with lib;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    shellAliases = {
+      oc2 = ''
+        opencode
+      '';
+    };
+  in {
     home.packages = [
       cfg.package
       pkgs.sqlite
     ];
+
+    programs = {
+      bash = {
+        shellAliases = shellAliases;
+      };
+      zsh = {
+        shellAliases = shellAliases;
+      };
+    };
 
     #sops.templates."opencode/config" = mkIf (writeMcp && mcpCfg.output.useTemplate) {
     #  path = "${config.xdg.configHome}/opencode/opencode.jsonc";
@@ -52,5 +67,5 @@ with lib;
     #xdg.configFile."opencode/opencode.jsonc" = mkIf (!(writeMcp && mcpCfg.output.useTemplate)) {
     #  text = contentJson;
     #};
-  };
+  });
 }

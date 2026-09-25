@@ -15,12 +15,26 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    shellAliases = {
+      ld= ''
+        lazydocker
+      '';
+    };
+  in {
     home = {
       packages = with pkgs;
         [
           lazydocker
         ];
     };
-  };
+    programs = {
+      bash = {
+        shellAliases = shellAliases;
+      };
+      zsh = {
+        shellAliases = shellAliases;
+      };
+    };
+  });
 }

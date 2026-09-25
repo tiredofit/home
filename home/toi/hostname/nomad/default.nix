@@ -105,7 +105,7 @@ in
       };
       service = {
         decrypt_cryfs_workspace.enable = true;
-        #paseo.enable = true;
+        paseo.enable = true;
       };
       user = {
         dave = {

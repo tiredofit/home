@@ -15,13 +15,28 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let
+    shellAliases = {
+      lg = ''
+        lazygit
+      '';
+    };
+  in {
     home = {
       packages = with pkgs;
         [
           lazygit
         ];
     };
-    programs.lazygit.enableZshIntegration = mkDefault true;
-  };
+
+    programs = {
+      bash = {
+        shellAliases = shellAliases;
+      };
+      zsh = {
+        shellAliases = shellAliases;
+      };
+      lazygit.enableZshIntegration = mkDefault true;
+    };
+  });
 }
