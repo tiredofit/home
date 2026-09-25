@@ -29,11 +29,19 @@ with lib;
           description = "Write MCP server configuration for opencode";
         };
       };
+      package = mkOption {
+        default = (pkgs.unstable.opencode.override { bun = pkgs.stable.bun; });
+        type = with types; package;
+        description = "opencode package to install";
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ opencode ];
+    home.packages = [
+      cfg.package
+      pkgs.sqlite
+    ];
 
     sops.templates."opencode/config" = mkIf (writeMcp && mcpCfg.output.useTemplate) {
       path = "${config.xdg.configHome}/opencode/opencode.jsonc";
