@@ -376,6 +376,7 @@ in
           "ui.context_menus.after_mouseup" = true;
           "widget.use-xdg-desktop-portal" = true;
           identity.fxaccounts.enabled = false; # Send to .. Sync
+          sidebar.animation.enabled = false;
         };
 
         extraConfig = ''
