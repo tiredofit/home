@@ -30,6 +30,7 @@ in
         ferdium.service.enable = true;
         file-roller.enable = true;
         flameshot.enable = true;
+        floorp.enable = false;
         github-client.enable = true;
         hadolint.enable = true;
         herdr.enable = true;
