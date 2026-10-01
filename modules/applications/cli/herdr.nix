@@ -14,7 +14,9 @@ with lib;
         description = "Agent multiplexer";
       };
       package = mkOption {
-        default = pkgs.unstable.herdr;
+        default = pkgs.unstable.herdr.overrideAttrs (old: {
+          env.RUSTFLAGS = (old.env.RUSTFLAGS or "") + " -C link-arg=-Wl,--no-eh-frame-hdr";
+        });
         type = with types; package;
         description = "Package to install";
       };
