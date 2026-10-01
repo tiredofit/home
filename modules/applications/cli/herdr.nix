@@ -14,9 +14,25 @@ with lib;
         description = "Agent multiplexer";
       };
       package = mkOption {
-        default = pkgs.unstable.herdr.overrideAttrs (old: {
-          env.RUSTFLAGS = (old.env.RUSTFLAGS or "") + " -C link-arg=-Wl,--no-eh-frame-hdr";
-        });
+        default =
+          let
+            version = "0.9.3";
+            src = pkgs.unstable.fetchFromGitHub {
+              owner = "herdrdev";
+              repo = "herdr";
+              tag = "v${version}";
+              hash = "sha256-uu452Xe23pSvFk7w7fKPjiaqY5QenUIljao2SFAxpc0=";
+            };
+          in
+          pkgs.unstable.herdr.overrideAttrs (old: {
+            inherit version src;
+            cargoDeps = pkgs.unstable.rustPlatform.fetchCargoVendor {
+              pname = "herdr";
+              inherit version src;
+              hash = "sha256-+gTWtEheyuI59yf2PqRbcbcFIW+/cYb7zZ2mPv2VN0Y=";
+            };
+            env.RUSTFLAGS = (old.env.RUSTFLAGS or "") + " -C link-arg=-Wl,--no-eh-frame-hdr";
+          });
         type = with types; package;
         description = "Package to install";
       };
