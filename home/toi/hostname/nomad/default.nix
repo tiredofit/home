@@ -71,10 +71,6 @@ in
           enable = true;
           mcp.enable = true;
         };
-        opencode2 = {
-          enable = true;
-          mcp.enable = true;
-        };
         playwright.enable = true;
         python.enable = true;
         remmina.enable = true;
