@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
+  opencode_version = "opencode2";
   cfg = config.host.home.applications.opencode;
   mcpCfg = config.host.home.applications.mcp-servers;
   writeMcp = cfg.enable && cfg.mcp.enable && mcpCfg.enable;
@@ -30,7 +31,7 @@ with lib;
         };
       };
       package = mkOption {
-        default = (pkgs.unstable.opencode.override { bun = pkgs.stable.bun; });
+        default = pkgs."pkg-${opencode_version}";
         type = with types; package;
         description = "opencode package to install";
       };
@@ -39,9 +40,7 @@ with lib;
 
   config = mkIf cfg.enable (let
     shellAliases = {
-      oc = ''
-        opencode
-      '';
+      oc = opencode_version;
     };
   in {
     home.packages = [
