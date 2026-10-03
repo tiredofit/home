@@ -19,6 +19,15 @@ in
     home = {
       applications = {
         git.enable = mkDefault true;
+        git.maintenance.enable = mkDefault true;
+        git.maintenance.repositories = mkDefault [
+          "${config.home.homeDirectory}/src/home"
+          "${config.home.homeDirectory}/src/nixos"
+          "${config.home.homeDirectory}/src/nix-modules"
+        ];
+        git.maintenance.searchPaths = mkDefault [
+          "${config.home.homeDirectory}/src"
+        ];
       };
     };
   };
