@@ -41,7 +41,9 @@ with lib;
   config = mkIf cfg.enable (let
     shellAliases = {
       oc = opencode_version;
+      opencode = opencode_version;
     };
+
   in {
     home.packages = [
       cfg.package
