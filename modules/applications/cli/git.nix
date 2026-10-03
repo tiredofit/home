@@ -12,6 +12,33 @@ in
         type = with types; bool;
         description = "Revision Control Tool";
       };
+      maintenance = {
+        enable = mkOption {
+          default = false;
+          type = with types; bool;
+          description = "Scheduled git maintenance (gc/repack) for repositories.";
+        };
+        repositories = mkOption {
+          default = [ ];
+          type = with types; listOf str;
+          description = "Extra repos to maintain. Missing dirs are skipped at runtime.";
+        };
+        searchPaths = mkOption {
+          default = [ ];
+          type = with types; listOf str;
+          description = "Top level folders to scan for git checkouts. Scanned at runtime and missing dirs skipped.";
+        };
+        searchSchedule = mkOption {
+          default = "Sun 03:00";
+          type = with types; either str (listOf str);
+          description = "schedule for the search path scan timer. String or list eg Mon,Thu 03:00.";
+        };
+        searchDepth = mkOption {
+          default = 4;
+          type = with types; int;
+          description = "What level of subdirectories to stop at when looking for .git dirs.";
+        };
+      };
     };
   };
 
@@ -58,6 +85,10 @@ in
       git = {
         enable = true;
         ignores = [ "*~" ".direnv" ".env" ".rgignore" ];
+        maintenance = mkIf cfg.maintenance.enable {
+          enable = true;
+          repositories = cfg.maintenance.repositories;
+        };
         settings = {
           alias = {
             ci = "commit";
@@ -95,5 +126,38 @@ in
         shellAliases = shellAliases;
       };
     };
+
+    systemd.user.services.git-maintenance-walk =
+      mkIf (cfg.maintenance.enable && cfg.maintenance.searchPaths != [ ]) {
+        Unit.Description = "git maintenance over search path checkouts";
+        Service = {
+          Type = "oneshot";
+          ExecStart = let
+            walker = pkgs.writeShellScript "git-maintenance-walk" ''
+              set -u
+              bases=(${lib.concatMapStringsSep " " lib.escapeShellArg cfg.maintenance.searchPaths})
+              for base in "''${bases[@]}"; do
+                [ -d "$base" ] || continue
+                ${pkgs.findutils}/bin/find "$base" -maxdepth ${toString cfg.maintenance.searchDepth} -type d -name .git -print0 \
+                  | while IFS= read -r -d "" gitdir; do
+                      repo="''${gitdir%/.git}"
+                      [ -d "$repo" ] || continue
+                      ${pkgs.git}/bin/git -C "$repo" maintenance run --schedule=daily || true
+                    done
+              done
+            '';
+          in "${walker}";
+        };
+      };
+
+    systemd.user.timers.git-maintenance-walk =
+      mkIf (cfg.maintenance.enable && cfg.maintenance.searchPaths != [ ]) {
+        Unit.Description = "Scheduled git maintenance over search path checkouts";
+        Timer = {
+          OnCalendar = cfg.maintenance.searchSchedule;
+          Persistent = true;
+        };
+        Install.WantedBy = [ "timers.target" ];
+      };
   });
 }
