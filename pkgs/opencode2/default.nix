@@ -8,20 +8,20 @@
 }:
 
 let
-  version = "2.0.22";
+  version = "2.0.24";
 
   sources = {
     x86_64-linux = fetchurl {
       url = "https://registry.npmjs.org/@opencode/cli-linux-x64/-/cli-linux-x64-${version}.tgz";
-      hash = "sha256-ZUNMviVvI985eklBA55e7iixo3wbrVN2pSF/WDo1NYM=";
+      hash = "sha256-IbHuBoOEFAXWlUH8REgfjldS6Vvqcui47DHbzbEC5/g=";
     };
     aarch64-linux = fetchurl {
       url = "https://registry.npmjs.org/@opencode/cli-linux-arm64/-/cli-linux-arm64-${version}.tgz";
-      hash = "sha256-SeVGbeYPZQAc3ddYNBn4QhQGl9rq0rTYgmvlTZBW5ws=";
+      hash = "sha256-nQzSv8Bg/Wwq/fbbaYN/hpDUao2DJ7uGRCGFHOAE9FM=";
     };
     aarch64-darwin = fetchurl {
       url = "https://registry.npmjs.org/@opencode/cli-darwin-arm64/-/cli-darwin-arm64-${version}.tgz";
-      hash = "sha256-FvX1hR4Pz4bcOMmAQrxQ5fFnMZqZc4l8lIfxey6BARc=";
+      hash = "sha256-fwPN/ZC/DORdSmbxvtfnZ+I7VGetGTqEVefG+7HquaE=";
     };
   };
 in
