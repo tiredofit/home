@@ -1,7 +1,17 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p curl jq nix gnused
 
-latest_version=$(curl -s https://api.github.com/repos/zen-browser/desktop/releases/latest | jq -r '.tag_name')
+# Usage: ./fetch_hash.sh [rev]
+#   With no argument, the latest zen-browser/desktop release is used.
+
+set -euo pipefail
+cd "$(dirname "$0")"
+
+if [ "${1:-}" ]; then
+  latest_version="${1}"
+else
+  latest_version=$(curl -s https://api.github.com/repos/zen-browser/desktop/releases/latest | jq -r '.tag_name')
+fi
 base_url="https://github.com/zen-browser/desktop/releases/download/${latest_version}"
 files=("zen.macos-universal.dmg" "zen.linux-x86_64.tar.xz")
 
