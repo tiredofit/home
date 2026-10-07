@@ -35,6 +35,7 @@ in
         hadolint.enable = true;
         herdr.enable = true;
         hyprcursor.enable = true;
+        kitty.enable = true;
         lazydocker.enable = false;
         lazygit.enable = true;
         mcp-servers = {
