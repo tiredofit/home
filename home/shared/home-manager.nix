@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   shellInit = ''
-    if [ -d "/home/$USER/src/home" ] ; then
-      alias hm="cd ~/src/home"
-      alias hmupdate="nix flake update --flake $HOME/src/home"
-      alias hmswitch="home-manager switch --flake $HOME/src/home/#$USER@$(hostname) $@"
+    if [ -d "/home/$USER/src/nix/home" ] ; then
+      alias hm="cd ~/src/nix/home"
+      alias hmupdate="nix flake update --flake $HOME/src/nix/home"
+      alias hmswitch="home-manager switch --flake $HOME/src/nix/home/#$USER@$(hostname) $@"
     fi
   '';
 in

@@ -1,15 +1,15 @@
 { inputs, config, lib, pkgs, ... }:
 let
   shellInit = ''
-    if [ -d "/home/$USER/src/nixos" ] ; then
-        alias nixos="cd ~/src/nixos"
-        alias nixosupdate="nix flake update --flake $HOME/src/nixos/ --extra-experimental-features 'nix-command flakes'"
+    if [ -d "/home/$USER/src/nix/nixos" ] ; then
+        alias nixos="cd ~/src/nix/nixos"
+        alias nixosupdate="nix flake update --flake $HOME/src/nix/nixos/ --extra-experimental-features 'nix-command flakes'"
         if command -v nixos-rebuild-ng > /dev/null 2>&1 ; then
             NIXOS_REBUILD_CMD="nixos-rebuild-ng"
         else
             NIXOS_REBUILD_CMD="nixos-rebuild"
         fi
-        alias nixswitch="$NIXOS_REBUILD_CMD switch --sudo --flake $HOME/src/nixos/#$HOSTNAME $@"
+        alias nixswitch="$NIXOS_REBUILD_CMD switch --sudo --flake $HOME/src/nix/nixos/#$HOSTNAME $@"
     fi
   '';
 in
